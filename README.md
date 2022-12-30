@@ -9,3 +9,11 @@ The Flavor Bombs project aims to create a food service app that connects custome
 - MySQL
 - Docker
 - Bootstrap
+
+## Entities
+- Users
+- Admin
+- Orders
+- Products
+- Companies
+- Reviews
