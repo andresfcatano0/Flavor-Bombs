@@ -10,7 +10,7 @@ The Flavor Bombs project aims to create a food service app that connects custome
 - Docker
 - Bootstrap
 
-## Entities
+## Entities:
 - Users
 - Admin
 - Orders
