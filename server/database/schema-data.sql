@@ -67,8 +67,8 @@ insert into app_role (name) values
 ('USER'),
 ('ADMIN');
 
--- dsmelser is top-secret-password
--- bob is bad-password
+-- joe is top-secret-password
+-- jane is bad-password
 insert into app_user (first_name, last_name, username, passhash, email) values
 ('john', 'doe', 'johndoe', '$2a$12$NNYEMXoCytN.jhFPmFzZFu6IKmZYHJHTN7unGpRBf8q0TxgogJQ6G', 'johndoe@email.com'),
 ('jane', 'doe', 'janedoe', '$2a$12$udDF/wYAOJNMW6e/yAt2xu98PGo5fKd1UBFi2w2zybtmfoldhoXSW', 'janedoe@email.com');
