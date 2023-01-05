@@ -1,14 +1,18 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Form from "react-bootstrap/Form";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 
 import Button from "react-bootstrap/Button";
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
+import UserContext from '../context/AuthContext';
+import jwtDecode from 'jwt-decode';
 
 export default function LoginPage() {
 
     const [loginData, setLoginData] = useState({username:"",password:""});
+
+    const context = useContext(UserContext);
 
     const handleLoginInput = (event) => {
         const inputChange = event.target;
@@ -46,6 +50,13 @@ export default function LoginPage() {
         }).then(jwtContainer => {
             const jwt = jwtContainer.jwt;
             console.log(jwt);
+            const decodeJwt = jwtDecode(jwt);
+            console.log(decodeJwt);
+
+            const fullLoginData = {
+                token: jwt,
+                userDate: decodeJwt
+            };
         })
 
 
