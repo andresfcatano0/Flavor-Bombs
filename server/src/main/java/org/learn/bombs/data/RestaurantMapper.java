@@ -1,4 +1,22 @@
 package org.learn.bombs.data;
 
-public class RestaurantMapper {
+import org.springframework.jdbc.core.RowMapper;
+import org.learn.bombs.models.AppUser;
+import org.learn.bombs.models.Restaurant;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class RestaurantMapper implements RowMapper<Restaurant> {
+    @Override
+    public Restaurant mapRow(ResultSet rs, int rowNum) throws SQLException {
+        Restaurant toBuild = new Restaurant();
+        toBuild.setRestaurantId( rs.getInt("restaurant_id"));
+        toBuild.setRestaurantName(rs.getString("restaurant_name"));
+        toBuild.setAddress(rs.getString("address"));
+        toBuild.setReviewId( rs.getInt("review_id"));
+
+        return toBuild;
+    }
+
 }
