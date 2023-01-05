@@ -28,4 +28,30 @@ public class RestaurantDatabaseRepo implements RestaurantRepo {
 
         return publicRestaurants;
     }
+
+    @Override
+    public void deleteRestaurantById(Integer restaurantId) {
+        int rowsAffected = template.update( "delete from restaurants where restaurant_id = ?", restaurantId);
+
+        //should always be equal to 1...
+        //TODO: add validation to ensure we affected one (and only one!) row
+    }
+
+    @Override
+    public Restaurant getRestaurantById(Integer restaurantId) {
+        String sql = "SELECT * \n" +
+                "FROM restaurants\n" +
+//                "left outer join app_user on todo.user_id = app_user.app_user_id\n" +
+                "where restaurant_id = ?";
+
+        List<Restaurant> matchingRestaurants = template.query( sql, new RestaurantMapper(), restaurantId );
+
+        if( matchingRestaurants.size() == 1){
+            return matchingRestaurants.get(0);
+        }
+
+        return null;
+    }
+
+
 }
