@@ -25,13 +25,14 @@ public class SecurityConfig {
 
         http.authorizeRequests()
 
-                .antMatchers( HttpMethod.POST, "/api/security").authenticated()
-                .antMatchers(HttpMethod.POST,"/api/security/login").permitAll()
+                .antMatchers( HttpMethod.GET,"/api/restaurant/public").permitAll()
+                .antMatchers( HttpMethod.DELETE, "/api/restaurant/*").hasRole("ADMIN")
+                .antMatchers( HttpMethod.POST,"/api/security/login").permitAll()
                 .and()
                 .addFilter( new JwtRequestFilter(buildAuthManager(config), converter ))
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-            return  http.build();
+        return  http.build();
     }
 
     @Bean
