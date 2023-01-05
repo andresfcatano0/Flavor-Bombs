@@ -8,6 +8,7 @@ import HomePage from './pages/HomePage';
 import { useContext, useState } from 'react';
 import UserContext from './context/AuthContext';
 import jwtDecode from 'jwt-decode';
+import RestaurantPage from './pages/RestaurantPage';
 
 function App() {
   const [menu, setMenu] = useState([]);
@@ -52,6 +53,9 @@ function App() {
           </Route>
           <Route path="/login">
             <LoginPage setAuthUser={setAuthUser}/>
+          </Route>
+          <Route path="/restaurants">
+            <RestaurantPage/>
           </Route>
         </Switch>
       </BrowserRouter>
