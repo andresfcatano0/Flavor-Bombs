@@ -25,6 +25,7 @@ public class SecurityConfig {
 
         http.authorizeRequests()
 
+                .antMatchers( HttpMethod.GET,"/api/restaurant/public").permitAll()
                 .antMatchers( HttpMethod.POST,"/api/security/login").permitAll()
                 .and()
                 .addFilter( new JwtRequestFilter(buildAuthManager(config), converter ))

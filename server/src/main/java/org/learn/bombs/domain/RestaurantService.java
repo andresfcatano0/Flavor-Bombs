@@ -10,6 +10,7 @@ import org.learn.bombs.models.Restaurant;
 
 import java.util.List;
 
+@Service
 public class RestaurantService {
 
     @Autowired
@@ -18,6 +19,15 @@ public class RestaurantService {
     @Autowired
     UserRepo uRepo;
 
+    public Result<List<Restaurant>> getPublicRestaurants() {
+        Result<List<Restaurant>> result = new Result<>();
+
+        List<Restaurant> publicRestaurants = repo.getPublicRestaurants();
+
+        result.setPayload(publicRestaurants);
+
+        return result;
+    }
 
 
 

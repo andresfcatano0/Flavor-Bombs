@@ -8,11 +8,11 @@ import java.util.List;
 public interface RestaurantRepo {
     List<Restaurant> getPublicRestaurants();
 
-    List<Restaurant> getPrivateRestaurantsByUsername(String username);
-
-    void deleteRestaurantById(Integer restaurantId);
-
-    Restaurant getRestaurantById(Integer restaurantId);
-
-    Restaurant addRestaurant(Restaurant toAdd);
+//    List<Restaurant> getPrivateRestaurantsByUsername(String username);
+//
+//    void deleteRestaurantById(Integer restaurantId);
+//
+//    Restaurant getRestaurantById(Integer restaurantId);
+//
+//    Restaurant addRestaurant(Restaurant toAdd);
 }
