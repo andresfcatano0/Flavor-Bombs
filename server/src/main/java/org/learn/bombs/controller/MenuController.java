@@ -1,17 +1,21 @@
 package org.learn.bombs.controller;
 
 import org.learn.bombs.domain.MenuService;
+import org.learn.bombs.domain.Result;
 import org.learn.bombs.models.Menu;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/api/menu")
 public class MenuController {
-
-    private final MenuService service;
+    @Autowired
+    MenuService service;
 
     public MenuController(MenuService service) {
         this.service = service;
@@ -25,5 +29,19 @@ public class MenuController {
         }
         return ResponseEntity.ok(menu);
     }
+
+    @GetMapping()
+    ResponseEntity getMenu(){
+
+        Result<List<Menu>> publicGetResult = service.getMenu();
+
+        if( publicGetResult.isSuccess() ){
+            return ResponseEntity.ok(publicGetResult.getPayload());
+        }
+
+        return ResponseEntity.badRequest().body(publicGetResult.getErrorMessages());
+    }
+
+
 
 }
