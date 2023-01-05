@@ -8,11 +8,10 @@ import Row from 'react-bootstrap/Row';
 import UserContext from '../context/AuthContext';
 import jwtDecode from 'jwt-decode';
 
-export default function LoginPage() {
+export default function LoginPage({setAuthUser}) {
 
     const [loginData, setLoginData] = useState({username:"",password:""});
 
-    const context = useContext(UserContext);
 
     const handleLoginInput = (event) => {
         const inputChange = event.target;
@@ -55,8 +54,10 @@ export default function LoginPage() {
 
             const fullLoginData = {
                 token: jwt,
-                userDate: decodeJwt
+                userData: decodeJwt
             };
+
+            setAuthUser(fullLoginData);
         })
 
 

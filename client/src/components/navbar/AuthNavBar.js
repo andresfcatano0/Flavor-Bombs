@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./NavBar.css";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
@@ -7,8 +7,17 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { Link } from "react-router-dom";
 import { PersonCircle } from "react-bootstrap-icons";
+import UserContext from "../../context/AuthContext";
 
-export default function AuthNavBar() {
+export default function AuthNavBar({setAuthUser}) {
+  const user = useContext(UserContext);
+  
+  function handleLogout(){
+    setAuthUser(null);
+    
+
+  }
+
   return (
     <>
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -51,7 +60,7 @@ export default function AuthNavBar() {
                 <NavDropdown.Item href="#action/3.1">Account</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">Orders</NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.3">Logout</NavDropdown.Item>
+                <NavDropdown.Item href="#action/3.3" onClick={handleLogout}>Logout {user.userData.sub}</NavDropdown.Item>
               </NavDropdown>
 
               {/* <Link to="/signup">
