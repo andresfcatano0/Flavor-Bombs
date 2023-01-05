@@ -27,7 +27,7 @@ export default function NavBar(){
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
                 <Nav.Item as="li">
-                  <Link to="/">
+                  <Link exact to="/">
                     <Nav.Link>Home</Nav.Link>
                   </Link>
                 </Nav.Item>
@@ -40,11 +40,7 @@ export default function NavBar(){
               </Nav>
               <Nav>
                 <Link to="/login">
-                  <Nav.Link>
-                    <Button>
-                      Log In
-                    </Button>
-                  </Nav.Link>
+                    <Button>Log In</Button>
                 </Link>
                 {/* <Link to="/signup">
                   <Nav.Link>Sign Up</Nav.Link>
