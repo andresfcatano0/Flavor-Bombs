@@ -58,6 +58,7 @@ create table menu (
 	menu_id int auto_increment primary key,
     item_name varchar(50) not null,
     item_description varchar(120) not null,
+    item_price decimal(4,2) not null,
 	restaurant_id int not null,
 
     constraint foreign key (restaurant_id) references restaurants(restaurant_id)
