@@ -25,8 +25,7 @@ public class SecurityConfig {
 
         http.authorizeRequests()
 
-                .antMatchers( HttpMethod.POST, "/api/security").authenticated()
-                .antMatchers(HttpMethod.POST,"/api/security/login").permitAll()
+                .antMatchers( HttpMethod.POST,"/api/security/login").permitAll()
                 .and()
                 .addFilter( new JwtRequestFilter(buildAuthManager(config), converter ))
                 .sessionManagement()
