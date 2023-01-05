@@ -3,6 +3,13 @@ GET http://localhost:8080/api/restaurant/public
 
 ###
 
+
+DELETE http://localhost:8080/api/restaurant/2 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzdWIiOiJqYW5lZG9lIiwicm9sZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfQURNSU4ifV0sImV4cCI6MTY3Mjk1MjU4OX0.f42kFTUxp2IEFuvHf20TMxgN5wFFgHiAEbnUcaxJkgI
+
+
+###
+
 GET /api/security HTTP/1.1
 Host: localhost:8080
 
@@ -13,7 +20,7 @@ Host: localhost:8080
 Content-Type: application/json
 
 {
-    "username":"johndoe",
-    "password":"top-secret-password"
+    "username":"janedoe",
+    "password":"bad-password"
 }
 
