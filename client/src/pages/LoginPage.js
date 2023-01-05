@@ -7,11 +7,14 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import UserContext from '../context/AuthContext';
 import jwtDecode from 'jwt-decode';
+import { useHistory } from 'react-router-dom';
 
 export default function LoginPage({setAuthUser}) {
 
     const [loginData, setLoginData] = useState({username:"",password:""});
 
+
+    const history = useHistory();
 
     const handleLoginInput = (event) => {
         const inputChange = event.target;
@@ -57,7 +60,10 @@ export default function LoginPage({setAuthUser}) {
                 userData: decodeJwt
             };
 
+            localStorage.setItem("userData",JSON.stringify(fullLoginData));
+
             setAuthUser(fullLoginData);
+            history.push("/");
         })
 
 

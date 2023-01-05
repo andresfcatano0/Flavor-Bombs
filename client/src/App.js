@@ -12,8 +12,14 @@ import jwtDecode from 'jwt-decode';
 function App() {
   const [menu, setMenu] = useState([]);
 
-  const [authUser, setAuthUser] = useState(null);
-
+  
+  let currentUserData = localStorage.getItem("userData");
+  
+  if(currentUserData){
+    currentUserData = JSON.parse(currentUserData);
+  }
+  
+  const [authUser, setAuthUser] = useState(currentUserData);
 
   
   const user = useContext(UserContext);
@@ -48,7 +54,6 @@ function App() {
             <LoginPage setAuthUser={setAuthUser}/>
           </Route>
         </Switch>
-        {/* <AdminNavBar/> */}
       </BrowserRouter>
     </UserContext.Provider>
   );

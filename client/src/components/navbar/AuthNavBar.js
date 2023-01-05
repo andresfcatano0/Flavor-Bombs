@@ -13,6 +13,7 @@ export default function AuthNavBar({setAuthUser}) {
   const user = useContext(UserContext);
   
   function handleLogout(){
+    localStorage.removeItem("userData");
     setAuthUser(null);
     
 
