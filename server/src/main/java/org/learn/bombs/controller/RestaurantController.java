@@ -33,4 +33,17 @@ public class RestaurantController {
         return ResponseEntity.badRequest().body(publicGetResult.getErrorMessages());
     }
 
+
+    @DeleteMapping("/{id}")
+    ResponseEntity deleteRestaurantById( @PathVariable Integer id ){
+
+        Result deleteResult = service.deleteRestaurantById( id );
+
+        if(deleteResult.isSuccess()) {
+            return ResponseEntity.noContent().build();
+        }
+
+        return ResponseEntity.badRequest().body(deleteResult.getErrorMessages());
+    }
+
 }

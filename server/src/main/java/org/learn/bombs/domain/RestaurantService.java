@@ -30,5 +30,20 @@ public class RestaurantService {
     }
 
 
+    public Result<Void> deleteRestaurantById(Integer restaurantId) {
+        Result<Void> deleteResult = new Result<Void>();
+
+        Restaurant toDelete = repo.getRestaurantById( restaurantId );
+
+        if( toDelete != null ){
+            repo.deleteRestaurantById( restaurantId );
+        } else {
+            deleteResult.addErrorMessage("Cannot delete restaurant");
+        }
+
+        return deleteResult;
+    }
+
+
 
 }
