@@ -21,7 +21,7 @@ public class RestaurantController {
     RestaurantService service;
 
     //getting all public restaurants
-    @GetMapping("/public")
+    @GetMapping
     ResponseEntity getPublicRestaurants(){
 
         Result<List<Restaurant>> publicGetResult = service.getPublicRestaurants();
@@ -31,6 +31,28 @@ public class RestaurantController {
         }
 
         return ResponseEntity.badRequest().body(publicGetResult.getErrorMessages());
+    }
+
+    @GetMapping("/{id}")
+    ResponseEntity getRestaurantById( @PathVariable Integer id ){
+        Result<Restaurant> getResult = service.getRestaurantById( id );
+        if(getResult.isSuccess()){
+            return ResponseEntity.ok(getResult.getPayload());
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+
+    @DeleteMapping("/{id}")
+    ResponseEntity deleteRestaurantById( @PathVariable Integer id ){
+
+        Result deleteResult = service.deleteRestaurantById( id );
+
+        if(deleteResult.isSuccess()) {
+            return ResponseEntity.noContent().build();
+        }
+
+        return ResponseEntity.badRequest().body(deleteResult.getErrorMessages());
     }
 
 }

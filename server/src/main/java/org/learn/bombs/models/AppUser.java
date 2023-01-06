@@ -17,7 +17,7 @@ public class AppUser implements UserDetails {
     private String password;
     private String email;
     private boolean enabled;
-    private Collection<GrantedAuthority> authorities;
+//    private Collection<GrantedAuthority> authorities;
 
     List<String> roles;
 
@@ -29,21 +29,23 @@ public class AppUser implements UserDetails {
         this.password = password;
         this.email = email;
         this.enabled = enabled;
-        this.authorities = convertRolesToAuthorities(authorities);
+        this.roles = authorities;
+//        this.authorities = convertRolesToAuthorities(authorities);
     }
 
-//    public AppUser(){
-//    }
+    public AppUser(){
+
+    }
 
     private static Collection<GrantedAuthority> convertRolesToAuthorities(List<String> roles){
         return roles.stream()
-                .map(r-> new SimpleGrantedAuthority(r))
+                .map(r-> new SimpleGrantedAuthority("ROLE_" + r))
                 .collect(Collectors.toList());
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return new ArrayList<>(authorities);
+        return convertRolesToAuthorities(roles);
     }
 
     @Override
@@ -127,7 +129,7 @@ public class AppUser implements UserDetails {
         return roles;
     }
 
-    public void setRoles(List<String> authorities) {
+    public void setRoles(List<String> roles) {
         this.roles = roles;
     }
 }

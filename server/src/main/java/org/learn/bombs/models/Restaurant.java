@@ -1,11 +1,14 @@
 package org.learn.bombs.models;
 
+import java.util.List;
+
 public class Restaurant {
 
     Integer restaurantId;
     String restaurantName;
     String address;
-    Integer reviewId;
+
+    List<Order> orders;
 
     public Integer getRestaurantId() {
         return restaurantId;
@@ -31,14 +34,13 @@ public class Restaurant {
         this.address = address;
     }
 
-    public Integer getReviewId() {
-        return reviewId;
+    public List<Order> getOrders() {
+        return orders;
     }
 
-    public void setReviewId(Integer reviewId) {
-        this.reviewId = reviewId;
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
     }
-
 
     @Override
     public String toString() {
@@ -46,7 +48,6 @@ public class Restaurant {
                 "restaurantId=" + restaurantId +
                 ", restaurantName='" + restaurantName + '\'' +
                 ", address='" + address + '\'' +
-                ", reviewId=" + reviewId +
                 '}';
     }
 
