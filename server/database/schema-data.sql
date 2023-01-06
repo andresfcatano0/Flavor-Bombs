@@ -67,8 +67,8 @@ insert into app_role (name) values
 ('USER'),
 ('ADMIN');
 
--- joe is top-secret-password
--- jane is bad-password
+-- dsmelser is top-secret-password
+-- bob is bad-password
 insert into app_user (first_name, last_name, username, passhash, email) values
 ('john', 'doe', 'johndoe', '$2a$12$NNYEMXoCytN.jhFPmFzZFu6IKmZYHJHTN7unGpRBf8q0TxgogJQ6G', 'johndoe@email.com'),
 ('jane', 'doe', 'janedoe', '$2a$12$udDF/wYAOJNMW6e/yAt2xu98PGo5fKd1UBFi2w2zybtmfoldhoXSW', 'janedoe@email.com');
@@ -76,4 +76,9 @@ insert into app_user (first_name, last_name, username, passhash, email) values
 insert into user_roles (app_user_id, app_role_id) values
 ( 1, 1 ),
 ( 2, 2 );
+
+insert into restaurants (restaurant_name, address) values
+('Taco House', '111 taco street'),
+('Canadian Bacon', '333 bacon street'),
+('Soulfu', '555 yummy ave');
 
