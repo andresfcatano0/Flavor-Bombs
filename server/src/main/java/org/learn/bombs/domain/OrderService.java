@@ -34,4 +34,20 @@ public class OrderService {
         return privateLookupResult;
     }
 
+
+    public Result deleteOrderById(Integer orderId, String username) {
+        Result deleteResult = new Result();
+
+        Order toDelete = repo.getOrderById( orderId );
+
+        if( toDelete.getOwner().getUsername().equals(username) ){
+            //this belongs to the current user, so they're allowed to delete it
+            repo.deleteOrderById( orderId );
+        } else {
+            deleteResult.addErrorMessage("Cannot delete order for another user.");
+        }
+
+        return deleteResult;
+    }
+
 }

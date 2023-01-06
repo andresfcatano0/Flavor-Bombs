@@ -8,4 +8,8 @@ public interface OrderRepo {
     List<Order> getPrivateOrdersByUsername(String username);
 
     List<Order> getOrdersByRestaurantId(Integer id);
+
+    void deleteOrderById(Integer orderId);
+
+    Order getOrderById(Integer orderId);
 }

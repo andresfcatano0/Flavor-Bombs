@@ -38,4 +38,18 @@ public class OrderController {
         return ResponseEntity.badRequest().body(lookupResult.getErrorMessages());
     }
 
+    @DeleteMapping("/{id}")
+    ResponseEntity deleteOrderById( @PathVariable Integer id ){
+
+        AppUser requestingUser = (AppUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        Result deleteResult = service.deleteOrderById( id, requestingUser.getUsername() );
+
+        if(deleteResult.isSuccess()) {
+            return ResponseEntity.noContent().build();
+        }
+
+        return ResponseEntity.badRequest().body(deleteResult.getErrorMessages());
+    }
+
 }
