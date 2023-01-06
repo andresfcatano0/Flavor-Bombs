@@ -7,44 +7,16 @@ import Col from "react-bootstrap/Col";
 
 import SkeletonLoader from './SkeletonLoader';
 
-export default function RestaurantCard() {
-    const [restaurants, setRestaurants] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
-
-    const getRestaurants = async () => {
-        await fetch("http://localhost:8080/api/restaurant", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
-          .then((res) => {
-              setIsLoading(false);
-            return res.json();
-          })
-          .then((data) => {
-            console.log(data);
-            setRestaurants(data);
-          })
-           .catch((err) => {
-             setIsLoading(false);
-             console.log(err);
-           });
-    }
-
-    useEffect(() => {
-      getRestaurants()
-    }, []);
-
-
+export default function RestaurantCard(props) {
+    
   return (
     <>
       <Container>
         <Row>
-          {isLoading ? (
+          {props.isLoading ? (
             <SkeletonLoader />
           ) : (
-            restaurants.map((restaurant) => {
+            props.restaurants.map((restaurant) => {
               return (
                 <Col key={restaurant.restaurantId}>
                   <Card

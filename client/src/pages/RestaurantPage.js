@@ -6,7 +6,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 
-export default function RestaurantPage() {
+export default function RestaurantPage({restaurants,isLoading}) {
 
   return (
     <>
@@ -14,11 +14,11 @@ export default function RestaurantPage() {
       {/* <Container>
         <Row className="mb-4 justify-content-md-center">
           <Col md="auto"> */}
-            <RestaurantCard />
-          {/* </Col>
+      <RestaurantCard restaurants={restaurants} isLoading={isLoading} />
+      {/* </Col>
         </Row> */}
-          {/* </Container> */}
-        {/* <Row className="mb-4 justify-content-md-center">
+      {/* </Container> */}
+      {/* <Row className="mb-4 justify-content-md-center">
           <Col md="auto">
             <RestaurantCard />
           </Col>
