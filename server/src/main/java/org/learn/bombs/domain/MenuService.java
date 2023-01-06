@@ -22,9 +22,9 @@ public class MenuService {
     public Result<List<Menu>> getMenu() {
         Result<List<Menu>> result = new Result<>();
 
-        List<Menu> publicTodos = repository.getMenu();
+        List<Menu> menu = repository.getMenu();
 
-        result.setPayload(publicTodos);
+        result.setPayload(menu);
 
         return result;
     }
