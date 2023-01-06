@@ -38,4 +38,26 @@ public class OrderDatabaseRepo implements OrderRepo{
         return restaurantOrders;
     }
 
+    @Override
+    public void deleteOrderById(Integer orderId) {
+        int rowsAffected = template.update( "delete from orders where order_id = ?", orderId);
+    }
+
+    @Override
+    public Order getOrderById(Integer orderId) {
+        String sql = "SELECT * \n" +
+                "FROM orders\n" +
+                "left outer join app_user on orders.app_user_id = app_user.app_user_id\n" +
+                "where order_id = ?";
+
+        List<Order> matchingTodos = template.query( sql, new OrderMapper(), orderId );
+
+        if( matchingTodos.size() == 1){
+            return matchingTodos.get(0);
+        }
+
+        return null;
+    }
+
+
 }
