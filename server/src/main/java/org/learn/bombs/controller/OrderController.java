@@ -52,4 +52,17 @@ public class OrderController {
         return ResponseEntity.badRequest().body(deleteResult.getErrorMessages());
     }
 
+    @PostMapping
+    ResponseEntity addOrder( @RequestBody Order toAdd ){
+        AppUser requestingUser = (AppUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        Result<Order> addResult = service.addOrder( toAdd, requestingUser.getUsername() );
+
+        if( addResult.isSuccess() ){
+            return new ResponseEntity( addResult.getPayload(), HttpStatus.CREATED);
+        }
+
+        return ResponseEntity.badRequest().body( addResult.getErrorMessages() );
+    }
+
 }

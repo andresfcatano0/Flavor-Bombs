@@ -12,4 +12,6 @@ public interface OrderRepo {
     void deleteOrderById(Integer orderId);
 
     Order getOrderById(Integer orderId);
+
+    Order addOrder(Order toAdd);
 }

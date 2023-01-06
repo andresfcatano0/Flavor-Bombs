@@ -6,8 +6,6 @@ public class Order {
 
     String orderItems;
 
-    Integer AppUserId;
-
     Integer restaurantId;
 
     AppUser owner;
@@ -36,14 +34,6 @@ public class Order {
         this.orderItems = orderItems;
     }
 
-    public Integer getAppUserId() {
-        return AppUserId;
-    }
-
-    public void setAppUserId(Integer appUserId) {
-        AppUserId = appUserId;
-    }
-
     public Integer getRestaurantId() {
         return restaurantId;
     }
@@ -57,7 +47,6 @@ public class Order {
         return "Order{" +
                 "orderId=" + orderId +
                 ", orderItems='" + orderItems + '\'' +
-                ", AppUserId=" + AppUserId +
                 ", restaurantId=" + restaurantId +
                 '}';
     }
