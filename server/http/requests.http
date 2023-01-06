@@ -26,21 +26,33 @@ GET http://localhost:8080/api/restaurant
 
 ###
 
-GET http://localhost:8080/api/restaurant/1
+GET http://localhost:8080/api/restaurant/2
 
 ###
 
-DELETE http://localhost:8080/api/restaurant/2 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzdWIiOiJqYW5lZG9lIiwicm9sZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfQURNSU4ifV0sImV4cCI6MTY3Mjk3ODM4Mn0.qX4UiInijkHI4Dj5dh5Wf1kumqr0CKRzpkADom26eyI
+DELETE http://localhost:8080/api/restaurant/1 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzdWIiOiJqYW5lZG9lIiwicm9sZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfQURNSU4ifV0sImV4cCI6MTY3MzA0NTAyM30._t4XHBFQW_PWxxqgpD_QCofi0TvwnYXOxco3OC6lmUc
 
 ###
 
 GET http://localhost:8080/api/order
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzdWIiOiJqb2huZG9lIiwicm9sZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfVVNFUiJ9XSwiZXhwIjoxNjczMDM2NjM3fQ.OVz57gVuHQGoG4KRRxVkAuRYVT_Vq7VE4_ID1bDdVB0
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzdWIiOiJqYW5lZG9lIiwicm9sZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfQURNSU4ifV0sImV4cCI6MTY3MzA0MzcyN30.BAmowsEw7iYVeNR3ufMLigo_rJJPrECLSFH7Iamf3bs
 
 ###
 
-DELETE http://localhost:8080/api/order/3 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzdWIiOiJqb2huZG9lIiwicm9sZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfVVNFUiJ9XSwiZXhwIjoxNjczMDM2NjM3fQ.OVz57gVuHQGoG4KRRxVkAuRYVT_Vq7VE4_ID1bDdVB0
+DELETE http://localhost:8080/api/order/1 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzdWIiOiJqYW5lZG9lIiwicm9sZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfQURNSU4ifV0sImV4cCI6MTY3MzA0MzcyN30.BAmowsEw7iYVeNR3ufMLigo_rJJPrECLSFH7Iamf3bs
+
 
 ###
+
+POST http://localhost:8080/api/order HTTP/1.1
+# Host: localhost:8080
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzdWIiOiJqYW5lZG9lIiwicm9sZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfQURNSU4ifV0sImV4cCI6MTY3MzA0MzcyN30.BAmowsEw7iYVeNR3ufMLigo_rJJPrECLSFH7Iamf3bs
+
+{
+  "orderItems": "Peperoni Pizza",
+  "AppUserId": 1,
+  "restaurantId": 1
+}
