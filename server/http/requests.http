@@ -1,17 +1,20 @@
 
-GET http://localhost:8080/api/restaurant/public
+
+GET http://localhost:8080/api/order
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzdWIiOiJqYW5lZG9lIiwicm9sZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfQURNSU4ifV0sImV4cCI6MTY3MzAxODkxN30.DDOG3U_DQpBKtRMQDBZqHlooa71ds6Y5ItdClmuwLAA
 
 ###
 
+GET http://localhost:8080/api/restaurant
+
+###
+
+GET http://localhost:8080/api/restaurant/1
+
+###
 
 DELETE http://localhost:8080/api/restaurant/2 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzdWIiOiJqYW5lZG9lIiwicm9sZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfQURNSU4ifV0sImV4cCI6MTY3Mjk1MjU4OX0.f42kFTUxp2IEFuvHf20TMxgN5wFFgHiAEbnUcaxJkgI
-
-
-###
-
-GET /api/security HTTP/1.1
-Host: localhost:8080
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzdWIiOiJqYW5lZG9lIiwicm9sZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfQURNSU4ifV0sImV4cCI6MTY3Mjk3ODM4Mn0.qX4UiInijkHI4Dj5dh5Wf1kumqr0CKRzpkADom26eyI
 
 ###
 
@@ -24,3 +27,13 @@ Content-Type: application/json
     "password":"bad-password"
 }
 
+###
+
+POST /api/security/login HTTP/1.1
+Host: localhost:8080
+Content-Type: application/json
+
+{
+    "username":"johndoe",
+    "password":"top-secret-password"
+}
