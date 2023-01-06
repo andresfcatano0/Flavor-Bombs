@@ -62,7 +62,7 @@ export default function RestaurantCard() {
       
       restaurants.map((restaurant)=> {
         return (
-            <Card key={restaurant.restaurantId} style={{ width: "28rem" }}>
+            <Card key={restaurant.restaurantId} style={{ width: "28rem" }} className="mb-4">
                 <Card.Img
                     variant="top"
                     src="https://cdn.pixabay.com/photo/2018/07/14/15/27/cafe-3537801_1280.jpg"
