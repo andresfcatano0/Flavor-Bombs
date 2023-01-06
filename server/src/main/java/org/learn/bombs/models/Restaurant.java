@@ -8,6 +8,10 @@ public class Restaurant {
     String restaurantName;
     String address;
 
+    String openHours;
+
+    String description;
+
     List<Order> orders;
 
     public Integer getRestaurantId() {
@@ -42,12 +46,31 @@ public class Restaurant {
         this.orders = orders;
     }
 
+    public String getOpenHours() {
+        return openHours;
+    }
+
+    public void setOpenHours(String openHours) {
+        this.openHours = openHours;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     @Override
     public String toString() {
         return "Restaurant{" +
                 "restaurantId=" + restaurantId +
                 ", restaurantName='" + restaurantName + '\'' +
                 ", address='" + address + '\'' +
+                ", openHours='" + openHours + '\'' +
+                ", description='" + description + '\'' +
+                ", orders=" + orders +
                 '}';
     }
 
