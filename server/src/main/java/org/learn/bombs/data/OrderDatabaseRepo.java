@@ -59,5 +59,48 @@ public class OrderDatabaseRepo implements OrderRepo{
         return null;
     }
 
+    @Override
+    public Order addOrder(Order toAdd) {
+
+        //need to get id from the insert and set it on the Order object
+        KeyHolder holder = new GeneratedKeyHolder();
+
+        if( toAdd.getOwner() != null ){
+            int rowsAffected = template.update(  connection -> {
+                PreparedStatement statement = connection.prepareStatement(
+                        "insert into orders (order_items,app_user_id,restaurant_id) values (?,?,?)",
+                        Statement.RETURN_GENERATED_KEYS
+                );
+
+                statement.setString(1, toAdd.getOrderItems());
+                statement.setInt( 2, toAdd.getOwner().getAppUserId() );
+                statement.setInt( 3, toAdd.getRestaurantId() );
+
+                return statement;
+            }, holder);
+            if( rowsAffected != 1 ){
+                return null;
+            }
+            toAdd.setOrderId( holder.getKey().intValue() );
+        }
+//        else {
+//            int rowsAffected = template.update(  connection -> {
+//                PreparedStatement statement = connection.prepareStatement(
+//                        "insert into todo (text) values (?)",
+//                        Statement.RETURN_GENERATED_KEYS
+//                );
+//
+//                statement.setString(1, toAdd.getText());
+//
+//                return statement;
+//            }, holder);
+//            if( rowsAffected != 1 ){
+//                return null;
+//            }
+//            toAdd.setId( holder.getKey().intValue() );
+//        }
+        return toAdd;
+    }
+
 
 }
