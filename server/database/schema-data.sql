@@ -30,7 +30,7 @@ create table user_roles (
 create table restaurants (
 	restaurant_id int auto_increment primary key,
     restaurant_name varchar(50) not null unique,
-    phone_number varchar(11) not null unique,
+    phone_number varchar(12) not null unique,
     address varchar(120) not null unique,
     open_hours varchar(120) not null,
     descript varchar(350) not null
@@ -93,7 +93,7 @@ insert into user_roles (app_user_id, app_role_id) values
 ( 6, 2 );
 
 insert into restaurants (restaurant_name, phone_number, address, open_hours, descript) values
-('Taco House', '612-555-0186' '111 taco street', 'Monday to Saturday - 10am to 11pm', 'Serving the best tacos in town since 1958'),
+('Taco House', '612-555-0186', '111 taco street', 'Monday to Saturday - 10am to 11pm', 'Serving the best tacos in town since 1958'),
 ('Canadian Bacon', '612-555-0156', '333 bacon street', 'Tuesday to Saturday - 9am to 9pm', 'Serving the bacon burger in town since 1999'),
 ('Soulfu', '612-555-0150', '555 tasty avenue', 'Monday to Friday - 11am to 8pm', 'Serving the best waffles in town since 2001'),
 ('Party Fowl', '763-555-0133', '89391 Christiansen Road', 'Monday to Sunday - 10am to 8pm', 'Serving the best waffles in town since 2001'),
@@ -104,6 +104,7 @@ We strive for an experience that blows you out of this world.'),
 ('Nacho Daddy', '952-555-3619', '411 Kareem Route', 'Monday to Friday - 11am to 8pm', 'You will get the OG taste of food at our restaurant.'),
 ('Lord of the Wings', '763-555-8712', '320 Mizey Junction', 'Monday to Saturday - 10am to 11pm', 'We do wings and only wings'),
 ('Pastabilities', '952-555-5873', '531 Dickinson Road', 'Monday to Sunday - 11am to 11pm', 'Everything can be solved with a little pasta');
+
 
 
 -- insert into orders (order_items, app_user_id, restaurant_id) values
