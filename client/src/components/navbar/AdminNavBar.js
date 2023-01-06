@@ -12,7 +12,7 @@ export default function AdminNavBar() {
     <>
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Container>
-          <Navbar.Brand href="#home">
+          <Navbar.Brand href="/">
             <img
               alt="brand logo"
               src={require("../../assets/primitiveSpongebob.png")}
@@ -25,29 +25,24 @@ export default function AdminNavBar() {
           {/* <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav"> */}
           <Nav className="justify-content-end">
-            <img 
+            <img
               alt="profile avatar"
               id="user-profile-avatar"
-              src="https://robohash.org/admin.pngProfile?size=50x50" 
+              src="https://robohash.org/admin.pngProfile?size=50x50"
             />
             <NavItem>
-              <NavDropdown
-                className=""
-                title=""
-                id="basic-nav-dropdown"
-              >
+              <NavDropdown className="" title="Hello, Admin" id="basic-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1">Settings</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">Users</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.3">Orders</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.4">
+                <NavDropdown.Item href="/restaurants">
                   Restaurants
                 </NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.5">Logout</NavDropdown.Item>
+                <NavDropdown.Item href="">Logout</NavDropdown.Item>
               </NavDropdown>
             </NavItem>
           </Nav>
-          {/* </Navbar.Collapse> */}
         </Container>
       </Navbar>
     </>
