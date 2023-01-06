@@ -9,6 +9,7 @@ import { useContext, useState } from 'react';
 import UserContext from './context/AuthContext';
 import jwtDecode from 'jwt-decode';
 import RestaurantPage from './pages/RestaurantPage';
+import RestaurantInfoPage from './pages/RestaurantInfoPage';
 
 function App() {
   const [menu, setMenu] = useState([]);
@@ -56,6 +57,9 @@ function App() {
           </Route>
           <Route path="/restaurants">
             <RestaurantPage/>
+          </Route>
+          <Route path="/restaurant-information">
+            <RestaurantInfoPage/>
           </Route>
         </Switch>
       </BrowserRouter>
