@@ -29,4 +29,13 @@ public class OrderDatabaseRepo implements OrderRepo{
         return personalOrders;
     }
 
+    @Override
+    public List<Order> getOrdersByRestaurantId(Integer id) {
+        String sql = "select * from orders where restaurant_id = ?";
+
+        List<Order> restaurantOrders = template.query(sql, new OrderMapper(), id);
+
+        return restaurantOrders;
+    }
+
 }

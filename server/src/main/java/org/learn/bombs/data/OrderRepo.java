@@ -7,4 +7,5 @@ import java.util.List;
 public interface OrderRepo {
     List<Order> getPrivateOrdersByUsername(String username);
 
+    List<Order> getOrdersByRestaurantId(Integer id);
 }
