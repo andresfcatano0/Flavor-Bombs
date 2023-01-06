@@ -25,7 +25,11 @@ export default function AdminNavBar() {
           {/* <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav"> */}
           <Nav className="justify-content-end">
-            <img src="https://robohash.org/admin.pngProfile?size=50x50" />
+            <img 
+              alt="profile avatar"
+              id="user-profile-avatar"
+              src="https://robohash.org/admin.pngProfile?size=50x50" 
+            />
             <NavItem>
               <NavDropdown
                 className=""
