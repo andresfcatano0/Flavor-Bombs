@@ -1,10 +1,38 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useParams } from "react-router-dom";
 
-export default function RestaurantInfoPage() {
-  return (
+export default function RestaurantInfoPage({getRestaurants, restaurants}) {
+  const params = useParams();
+  const [specificRestaurant, setSpecificRestaurant] = useState({});
+
+  const getSpecificRestaurant = () => {
+    fetch(`http://localhost:8080/api/restaurant/${params.id}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+
+        },
+    })
+    .then(res=> {
+        // console.log(res.json())
+        return res.json();
+    })
+    .then(data => {
+        console.log(data)
+        setSpecificRestaurant(data);
+    })
+  }
+
+  useEffect(()=> {
+    getSpecificRestaurant();
+  }, [])
+  
+    return (
     // <div className="mt-4 flex-column text-center">
-    <div className="mt-4">
-      <div className="text-center">
+    <>
+                <div className="mt-4" key={specificRestaurant.restaurantId}>
+                <div className="text-center">
+
         <img
           className="rounded"
           height={"350px"}
@@ -12,10 +40,10 @@ export default function RestaurantInfoPage() {
         />
       </div>
       <div>
-        <h3 className="mt-2">Restaurant Name</h3>
+        <h3 className="mt-2">{specificRestaurant.restaurantName}</h3>
       </div>
       <div>
-        <p className="text-muted">Restaurant Name</p>
+        <p className="text-muted">{}</p>
       </div>
       <hr />
       <div>
@@ -28,6 +56,7 @@ export default function RestaurantInfoPage() {
           src="https://cdn.pixabay.com/photo/2014/11/05/15/57/salmon-518032_1280.jpg"
         />
       </div>
-    </div>
+      </div>
+    </>    
   );
 }

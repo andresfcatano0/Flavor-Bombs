@@ -6,6 +6,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
 import SkeletonLoader from './SkeletonLoader';
+import { Link } from 'react-router-dom';
 
 export default function RestaurantCard(props) {
     
@@ -40,9 +41,18 @@ export default function RestaurantCard(props) {
                     <Card.Body>
                       <Card.Text>{restaurant.description}</Card.Text>
                       <div className="d-grid gap-2 white-text">
-                        <Button variant="primary" size="lg">
-                          More Info
-                        </Button>
+                        {/* <Button
+                          variant="primary"
+                          size="lg"
+                          href={`/restaurant/${restaurant.restaurantId}`}
+                        > */}
+                          <Link 
+                            to={`/restaurant/${restaurant.restaurantId}`}
+                            className="btn btn-primary"
+                          >
+                            More Info
+                          </Link>
+                        {/* </Button> */}
                       </div>
                     </Card.Body>
                   </Card>
