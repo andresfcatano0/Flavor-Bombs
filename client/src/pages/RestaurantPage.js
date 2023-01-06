@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import RestaurantCard from '../components/RestaurantCard';
 
 import Container from 'react-bootstrap/Container';
@@ -7,6 +7,7 @@ import Col from 'react-bootstrap/Col';
 
 
 export default function RestaurantPage() {
+
   return (
     <>
       <h1 className="text-center mb-4">Restaurants</h1>
@@ -16,7 +17,7 @@ export default function RestaurantPage() {
             <RestaurantCard />
           </Col>
         </Row>
-        <Row className="mb-4 justify-content-md-center">
+        {/* <Row className="mb-4 justify-content-md-center">
           <Col md="auto">
             <RestaurantCard />
           </Col>
@@ -25,7 +26,7 @@ export default function RestaurantPage() {
           <Col md="auto">
             <RestaurantCard />
           </Col>
-        </Row>
+        </Row> */}
       </Container>
     </>
   );
