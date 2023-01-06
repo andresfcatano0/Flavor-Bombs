@@ -11,12 +11,13 @@ export default function RestaurantPage() {
   return (
     <>
       <h1 className="text-center mb-4">Restaurants</h1>
-      <Container>
+      {/* <Container>
         <Row className="mb-4 justify-content-md-center">
-          <Col md="auto">
+          <Col md="auto"> */}
             <RestaurantCard />
-          </Col>
-        </Row>
+          {/* </Col>
+        </Row> */}
+          {/* </Container> */}
         {/* <Row className="mb-4 justify-content-md-center">
           <Col md="auto">
             <RestaurantCard />
@@ -27,7 +28,6 @@ export default function RestaurantPage() {
             <RestaurantCard />
           </Col>
         </Row> */}
-      </Container>
     </>
   );
 }
