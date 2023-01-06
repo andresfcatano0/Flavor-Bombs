@@ -22,7 +22,7 @@ export default function RestaurantCard() {
           bulk of the card's content.
         </Card.Text>
         <div className="d-grid gap-2 white-text">
-            <Button variant="primary" size="lg">
+            <Button href="/restaurant-information" variant="primary" size="lg">
                 More Info
             </Button>
         </div>
