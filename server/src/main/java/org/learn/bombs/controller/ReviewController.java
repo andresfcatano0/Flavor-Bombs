@@ -42,10 +42,10 @@ public class ReviewController {
     }
 
 
-    @DeleteMapping("/{id}")
-    ResponseEntity deleteReviewsById(@PathVariable Integer id){
+    @DeleteMapping("/{reviewId}")
+    ResponseEntity deleteReviewsById(@PathVariable int reviewId){
 
-        Result deleteResult = service.deleteReviewById(id);
+        Result deleteResult = service.deleteReviewById(reviewId);
 
         if(deleteResult.isSuccess()) {
             return ResponseEntity.noContent().build();

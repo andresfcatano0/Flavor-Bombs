@@ -1,5 +1,10 @@
 
-GET /api/security HTTP/1.1
+GET /api/menu/ HTTP/1.1
+Host: localhost:8080
+
+###
+
+GET /api/review/ HTTP/1.1
 Host: localhost:8080
 
 ###
@@ -13,3 +18,23 @@ Content-Type: application/json
     "password":"top-secret-password"
 }
 
+###
+
+POST /api/security/login HTTP/1.1
+Host: localhost:8080
+Content-Type: application/json
+
+{
+    "username":"janedoe",
+    "password":"bad-password"
+}
+
+###
+
+DELETE http://localhost:8080/api/review/1 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzdWIiOiJqb2huZG9lIiwicm9sZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfVVNFUiJ9XSwiZXhwIjoxNjczMTI1MTY2fQ.vqy_av_KmC7dO1IP-XMe8calrQJUAcyjAfDN_-G5KeY
+
+###
+
+DELETE http://localhost:8080/api/review/2 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzdWIiOiJqYW5lZG9lIiwicm9sZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfQURNSU4ifV0sImV4cCI6MTY3MzEyNTE5Mn0.sfWWqab1Ldij33moE9tlRG1SWaTwkfGx3peURLazhnw
