@@ -27,21 +27,23 @@ create table user_roles (
     constraint primary key (app_user_id, app_role_id)
 );
 
+create table restaurants (
+	restaurant_id int auto_increment primary key,
+    restaurant_name varchar(50) not null unique,
+    phone_number varchar(12) not null unique,
+    address varchar(120) not null unique,
+    open_hours varchar(120) not null,
+    descript varchar(350) not null
+);
+
 create table reviews (
 	review_id int auto_increment primary key,
     review_text varchar(130) not null,
     app_user_id int not null,
+    restaurant_id int not null,
 
-    constraint foreign key (app_user_id) references app_user(app_user_id)
-);
-
-create table restaurants (
-	restaurant_id int auto_increment primary key,
-    restaurant_name varchar(50) not null unique,
-    address varchar(120) not null unique,
-    review_id int,
-
-    constraint foreign key (review_id) references reviews(review_id)
+    constraint foreign key (app_user_id) references app_user(app_user_id),
+    constraint foreign key (restaurant_id) references restaurants(restaurant_id)
 );
 
 create table orders (
@@ -57,8 +59,8 @@ create table orders (
 create table menu (
 	menu_id int auto_increment primary key,
     item_name varchar(50) not null,
-    item_description varchar(120) not null,
     item_price decimal(4,2) not null,
+    item_description varchar(120) not null,
 	restaurant_id int not null,
 
     constraint foreign key (restaurant_id) references restaurants(restaurant_id)
@@ -68,13 +70,137 @@ insert into app_role (name) values
 ('USER'),
 ('ADMIN');
 
--- joe is top-secret-password
--- jane is bad-password
+-- johndoe is top-secret-password
+-- janedoe is bad-password
+-- shurst is butterfly
+-- blucky is 2-the-moon
+-- afalls is trinity_2000
+-- marksmith is marzbarz
 insert into app_user (first_name, last_name, username, passhash, email) values
-('john', 'doe', 'johndoe', '$2a$12$NNYEMXoCytN.jhFPmFzZFu6IKmZYHJHTN7unGpRBf8q0TxgogJQ6G', 'johndoe@email.com'),
-('jane', 'doe', 'janedoe', '$2a$12$udDF/wYAOJNMW6e/yAt2xu98PGo5fKd1UBFi2w2zybtmfoldhoXSW', 'janedoe@email.com');
+('John', 'Doe', 'johndoe', '$2a$12$NNYEMXoCytN.jhFPmFzZFu6IKmZYHJHTN7unGpRBf8q0TxgogJQ6G', 'johndoe@email.com'),
+('Jane', 'Doe', 'janedoe', '$2a$12$udDF/wYAOJNMW6e/yAt2xu98PGo5fKd1UBFi2w2zybtmfoldhoXSW', 'janedoe@email.com'),
+('Sam', 'Hurst', 'shurst', '$2a$12$3APECHx23lqiuSLz0IeVyeUfz5fEIZkLPIvjnYUqsutzwjRURAe9C', 'shurst@msn.com'),
+('Ben', 'Luck', 'blucky', '$2a$12$J24ghomhtWx1qnW1VwjWIOxkivbUd5YSQ4D7So6diiBA6B122aBwy', 'blucky@email.com'),
+('Alice', 'Falls', 'afalls', '$2a$12$An.Cvb2BXLFfzqOaobdS5uWwfEknrWFsnATySTyOy5f1v8kTou0yq ', 'alice@gmail.com'),
+('Mark', 'Smith', 'marksmith', '$2a$12$AjtBZu1/EbGSmH8sv/dYSeT9icOVhTXOrlFhgVsfVEmKnrTnQcGne', 'mark@gmail.com');
 
 insert into user_roles (app_user_id, app_role_id) values
 ( 1, 1 ),
-( 2, 2 );
+( 2, 2 ),
+( 3, 1 ),
+( 4, 1 ),
+( 5, 1 ),
+( 6, 2 );
 
+insert into restaurants (restaurant_name, phone_number, address, open_hours, descript) values
+('Taco House', '612-555-0186', '111 taco street', 'Monday to Saturday - 10am to 11pm', 'Serving the best tacos in town since 1958'),
+('Canadian Bacon', '612-555-0156', '333 bacon street', 'Tuesday to Saturday - 9am to 9pm', 'Serving the bacon burger in town since 1999'),
+('Soulfu', '612-555-0150', '555 tasty avenue', 'Monday to Friday - 11am to 8pm', 'Serving the best waffles in town since 2001'),
+('Party Fowl', '763-555-0133', '89391 Christiansen Road', 'Monday to Sunday - 10am to 8pm', 'Serving the best waffles in town since 2001'),
+('9021PHO', '612-555-9157', '685 Swift Valleys', 'Tuesday to Sunday - 11am to 10pm', 'Hipster-friendly fusion with a little extra spice.'),
+('Tequila Mockingbird', '612-555-2850', '93661 Bayer Square', 'Monday to Sunday - 11am to 11pm', 'We are a family-run operation spanning three generations of hard-working chefs.
+We strive for an experience that blows you out of this world.'),
+('Vincent Van Doughnut', '763-555-1123', '4192 Pietro Crossing', 'Monday to Sunday - 6am to 12am', 'Attention-hungry humans! Welcome you to our world-class restaurant.'),
+('Nacho Daddy', '952-555-3619', '411 Kareem Route', 'Monday to Friday - 11am to 8pm', 'You will get the OG taste of food at our restaurant.'),
+('Lord of the Wings', '763-555-8712', '320 Mizey Junction', 'Monday to Saturday - 10am to 11pm', 'We do wings and only wings'),
+('Pastabilities', '952-555-5873', '531 Dickinson Road', 'Monday to Sunday - 11am to 11pm', 'Everything can be solved with a little pasta');
+
+insert into reviews (review_text, app_user_id, restaurant_id) values
+-- Taco House
+('It was great!', 1, 1),
+('I love the bean bowl.', 3, 1),
+('Amazing food.', 4, 1),
+-- Canadian bacon
+('We loved our visit to Canadian Bacon and we love ordering takeout from there!', 5, 2),
+('Good stuff.', 1, 2),
+('Love it.', 3, 2),
+-- SoulFu
+('It was heavenly', 4, 3),
+('Highly Recommend', 5, 3),
+('Its ok', 1, 3);
+-- Party Fowl
+
+insert into orders (order_items, app_user_id, restaurant_id) values
+('Chicken Burrito', 1, 1),
+('Bison Burger', 2, 2),
+('Bison Burger', 2, 2),
+('Shrimp Curry Waffles', 1, 3);
+
+insert into menu (item_name, item_price, item_description, restaurant_id) values
+-- Taco House
+('Chicken Burrito', '13.50', 'Its a chicken burrito with beans', 1),
+('Chicken Taco', '8.50', 'Ground chicken with pico and lettuce between a corn tortilla', 1),
+('Mexican Rice', '6.70', 'Rice with beans and red and green peppers', 1),
+-- Canadian bacon
+('Bison Burger', '15.00', 'Ground bison between two buns', 2),
+('Bacon Burger', '13.00', 'Beef between two buns', 2),
+('Poutine', '12.70', 'Frech fries with gravy and cheese curds', 2),
+-- SoulFu
+('Shrimp Curry Waffles', '12.75', 'Spicy shrimp on top of 3 buttermilk waffles', 3),
+('Pork Fried Rice', '8.25', 'Pork fried with white rice, carrots, and peas', 3),
+('BBQ Potstickers', '9.75', 'Pan seared dumpling with spicy BBQ sauce', 3),
+-- Party Fowl
+('Chicken Dinner', '19.75', 'Just like Momma used to make', 4),
+('Fried Chicken', '14.00', 'Its a bird fried to golden perfection', 4),
+('French Fries ', '14.00', 'Fried potato strings', 4);
+insert into user_roles (app_user_id, app_role_id) values
+( 1, 1 ),
+( 2, 2 ),
+( 3, 1 ),
+( 4, 1 ),
+( 5, 1 ),
+( 6, 2 );
+
+insert into restaurants (restaurant_name, phone_number, address, open_hours, descript) values
+('Taco House', '612-555-0186', '111 taco street', 'Monday to Saturday - 10am to 11pm', 'Serving the best tacos in town since 1958'),
+('Canadian Bacon', '612-555-0156', '333 bacon street', 'Tuesday to Saturday - 9am to 9pm', 'Serving the bacon burger in town since 1999'),
+('Soulfu', '612-555-0150', '555 tasty avenue', 'Monday to Friday - 11am to 8pm', 'Serving the best waffles in town since 2001'),
+('Party Fowl', '763-555-0133', '89391 Christiansen Road', 'Monday to Sunday - 10am to 8pm', 'Serving the best waffles in town since 2001'),
+('9021PHO', '612-555-9157', '685 Swift Valleys', 'Tuesday to Sunday - 11am to 10pm', 'Hipster-friendly fusion with a little extra spice.'),
+('Tequila Mockingbird', '612-555-2850', '93661 Bayer Square', 'Monday to Sunday - 11am to 11pm', 'We are a family-run operation spanning three generations of hard-working chefs.  
+We strive for an experience that blows you out of this world.'),
+('Vincent Van Doughnut', '763-555-1123', '4192 Pietro Crossing', 'Monday to Sunday - 6am to 12am', 'Attention-hungry humans! Welcome you to our world-class restaurant.'),
+('Nacho Daddy', '952-555-3619', '411 Kareem Route', 'Monday to Friday - 11am to 8pm', 'You will get the OG taste of food at our restaurant.'),
+('Lord of the Wings', '763-555-8712', '320 Mizey Junction', 'Monday to Saturday - 10am to 11pm', 'We do wings and only wings'),
+('Pastabilities', '952-555-5873', '531 Dickinson Road', 'Monday to Sunday - 11am to 11pm', 'Everything can be solved with a little pasta');
+
+insert into reviews (review_text, app_user_id, restaurant_id) values
+-- Taco House
+('It was great!', 1, 1),
+('I love the bean bowl.', 3, 1),
+('Amazing food.', 4, 1),
+-- Canadian bacon
+('We loved our visit to Canadian Bacon and we love ordering takeout from there!', 5, 2),
+('Good stuff.', 1, 2),
+('Love it.', 3, 2),
+-- SoulFu
+('It was heavenly', 4, 3),
+('Highly Recommend', 5, 3),
+('Its ok', 1, 3);
+-- Party Fowl
+
+insert into orders (order_items, app_user_id, restaurant_id) values
+('Chicken Burrito', 1, 1),
+('Bison Burger', 2, 2),
+('Bison Burger', 2, 2),
+('Shrimp Curry Waffles', 1, 3);
+
+insert into menu (item_name, item_price, item_description, restaurant_id) values 
+-- Taco House
+('Chicken Burrito', '13.50', 'Its a chicken burrito with beans', 1),
+('Chicken Taco', '8.50', 'Ground chicken with pico and lettuce between a corn tortilla', 1),
+('Mexican Rice', '6.70', 'Rice with beans and red and green peppers', 1),
+-- Canadian bacon
+('Bison Burger', '15.00', 'Ground bison between two buns', 2),
+('Bacon Burger', '13.00', 'Beef between two buns', 2),
+('Poutine', '12.70', 'Frech fries with gravy and cheese curds', 2),
+-- SoulFu
+('Shrimp Curry Waffles', '12.75', 'Spicy shrimp on top of 3 buttermilk waffles', 3),
+('Pork Fried Rice', '8.25', 'Pork fried with white rice, carrots, and peas', 3),
+('BBQ Potstickers', '9.75', 'Pan seared dumpling with spicy BBQ sauce', 3),
+-- Party Fowl
+('Chicken Dinner', '19.75', 'Just like Momma used to make', 4),
+('Fried Chicken', '14.00', 'Its a bird fried to golden perfection', 4),
+('French Fries ', '14.00', 'Fried potato strings', 4);
+
+	   

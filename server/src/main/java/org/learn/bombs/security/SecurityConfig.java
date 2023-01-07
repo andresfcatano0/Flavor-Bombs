@@ -27,6 +27,7 @@ public class SecurityConfig {
 
                 .antMatchers( HttpMethod.GET,"/api/restaurant/public").permitAll()
                 .antMatchers( HttpMethod.DELETE, "/api/restaurant/*").hasRole("ADMIN")
+                .antMatchers( HttpMethod.DELETE, "/api/review/*").authenticated()
                 .antMatchers( HttpMethod.POST,"/api/security/login").permitAll()
                 .and()
                 .addFilter( new JwtRequestFilter(buildAuthManager(config), converter ))

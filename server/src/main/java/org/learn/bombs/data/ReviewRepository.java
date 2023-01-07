@@ -9,6 +9,7 @@ public interface ReviewRepository {
 
     Review getReviewById(int reviewId);
 
-
     void deleteReviewById(int reviewId);
+
+    Review addReview(Review toAdd);
 }

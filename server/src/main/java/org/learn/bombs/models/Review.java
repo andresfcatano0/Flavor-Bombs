@@ -1,9 +1,11 @@
 package org.learn.bombs.models;
 
 public class Review {
+
     private int reviewId;
     private String reviewText;
-    private int appUserId;
+    private int restaurantId;
+    AppUser owner;
 
     public int getReviewId() {
         return reviewId;
@@ -16,16 +18,30 @@ public class Review {
     public String getReviewText() {
         return reviewText;
     }
-
+    public int getRestaurantId() {
+        return restaurantId;
+    }
+    public void setRestaurantId(int restaurantId) {
+        this.restaurantId = restaurantId;
+    }
     public void setReviewText(String reviewText) {
         this.reviewText = reviewText;
     }
 
-    public int getAppUserId() {
-        return appUserId;
+    public AppUser getOwner() {
+        return owner;
     }
 
-    public void setAppUserId(int appUserId) {
-        this.appUserId = appUserId;
+    public void setOwner(AppUser owner) {
+        this.owner = owner;
+    }
+
+    @Override
+    public String toString() {
+        return "Review{" +
+                "reviewId=" + reviewId +
+                ", reviewText='" + reviewText + '\'' +
+                ", restaurantId=" + restaurantId +
+                '}';
     }
 }
