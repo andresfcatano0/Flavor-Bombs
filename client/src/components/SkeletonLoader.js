@@ -4,14 +4,10 @@ import Placeholder from "react-bootstrap/Placeholder";
 
 export default function SkeletonLoader() {
   return (
-    <Card style={{ width: "28rem" }}>
-
+    <Card style={{ width: "20rem" }}>
       {/* Placeholder for the image */}
       <Placeholder animation="glow">
-      <Placeholder
-        xs={12}
-        style={{ height: "286px" }}
-      />
+        <Placeholder xs={12} style={{ height: "286px" }} />
       </Placeholder>
 
       <Card.Body>
