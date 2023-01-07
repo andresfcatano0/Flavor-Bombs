@@ -4,10 +4,10 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 
-export default function MenuCard() {
+export default function MenuCard({m}) {
   return (
     <Container
-      className="mb-4"
+      className="mb-4 pe-5"
       style={{
         backgroundColor: "lightGrey",
         width: "90vw",
@@ -25,8 +25,8 @@ export default function MenuCard() {
         </Col>
         <Col className="d-flex">
           <Row>
-            <h5 className="mt-3 ">Food Item Title</h5>
-            <p>lorem ipsum dolor sit amet</p>
+            <h5 className="mt-3 ">{m.itemName}</h5>
+            <p>{m.itemDescription}</p>
           </Row>
           <Row className="align-items-end mb-3">
             <Button className="">Order Now</Button>

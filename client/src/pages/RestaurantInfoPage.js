@@ -10,15 +10,33 @@ import ReviewCard from '../components/ReviewCard';
 import MenuCard from '../components/MenuCard';
 
 export default function RestaurantInfoPage({getRestaurants, restaurants}) {
-    const [index, setIndex] = useState(0);
+    // const [index, setIndex] = useState(0);
 
-    const handleSelect = (selectedIndex, e) => {
-      setIndex(selectedIndex);
-    };
+    // const handleSelect = (selectedIndex, e) => {
+    //   setIndex(selectedIndex);
+    // };
+    const [menu, setMenu] = useState([]);
+    const params = useParams();
+    const [specificRestaurant, setSpecificRestaurant] = useState({});
+
+    const getMenuByRestaurant = () => {
+        fetch("http://localhost:8080/api/menu", {
+            method: 'GET',
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then(response => {
+            return response.json();
+        }).then(data => {
+            let specificMenu = data.filter(d=> {
+                return d.restaurantId.toString() === params.id.toString()
+            })
+            // console.log(specificMenu);
+            setMenu(specificMenu);
+        }).catch(err=> console.log(err));
+    }
 
 
-  const params = useParams();
-  const [specificRestaurant, setSpecificRestaurant] = useState({});
 
   const getSpecificRestaurant = () => {
     fetch(`http://localhost:8080/api/restaurant/${params.id}`, {
@@ -29,17 +47,17 @@ export default function RestaurantInfoPage({getRestaurants, restaurants}) {
         },
     })
     .then(res=> {
-        // console.log(res.json())
         return res.json();
     })
     .then(data => {
-        console.log(data)
+        // console.log(data)
         setSpecificRestaurant(data);
     })
   }
 
   useEffect(()=> {
     getSpecificRestaurant();
+    getMenuByRestaurant();
   }, [])
   
     return (
@@ -82,7 +100,11 @@ export default function RestaurantInfoPage({getRestaurants, restaurants}) {
           <div>
             <h4>Menu</h4>
           </div>
-          <MenuCard/>
+          {menu.map(m=>{
+            return (
+                <MenuCard key={m.menuId} m={m}/>
+            )
+          })}
         </div>
       </>
     );
