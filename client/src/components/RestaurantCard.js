@@ -15,11 +15,10 @@ export default function RestaurantCard(props) {
       <Container>
         <Row>
           {props.isLoading ? (
+            Array.from({ length: 3 }).map((_, idx) => (
             <Col>
               <SkeletonLoader />
-              <SkeletonLoader />
-              <SkeletonLoader />
-            </Col>
+            </Col>))
             ) : (
             props.restaurants.map((restaurant) => {
               return (
