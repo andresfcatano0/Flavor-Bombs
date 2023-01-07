@@ -10,6 +10,7 @@ import UserContext from './context/AuthContext';
 import jwtDecode from 'jwt-decode';
 import RestaurantPage from './pages/RestaurantPage';
 import RestaurantInfoPage from './pages/RestaurantInfoPage';
+import OrdersPage from './pages/OrdersPage';
 
 function App() {
   const [menu, setMenu] = useState([]);
@@ -57,7 +58,7 @@ function App() {
         return res.json();
       })
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         setRestaurants(data);
       })
       .catch((err) => {
@@ -89,12 +90,18 @@ function App() {
             <RestaurantPage 
               restaurants={restaurants}
               isLoading={isLoading}
-              
+
             />
           </Route>
           <Route path="/restaurant/:id">
             <RestaurantInfoPage
               getRestaurants={getRestaurants}
+              restaurants={restaurants}
+            />
+          </Route>
+          <Route path="/orders">
+            <OrdersPage 
+              setAuthUser={setAuthUser}
               restaurants={restaurants}
             />
           </Route>
