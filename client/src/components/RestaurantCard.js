@@ -15,8 +15,12 @@ export default function RestaurantCard(props) {
       <Container>
         <Row>
           {props.isLoading ? (
-            <SkeletonLoader />
-          ) : (
+            <Col>
+              <SkeletonLoader />
+              <SkeletonLoader />
+              <SkeletonLoader />
+            </Col>
+            ) : (
             props.restaurants.map((restaurant) => {
               return (
                 <Col key={restaurant.restaurantId}>
