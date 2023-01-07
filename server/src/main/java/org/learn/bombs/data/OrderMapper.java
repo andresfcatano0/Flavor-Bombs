@@ -13,7 +13,7 @@ public class OrderMapper implements RowMapper<Order> {
         Order toBuild = new Order();
         toBuild.setOrderId( rs.getInt("order_id"));
         toBuild.setOrderItems(rs.getString("order_items"));
-        toBuild.setAppUserId( rs.getInt("app_user_id"));
+//        toBuild.setAppUserId( rs.getInt("app_user_id"));
         toBuild.setRestaurantId( rs.getInt("restaurant_id"));
 
         try{

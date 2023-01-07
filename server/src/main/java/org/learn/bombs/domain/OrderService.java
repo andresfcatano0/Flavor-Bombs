@@ -34,4 +34,39 @@ public class OrderService {
         return privateLookupResult;
     }
 
+
+    public Result deleteOrderById(Integer orderId, String username) {
+        Result deleteResult = new Result();
+
+        Order toDelete = repo.getOrderById( orderId );
+
+        AppUser deletingUser = uRepo.loadUserByUsername(username);
+
+        Boolean isAdmin = deletingUser.getRoles().stream().anyMatch(r -> r.equals("ADMIN"));
+
+        if( toDelete.getOwner().getUsername().equals(username) || isAdmin){
+            //this belongs to the current user, so they're allowed to delete it
+            repo.deleteOrderById( orderId );
+        } else {
+            deleteResult.addErrorMessage("Cannot delete order for another user.");
+        }
+
+        return deleteResult;
+    }
+
+    public Result<Order> addOrder(Order toAdd, String username) {
+
+        Result<Order> addResult = new Result<>();
+
+        AppUser addingUser = uRepo.loadUserByUsername(username);
+        toAdd.setOwner(addingUser);
+
+        Order fullyHydrated = repo.addOrder( toAdd );
+
+        addResult.setPayload( fullyHydrated );
+
+        return addResult;
+
+    }
+
 }
