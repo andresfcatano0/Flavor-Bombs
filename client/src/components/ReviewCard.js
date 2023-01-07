@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 
 export default function ReviewCard() {
   return (
-    <Card style={{ width: "15rem" }}>
+    <Card style={{ width: "15rem" }} className="ms-3">
       <Card.Header>UserName</Card.Header>
       <Card.Body>
         {/* <Card.Title>Special title treatment</Card.Title> */}
