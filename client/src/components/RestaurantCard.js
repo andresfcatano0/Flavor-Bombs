@@ -16,7 +16,7 @@ export default function RestaurantCard(props) {
         <Row>
           {props.isLoading ? (
             Array.from({ length: 3 }).map((_, idx) => (
-            <Col>
+            <Col key={idx}>
               <SkeletonLoader />
             </Col>))
             ) : (
