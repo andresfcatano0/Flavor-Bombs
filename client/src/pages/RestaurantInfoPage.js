@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
 import Carousel from 'react-bootstrap/Carousel';
 import { useParams } from "react-router-dom";
 import ReviewCard from '../components/ReviewCard';
+import MenuCard from '../components/MenuCard';
 
 export default function RestaurantInfoPage({getRestaurants, restaurants}) {
     const [index, setIndex] = useState(0);
@@ -58,7 +63,7 @@ export default function RestaurantInfoPage({getRestaurants, restaurants}) {
             <p className="text-muted">{specificRestaurant.openHours}</p>
           </div>
           <hr />
-            {/* <Carousel activeIndex={index} onSelect={handleSelect}>
+          {/* <Carousel activeIndex={index} onSelect={handleSelect}>
               <Carousel.Item>
                 <ReviewCard/>
               </Carousel.Item>
@@ -72,19 +77,12 @@ export default function RestaurantInfoPage({getRestaurants, restaurants}) {
           <Row>
             <ReviewCard />
             <ReviewCard />
-            <ReviewCard />
           </Row>
           <hr />
           <div>
             <h4>Menu</h4>
           </div>
-          <div style={{ backgroundColor: "lightGrey", width: "350px" }}>
-            <img
-              width={"150px"}
-              className="p-2"
-              src="https://cdn.pixabay.com/photo/2014/11/05/15/57/salmon-518032_1280.jpg"
-            />
-          </div>
+          <MenuCard/>
         </div>
       </>
     );
