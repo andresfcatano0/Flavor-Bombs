@@ -21,12 +21,9 @@ public class Result<T> {
     }
 
     public List<String> getErrorMessages(){
-        //return a copy so the outside world can't mutate errors after
-        //they've been added
         return new ArrayList<>(errorMessages);
     }
     public boolean isSuccess(){
         return errorMessages.isEmpty();
     }
-
 }
