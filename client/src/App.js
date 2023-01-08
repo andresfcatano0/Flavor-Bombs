@@ -11,6 +11,7 @@ import jwtDecode from 'jwt-decode';
 import RestaurantPage from './pages/RestaurantPage';
 import RestaurantInfoPage from './pages/RestaurantInfoPage';
 import OrdersPage from './pages/OrdersPage';
+import AboutPage from './pages/AboutPage';
 
 function App() {
   const [menu, setMenu] = useState([]);
@@ -104,6 +105,9 @@ function App() {
               setAuthUser={setAuthUser}
               restaurants={restaurants}
             />
+          </Route>
+          <Route path="/about-us">
+            <AboutPage/>
           </Route>
         </Switch>
       </BrowserRouter>
