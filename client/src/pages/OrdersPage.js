@@ -10,13 +10,6 @@ export default function OrdersPage({restaurants}) {
      const [restaurantOrders, setRestaurantOrders] = useState([]);
      
 
-    //  console.log(restaurants)
-    
-    let getSpecificRestaurantName = (orderId) => {
-      let found = restaurants.filter(r=>r.restaurantId == orderId);
-      setRestaurantOrders(found)
-    }
-
     const getAllUserOrders = () => {
         fetch("http://localhost:8080/api/order", {
           method: "GET",
@@ -26,13 +19,6 @@ export default function OrdersPage({restaurants}) {
         }).then((res) => {
           return res.json()
         }).then((data) => {
-            console.log(data);
-            // getSpecificRestaurantName(data.restaurantId)
-            // for(let d of data){
-            //   setRestaurantOrders(restaurants.filter(r=>r.restaurantId == d.orderId))
-            //   setOrders(d)
-            // }
-            // console.log(restaurantOrders)
             setOrders(data);
         });
     }
@@ -55,23 +41,22 @@ export default function OrdersPage({restaurants}) {
           <tr>
             <th>#</th>
             <th>Restaurant Name</th>
-            <th>Restaurant Name</th>
             <th>Food Item</th>
             {/* <th>Time</th> */}
           </tr>
         </thead>
         <tbody>
             {orders.map((order, index)=> {
-                return(
-                <tr key={order.orderId}>
-
-                  <td>{index+1}</td>
-                  <td>{order.restaurantId}</td>
-                  <td></td>
-                  <td>{order.orderItems}</td>
-                </tr>
-
-                )
+                return (
+                  <tr key={order.orderId}>
+                    <td>{index + 1}</td>
+                    {/* <td>{order.restaurantId}</td> */}
+                    <td>
+                      {restaurants[order.restaurantId-1].restaurantName}
+                    </td>
+                    <td>{order.orderItems}</td>
+                  </tr>
+                );
             })}
           
         </tbody>
