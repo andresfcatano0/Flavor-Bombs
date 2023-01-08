@@ -79,21 +79,16 @@ function App() {
   return (
     <UserContext.Provider value={authUser}>
       <BrowserRouter>
-        
-        <NavBar setAuthUser={setAuthUser}/>
+        <NavBar setAuthUser={setAuthUser} />
         <Switch>
           <Route exact path="/">
             <HomePage />
           </Route>
           <Route path="/login">
-            <LoginPage setAuthUser={setAuthUser}/>
+            <LoginPage setAuthUser={setAuthUser} />
           </Route>
           <Route exact path="/restaurants">
-            <RestaurantPage 
-              restaurants={restaurants}
-              isLoading={isLoading}
-
-            />
+            <RestaurantPage restaurants={restaurants} isLoading={isLoading} />
           </Route>
           <Route path="/restaurant/:id">
             <RestaurantInfoPage
@@ -102,10 +97,7 @@ function App() {
             />
           </Route>
           <Route path="/orders">
-            <OrdersPage 
-              setAuthUser={setAuthUser}
-              restaurants={restaurants}
-            />
+            <OrdersPage setAuthUser={setAuthUser} restaurants={restaurants} />
           </Route>
           <Route path="/admin-dashboard">
             <AdminPage
@@ -114,7 +106,7 @@ function App() {
             />
           </Route>
           <Route path="/about-us">
-            <AboutPage/>
+            <AboutPage />
           </Route>
         </Switch>
       </BrowserRouter>
