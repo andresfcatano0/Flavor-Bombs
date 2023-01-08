@@ -12,6 +12,7 @@ import RestaurantPage from './pages/RestaurantPage';
 import RestaurantInfoPage from './pages/RestaurantInfoPage';
 import OrdersPage from './pages/OrdersPage';
 import AboutPage from './pages/AboutPage';
+import AdminPage from './pages/AdminPage';
 
 function App() {
   const [menu, setMenu] = useState([]);
@@ -107,7 +108,7 @@ function App() {
             />
           </Route>
           <Route path="/admin-dashboard">
-            <OrdersPage 
+            <AdminPage
               setAuthUser={setAuthUser}
               restaurants={restaurants}
             />

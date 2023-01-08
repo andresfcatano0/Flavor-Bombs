@@ -51,9 +51,9 @@ export default function LoginPage({setAuthUser}) {
 
         }).then(jwtContainer => {
             const jwt = jwtContainer.jwt;
-            console.log(jwt);
+            // console.log(jwt);
             const decodeJwt = jwtDecode(jwt);
-            console.log(decodeJwt);
+            // console.log(decodeJwt);
 
             const fullLoginData = {
                 token: jwt,
@@ -63,7 +63,9 @@ export default function LoginPage({setAuthUser}) {
             localStorage.setItem("userData",JSON.stringify(fullLoginData));
 
             setAuthUser(fullLoginData);
-            history.push("/");
+            console.log(fullLoginData)
+            fullLoginData.userData.roles[0].authority === "ROLE_ADMIN" ? history.push("/admin-dashboard") : history.push("/")
+            // history.push("/");
         })
 
 
