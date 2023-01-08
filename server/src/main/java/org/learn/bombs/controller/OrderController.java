@@ -65,4 +65,21 @@ public class OrderController {
         return ResponseEntity.badRequest().body( addResult.getErrorMessages() );
     }
 
+    @PutMapping("/{orderId}")
+    ResponseEntity update( @PathVariable int orderId, @RequestBody Order order) {
+        AppUser requestingUser = (AppUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        Result<Order> updateResult = service.update(order, requestingUser.getUsername());
+
+        if (orderId != order.getOrderId()) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+        if (updateResult.isSuccess() ){
+            return new ResponseEntity( updateResult.getPayload(), HttpStatus.CREATED);
+        }
+
+        return ResponseEntity.badRequest().body( updateResult.getErrorMessages() );
+    }
+
 }

@@ -69,4 +69,27 @@ public class OrderService {
 
     }
 
+    public Result<Order> update(Order order, String username) {
+
+        Result<Order> updateResult = new Result<>();
+
+        AppUser updatingUser = uRepo.loadUserByUsername(username);
+        order.setOwner(updatingUser);
+
+        if (order.getOrderId() <= 0) {
+            updateResult.addErrorMessage("Order `id` is required.");
+        }
+
+        if (updateResult.isSuccess()) {
+            if (repo.updateOrder(order)) {
+                updateResult.setPayload(order);
+            } else {
+                updateResult.addErrorMessage("Order id was not found." );
+            }
+        }
+
+        return updateResult;
+    }
+
+
 }
