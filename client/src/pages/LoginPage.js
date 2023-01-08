@@ -63,7 +63,7 @@ export default function LoginPage({setAuthUser}) {
             localStorage.setItem("userData",JSON.stringify(fullLoginData));
 
             setAuthUser(fullLoginData);
-            console.log(fullLoginData)
+            // console.log(fullLoginData)
             fullLoginData.userData.roles[0].authority === "ROLE_ADMIN" ? history.push("/admin-dashboard") : history.push("/")
             // history.push("/");
         })
