@@ -74,14 +74,14 @@ insert into app_role (name) values
 -- janedoe is bad-password
 -- shurst is butterfly
 -- blucky is 2-the-moon
--- afalls is trinity_2000
+-- afalls is trinity-2000
 -- marksmith is marzbarz
 insert into app_user (first_name, last_name, username, passhash, email) values
 ('John', 'Doe', 'johndoe', '$2a$12$NNYEMXoCytN.jhFPmFzZFu6IKmZYHJHTN7unGpRBf8q0TxgogJQ6G', 'johndoe@email.com'),
 ('Jane', 'Doe', 'janedoe', '$2a$12$udDF/wYAOJNMW6e/yAt2xu98PGo5fKd1UBFi2w2zybtmfoldhoXSW', 'janedoe@email.com'),
 ('Sam', 'Hurst', 'shurst', '$2a$12$3APECHx23lqiuSLz0IeVyeUfz5fEIZkLPIvjnYUqsutzwjRURAe9C', 'shurst@msn.com'),
 ('Ben', 'Luck', 'blucky', '$2a$12$J24ghomhtWx1qnW1VwjWIOxkivbUd5YSQ4D7So6diiBA6B122aBwy', 'blucky@email.com'),
-('Alice', 'Falls', 'afalls', '$2a$12$An.Cvb2BXLFfzqOaobdS5uWwfEknrWFsnATySTyOy5f1v8kTou0yq ', 'alice@gmail.com'),
+('Alice', 'Falls', 'afalls', '$2a$12$0nDKpQ6hRVhnOmEGd03RaORFnozzCDJkT82I3mKEvElUScrWeTU/S', 'alice@gmail.com'),
 ('Mark', 'Smith', 'marksmith', '$2a$12$AjtBZu1/EbGSmH8sv/dYSeT9icOVhTXOrlFhgVsfVEmKnrTnQcGne', 'mark@gmail.com');
 
 insert into user_roles (app_user_id, app_role_id) values
@@ -194,3 +194,4 @@ insert into menu (item_name, item_price, item_description, restaurant_id) values
 ('Canola oil and pasta salad', '19.00', 'A crisp salad featuring canola oil and dried pasta', 10),
 ('Tofu and mushroom soup', '13.00', 'Smoked tofu and oyster mushroom combined into chunky soup', 10),
 ('Mozzarella and thyme pizza', 18.00, 'Thin and crispy pizza topped with fresh mozzarella and thyme', 10);
+	   
