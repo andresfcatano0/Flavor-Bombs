@@ -6,7 +6,16 @@ export default function OrdersPage({restaurants}) {
 
      const userData = useContext(UserContext);
      const [orders, setOrders] = useState([]);
+
+     const [restaurantOrders, setRestaurantOrders] = useState([]);
      
+
+    //  console.log(restaurants)
+    
+    let getSpecificRestaurantName = (orderId) => {
+      let found = restaurants.filter(r=>r.restaurantId == orderId);
+      setRestaurantOrders(found)
+    }
 
     const getAllUserOrders = () => {
         fetch("http://localhost:8080/api/order", {
@@ -18,16 +27,29 @@ export default function OrdersPage({restaurants}) {
           return res.json()
         }).then((data) => {
             console.log(data);
+            // getSpecificRestaurantName(data.restaurantId)
+            // for(let d of data){
+            //   setRestaurantOrders(restaurants.filter(r=>r.restaurantId == d.orderId))
+            //   setOrders(d)
+            // }
+            // console.log(restaurantOrders)
             setOrders(data);
         });
     }
 
     useEffect(()=>{
         getAllUserOrders()
+        
     },[])
+
+    // console.log(restaurantOrders)
 
   return (
     <div>
+      <h2>Current or Future Orders</h2>
+
+      <hr/>
+      <h2>Past Orders</h2>
       <Table striped hover>
         <thead>
           <tr>
