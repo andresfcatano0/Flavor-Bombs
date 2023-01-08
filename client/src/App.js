@@ -106,6 +106,12 @@ function App() {
               restaurants={restaurants}
             />
           </Route>
+          <Route path="/admin-dashboard">
+            <OrdersPage 
+              setAuthUser={setAuthUser}
+              restaurants={restaurants}
+            />
+          </Route>
           <Route path="/about-us">
             <AboutPage/>
           </Route>
