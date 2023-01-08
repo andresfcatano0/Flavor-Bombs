@@ -65,4 +65,26 @@ public class ReviewService {
 
 
     }
+
+    public Result<Review> updateReview(Review review, String username) {
+
+        Result<Review> updateResult = new Result<>();
+
+        AppUser updatingUser = userRepo.loadUserByUsername(username);
+        review.setOwner(updatingUser);
+
+        if (review.getReviewId() <= 0) {
+            updateResult.addErrorMessage("A Review `id` is required.");
+        }
+
+        if (updateResult.isSuccess()) {
+            if (repository.updateReview(review)) {
+                updateResult.setPayload(review);
+            } else {
+                updateResult.addErrorMessage("Review id was not found." );
+            }
+        }
+
+        return updateResult;
+    }
 }

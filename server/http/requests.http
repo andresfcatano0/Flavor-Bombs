@@ -36,6 +36,17 @@ Host: localhost:8080
 Content-Type: application/json
 
 {
+    "username":"shurst",
+    "password":"butterfly"
+}
+
+###
+
+POST /api/security/login HTTP/1.1
+Host: localhost:8080
+Content-Type: application/json
+
+{
     "username":"blucky",
     "password":"2-the-moon"
 }
@@ -70,7 +81,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzd
 
 {
     "reviewText": "This is a New Review.",
-    "restaurantId": 10,
+    "restaurantId": 4,
     "owner": null
 }
 
@@ -79,11 +90,38 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzd
 POST /api/review HTTP/1.1
 Host: localhost:8080
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzdWIiOiJqb2huZG9lIiwicm9sZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfVVNFUiJ9XSwiZXhwIjoxNjczMTM5MDU1fQ.74AdEpyB4c89G8XIe89QLoNE29IT9h_E8cbtIdGh61k
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzdWIiOiJhZmFsbHMiLCJyb2xlcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9VU0VSIn1dLCJleHAiOjE2NzMxNDA2MTR9.8PFr3dj6PVuQtoIBAYQLNjeH-vItXn4KHtdCbmygKLc
 
 {
     "reviewText": "BIG BOLD REVIEW.",
     "restaurantId": 6,
     "owner": null
 
+}
+
+###
+
+PUT /api/review/2 HTTP/1.1
+Host: localhost:8080
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzdWIiOiJzaHVyc3QiLCJyb2xlcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9VU0VSIn1dLCJleHAiOjE2NzMyMDYxNzZ9.U5AaSbJSjCaydHX5-IU7ZdqOUnoNxcKtePkFjbQg7Qc
+
+{
+    "reviewId": 2,
+    "reviewText": "Everything I tried was bursting with flavor!",
+    "restaurantId": 2,
+    "owner": null
+}
+
+###
+
+PUT /api/review/1 HTTP/1.1
+Host: localhost:8080
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzdWIiOiJzaHVyc3QiLCJyb2xlcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9VU0VSIn1dLCJleHAiOjE2NzMyMDU5NjB9.GupyR4Pku7OF1TWeTAinpSetnWNVKmjSPomf0BlMC8k
+
+{
+    "reviewId": 1,
+    "reviewText": "Everything I tried was bursting with flavor!",
+    "restaurantId": 1
 }

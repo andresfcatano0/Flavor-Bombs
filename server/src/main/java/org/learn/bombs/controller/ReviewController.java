@@ -70,4 +70,22 @@ public class ReviewController {
         return ResponseEntity.badRequest().body(deleteResult.getErrorMessages());
     }
 
+    @PutMapping("/{reviewId}")
+    ResponseEntity updateReview( @PathVariable int reviewId, @RequestBody Review review) {
+        AppUser requestingUser = (AppUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        Result<Review> updateResult = service.updateReview(review, requestingUser.getUsername());
+
+        if (reviewId != review.getReviewId()) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+        if (updateResult.isSuccess() ){
+            return new ResponseEntity(updateResult.getPayload(), HttpStatus.CREATED);
+        }
+
+        return ResponseEntity.badRequest().body(updateResult.getErrorMessages() );
+    }
+
 }
+

@@ -70,4 +70,18 @@ public class ReviewDatabaseRepository implements ReviewRepository {
             }
             return toAdd;
         }
+
+    @Override
+    public boolean updateReview(Review review) {
+        final String sql = "update reviews set " +
+                "review_text = ?, " +
+                "app_user_id = ?, " +
+                "restaurant_id = ? " +
+                "where review_id = ?;";
+
+        int rowsUpdated = jdbcTemplate.update(sql, review.getReviewText(), review.getOwner().getAppUserId(),
+                review.getRestaurantId(), review.getRestaurantId());
+
+        return rowsUpdated > 0;
+    }
 }

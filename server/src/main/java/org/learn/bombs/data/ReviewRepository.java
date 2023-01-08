@@ -12,4 +12,6 @@ public interface ReviewRepository {
     void deleteReviewById(int reviewId);
 
     Review addReview(Review toAdd);
+
+    boolean updateReview(Review review);
 }
