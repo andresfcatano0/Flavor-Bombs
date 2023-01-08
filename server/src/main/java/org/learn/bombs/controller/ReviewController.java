@@ -2,11 +2,13 @@ package org.learn.bombs.controller;
 
 import org.learn.bombs.domain.Result;
 import org.learn.bombs.domain.ReviewService;
+import org.learn.bombs.models.AppUser;
 import org.learn.bombs.models.Menu;
 import org.learn.bombs.models.Review;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,6 +33,20 @@ public class ReviewController {
 
         return ResponseEntity.badRequest().body(publicGetResult.getErrorMessages());
     }
+
+    @PostMapping
+    ResponseEntity addReview( @RequestBody Review toAdd ){
+        AppUser requestingUser = (AppUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        Result<Review> addResult = service.addReview( toAdd, requestingUser.getUsername() );
+
+        if( addResult.isSuccess() ){
+            return new ResponseEntity( addResult.getPayload(), HttpStatus.CREATED);
+        }
+
+        return ResponseEntity.badRequest().body( addResult.getErrorMessages() );
+    }
+
 
     @GetMapping("/{reviewId}")
     public ResponseEntity<Review> getReviewById(@PathVariable int reviewId) {

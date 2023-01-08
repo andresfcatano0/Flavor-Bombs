@@ -31,10 +31,59 @@ Content-Type: application/json
 
 ###
 
+POST /api/security/login HTTP/1.1
+Host: localhost:8080
+Content-Type: application/json
+
+{
+    "username":"blucky",
+    "password":"2-the-moon"
+}
+
+###
+
+POST /api/security/login HTTP/1.1
+Host: localhost:8080
+Content-Type: application/json
+
+{
+    "username":"afalls",
+    "password":"trinity-2000"
+}
+
+###
+
 DELETE http://localhost:8080/api/review/1 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzdWIiOiJqb2huZG9lIiwicm9sZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfVVNFUiJ9XSwiZXhwIjoxNjczMTI1MTY2fQ.vqy_av_KmC7dO1IP-XMe8calrQJUAcyjAfDN_-G5KeY
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzdWIiOiJqb2huZG9lIiwicm9sZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfVVNFUiJ9XSwiZXhwIjoxNjczMTI4Nzk3fQ.eRiTZG3mTr6pPC09zgRPRuP1QLN1rvFvT0VP7FYeDSo
 
 ###
 
 DELETE http://localhost:8080/api/review/2 HTTP/1.1
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzdWIiOiJqYW5lZG9lIiwicm9sZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfQURNSU4ifV0sImV4cCI6MTY3MzEyNTE5Mn0.sfWWqab1Ldij33moE9tlRG1SWaTwkfGx3peURLazhnw
+
+###
+
+POST /api/review HTTP/1.1
+Host: localhost:8080
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzdWIiOiJibHVja3kiLCJyb2xlcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9VU0VSIn1dLCJleHAiOjE2NzMxMzkwMTR9.wmFvUUDr9fXjBSQdLUW7BZdD9_UuzEewMAh0AZs4OY8
+
+{
+    "reviewText": "This is a New Review.",
+    "restaurantId": 10,
+    "owner": null
+}
+
+###
+
+POST /api/review HTTP/1.1
+Host: localhost:8080
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzdWIiOiJqb2huZG9lIiwicm9sZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfVVNFUiJ9XSwiZXhwIjoxNjczMTM5MDU1fQ.74AdEpyB4c89G8XIe89QLoNE29IT9h_E8cbtIdGh61k
+
+{
+    "reviewText": "BIG BOLD REVIEW.",
+    "restaurantId": 6,
+    "owner": null
+
+}
