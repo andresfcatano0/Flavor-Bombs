@@ -7,61 +7,132 @@ import Button from "react-bootstrap/Button";
 import { Link } from 'react-router-dom';
 import UserContext from '../../context/AuthContext';
 import AuthNavBar from './AuthNavBar';
+import AdminNavBar from './AdminNavBar';
 
 export default function NavBar({setAuthUser}){
 
   const user = useContext(UserContext);
 
-  
+  //  console.log(user.userData.roles[0].authority)
 
     return (
       <>
-      {user ? <AuthNavBar setAuthUser={setAuthUser}/> : 
-        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-          <Container>
-            <Link to="/">
-              <Navbar.Brand>
-                <img
-                  alt="brand logo"
-                  src={require("../../assets/primitiveSpongebob.png")}
-                  width="50"
-                  height="35"
-                  className="d-inline-block align-top"
-                />{" "}
-                Flavor Bombs
-              </Navbar.Brand>
-            </Link>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav">
-              <Nav className="me-auto">
-                {/* <Link to="/"> */}
-                  {/* <Nav.Item>Home</Nav.Item> */}
-                {/* </Link> */}
-                <Nav.Link href="/">Home</Nav.Link>
-                {/* <Link to="/about-us">
-                  <Nav.Item>About Us</Nav.Item> */}
-                  <Nav.Link href="/about-us">About Us</Nav.Link>
-                {/* </Link> */}
+        {!user ? (
+          <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+            <Container>
+              <Link to="/">
+                <Navbar.Brand>
+                  <img
+                    alt="brand logo"
+                    src={require("../../assets/primitiveSpongebob.png")}
+                    width="50"
+                    height="35"
+                    className="d-inline-block align-top"
+                  />{" "}
+                  Flavor Bombs
+                </Navbar.Brand>
+              </Link>
+              <Navbar.Toggle aria-controls="basic-navbar-nav" />
+              <Navbar.Collapse id="basic-navbar-nav">
+                <Nav className="me-auto">
+                  <Nav.Link href="/">Home</Nav.Link>
 
-                {/* <Nav.Item>
-                <Link to="/restaurants">
-                  Restaurants */}
+                  <Nav.Link href="/about-us">About Us</Nav.Link>
+
                   <Nav.Link href="/restaurants">Restaurants</Nav.Link>
-                {/* </Link>
-                </Nav.Item> */}
-              </Nav>
-              <Nav>
-                <Link to="/login">
-                  <Button>Log In</Button>
-                </Link>
-                {/* <Link to="/signup">
-                  <Nav.Link>Sign Up</Nav.Link>
-                </Link> */}
-              </Nav>
-            </Navbar.Collapse>
-          </Container>
-        </Navbar>
-}
+                </Nav>
+                <Nav>
+                  <Link to="/login">
+                    <Button>Log In</Button>
+                  </Link>
+                </Nav>
+              </Navbar.Collapse>
+            </Container>
+          </Navbar>
+        ) : user.userData.roles[0].authority === "ROLE_ADMIN" ? (
+          <AdminNavBar setAuthUser={setAuthUser} />
+        ) : (
+          <AuthNavBar setAuthUser={setAuthUser} />
+        )}
+
+        {/* { user.userData.roles[0].authority === "ROLE_ADMIN" ? (
+          <AdminNavBar setAuthUser={setAuthUser} />
+        ) : user.userData.roles[0].authority === "ROLES_USER" ? (
+          <AuthNavBar setAuthUser={setAuthUser} />
+        ) : (
+          <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+            <Container>
+              <Link to="/">
+                <Navbar.Brand>
+                  <img
+                    alt="brand logo"
+                    src={require("../../assets/primitiveSpongebob.png")}
+                    width="50"
+                    height="35"
+                    className="d-inline-block align-top"
+                  />{" "}
+                  Flavor Bombs
+                </Navbar.Brand>
+              </Link>
+              <Navbar.Toggle aria-controls="basic-navbar-nav" />
+              <Navbar.Collapse id="basic-navbar-nav">
+                <Nav className="me-auto">
+                  <Nav.Link href="/">Home</Nav.Link>
+
+                  <Nav.Link href="/about-us">About Us</Nav.Link>
+
+                  <Nav.Link href="/restaurants">Restaurants</Nav.Link>
+                </Nav>
+                <Nav>
+                  <Link to="/login">
+                    <Button>Log In</Button>
+                  </Link>
+                </Nav>
+              </Navbar.Collapse>
+            </Container>
+          </Navbar>
+        )} */}
+        {/* {user ? (
+          <AuthNavBar setAuthUser={setAuthUser} />
+        ) : (
+          <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+            <Container>
+              <Link to="/">
+                <Navbar.Brand>
+                  <img
+                    alt="brand logo"
+                    src={require("../../assets/primitiveSpongebob.png")}
+                    width="50"
+                    height="35"
+                    className="d-inline-block align-top"
+                  />{" "}
+                  Flavor Bombs
+                </Navbar.Brand>
+              </Link>
+              <Navbar.Toggle aria-controls="basic-navbar-nav" />
+              <Navbar.Collapse id="basic-navbar-nav">
+                <Nav className="me-auto">
+                 
+                   <Nav.Link href="/">Home</Nav.Link>
+                  
+                   <Nav.Link href="/about-us">About Us</Nav.Link> 
+                
+
+                  
+                  <Nav.Link href="/restaurants">Restaurants</Nav.Link>
+              
+             
+                </Nav>
+                <Nav>
+                  <Link to="/login">
+                    <Button>Log In</Button>
+                  </Link>
+                  
+                </Nav>
+              </Navbar.Collapse>
+            </Container>
+          </Navbar>
+        )} */}
       </>
     );
 }
