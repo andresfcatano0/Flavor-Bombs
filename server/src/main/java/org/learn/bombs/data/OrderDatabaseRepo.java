@@ -83,24 +83,21 @@ public class OrderDatabaseRepo implements OrderRepo{
             }
             toAdd.setOrderId( holder.getKey().intValue() );
         }
-//        else {
-//            int rowsAffected = template.update(  connection -> {
-//                PreparedStatement statement = connection.prepareStatement(
-//                        "insert into todo (text) values (?)",
-//                        Statement.RETURN_GENERATED_KEYS
-//                );
-//
-//                statement.setString(1, toAdd.getText());
-//
-//                return statement;
-//            }, holder);
-//            if( rowsAffected != 1 ){
-//                return null;
-//            }
-//            toAdd.setId( holder.getKey().intValue() );
-//        }
         return toAdd;
     }
 
+    @Override
+    public boolean updateOrder(Order order) {
+        final String sql = "update orders set " +
+                "order_items = ?, " +
+                "app_user_id = ?, " +
+                "restaurant_id = ? " +
+                "where order_id = ?;";
+
+        int rowsUpdated = template.update(sql, order.getOrderItems(), order.getOwner().getAppUserId(),
+                order.getRestaurantId(), order.getOrderId());
+
+        return rowsUpdated > 0;
+    }
 
 }
