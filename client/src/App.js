@@ -15,7 +15,6 @@ import AboutPage from './pages/AboutPage';
 import AdminPage from './pages/AdminPage';
 
 function App() {
-  const [menu, setMenu] = useState([]);
 
   
   let currentUserData = localStorage.getItem("userData");
@@ -69,9 +68,9 @@ function App() {
       });
   };
 
-  useEffect(() => {
-    getRestaurants();
-  }, []);
+   useEffect(() => {
+     getRestaurants();
+   }, []);
 
   
   
