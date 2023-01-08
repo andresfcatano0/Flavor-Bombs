@@ -62,16 +62,16 @@ export default function OrdersPage({restaurants}) {
         </thead>
         <tbody>
             {orders.map((order, index)=> {
-                return(
-                <tr key={order.orderId}>
-
-                  <td>{index+1}</td>
-                  <td>{order.restaurantId}</td>
-                  <td></td>
-                  <td>{order.orderItems}</td>
-                </tr>
-
-                )
+                return (
+                  <tr key={order.orderId}>
+                    <td>{index + 1}</td>
+                    <td>{order.restaurantId}</td>
+                    <td>
+                      {restaurants[order.restaurantId - 1].restaurantName}
+                    </td>
+                    <td>{order.orderItems}</td>
+                  </tr>
+                );
             })}
           
         </tbody>
