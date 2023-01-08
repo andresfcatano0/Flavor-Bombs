@@ -77,7 +77,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzd
 POST /api/review HTTP/1.1
 Host: localhost:8080
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzdWIiOiJibHVja3kiLCJyb2xlcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9VU0VSIn1dLCJleHAiOjE2NzMxMzkwMTR9.wmFvUUDr9fXjBSQdLUW7BZdD9_UuzEewMAh0AZs4OY8
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzdWIiOiJibHVja3kiLCJyb2xlcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9VU0VSIn1dLCJleHAiOjE2NzMyMDgxMDN9.yLfhqAoaUOh70-O7cBFdmOolYghbPPyV_VRaqebceRM
 
 {
     "reviewText": "This is a New Review.",
@@ -101,27 +101,28 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzd
 
 ###
 
-PUT /api/review/2 HTTP/1.1
+PUT /api/review/19 HTTP/1.1
 Host: localhost:8080
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzdWIiOiJzaHVyc3QiLCJyb2xlcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9VU0VSIn1dLCJleHAiOjE2NzMyMDYxNzZ9.U5AaSbJSjCaydHX5-IU7ZdqOUnoNxcKtePkFjbQg7Qc
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzdWIiOiJzaHVyc3QiLCJyb2xlcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9VU0VSIn1dLCJleHAiOjE2NzMyMDk4NTZ9._suES2_eKcGUYPFvcb33yJ9fxjiGXIkKKGJcLOPl8s0
 
 {
-    "reviewId": 2,
+    "reviewId": 19,
     "reviewText": "Everything I tried was bursting with flavor!",
-    "restaurantId": 2,
+    "restaurantId": 7,
     "owner": null
 }
 
 ###
 
-PUT /api/review/1 HTTP/1.1
+PUT /api/review/9 HTTP/1.1
 Host: localhost:8080
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzdWIiOiJzaHVyc3QiLCJyb2xlcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9VU0VSIn1dLCJleHAiOjE2NzMyMDU5NjB9.GupyR4Pku7OF1TWeTAinpSetnWNVKmjSPomf0BlMC8k
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzdWIiOiJqb2huZG9lIiwicm9sZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfVVNFUiJ9XSwiZXhwIjoxNjczMjA5NzYwfQ.bPxaWfRVutAzoVS7cb6tcds6d5iyeUNeciRVznwqOUo
 
 {
-    "reviewId": 1,
-    "reviewText": "Everything I tried was bursting with flavor!",
-    "restaurantId": 1
+    "reviewId": 9,
+    "reviewText": "Its perfect!!!!",
+    "restaurantId": 3,
+    "owner": null
 }

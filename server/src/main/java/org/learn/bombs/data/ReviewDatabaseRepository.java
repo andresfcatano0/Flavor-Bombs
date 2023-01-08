@@ -80,7 +80,7 @@ public class ReviewDatabaseRepository implements ReviewRepository {
                 "where review_id = ?;";
 
         int rowsUpdated = jdbcTemplate.update(sql, review.getReviewText(), review.getOwner().getAppUserId(),
-                review.getRestaurantId(), review.getRestaurantId());
+                review.getRestaurantId(), review.getReviewId());
 
         return rowsUpdated > 0;
     }
