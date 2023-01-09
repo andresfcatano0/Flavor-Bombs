@@ -14,7 +14,7 @@ import ReviewsTable from '../components/adminTables/ReviewsTable';
 
 
 
-export default function AdminPage({ restaurants}) {
+export default function AdminPage({ restaurants, getRestaurants}) {
   const adminUser = useContext(UserContext);
 
     const deleteRestaurant = (restaurantId) => {
@@ -23,12 +23,16 @@ export default function AdminPage({ restaurants}) {
             fetch("http://localhost:8080/api/restaurant/"+restaurantId, {
                 method: 'DELETE',
                 headers: {
-                    "Authorization": "Bearer " + adminUser.token
+                    Authorization: "Bearer " + adminUser.token
                 }
-            }).then(res=>{
-                return res.json()
+          
             }).then(data => {
-                console.log(data.statusCode)
+                console.log(data);
+                getRestaurants();
+                if(data.statusCode === 204){
+                  console.log("successfully deleted");
+                }
+                // console.log(data.statusCode)
             })
         }
         }
@@ -103,6 +107,7 @@ export default function AdminPage({ restaurants}) {
                               <td>{restaurant.description}</td>
                               <td className="d-flex justify-content-around">
                                 <Button
+                                  value={restaurant.restaurantId}
                                   onClick={() => {
                                     deleteRestaurant(restaurant.restaurantId);
                                   }}
