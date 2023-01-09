@@ -66,5 +66,10 @@ public class AppUserRepository implements UserRepo{
         return null;
     }
 
+    @Override
+    public void deleteAppUserById(Integer id) {
+        int rowsAffected = jdbcTemplate.update( "delete from app_user where app_user_id = ?", id);
+    }
+
 
 }
