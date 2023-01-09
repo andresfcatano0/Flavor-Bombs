@@ -16,4 +16,7 @@ public interface OrderRepo {
     Order addOrder(Order toAdd);
 
     boolean updateOrder(Order order);
+
+    List<Order> getAllOrders();
+
 }
