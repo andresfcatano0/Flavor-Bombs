@@ -55,13 +55,12 @@ export default function OrdersPage({restaurants}) {
 
       <br />
       <br />
-      <hr />
       <h2>Past Orders</h2>
+      <hr />
       <Table striped hover>
         <thead>
           <tr>
             <th>#</th>
-            <th>Restaurant Name</th>
             <th>Restaurant Name</th>
             <th>Food Item</th>
             {/* <th>Time</th> */}
@@ -72,7 +71,7 @@ export default function OrdersPage({restaurants}) {
             return (
               <tr key={order.orderId}>
                 <td>{index + 1}</td>
-                <td>{order.restaurantId}</td>
+                {/* <td>{order.restaurantId}</td> */}
                 <td>{restaurants[order.restaurantId - 1].restaurantName}</td>
                 <td>{order.orderItems}</td>
               </tr>
