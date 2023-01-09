@@ -19,6 +19,16 @@ Content-Type: application/json
     "username":"johndoe",
     "password":"top-secret-password"
 }
+###
+
+POST /api/security/login HTTP/1.1
+Host: localhost:8080
+Content-Type: application/json
+
+{
+    "username":"janedoe",
+    "password":"bad-password"
+}
 
 ###
 
@@ -31,7 +41,7 @@ GET http://localhost:8080/api/restaurant/3
 ###
 
 DELETE http://localhost:8080/api/restaurant/1 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzdWIiOiJqYW5lZG9lIiwicm9sZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfQURNSU4ifV0sImV4cCI6MTY3MzA0NzUxNH0.5OaPjoTbk0-0QZ2kXUVes5J0UkTejN4VP-GudjtPJIA
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzdWIiOiJqYW5lZG9lIiwicm9sZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfQURNSU4ifV0sImV4cCI6MTY3MzI4NDExNH0.adVAcNiI9MTHu0OoxrBxGwMDR8RiJbmAjFTvrUnvISU
 
 ###
 
