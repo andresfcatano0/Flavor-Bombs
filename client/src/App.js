@@ -14,6 +14,7 @@ import OrdersPage from './pages/OrdersPage';
 import AboutPage from './pages/AboutPage';
 import AdminPage from './pages/AdminPage';
 import AdminDashboard from './pages/AdminDashboard';
+import UserProfilePage from './pages/UserProfilePage';
 
 function App() {
 
@@ -111,6 +112,9 @@ function App() {
           </Route>
           <Route path="/about-us">
             <AboutPage />
+          </Route>
+          <Route path="/user/:username">
+            <UserProfilePage setAuthUser={setAuthUser} />
           </Route>
         </Switch>
       </BrowserRouter>

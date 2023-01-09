@@ -50,7 +50,7 @@ export default function AuthNavBar({setAuthUser}) {
               <Nav.Link href="/restaurants">Restaurants</Nav.Link>
             </Nav>
             <Nav>
-              <Nav.Link>
+              <Nav.Link href={`/user/:${user.userData.sub}`}>
                 <PersonCircle size={30} />
               </Nav.Link>
               <NavDropdown className="" title="" id="basic-nav-dropdown">
