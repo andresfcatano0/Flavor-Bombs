@@ -19,6 +19,16 @@ public class OrderService {
     @Autowired
     UserRepo uRepo;
 
+    public Result<List<Order>> getAllOrders() {
+        Result<List<Order>> result = new Result<>();
+
+        List<Order> allOrders = repo.getAllOrders();
+
+        result.setPayload(allOrders);
+
+        return result;
+    }
+
     public Result<List<Order>> getPrivateOrdersByUsername(String username) {
         Result<List<Order>> privateLookupResult = new Result<>();
 
