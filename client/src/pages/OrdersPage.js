@@ -47,8 +47,15 @@ export default function OrdersPage({restaurants}) {
   return (
     <div>
       <h2>Current or Future Orders</h2>
+      <hr />
+      <p className="text-muted">
+        There are no current or future orders yet... Visit <a href="/restaurants" style={{color:"grey", fontWeight:"700"}}>Restaurants</a> to start
+        ordering
+      </p>
 
-      <hr/>
+      <br />
+      <br />
+      <hr />
       <h2>Past Orders</h2>
       <Table striped hover>
         <thead>
@@ -61,19 +68,16 @@ export default function OrdersPage({restaurants}) {
           </tr>
         </thead>
         <tbody>
-            {orders.map((order, index)=> {
-                return (
-                  <tr key={order.orderId}>
-                    <td>{index + 1}</td>
-                    <td>{order.restaurantId}</td>
-                    <td>
-                      {restaurants[order.restaurantId - 1].restaurantName}
-                    </td>
-                    <td>{order.orderItems}</td>
-                  </tr>
-                );
-            })}
-          
+          {orders.map((order, index) => {
+            return (
+              <tr key={order.orderId}>
+                <td>{index + 1}</td>
+                <td>{order.restaurantId}</td>
+                <td>{restaurants[order.restaurantId - 1].restaurantName}</td>
+                <td>{order.orderItems}</td>
+              </tr>
+            );
+          })}
         </tbody>
       </Table>
     </div>
