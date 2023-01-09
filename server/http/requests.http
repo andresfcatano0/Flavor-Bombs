@@ -33,10 +33,16 @@ GET http://localhost:8080/api/restaurant/3
 DELETE http://localhost:8080/api/restaurant/1 HTTP/1.1
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzdWIiOiJqYW5lZG9lIiwicm9sZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfQURNSU4ifV0sImV4cCI6MTY3MzI4MDIwNn0.USn4DAhwQrJS2naeOa45GZ-n7zHNicSlzEfpQB5RH_8
 
+
+###
+
+GET http://localhost:8080/api/order/all
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzdWIiOiJqYW5lZG9lIiwicm9sZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfQURNSU4ifV0sImV4cCI6MTY3MzI5NTYwMn0.vZF-U2STT5QG0xSU-HyfyaYksnl11m_YObeNRVWMcQc
+
 ###
 
 GET http://localhost:8080/api/order
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzdWIiOiJqYW5lZG9lIiwicm9sZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfQURNSU4ifV0sImV4cCI6MTY3MzEzNzAyNX0.gZF-SgErmkvB8xOXzfEIb98-EjKvFuFTFIHyIHYJA9c
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzdWIiOiJqYW5lZG9lIiwicm9sZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfQURNSU4ifV0sImV4cCI6MTY3MzI5NTYwMn0.vZF-U2STT5QG0xSU-HyfyaYksnl11m_YObeNRVWMcQc
 
 ###
 
@@ -61,7 +67,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzd
 
 PUT http://localhost:8080/api/order/2 HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzdWIiOiJqYW5lZG9lIiwicm9sZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfQURNSU4ifV0sImV4cCI6MTY3MzEzNzAyNX0.gZF-SgErmkvB8xOXzfEIb98-EjKvFuFTFIHyIHYJA9c
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzdWIiOiJqYW5lZG9lIiwicm9sZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfQURNSU4ifV0sImV4cCI6MTY3MzI5NDkyN30.7NQ4rXcXLdHq9Ubb4vMiSwnpZovBS90wb0zyeVyuCMg
 
 {
   "orderId": 2,
@@ -73,7 +79,11 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzd
 ###
 
 GET http://localhost:8080/api/user
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzdWIiOiJqYW5lZG9lIiwicm9sZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfQURNSU4ifV0sImV4cCI6MTY3MzI5NDkyN30.7NQ4rXcXLdHq9Ubb4vMiSwnpZovBS90wb0zyeVyuCMg
 
 ###
 
 GET http://localhost:8080/api/user/2
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzdWIiOiJqYW5lZG9lIiwicm9sZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfQURNSU4ifV0sImV4cCI6MTY3MzI5NDkyN30.7NQ4rXcXLdHq9Ubb4vMiSwnpZovBS90wb0zyeVyuCMg
+
+
