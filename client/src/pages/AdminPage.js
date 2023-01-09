@@ -9,7 +9,8 @@ import Col from "react-bootstrap/Col";
 import Tab from "react-bootstrap/Tab";
 import ListGroup from "react-bootstrap/ListGroup";
 import Modal from "react-bootstrap/Modal";
-import { MenuDown, PeopleFill, Shop, Trash3 } from 'react-bootstrap-icons';
+import { BagCheckFill, Basket3Fill, BasketFill, ChatQuoteFill, MenuDown, PeopleFill, Shop, Trash3 } from 'react-bootstrap-icons';
+import ReviewsTable from '../components/adminTables/ReviewsTable';
 
 
 
@@ -60,6 +61,23 @@ export default function AdminPage({ restaurants}) {
                     <PeopleFill />
                     <span>Users</span>
                   </ListGroup.Item>
+                  <ListGroup.Item
+                    action
+                    href="#link3"
+                    className="d-flex align-items-center justify-content-between"
+                  >
+                    <BasketFill />
+                    <span>Orders</span>
+                  </ListGroup.Item>
+
+                  <ListGroup.Item
+                    action
+                    href="#link4"
+                    className="d-flex align-items-center justify-content-between"
+                  >
+                    <ChatQuoteFill />
+                    <span>Reviews</span>
+                  </ListGroup.Item>
                 </ListGroup>
               </Col>
               <Col sm={8}>
@@ -84,10 +102,12 @@ export default function AdminPage({ restaurants}) {
                               <td>{restaurant.address}</td>
                               <td>{restaurant.description}</td>
                               <td className="d-flex justify-content-around">
-                               
-                                <Button onClick={()=>{
+                                <Button
+                                  onClick={() => {
                                     deleteRestaurant(restaurant.restaurantId);
-                                }} className="btn btn-danger d-flex align-items-center">
+                                  }}
+                                  className="btn btn-danger d-flex align-items-center"
+                                >
                                   <span className="px-2">Delete</span>
                                   <Trash3 />
                                 </Button>
@@ -99,17 +119,116 @@ export default function AdminPage({ restaurants}) {
                       </tbody>
                     </Table>
                   </Tab.Pane>
-                  <Tab.Pane eventKey="#link2">bye</Tab.Pane>
+                  <Tab.Pane eventKey="#link2">
+                    Users
+                    <Table striped bordered hover className="text-center">
+                      <thead>
+                        <tr>
+                          <th></th>
+                          <th>User Name</th>
+                          <th>First Name</th>
+                          <th>Last Name</th>
+                          <th>Email</th>
+                          <th>Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {restaurants.map((restaurant, index) => {
+                          return (
+                            <tr key={index}>
+                              <td>{index + 1}</td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td className="d-flex justify-content-around">
+                                <Button className="btn btn-danger d-flex align-items-center">
+                                  <span className="px-2">Delete</span>
+                                  <Trash3 />
+                                </Button>
+                              </td>
+                            </tr>
+                          );
+                        })}
+                        <tr></tr>
+                      </tbody>
+                    </Table>
+                  </Tab.Pane>
+                  <Tab.Pane eventKey="#link3">
+                    Orders
+                    <Table striped bordered hover className="text-center">
+                      <thead>
+                        <tr>
+                          <th></th>
+                          <th>OrderId</th>
+                          <th>Customer First Name</th>
+                          <th>Customer Last Name</th>
+                          <th>Order Items</th>
+                          <th>Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {restaurants.map((restaurant, index) => {
+                          return (
+                            <tr key={index}>
+                              <td>{index + 1}</td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td className="d-flex justify-content-around">
+                                <Button className="btn btn-danger d-flex align-items-center">
+                                  <span className="px-2">Delete</span>
+                                  <Trash3 />
+                                </Button>
+                              </td>
+                            </tr>
+                          );
+                        })}
+                        <tr></tr>
+                      </tbody>
+                    </Table>
+                  </Tab.Pane>
+                  <Tab.Pane eventKey="#link4">
+                    Reviews 
+                    {/* <ReviewsTable/> */}
+                     <Table striped bordered hover className="text-center">
+                      <thead>
+                        <tr>
+                          <th></th>
+                          <th>User Name</th>
+                          <th>Restaurant</th>
+                          <th>Text</th>
+                          <th>Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody> 
+                        {restaurants.map((restaurant, index) => {
+                          return (
+                            <tr key={index}>
+                              <td>{index + 1}</td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td className="d-flex justify-content-around">
+                                <Button className="btn btn-danger d-flex align-items-center">
+                                  <span className="px-2">Delete</span>
+                                  <Trash3 />
+                                </Button>
+                              </td>
+                            </tr>
+                          );
+                        })}
+                        <tr></tr>
+                      </tbody>
+                    </Table> 
+                  </Tab.Pane>
                 </Tab.Content>
               </Col>
             </Row>
           </Tab.Container>
         </Col>
-        
       </Container>
-   
-
-      
     </>
   );
 }
