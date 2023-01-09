@@ -1,6 +1,7 @@
 package org.learn.bombs.data;
 
 import org.learn.bombs.models.Menu;
+import org.learn.bombs.models.Review;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -38,8 +39,11 @@ public class MenuDatabaseRepository implements MenuRepository{
 
         return publicMenu;
     }
+
+
+
     @DeleteMapping
-    public void deleteMenuItemById(Integer menuId) {
+    public void deleteMenuById(int menuId) {
         int rowsAffected = jdbcTemplate.update( "delete from menu where menu_id = ?", menuId);
 
     }}

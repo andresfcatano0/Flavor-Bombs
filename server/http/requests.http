@@ -69,7 +69,13 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzd
 
 ###
 
-DELETE http://localhost:8080/api/review/2 HTTP/1.1
+DELETE http://localhost:8080/api/menu/2 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzdWIiOiJqYW5lZG9lIiwicm9sZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfQURNSU4ifV0sImV4cCI6MTY3MzI4MTMzOH0._PS9y0ANHJb-t7IXnGVMBgu7QTtlaVa12v-qugDxMXk
+
+###
+
+
+DELETE http://localhost:8080/api/menu/2 HTTP/1.1
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzdWIiOiJqYW5lZG9lIiwicm9sZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfQURNSU4ifV0sImV4cCI6MTY3MzEyNTE5Mn0.sfWWqab1Ldij33moE9tlRG1SWaTwkfGx3peURLazhnw
 
 ###
