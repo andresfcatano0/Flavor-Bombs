@@ -61,4 +61,20 @@ public class AppUserService implements UserDetailsService {
         return lookupResult;
     }
 
+    public Result deleteAppUserById(Integer id) {
+        Result<Void> deleteResult = new Result<Void>();
+
+        AppUser toDelete = repo.getAppUserById( id );
+
+        if( toDelete != null ){
+            repo.deleteAppUserById( id );
+        } else {
+            deleteResult.addErrorMessage("Cannot delete user");
+        }
+
+        return deleteResult;
+    }
+
+
+
 }

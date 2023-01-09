@@ -42,4 +42,16 @@ public class AppUserController {
         return ResponseEntity.notFound().build();
     }
 
+    @DeleteMapping("/{id}")
+    ResponseEntity deleteAppUserById( @PathVariable Integer id ){
+
+        Result deleteResult = service.deleteAppUserById( id );
+
+        if(deleteResult.isSuccess()) {
+            return ResponseEntity.noContent().build();
+        }
+
+        return ResponseEntity.badRequest().body(deleteResult.getErrorMessages());
+    }
+
 }

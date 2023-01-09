@@ -12,4 +12,5 @@ public interface UserRepo {
 
     AppUser getAppUserById(Integer id);
 
+    void deleteAppUserById(Integer id);
 }
