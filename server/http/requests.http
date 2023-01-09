@@ -1,13 +1,11 @@
 
-
-POST /api/security/login HTTP/1.1
+GET /api/menu/ HTTP/1.1
 Host: localhost:8080
-Content-Type: application/json
 
-{
-    "username":"janedoe",
-    "password":"bad-password"
-}
+###
+
+GET /api/review/ HTTP/1.1
+Host: localhost:8080
 
 ###
 
@@ -19,6 +17,7 @@ Content-Type: application/json
     "username":"johndoe",
     "password":"top-secret-password"
 }
+
 ###
 
 POST /api/security/login HTTP/1.1
@@ -32,50 +31,104 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:8080/api/restaurant
-
-###
-
-GET http://localhost:8080/api/restaurant/3
-
-###
-
-DELETE http://localhost:8080/api/restaurant/1 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzdWIiOiJqYW5lZG9lIiwicm9sZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfQURNSU4ifV0sImV4cCI6MTY3MzI4NDExNH0.adVAcNiI9MTHu0OoxrBxGwMDR8RiJbmAjFTvrUnvISU
-
-###
-
-GET http://localhost:8080/api/order
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzdWIiOiJqYW5lZG9lIiwicm9sZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfQURNSU4ifV0sImV4cCI6MTY3MzEzNzAyNX0.gZF-SgErmkvB8xOXzfEIb98-EjKvFuFTFIHyIHYJA9c
-
-###
-
-DELETE http://localhost:8080/api/order/4 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzdWIiOiJqb2huZG9lIiwicm9sZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfVVNFUiJ9XSwiZXhwIjoxNjczMTM1MDU1fQ.8mLQAe-Pepo4RAeKHMXluZ2ag8EtKoaz3C3oGqnlXzw
-
-
-###
-
-POST http://localhost:8080/api/order HTTP/1.1
-# Host: localhost:8080
+POST /api/security/login HTTP/1.1
+Host: localhost:8080
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzdWIiOiJqYW5lZG9lIiwicm9sZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfQURNSU4ifV0sImV4cCI6MTY3MzEzNzAyNX0.gZF-SgErmkvB8xOXzfEIb98-EjKvFuFTFIHyIHYJA9c
 
 {
-  "orderItems": "cheese Pizza",
-  "AppUserId": 1,
-  "restaurantId": 1
+    "username":"shurst",
+    "password":"butterfly"
 }
 
 ###
 
-PUT http://localhost:8080/api/order/2 HTTP/1.1
+POST /api/security/login HTTP/1.1
+Host: localhost:8080
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzdWIiOiJqYW5lZG9lIiwicm9sZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfQURNSU4ifV0sImV4cCI6MTY3MzEzNzAyNX0.gZF-SgErmkvB8xOXzfEIb98-EjKvFuFTFIHyIHYJA9c
 
 {
-  "orderId": 2,
-  "orderItems": "Noodle soup",
-  "AppUserId": 1,
-  "restaurantId": 1
+    "username":"blucky",
+    "password":"2-the-moon"
+}
+
+###
+
+POST /api/security/login HTTP/1.1
+Host: localhost:8080
+Content-Type: application/json
+
+{
+    "username":"afalls",
+    "password":"trinity-2000"
+}
+
+###
+
+DELETE http://localhost:8080/api/review/1 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzdWIiOiJqb2huZG9lIiwicm9sZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfVVNFUiJ9XSwiZXhwIjoxNjczMTI4Nzk3fQ.eRiTZG3mTr6pPC09zgRPRuP1QLN1rvFvT0VP7FYeDSo
+
+###
+
+DELETE http://localhost:8080/api/menu/2 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzdWIiOiJqYW5lZG9lIiwicm9sZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfQURNSU4ifV0sImV4cCI6MTY3MzI4MTMzOH0._PS9y0ANHJb-t7IXnGVMBgu7QTtlaVa12v-qugDxMXk
+
+###
+
+
+DELETE http://localhost:8080/api/menu/2 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzdWIiOiJqYW5lZG9lIiwicm9sZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfQURNSU4ifV0sImV4cCI6MTY3MzEyNTE5Mn0.sfWWqab1Ldij33moE9tlRG1SWaTwkfGx3peURLazhnw
+
+###
+
+POST /api/review HTTP/1.1
+Host: localhost:8080
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzdWIiOiJibHVja3kiLCJyb2xlcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9VU0VSIn1dLCJleHAiOjE2NzMyMDgxMDN9.yLfhqAoaUOh70-O7cBFdmOolYghbPPyV_VRaqebceRM
+
+{
+    "reviewText": "This is a New Review.",
+    "restaurantId": 4,
+    "owner": null
+}
+
+###
+
+POST /api/review HTTP/1.1
+Host: localhost:8080
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzdWIiOiJhZmFsbHMiLCJyb2xlcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9VU0VSIn1dLCJleHAiOjE2NzMxNDA2MTR9.8PFr3dj6PVuQtoIBAYQLNjeH-vItXn4KHtdCbmygKLc
+
+{
+    "reviewText": "BIG BOLD REVIEW.",
+    "restaurantId": 6,
+    "owner": null
+
+}
+
+###
+
+PUT /api/review/19 HTTP/1.1
+Host: localhost:8080
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzdWIiOiJzaHVyc3QiLCJyb2xlcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9VU0VSIn1dLCJleHAiOjE2NzMyMDk4NTZ9._suES2_eKcGUYPFvcb33yJ9fxjiGXIkKKGJcLOPl8s0
+
+{
+    "reviewId": 19,
+    "reviewText": "Everything I tried was bursting with flavor!",
+    "restaurantId": 7,
+    "owner": null
+}
+
+###
+
+PUT /api/review/9 HTTP/1.1
+Host: localhost:8080
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzdWIiOiJqb2huZG9lIiwicm9sZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfVVNFUiJ9XSwiZXhwIjoxNjczMjA5NzYwfQ.bPxaWfRVutAzoVS7cb6tcds6d5iyeUNeciRVznwqOUo
+
+{
+    "reviewId": 9,
+    "reviewText": "Its perfect!!!!",
+    "restaurantId": 3,
+    "owner": null
 }

@@ -17,7 +17,6 @@ public class AppUser implements UserDetails {
     private String password;
     private String email;
     private boolean enabled;
-//    private Collection<GrantedAuthority> authorities;
 
     List<String> roles;
 

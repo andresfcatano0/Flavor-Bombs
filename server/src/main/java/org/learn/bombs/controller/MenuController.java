@@ -30,6 +30,7 @@ public class MenuController {
         return ResponseEntity.ok(menu);
     }
 
+
     @GetMapping()
     ResponseEntity getMenu(){
 
@@ -42,6 +43,16 @@ public class MenuController {
         return ResponseEntity.badRequest().body(publicGetResult.getErrorMessages());
     }
 
+    @DeleteMapping("/{menuId}")
+    ResponseEntity deleteMenuById(@PathVariable int menuId){
 
+        Result deleteResult = service.deleteMenuById(menuId);
+
+        if(deleteResult.isSuccess()) {
+            return ResponseEntity.noContent().build();
+        }
+
+        return ResponseEntity.badRequest().body(deleteResult.getErrorMessages());
+    }
 
 }

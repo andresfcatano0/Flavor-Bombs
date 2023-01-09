@@ -2,6 +2,7 @@ package org.learn.bombs.domain;
 
 import org.learn.bombs.data.MenuRepository;
 import org.learn.bombs.models.Menu;
+import org.learn.bombs.models.Review;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,13 +23,24 @@ public class MenuService {
     public Result<List<Menu>> getMenu() {
         Result<List<Menu>> result = new Result<>();
 
-        List<Menu> publicTodos = repository.getMenu();
+        List<Menu> menu = repository.getMenu();
 
-        result.setPayload(publicTodos);
+        result.setPayload(menu);
 
         return result;
     }
 
+    public Result deleteMenuById(int menuId) {
+        Result<Void> deleteResult = new Result<Void>();
 
+        Menu toDelete = repository.findById(menuId);
 
+        if (toDelete != null) {
+            repository.deleteMenuById(menuId);
+        } else {
+            deleteResult.addErrorMessage("Cannot delete menu item");
+        }
+
+        return deleteResult;
+    }
 }
