@@ -50,13 +50,14 @@ export default function OrdersPage({restaurants}) {
       <hr />
       <p className="text-muted">
         There are no current or future orders yet... Visit <a href="/restaurants" style={{color:"grey", fontWeight:"700"}}>Restaurants</a> to start
-        ordering
+        ordering.
       </p>
 
       <br />
       <br />
       <h2>Past Orders</h2>
       <hr />
+      {!orders ? (
       <Table striped hover>
         <thead>
           <tr>
@@ -76,9 +77,13 @@ export default function OrdersPage({restaurants}) {
                 <td>{order.orderItems}</td>
               </tr>
             );
-          })}
+          })
+        }
         </tbody>
-      </Table>
+      </Table>) :
+      <p className="text-muted">
+        There are no past orders.
+      </p>}
     </div>
   );
 }
