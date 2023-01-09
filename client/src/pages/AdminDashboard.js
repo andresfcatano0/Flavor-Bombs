@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button';
 import Badge from "react-bootstrap/Badge";
 import ListGroup from "react-bootstrap/ListGroup";
 import Card from "react-bootstrap/Card";
-import { CreditCardFill, PeopleFill, Shop } from 'react-bootstrap-icons';
+import { Cart2, Clipboard2Data, CreditCardFill, People, PeopleFill, Shop, ShopWindow } from 'react-bootstrap-icons';
 import UserContext from '../context/AuthContext';
 
 
@@ -20,25 +20,32 @@ export default function AdminDashboard({ setAuthUser }) {
         <Col>
           <div>
             <ListGroup as="ol">
-              <ListGroup.Item
-                as="li"
-                className="d-flex justify-content-between align-items-start"
-              >
+              <ListGroup.Item as="li" className=" ">
                 <div className="ms-2 me-auto">
-                  <div className="fw-bold">MAIN</div>
-                  DASHBOARD
+                  <div className="fw-bold text-muted">MAIN</div>
+                  <div className="d-flex align-items-center justify-content-between">
+                    <Clipboard2Data
+                    // style={{marginLeft: "-15px"}}
+                    />
+                    <span className="">Dashboard</span>
+                  </div>
                 </div>
               </ListGroup.Item>
-              <ListGroup.Item
-                as="li"
-                className="d-flex justify-content-between align-items-start"
-              >
+              <ListGroup.Item as="li" className="">
                 <div className="ms-2 me-auto">
-                  <div className="fw-bold">VIEWINGS</div>
-
-                  <p>USERS</p>
-                  <p>RESTAURANTS</p>
-                  <p>ORDERS</p>
+                  <div className="fw-bold text-muted">VIEWINGS</div>
+                  <div className="d-flex align-items-center justify-content-between">
+                    <People />
+                    <span>Users</span>
+                  </div>
+                  <div className="d-flex align-items-center justify-content-between">
+                    <ShopWindow />
+                    <span>Restaurants</span>
+                  </div>
+                  <div className="d-flex align-items-center justify-content-between">
+                    <Cart2 />
+                    <span>Orders</span>
+                  </div>
                 </div>
               </ListGroup.Item>
             </ListGroup>
@@ -49,7 +56,13 @@ export default function AdminDashboard({ setAuthUser }) {
         <Col xs={10}>
           <Row>
             <Col>
-              <h2>Welcome, {user.userData.sub}</h2>
+              <h2>
+                Welcome,{" "}
+                {
+                // user.userData.sub
+                user.userData.sub.charAt(0).toUpperCase() + user.userData.sub.slice(1)
+                }
+              </h2>
             </Col>
           </Row>
           <Row>
