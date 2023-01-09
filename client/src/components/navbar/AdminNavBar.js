@@ -25,7 +25,7 @@ export default function AdminNavBar({ setAuthUser }) {
     <>
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Container>
-          <Navbar.Brand href="/">
+          <Navbar.Brand href="/admin/dashboard-menu">
             <img
               alt="brand logo"
               src={require("../../assets/primitiveSpongebob.png")}

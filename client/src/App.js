@@ -13,6 +13,7 @@ import RestaurantInfoPage from './pages/RestaurantInfoPage';
 import OrdersPage from './pages/OrdersPage';
 import AboutPage from './pages/AboutPage';
 import AdminPage from './pages/AdminPage';
+import AdminDashBoard from './pages/AdminDashboard';
 
 function App() {
 
@@ -98,7 +99,10 @@ function App() {
           <Route path="/orders">
             <OrdersPage setAuthUser={setAuthUser} restaurants={restaurants} />
           </Route>
-          <Route path="/admin-dashboard">
+          <Route path="/admin/dashboard-menu">
+            <AdminDashBoard setAuthUser={setAuthUser} />
+          </Route>
+          <Route path="/admin/table-view">
             <AdminPage
               setAuthUser={setAuthUser}
               restaurants={restaurants}

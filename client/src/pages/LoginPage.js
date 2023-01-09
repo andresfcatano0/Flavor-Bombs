@@ -64,7 +64,9 @@ export default function LoginPage({setAuthUser}) {
 
             setAuthUser(fullLoginData);
             // console.log(fullLoginData)
-            fullLoginData.userData.roles[0].authority === "ROLE_ADMIN" ? history.push("/admin-dashboard") : history.push("/")
+            fullLoginData.userData.roles[0].authority === "ROLE_ADMIN"
+              ? history.push("/admin/dashboard-menu")
+              : history.push("/");
             // history.push("/");
         })
 
