@@ -20,6 +20,15 @@ Content-Type: application/json
     "password":"top-secret-password"
 }
 
+
+
+
+
+
+
+# ----------- RESTAURANT ----------
+
+
 ###
 
 GET http://localhost:8080/api/restaurant
@@ -33,6 +42,13 @@ GET http://localhost:8080/api/restaurant/3
 DELETE http://localhost:8080/api/restaurant/1 HTTP/1.1
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzdWIiOiJqYW5lZG9lIiwicm9sZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfQURNSU4ifV0sImV4cCI6MTY3MzI4MDIwNn0.USn4DAhwQrJS2naeOa45GZ-n7zHNicSlzEfpQB5RH_8
 
+
+
+
+
+
+
+# ----------- ORDER ----------
 
 ###
 
@@ -55,7 +71,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzd
 POST http://localhost:8080/api/order HTTP/1.1
 # Host: localhost:8080
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzdWIiOiJqYW5lZG9lIiwicm9sZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfQURNSU4ifV0sImV4cCI6MTY3MzEzNzAyNX0.gZF-SgErmkvB8xOXzfEIb98-EjKvFuFTFIHyIHYJA9c
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzdWIiOiJqYW5lZG9lIiwicm9sZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfQURNSU4ifV0sImV4cCI6MTY3MzI5Nzc2OX0.w38yncWs3uVrtUL_CJe7N6Ni8eZ_wmbHWOA8XCsmbvw
 
 {
   "orderItems": "cheese Pizza",
@@ -67,7 +83,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzd
 
 PUT http://localhost:8080/api/order/2 HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzdWIiOiJqYW5lZG9lIiwicm9sZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfQURNSU4ifV0sImV4cCI6MTY3MzI5NDkyN30.7NQ4rXcXLdHq9Ubb4vMiSwnpZovBS90wb0zyeVyuCMg
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzdWIiOiJqYW5lZG9lIiwicm9sZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfQURNSU4ifV0sImV4cCI6MTY3MzI5Nzc2OX0.w38yncWs3uVrtUL_CJe7N6Ni8eZ_wmbHWOA8XCsmbvw
 
 {
   "orderId": 2,
@@ -76,14 +92,28 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzd
   "restaurantId": 1
 }
 
+
+
+
+
+
+
+# ----------- USER ----------
+
 ###
 
 GET http://localhost:8080/api/user
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzdWIiOiJqYW5lZG9lIiwicm9sZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfQURNSU4ifV0sImV4cCI6MTY3MzI5NDkyN30.7NQ4rXcXLdHq9Ubb4vMiSwnpZovBS90wb0zyeVyuCMg
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzdWIiOiJqYW5lZG9lIiwicm9sZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfQURNSU4ifV0sImV4cCI6MTY3MzI5ODc4NX0.b8LgcBJfxuzYEy9wt_HjtVkGnDg4OBI-ezTZtZidtE0
 
 ###
 
 GET http://localhost:8080/api/user/2
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzdWIiOiJqYW5lZG9lIiwicm9sZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfQURNSU4ifV0sImV4cCI6MTY3MzI5NDkyN30.7NQ4rXcXLdHq9Ubb4vMiSwnpZovBS90wb0zyeVyuCMg
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzdWIiOiJqYW5lZG9lIiwicm9sZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfQURNSU4ifV0sImV4cCI6MTY3MzI5ODc4NX0.b8LgcBJfxuzYEy9wt_HjtVkGnDg4OBI-ezTZtZidtE0
+
+###
+
+DELETE http://localhost:8080/api/user/2 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzdWIiOiJqYW5lZG9lIiwicm9sZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfQURNSU4ifV0sImV4cCI6MTY3MzI5ODc4NX0.b8LgcBJfxuzYEy9wt_HjtVkGnDg4OBI-ezTZtZidtE0
+
 
 
