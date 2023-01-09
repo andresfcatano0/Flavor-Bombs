@@ -25,6 +25,8 @@ public class SecurityConfig {
 
         http.authorizeRequests()
 
+                .antMatchers( HttpMethod.GET,"/api/user/*").permitAll()
+                .antMatchers( HttpMethod.GET,"/api/user").permitAll()
                 .antMatchers( HttpMethod.GET,"/api/restaurant/*").permitAll()
                 .antMatchers( HttpMethod.GET,"/api/restaurant").permitAll()
                 .antMatchers( HttpMethod.GET,"/api/order").authenticated()
