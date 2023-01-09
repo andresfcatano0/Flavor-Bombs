@@ -106,6 +106,7 @@ function App() {
             <AdminPage
               setAuthUser={setAuthUser}
               restaurants={restaurants}
+              getRestaurants={getRestaurants}
             />
           </Route>
           <Route path="/about-us">
