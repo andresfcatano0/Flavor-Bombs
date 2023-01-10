@@ -23,7 +23,7 @@ public class JwtConverter {
                 .setSubject(details.getUsername())
                 .claim( "roles", details.getAuthorities() )
                 .setExpiration( new Date(System.currentTimeMillis()
-                        + 15 * 60 * 1000) )
+                        + 75 * 60 * 1000) )
                 .signWith( signingKey )
                 .compact();
     }
