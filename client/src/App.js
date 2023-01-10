@@ -16,6 +16,10 @@ const center = {
   lng: -93.258133,
 };
 
+// const options = {
+//   disableDefaultUI: true,
+// }
+
 
 function App() {
   const { isLoaded, loadError } = useLoadScript({
@@ -43,7 +47,12 @@ function App() {
           <MarkerF
             debugger
             key={restName.restaurant_id}
-            icon={restName.icon}
+            // options
+            // icon={restName.icon}
+            icon={{
+              url: restName.icon,
+              scaledSize: new window.google.maps.Size(40, 40)
+            }}
             position={{
             lat: restName.lat,
             lng: restName.lng
