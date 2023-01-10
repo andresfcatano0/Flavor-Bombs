@@ -8,8 +8,8 @@ import restInfo from "./data/restInfo.json";
 
 const libraries = ["places"];
 const mapContainerStyle = {
-  width: "50vw",
-  height: "50vh",
+  width: "80vw",
+  height: "70vh",
 };
 const center = {
   lat: 44.986656,
@@ -36,7 +36,7 @@ function App() {
       </h1>
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
-        zoom={10}
+        zoom={12}
         center={center}
       >
         {restInfo.restaurants.map((restName) => (
