@@ -22,8 +22,10 @@ create table user_roles (
 	app_user_id int not null,
     app_role_id int not null,
 
-    constraint foreign key (app_user_id) references app_user(app_user_id),
-    constraint foreign key (app_role_id) references app_role(app_role_id),
+    constraint foreign key (app_user_id) references app_user(app_user_id)
+    ON DELETE CASCADE,
+    constraint foreign key (app_role_id) references app_role(app_role_id)
+    ON DELETE CASCADE,
     constraint primary key (app_user_id, app_role_id)
 );
 
@@ -33,7 +35,10 @@ create table restaurants (
     phone_number varchar(12) not null unique,
     address varchar(120) not null unique,
     open_hours varchar(120) not null,
-    descript varchar(350) not null
+    descript varchar(350) not null,
+    restaurant_image varchar(2040) not null,
+	`filter` varchar(250) not null
+    
 );
 
 create table reviews (
@@ -42,8 +47,10 @@ create table reviews (
     app_user_id int not null,
     restaurant_id int not null,
 
-    constraint foreign key (app_user_id) references app_user(app_user_id),
+    constraint foreign key (app_user_id) references app_user(app_user_id)
+    ON DELETE CASCADE,
     constraint foreign key (restaurant_id) references restaurants(restaurant_id)
+    ON DELETE CASCADE
 );
 
 create table orders (
@@ -51,9 +58,15 @@ create table orders (
     order_items varchar(250) not null,
 	app_user_id int not null,
     restaurant_id int not null,
+    order_date date not null,
+    item_quantity int not null,
+    total_price decimal(4,2) not null,
 
-    constraint foreign key (app_user_id) references app_user(app_user_id),
+
+    constraint foreign key (app_user_id) references app_user(app_user_id)
+    ON DELETE CASCADE,
     constraint foreign key (restaurant_id) references restaurants(restaurant_id)
+    ON DELETE CASCADE
 );
 
 create table menu (
@@ -63,8 +76,10 @@ create table menu (
     item_description varchar(120) not null,
 	restaurant_id int not null,
     menu_image varchar(2048) not null,
+	`filter` varchar(250) not null, 
 
     constraint foreign key (restaurant_id) references restaurants(restaurant_id)
+    ON DELETE CASCADE
 );
 
 insert into app_role (name) values
@@ -93,18 +108,18 @@ insert into user_roles (app_user_id, app_role_id) values
 ( 5, 1 ),
 ( 6, 2 );
 
-insert into restaurants (restaurant_name, phone_number, address, open_hours, descript) values
-('Taco House', '612-555-0186', '111 taco street', 'Monday to Saturday - 10am to 11pm', 'Serving the best tacos in town since 1958'),
-('Canadian Bacon', '612-555-0156', '333 bacon street', 'Tuesday to Saturday - 9am to 9pm', 'Serving the bacon burger in town since 1999'),
-('Soulfu', '612-555-0150', '555 tasty avenue', 'Monday to Friday - 11am to 8pm', 'Serving the best waffles in town since 2001'),
-('Party Fowl', '763-555-0133', '89391 Christiansen Road', 'Monday to Sunday - 10am to 8pm', 'Serving the best waffles in town since 2001'),
-('9021PHO', '612-555-9157', '685 Swift Valleys', 'Tuesday to Sunday - 11am to 10pm', 'Hipster-friendly fusion with a little extra spice.'),
+insert into restaurants (restaurant_name, phone_number, address, open_hours, descript, restaurant_image) values
+('Taco House', '612-555-0186', '111 taco street', 'Monday to Saturday - 10am to 11pm', 'Serving the best tacos in town since 1958', "./assets/images/restaurant-overhead.jpg"),
+('Canadian Bacon', '612-555-0156', '333 bacon street', 'Tuesday to Saturday - 9am to 9pm', 'Serving the bacon burger in town since 1999', "./assets/images/bar-outside.jpg"),
+('Soulfu', '612-555-0150', '555 tasty avenue', 'Monday to Friday - 11am to 8pm', 'Serving the best waffles in town since 2001', "./assets/images/food-seasoning.jpg"),
+('Party Fowl', '763-555-0133', '89391 Christiansen Road', 'Monday to Sunday - 10am to 8pm', 'Serving the best waffles in town since 2001', "./assets/images/pub-orange.jpg"),
+('9021PHO', '612-555-9157', '685 Swift Valleys', 'Tuesday to Sunday - 11am to 10pm', 'Hipster-friendly fusion with a little extra spice.', "./assets/images/kitchen-working.jpg"),
 ('Tequila Mockingbird', '612-555-2850', '93661 Bayer Square', 'Monday to Sunday - 11am to 11pm', 'We are a family-run operation spanning three generations of hard-working chefs.
-We strive for an experience that blows you out of this world.'),
-('Vincent Van Doughnut', '763-555-1123', '4192 Pietro Crossing', 'Monday to Sunday - 6am to 12am', 'Attention-hungry humans! Welcome you to our world-class restaurant.'),
-('Nacho Daddy', '952-555-3619', '411 Kareem Route', 'Monday to Friday - 11am to 8pm', 'You will get the OG taste of food at our restaurant.'),
-('Lord of the Wings', '763-555-8712', '320 Mizey Junction', 'Monday to Saturday - 10am to 11pm', 'We do wings and only wings'),
-('Pastabilities', '952-555-5873', '531 Dickinson Road', 'Monday to Sunday - 11am to 11pm', 'Everything can be solved with a little pasta');
+We strive for an experience that blows you out of this world.', "./assets/images/storefront-red.jpg"),
+('Vincent Van Doughnut', '763-555-1123', '4192 Pietro Crossing', 'Monday to Sunday - 6am to 12am', 'Attention-hungry humans! Welcome you to our world-class restaurant.', "./assets/images/bakery-inside.jpg"),
+('Nacho Daddy', '952-555-3619', '411 Kareem Route', 'Monday to Friday - 11am to 8pm', 'You will get the OG taste of food at our restaurant.', "./assets/images/cafe-inside.jpg"),
+('Lord of the Wings', '763-555-8712', '320 Mizey Junction', 'Monday to Saturday - 10am to 11pm', 'We do wings and only wings', "./assets/images/cafe-dim.jpg"),
+('Pastabilities', '952-555-5873', '531 Dickinson Road', 'Monday to Sunday - 11am to 11pm', 'Everything can be solved with a little pasta', "./assets/images/cafe-seats.jpg");
 
 insert into reviews (review_text, app_user_id, restaurant_id) values
 -- Taco House
@@ -156,7 +171,7 @@ insert into orders (order_items, app_user_id, restaurant_id) values
 
 insert into menu (item_name, item_price, item_description, restaurant_id, menu_image) values
 -- Taco House
-('Chicken Burrito', '13.50', 'Its a chicken burrito with beans.', 1, "./assets/images/burrito-chicken.jpg")
+('Chicken Burrito', '13.50', 'Its a chicken burrito with beans.', 1, './assets/images/burrito-chicken.jpg'),
 ('Chicken Taco', '8.50', 'Ground chicken with pico and lettuce between a corn tortilla.', 1, "./assets/images/taco.jpg"),
 ('Mexican Rice', '6.70', 'Rice with beans and red and green peppers.', 1, "./assets/images/mexican-rice.jpg"),
 -- Canadian bacon
@@ -189,7 +204,7 @@ insert into menu (item_name, item_price, item_description, restaurant_id, menu_i
 ('Nacho Bizness', '13.25', 'Cheese and salsa heaven on top of yummy nacho goodness.', 8, "./assets/images/nacho-bizness.jpg"),
 -- Lord of the Wings
 ('A Wing and a Prayer', '10.25', 'Our spiciest wings sauce on top of eight wings.', 9, "./assets/images/wings-prayer.jpg"),
-('Winged Perfection', '12.75', 'Award winning wings with a tangy dry rub', , "./assets/images/wings-perfection.jpg"),
+('Winged Perfection', '12.75', 'Award winning wings with a tangy dry rub', 9, "./assets/images/wings-perfection.jpg"),
 ('Queen Wings', '14.50', 'Crispy fried wings fit for a Queen', 9, "./assets/images/wings-queen.jpg"),
 -- Pastabilities
 ('Canola oil and pasta salad', '19.00', 'A crisp salad featuring canola oil and dried pasta', 10, "./assets/images/pasta-salad.jpg"),
