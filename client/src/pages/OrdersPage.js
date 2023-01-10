@@ -57,7 +57,7 @@ export default function OrdersPage({restaurants}) {
       <br />
       <h2>Past Orders</h2>
       <hr />
-      {!orders ? (
+      {orders ? (
       <Table striped hover>
         <thead>
           <tr>
