@@ -16,6 +16,26 @@ import { Link } from 'react-router-dom';
 
 
 export default function AdminPage({ restaurants, getRestaurants}) {
+
+  const [reviews, setReviews] = useState([]);
+  const getAllReviews = () => {
+    fetch("http://localhost:8080/api/review", {
+      method: 'GET',
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }).then(res=> {
+      return res.json()}
+    ).then(data=>{
+      // console.log(data)
+      setReviews(data)
+    })
+  }
+
+  useEffect(()=>{
+    getAllReviews()
+  })
+
   const adminUser = useContext(UserContext);
 
     const deleteRestaurant = (restaurantId) => {
@@ -31,9 +51,29 @@ export default function AdminPage({ restaurants, getRestaurants}) {
                 console.log(data);
                 getRestaurants();
                 if(data.statusCode === 204){
-                  console.log("successfully deleted");
+                  console.log("successfully deleted restaurant");
                 }
                 // console.log(data.statusCode)
+            })
+        }
+        }
+
+    const deleteReview = (reviewId) => {
+        if(window.confirm("Are you sure you want to delete this review?")){
+
+            fetch("http://localhost:8080/api/review/"+reviewId, {
+                method: 'DELETE',
+                headers: {
+                    Authorization: "Bearer " + adminUser.token
+                }
+          
+            }).then(data => {
+                console.log(data);
+                
+                if(data.statusCode === 204){
+                  console.log("successfully deleted review");
+                }
+                console.log(data.statusCode)
             })
         }
         }
@@ -220,15 +260,19 @@ export default function AdminPage({ restaurants, getRestaurants}) {
                         </tr>
                       </thead>
                       <tbody>
-                        {restaurants.map((restaurant, index) => {
+                        {reviews.map((review, index) => {
                           return (
-                            <tr key={index}>
+                            <tr key={review.reviewId}>
                               <td>{index + 1}</td>
-                              <td></td>
-                              <td></td>
-                              <td></td>
+                              <td>{review.owner}</td>
+                              <td>{review.restaurantId}</td>
+                              <td>{review.reviewText}</td>
                               <td className="d-flex justify-content-around">
-                                <Button className="btn btn-danger d-flex align-items-center">
+                                <Button 
+                                  onClick={()=> {
+                                    deleteReview(review.reviewId)
+                                  }}
+                                  className="btn btn-danger d-flex align-items-center">
                                   <span className="px-2">Delete</span>
                                   <Trash3 />
                                 </Button>
