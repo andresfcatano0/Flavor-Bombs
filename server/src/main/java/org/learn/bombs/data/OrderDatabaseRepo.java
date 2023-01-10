@@ -1,5 +1,6 @@
 package org.learn.bombs.data;
 
+import org.learn.bombs.models.AppUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -9,6 +10,7 @@ import org.learn.bombs.models.Order;
 
 import java.sql.PreparedStatement;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -16,6 +18,17 @@ public class OrderDatabaseRepo implements OrderRepo{
 
     @Autowired
     JdbcTemplate template;
+
+    @Override
+    public List<Order> getAllOrders() {
+        //select all orders
+        List<Order> allOrders = template.query(
+                "select * from orders",
+                new OrderMapper()
+        );
+
+        return allOrders;
+    }
 
     @Override
     public List<Order> getPrivateOrdersByUsername(String username) {
@@ -36,6 +49,15 @@ public class OrderDatabaseRepo implements OrderRepo{
         List<Order> restaurantOrders = template.query(sql, new OrderMapper(), id);
 
         return restaurantOrders;
+    }
+
+    @Override
+    public List<Order> getOrdersByAppUserId(Integer id) {
+        String sql = "select * from orders where app_user_id = ?";
+
+        List<Order> appUserOrders = template.query(sql, new OrderMapper(), id);
+
+        return appUserOrders;
     }
 
     @Override
@@ -99,5 +121,6 @@ public class OrderDatabaseRepo implements OrderRepo{
 
         return rowsUpdated > 0;
     }
+
 
 }

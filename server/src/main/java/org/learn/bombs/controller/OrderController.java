@@ -20,6 +20,19 @@ public class OrderController {
     @Autowired
     OrderService service;
 
+
+    @GetMapping("/all")
+    ResponseEntity getAllOrders(){
+
+        Result<List<Order>> publicGetResult = service.getAllOrders();
+
+        if( publicGetResult.isSuccess() ){
+            return ResponseEntity.ok(publicGetResult.getPayload());
+        }
+
+        return ResponseEntity.badRequest().body(publicGetResult.getErrorMessages());
+    }
+
     @GetMapping
     ResponseEntity getPersonalOrders(){
 

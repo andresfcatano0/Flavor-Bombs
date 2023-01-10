@@ -2,10 +2,12 @@ package org.learn.bombs.data;
 
 import org.learn.bombs.App;
 import org.learn.bombs.models.AppUser;
+import org.learn.bombs.models.Restaurant;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -37,4 +39,37 @@ public class AppUserRepository implements UserRepo{
                 + "where au.username = ?";
         return jdbcTemplate.query(sql, (rs, rowId) -> rs.getString("name"), username);
     }
+
+    @Override
+    public List<AppUser> getAllAppUsers() {
+        //select all restaurants
+        List<AppUser> allAppUsers = jdbcTemplate.query(
+                "select * from app_user",
+                new AppUserMapper(new ArrayList<>())
+        );
+
+        return allAppUsers;
+    }
+
+    @Override
+    public AppUser getAppUserById(Integer id) {
+        String sql = "SELECT * \n" +
+                "FROM app_user\n" +
+                "where app_user_id = ?";
+
+        List<AppUser> matchingRestaurants = jdbcTemplate.query( sql, new AppUserMapper(new ArrayList<>()), id );
+
+        if( matchingRestaurants.size() == 1){
+            return matchingRestaurants.get(0);
+        }
+
+        return null;
+    }
+
+    @Override
+    public void deleteAppUserById(Integer id) {
+        int rowsAffected = jdbcTemplate.update( "delete from app_user where app_user_id = ?", id);
+    }
+
+
 }

@@ -25,10 +25,14 @@ public class SecurityConfig {
 
         http.authorizeRequests()
 
+                .antMatchers( HttpMethod.GET,"/api/user/*").authenticated()
+                .antMatchers( HttpMethod.GET,"/api/user").hasRole("ADMIN")
                 .antMatchers( HttpMethod.GET,"/api/restaurant/*").permitAll()
                 .antMatchers( HttpMethod.GET,"/api/restaurant").permitAll()
+                .antMatchers( HttpMethod.GET,"/api/order/all").hasRole("ADMIN")
                 .antMatchers( HttpMethod.GET,"/api/order").authenticated()
                 .antMatchers( HttpMethod.DELETE, "/api/restaurant/*").hasRole("ADMIN")
+                .antMatchers( HttpMethod.DELETE, "/api/user/*").hasRole("ADMIN")
                 .antMatchers( HttpMethod.DELETE, "/api/menu/*").hasRole("ADMIN")
                 .antMatchers( HttpMethod.DELETE, "/api/order/*").authenticated()
                 .antMatchers( HttpMethod.POST, "/api/review").authenticated()
