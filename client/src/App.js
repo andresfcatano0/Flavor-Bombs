@@ -5,7 +5,7 @@ import {
   GoogleMap,
   useLoadScript,
   MarkerF,
-  InfoWindow,
+  InfoWindowF,
 } from "@react-google-maps/api";
 import restInfo from "./data/restInfo.json";
 
@@ -64,10 +64,13 @@ function App() {
           />
         ))}
         {selectedRestaurant ? (
-          <InfoWindow
+          <InfoWindowF
             position={{
               lat: selectedRestaurant.lat,
               lng: selectedRestaurant.lng,
+            }}
+            onCloseClick={() => {
+              setSelectedRestaurant(null);
             }}
           >
             <div>
@@ -75,8 +78,10 @@ function App() {
               {selectedRestaurant.restaurant_name}
               </h6>
               <p>{selectedRestaurant.open_hours}</p>
+              <p>{selectedRestaurant.address}</p>
+              <p>{selectedRestaurant.phone_number}</p>
             </div>
-          </InfoWindow>
+          </InfoWindowF>
         ) : null}
       </GoogleMap>
     </div>

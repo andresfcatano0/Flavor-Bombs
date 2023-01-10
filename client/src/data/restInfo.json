@@ -4,6 +4,8 @@
       "restaurant_id": 1,
       "restaurant_name": "Taco House",
       "open_hours": "Monday to Saturday - 10am to 11pm",
+      "address": "111 taco street",
+      "phone_number": "612-555-0186",
       "lat": 44.986657,
       "lng": -93.258139,
       "icon": "/icons/burger.png"
@@ -12,6 +14,8 @@
       "restaurant_id": 2,
       "restaurant_name": "Canadian Bacon",
       "open_hours": "Tuesday to Saturday - 9am to 9pm",
+      "address": "333 bacon street",
+      "phone_number": "612-555-0186",
       "lat": 44.946346,
       "lng": -93.305101, 
       "icon": "/icons/burger.png"
@@ -19,7 +23,9 @@
     {
       "restaurant_id": 3,
       "restaurant_name": "Soulfu",
-      "open_hours": "Tuesday to Saturday - 9am to 9pm",
+      "open_hours": "Monday to Friday - 11am to 8pm",
+      "address": "555 tasty avenue",
+      "phone_number": "612-555-0186",
       "lat": 44.97482,
       "lng": -93.275941,
       "icon": "/icons/burger.png"
@@ -27,7 +33,9 @@
     {
       "restaurant_id": 4,
       "restaurant_name": "Party Fowl",
-      "open_hours": "Tuesday to Saturday - 9am to 9pm",
+      "open_hours": "Monday to Sunday - 10am to 8pm",
+      "address": "89391 Christiansen Road",
+      "phone_number": "612-555-0186",
       "lat": 44.978471,
       "lng": -93.275941,
       "icon": "/icons/burger.png"
@@ -35,7 +43,9 @@
     {
       "restaurant_id": 5,
       "restaurant_name": "9021PHO",
-      "open_hours": "Tuesday to Saturday - 9am to 9pm",
+      "open_hours": "Tuesday to Sunday - 11am to 10pm",
+      "address": "685 Swift Valleys",
+      "phone_number": "612-555-0186",
       "lat": 44.977032,
       "lng": -93.272362,
       "icon": "/icons/burger.png"
@@ -43,7 +53,9 @@
     {
       "restaurant_id": 6,
       "restaurant_name": "Tequila Mockingbird",
-      "open_hours": "Tuesday to Saturday - 9am to 9pm",
+      "open_hours": "Monday to Sunday - 11am to 11pm",
+      "address": "93661 Bayer Square",
+      "phone_number": "612-555-0186",
       "lat": 44.969191,
       "lng": -93.247046,
       "icon": "/icons/burger.png"
@@ -51,7 +63,9 @@
     {
       "restaurant_id": 7,
       "restaurant_name": "Vincent Van Doughnut",
-      "open_hours": "Tuesday to Saturday - 9am to 9pm",
+      "open_hours": "Monday to Sunday - 6am to 12am",
+      "address": "4192 Pietro Crossing",
+      "phone_number": "612-555-0186",
       "lat": 44.968174,
       "lng": -93.276598,
       "icon": "/icons/burger.png"
@@ -59,7 +73,9 @@
     {
       "restaurant_id": 8,
       "restaurant_name": "Nacho Daddy",
-      "open_hours": "Tuesday to Saturday - 9am to 9pm",
+      "open_hours": "Monday to Friday - 11am to 8pm",
+      "address": "411 Kareem Route",
+      "phone_number": "612-555-0186",
       "lat": 44.96548,
       "lng": -93.298057,
       "icon": "/icons/burger.png"
@@ -67,7 +83,9 @@
     {
       "restaurant_id": 9,
       "restaurant_name": "Lord of the Wings",
-      "open_hours": "Tuesday to Saturday - 9am to 9pm",
+      "open_hours": "Monday to Saturday - 10am to 11pm",
+      "address": "320 Mizey Junction",
+      "phone_number": "612-555-0186",
       "lat": 44.952147,
       "lng": -93.293456,
       "icon": "/icons/burger.png"
@@ -75,7 +93,9 @@
     {
       "restaurant_id": 10,
       "restaurant_name": "Pastabilities",
-      "open_hours": "Tuesday to Saturday - 9am to 9pm",
+      "open_hours": "Monday to Sunday - 11am to 11pm",
+      "address": "531 Dickinson Road",
+      "phone_number": "612-555-0186",
       "lat": 44.968053,
       "lng": -93.290599,
       "icon": "/icons/burger.png"
