@@ -16,6 +16,7 @@ import AdminPage from './pages/AdminPage';
 import AdminDashboard from './pages/AdminDashboard';
 import UserProfilePage from './pages/UserProfilePage';
 import OrdersCartPage from './pages/OrdersCartPage';
+import CartContext from './context/cart/CartContext';
 
 function App() {
 
@@ -27,6 +28,8 @@ function App() {
   }
   
   const [authUser, setAuthUser] = useState(currentUserData);
+
+  const [orderInCart, setOrdersInCart] = useState();
 
   
   const user = useContext(UserContext);
@@ -78,6 +81,16 @@ function App() {
   
   
 
+const {
+    addItemToCart,
+    increaseQuantity,
+
+    orderCartItems,
+    handleTotals,
+    itemCount,
+  } = useContext(CartContext);
+
+
   return (
     <UserContext.Provider value={authUser}>
       <BrowserRouter>
@@ -102,7 +115,11 @@ function App() {
             <OrdersPage setAuthUser={setAuthUser} restaurants={restaurants} />
           </Route>
           <Route path="/admin/dashboard-menu">
-            <AdminDashboard setAuthUser={setAuthUser} />
+            <AdminDashboard
+              restaurants={restaurants}
+              getRestaurants={getRestaurants}
+              setAuthUser={setAuthUser}
+            />
           </Route>
           <Route path="/admin/table-view">
             <AdminPage
@@ -117,6 +134,7 @@ function App() {
           <Route path="/user/:username">
             <UserProfilePage setAuthUser={setAuthUser} />
           </Route>
+
           <Route path="/shopping-cart">
             <OrdersCartPage setAuthUser={setAuthUser} />
           </Route>
