@@ -9,6 +9,7 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import { Link, useHistory } from "react-router-dom";
 import { Cart3, PersonCircle } from "react-bootstrap-icons";
 import UserContext from "../../context/AuthContext";
+import CartContext from "../../context/cart/CartContext";
 
 export default function AuthNavBar({setAuthUser}) {
   const history = useHistory();
@@ -20,6 +21,9 @@ export default function AuthNavBar({setAuthUser}) {
     setAuthUser(null);
     history.push("/");
   }
+
+  const {orderCartItems} = useContext(CartContext);
+  // console.log(orderCartItems)
 
   return (
     <>
@@ -53,9 +57,12 @@ export default function AuthNavBar({setAuthUser}) {
             <Nav>
               <Nav.Link href={`/shopping-cart`} className="d-flex">
                 <Cart3 className="align-self-center" size={20} />
-                <Badge pill bg="danger" className="align-self-start">
-                  2
-                </Badge>
+                {orderCartItems.length > 0 ? (<Badge pill bg="danger" className="align-self-start">
+                  {orderCartItems.length}
+                </Badge>) : null}
+                 {/* <Badge pill bg="danger" className="align-self-start">
+                   777777
+                 </Badge> */}
               </Nav.Link>
               <Nav.Link href={`/user/:${user.userData.sub}`}>
                 <PersonCircle size={30} />
