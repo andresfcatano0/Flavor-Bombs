@@ -1,8 +1,11 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import {
-  GoogleMap, useLoadScript, MarkerF, InfoWindow,
+  GoogleMap,
+  useLoadScript,
+  MarkerF,
+  InfoWindow,
 } from "@react-google-maps/api";
 import restInfo from "./data/restInfo.json";
 
@@ -20,8 +23,9 @@ const center = {
 //   disableDefaultUI: true,
 // }
 
-
 function App() {
+  const [selectedRestaurant, setSelectedRestaurant] = useState(null);
+
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     libraries,
@@ -31,7 +35,7 @@ function App() {
   if (!isLoaded) return "Loading map...";
 
   return (
-    <div>
+    <div id="googleMapApp">
       <h1>
         Flavor Bombs{" "}
         <span role="img" aria-label="bombs">
@@ -45,21 +49,35 @@ function App() {
       >
         {restInfo.restaurants.map((restName) => (
           <MarkerF
-            debugger
             key={restName.restaurant_id}
-            // options
-            // icon={restName.icon}
             icon={{
               url: restName.icon,
-              scaledSize: new window.google.maps.Size(40, 40)
+              scaledSize: new window.google.maps.Size(40, 40),
             }}
             position={{
-            lat: restName.lat,
-            lng: restName.lng
+              lat: restName.lat,
+              lng: restName.lng,
             }}
-          ></MarkerF>
+            onClick={() => {
+              setSelectedRestaurant(restName);
+            }}
+          />
         ))}
-        
+        {selectedRestaurant ? (
+          <InfoWindow
+            position={{
+              lat: selectedRestaurant.lat,
+              lng: selectedRestaurant.lng,
+            }}
+          >
+            <div>
+              <h6>
+              {selectedRestaurant.restaurant_name}
+              </h6>
+              <p>{selectedRestaurant.open_hours}</p>
+            </div>
+          </InfoWindow>
+        ) : null}
       </GoogleMap>
     </div>
   );
