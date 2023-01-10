@@ -9,8 +9,9 @@ import Col from "react-bootstrap/Col";
 import Tab from "react-bootstrap/Tab";
 import ListGroup from "react-bootstrap/ListGroup";
 import Modal from "react-bootstrap/Modal";
-import { BagCheckFill, Basket3Fill, BasketFill, ChatQuoteFill, MenuDown, PeopleFill, Shop, Trash3 } from 'react-bootstrap-icons';
+import { BagCheckFill, Basket3Fill, BasketFill, ChatQuoteFill, Clipboard2Data, MenuDown, PeopleFill, Shop, Trash3 } from 'react-bootstrap-icons';
 import ReviewsTable from '../components/adminTables/ReviewsTable';
+import { Link } from 'react-router-dom';
 
 
 
@@ -82,6 +83,17 @@ export default function AdminPage({ restaurants, getRestaurants}) {
                     <ChatQuoteFill />
                     <span>Reviews</span>
                   </ListGroup.Item>
+                  <Link to="/admin/dashboard-menu">
+
+                  <ListGroup.Item
+                    action
+                    // href="/admin/dashboard-menu"
+                    className="d-flex align-items-center justify-content-between"
+                  >
+                    <Clipboard2Data />
+                    <span>Dashboard</span>
+                  </ListGroup.Item>
+                  </Link>
                 </ListGroup>
               </Col>
               <Col sm={8}>
@@ -195,9 +207,9 @@ export default function AdminPage({ restaurants, getRestaurants}) {
                     </Table>
                   </Tab.Pane>
                   <Tab.Pane eventKey="#link4">
-                    Reviews 
+                    Reviews
                     {/* <ReviewsTable/> */}
-                     <Table striped bordered hover className="text-center">
+                    <Table striped bordered hover className="text-center">
                       <thead>
                         <tr>
                           <th></th>
@@ -207,7 +219,7 @@ export default function AdminPage({ restaurants, getRestaurants}) {
                           <th>Actions</th>
                         </tr>
                       </thead>
-                      <tbody> 
+                      <tbody>
                         {restaurants.map((restaurant, index) => {
                           return (
                             <tr key={index}>
@@ -226,7 +238,7 @@ export default function AdminPage({ restaurants, getRestaurants}) {
                         })}
                         <tr></tr>
                       </tbody>
-                    </Table> 
+                    </Table>
                   </Tab.Pane>
                 </Tab.Content>
               </Col>
