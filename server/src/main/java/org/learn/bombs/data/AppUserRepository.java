@@ -71,5 +71,23 @@ public class AppUserRepository implements UserRepo{
         int rowsAffected = jdbcTemplate.update( "delete from app_user where app_user_id = ?", id);
     }
 
+    @Override
+    public boolean updateAppUser(AppUser appUser) {
+        final String sql = "update app_user set " +
+                "first_name = ?, " +
+                "last_name = ?, " +
+                "username = ? " +
+                "passhash = ? " +
+                "email = ? " +
+                "enabled = ? " +
+                "where app_user_id = ?;";
+
+        int rowsUpdated = jdbcTemplate.update(sql, appUser.getFirstName(), appUser.getLastName(),
+                appUser.getUsername(), appUser.getPassword(), appUser.getEmail(),
+                appUser.isEnabled(), appUser.getAppUserId());
+
+        return rowsUpdated > 0;
+    }
+
 
 }

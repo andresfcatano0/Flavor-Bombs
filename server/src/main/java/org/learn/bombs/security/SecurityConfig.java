@@ -32,6 +32,7 @@ public class SecurityConfig {
                 .antMatchers( HttpMethod.GET,"/api/order/all").hasRole("ADMIN")
                 .antMatchers( HttpMethod.GET,"/api/order").authenticated()
                 .antMatchers( HttpMethod.GET,"/api/review").permitAll()
+                .antMatchers( HttpMethod.DELETE, "/api/review/*").authenticated()
                 .antMatchers( HttpMethod.DELETE, "/api/restaurant/*").hasRole("ADMIN")
                 .antMatchers( HttpMethod.DELETE, "/api/user/*").hasRole("ADMIN")
                 .antMatchers( HttpMethod.DELETE, "/api/menu/*").hasRole("ADMIN")
@@ -39,13 +40,15 @@ public class SecurityConfig {
                 .antMatchers( HttpMethod.POST, "/api/review").authenticated()
                 .antMatchers( HttpMethod.POST, "/api/order").authenticated()
                 .antMatchers( HttpMethod.POST,"/api/security/login").permitAll()
-                .antMatchers(HttpMethod.PUT, "/api/order/*").authenticated()
+                .antMatchers( HttpMethod.POST, "/api/order").authenticated()
+                .antMatchers( HttpMethod.PUT, "/api/user/*").authenticated()
+                .antMatchers( HttpMethod.PUT, "/api/order/*").authenticated()
                 .antMatchers(HttpMethod.PUT, "/api/review/*").authenticated()
                 .and()
                 .addFilter( new JwtRequestFilter(buildAuthManager(config), converter ))
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        return  http.build();
+            return  http.build();
     }
 
     @Bean

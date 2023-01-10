@@ -1,5 +1,6 @@
 package org.learn.bombs.controller;
 
+import org.learn.bombs.models.Order;
 import org.learn.bombs.models.Restaurant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -52,6 +53,23 @@ public class AppUserController {
         }
 
         return ResponseEntity.badRequest().body(deleteResult.getErrorMessages());
+    }
+
+    @PutMapping("/{appUserId}")
+    ResponseEntity update( @PathVariable int appUserId, @RequestBody AppUser appUser) {
+        AppUser requestingUser = (AppUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        Result<AppUser> updateResult = service.update(appUser, requestingUser.getUsername());
+
+        if (appUserId != appUser.getAppUserId()) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+        if (updateResult.isSuccess() ){
+            return new ResponseEntity( updateResult.getPayload(), HttpStatus.CREATED);
+        }
+
+        return ResponseEntity.badRequest().body( updateResult.getErrorMessages() );
     }
 
 }

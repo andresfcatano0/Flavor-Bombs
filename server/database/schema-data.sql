@@ -98,8 +98,7 @@ insert into restaurants (restaurant_name, phone_number, address, open_hours, des
 ('Soulfu', '612-555-0150', '555 tasty avenue', 'Monday to Friday - 11am to 8pm', 'Serving the best waffles in town since 2001'),
 ('Party Fowl', '763-555-0133', '89391 Christiansen Road', 'Monday to Sunday - 10am to 8pm', 'Serving the best waffles in town since 2001'),
 ('9021PHO', '612-555-9157', '685 Swift Valleys', 'Tuesday to Sunday - 11am to 10pm', 'Hipster-friendly fusion with a little extra spice.'),
-('Tequila Mockingbird', '612-555-2850', '93661 Bayer Square', 'Monday to Sunday - 11am to 11pm', 'We are a family-run operation spanning three generations of hard-working chefs.
-We strive for an experience that blows you out of this world.'),
+('Tequila Mockingbird', '612-555-2850', '93661 Bayer Square', 'Monday to Sunday - 11am to 11pm', 'We are a family-run operation spanning three generations of hard-working chefs.'),
 ('Vincent Van Doughnut', '763-555-1123', '4192 Pietro Crossing', 'Monday to Sunday - 6am to 12am', 'Attention-hungry humans! Welcome you to our world-class restaurant.'),
 ('Nacho Daddy', '952-555-3619', '411 Kareem Route', 'Monday to Friday - 11am to 8pm', 'You will get the OG taste of food at our restaurant.'),
 ('Lord of the Wings', '763-555-8712', '320 Mizey Junction', 'Monday to Saturday - 10am to 11pm', 'We do wings and only wings'),
