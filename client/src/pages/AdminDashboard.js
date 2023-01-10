@@ -8,6 +8,7 @@ import ListGroup from "react-bootstrap/ListGroup";
 import Card from "react-bootstrap/Card";
 import { Cart2, Clipboard2Data, CreditCardFill, People, PeopleFill, Shop, ShopWindow } from 'react-bootstrap-icons';
 import UserContext from '../context/AuthContext';
+import { Link } from 'react-router-dom';
 
 
 export default function AdminDashboard({ setAuthUser }) {
@@ -38,10 +39,12 @@ export default function AdminDashboard({ setAuthUser }) {
                     <People />
                     <span>Users</span>
                   </div>
-                  <div className="d-flex align-items-center justify-content-between">
-                    <ShopWindow />
-                    <span>Restaurants</span>
-                  </div>
+                  <Link to="/admin/table-view" className="text-reset">
+                    <div className="d-flex align-items-center justify-content-between">
+                      <ShopWindow />
+                      <span>Restaurants</span>
+                    </div>
+                  </Link>
                   <div className="d-flex align-items-center justify-content-between">
                     <Cart2 />
                     <span>Orders</span>
@@ -59,8 +62,9 @@ export default function AdminDashboard({ setAuthUser }) {
               <h2>
                 Welcome,{" "}
                 {
-                // user.userData.sub
-                user.userData.sub.charAt(0).toUpperCase() + user.userData.sub.slice(1)
+                  // user.userData.sub
+                  user.userData.sub.charAt(0).toUpperCase() +
+                    user.userData.sub.slice(1)
                 }
               </h2>
             </Col>
@@ -102,13 +106,15 @@ export default function AdminDashboard({ setAuthUser }) {
                     up the bulk of the card's content.
                   </Card.Text>
                   <div className="d-flex align-items-center justify-content-between">
-                    <Card.Link
-                      href="#"
+                    <Link to="/admin/table-view"
+                    // <Card.Link
+                    //   href="#"
                       className="fw-semibold text-decoration-underline"
                       style={{ color: "#999" }}
                     >
                       See all restaurants
-                    </Card.Link>
+                      </Link>
+                    {/* </Card.Link> */}
                     <Shop style={{ color: "indigo" }} />
                   </div>
                 </Card.Body>
