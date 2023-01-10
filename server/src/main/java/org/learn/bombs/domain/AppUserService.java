@@ -2,10 +2,12 @@ package org.learn.bombs.domain;
 
 import org.learn.bombs.data.AppUserRepository;
 import org.learn.bombs.data.OrderRepo;
+import org.learn.bombs.data.ReviewRepository;
 import org.learn.bombs.data.UserRepo;
 import org.learn.bombs.models.AppUser;
 import org.learn.bombs.models.Order;
 import org.learn.bombs.models.Restaurant;
+import org.learn.bombs.models.Review;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -23,6 +25,9 @@ public class AppUserService implements UserDetailsService {
 
     @Autowired
     OrderRepo orderRepo;
+
+    @Autowired
+    ReviewRepository reviewRepo;
 
     private final AppUserRepository repository;
     private final PasswordEncoder encoder;
@@ -64,6 +69,9 @@ public class AppUserService implements UserDetailsService {
         // agent-alias relationship
         List<Order> appUserOrders = orderRepo.getOrdersByAppUserId(id);
         foundAppUser.setOrders(appUserOrders);
+
+        List<Review> appUserReviews = reviewRepo.getReviewsByAppUserId(id);
+        foundAppUser.setReviews(appUserReviews);
 
         lookupResult.setPayload(foundAppUser);
         return lookupResult;

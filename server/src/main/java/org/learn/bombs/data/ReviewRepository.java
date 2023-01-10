@@ -14,4 +14,6 @@ public interface ReviewRepository {
     Review addReview(Review toAdd);
 
     boolean updateReview(Review review);
+
+    List<Review> getReviewsByAppUserId(Integer id);
 }

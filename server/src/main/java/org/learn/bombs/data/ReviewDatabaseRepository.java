@@ -1,5 +1,6 @@
 package org.learn.bombs.data;
 
+import org.learn.bombs.models.Order;
 import org.learn.bombs.models.Review;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -84,4 +85,14 @@ public class ReviewDatabaseRepository implements ReviewRepository {
 
         return rowsUpdated > 0;
     }
+
+    @Override
+    public List<Review> getReviewsByAppUserId(Integer id) {
+        String sql = "select * from reviews where app_user_id = ?";
+
+        List<Review> appUserReviews = jdbcTemplate.query(sql, new ReviewMapper(), id);
+
+        return appUserReviews;
+    }
+
 }

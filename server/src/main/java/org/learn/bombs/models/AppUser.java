@@ -23,6 +23,16 @@ public class AppUser implements UserDetails {
 
     List<Order> orders;
 
+    List<Review> reviews;
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
+    }
+
     public List<Order> getOrders() {
         return orders;
     }
