@@ -3,10 +3,11 @@ import "./NavBar.css";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
+import Badge from "react-bootstrap/Badge";
 
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { Link, useHistory } from "react-router-dom";
-import { PersonCircle } from "react-bootstrap-icons";
+import { Cart3, PersonCircle } from "react-bootstrap-icons";
 import UserContext from "../../context/AuthContext";
 
 export default function AuthNavBar({setAuthUser}) {
@@ -50,6 +51,12 @@ export default function AuthNavBar({setAuthUser}) {
               <Nav.Link href="/restaurants">Restaurants</Nav.Link>
             </Nav>
             <Nav>
+              <Nav.Link href={`/shopping-cart`} className="d-flex">
+                <Cart3 className="align-self-center" size={20} />
+                <Badge pill bg="danger" className="align-self-start">
+                  2
+                </Badge>
+              </Nav.Link>
               <Nav.Link href={`/user/:${user.userData.sub}`}>
                 <PersonCircle size={30} />
               </Nav.Link>

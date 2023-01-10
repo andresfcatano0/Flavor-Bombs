@@ -15,6 +15,7 @@ import AboutPage from './pages/AboutPage';
 import AdminPage from './pages/AdminPage';
 import AdminDashboard from './pages/AdminDashboard';
 import UserProfilePage from './pages/UserProfilePage';
+import OrdersCartPage from './pages/OrdersCartPage';
 
 function App() {
 
@@ -115,6 +116,9 @@ function App() {
           </Route>
           <Route path="/user/:username">
             <UserProfilePage setAuthUser={setAuthUser} />
+          </Route>
+          <Route path="/shopping-cart">
+            <OrdersCartPage setAuthUser={setAuthUser} />
           </Route>
         </Switch>
       </BrowserRouter>
