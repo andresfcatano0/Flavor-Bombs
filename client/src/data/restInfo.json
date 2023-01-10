@@ -1,0 +1,66 @@
+{
+  "restaurants": [
+    {
+      "restaurant_id": 1,
+      "descript": "Monday to Saturday - 10am to 11pm",
+      "lat": 44.986657,
+      "lng": -93.258139
+
+    },
+    {
+      "restaurant_id": 2,
+      "descript": "Tuesday to Saturday - 9am to 9pm",
+      "lat": 44.946346,
+      "lng": -93.305101
+    },
+    {
+      "restaurant_id": 3,
+      "descript": "Tuesday to Saturday - 9am to 9pm",
+      "lat": 44.97482,
+      "lng": 44.978471
+    },
+    {
+      "restaurant_id": 4,
+      "descript": "Tuesday to Saturday - 9am to 9pm",
+      "lat": 44.978471,
+      "lng": -93.275941
+    },
+    {
+      "restaurant_id": 5,
+      "descript": "Tuesday to Saturday - 9am to 9pm",
+      "lat": 44.977032,
+      "lng": -93.272362
+    },
+    {
+      "restaurant_id": 6,
+      "descript": "Tuesday to Saturday - 9am to 9pm",
+      "lat": 44.969191,
+      "lng": -93.247046
+    },
+    {
+      "restaurant_id": 7,
+      "descript": "Tuesday to Saturday - 9am to 9pm",
+      "lat": 44.968174,
+      "lng": -93.276598,
+      "icon": "/icons/pizza.png"
+    },
+    {
+      "restaurant_id": 8,
+      "descript": "Tuesday to Saturday - 9am to 9pm",
+      "lat": 44.96548,
+      "lng": -93.298057
+    },
+    {
+      "restaurant_id": 9,
+      "descript": "Tuesday to Saturday - 9am to 9pm",
+      "lat": 44.952147,
+      "lng": -93.293456
+    },
+    {
+      "restaurant_id": 10,
+      "descript": "Tuesday to Saturday - 9am to 9pm",
+      "lat": 44.968053,
+      "lng": -93.290599
+    }
+  ]
+}
