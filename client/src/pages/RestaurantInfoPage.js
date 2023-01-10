@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
@@ -8,6 +8,7 @@ import Carousel from 'react-bootstrap/Carousel';
 import { useParams } from "react-router-dom";
 import ReviewCard from '../components/ReviewCard';
 import MenuCard from '../components/MenuCard';
+import CartContext from '../context/cart/CartContext';
 
 export default function RestaurantInfoPage({getRestaurants, restaurants}) {
     // const [index, setIndex] = useState(0);
@@ -15,6 +16,11 @@ export default function RestaurantInfoPage({getRestaurants, restaurants}) {
     // const handleSelect = (selectedIndex, e) => {
     //   setIndex(selectedIndex);
     // };
+
+    
+
+
+
     const [menu, setMenu] = useState([]);
     const params = useParams();
     const [specificRestaurant, setSpecificRestaurant] = useState({});
@@ -35,6 +41,22 @@ export default function RestaurantInfoPage({getRestaurants, restaurants}) {
             setMenu(specificMenu);
         }).catch(err=> console.log(err));
     }
+
+
+const {
+  addItemToCart,
+  increaseQuantity,
+
+  orderCartItems,
+  handleTotals,
+  itemCount,
+} = useContext(CartContext);
+
+const itemInCart = (menuItems) => {
+  return orderCartItems?.find((item) => item.menuId === menuItems.menuId);
+};
+
+
 
 
 
@@ -102,7 +124,11 @@ export default function RestaurantInfoPage({getRestaurants, restaurants}) {
           </div>
           {menu.map(m=>{
             return (
-                <MenuCard key={m.menuId} m={m}/>
+                <MenuCard 
+                key={m.menuId} 
+                m={m} 
+                
+                />
             )
           })}
         </div>
