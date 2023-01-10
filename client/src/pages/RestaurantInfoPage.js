@@ -60,26 +60,54 @@ const itemInCart = (menuItems) => {
 
 
 
-  const getSpecificRestaurant = () => {
-    fetch(`http://localhost:8080/api/restaurant/${params.id}`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json'
 
-        },
-    })
-    .then(res=> {
-        return res.json();
-    })
-    .then(data => {
-        // console.log(data)
-        setSpecificRestaurant(data);
-    })
-  }
 
-  useEffect(()=> {
-    getSpecificRestaurant();
-    getMenuByRestaurant();
+
+const getSpecificRestaurant = () => {
+  fetch(`http://localhost:8080/api/restaurant/${params.id}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+      
+    },
+  })
+  .then(res=> {
+    return res.json();
+  })
+  .then(data => {
+    // console.log(data)
+    setSpecificRestaurant(data);
+  })
+}
+
+const [reviews, setReviews] = useState([]);
+const getReviewPerRestaurant = () => {
+  fetch("http://localhost:8080/api/review", {
+    method: 'GET',
+    headers:{
+      "Content-Type": "application/json"
+    }
+  }).then(res=> {
+    return res.json();
+  }).then(data=> {
+    // console.log(data)
+    // for(let i = 0; i<data.length;i++){
+    //   if (data[i].restaurantId === params.id) {
+    //     setReviews(data[i]);
+    //   }
+    // }
+    let specificReviews = data.filter(d=> {
+      return d.restaurantId.toString() === params.id.toString()
+    })
+    setReviews(specificReviews)
+    // console.log(specificReviews)
+  })
+}
+
+useEffect(()=> {
+  getSpecificRestaurant();
+  getMenuByRestaurant();
+  getReviewPerRestaurant();
   }, [])
   
     return (
@@ -115,8 +143,9 @@ const itemInCart = (menuItems) => {
               </Carousel.Item>
             </Carousel> */}
           <Row>
-            <ReviewCard />
-            <ReviewCard />
+            <ReviewCard reviews={reviews}/>
+            {console.log(reviews)}
+            {/* <ReviewCard /> */}
           </Row>
           <hr />
           <div>
@@ -127,6 +156,7 @@ const itemInCart = (menuItems) => {
                 <MenuCard 
                 key={m.menuId} 
                 m={m} 
+
                 
                 />
             )
