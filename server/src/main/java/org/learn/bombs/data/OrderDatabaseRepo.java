@@ -52,6 +52,15 @@ public class OrderDatabaseRepo implements OrderRepo{
     }
 
     @Override
+    public List<Order> getOrdersByAppUserId(Integer id) {
+        String sql = "select * from orders where app_user_id = ?";
+
+        List<Order> appUserOrders = template.query(sql, new OrderMapper(), id);
+
+        return appUserOrders;
+    }
+
+    @Override
     public void deleteOrderById(Integer orderId) {
         int rowsAffected = template.update( "delete from orders where order_id = ?", orderId);
     }

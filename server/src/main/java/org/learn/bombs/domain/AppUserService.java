@@ -1,6 +1,7 @@
 package org.learn.bombs.domain;
 
 import org.learn.bombs.data.AppUserRepository;
+import org.learn.bombs.data.OrderRepo;
 import org.learn.bombs.data.UserRepo;
 import org.learn.bombs.models.AppUser;
 import org.learn.bombs.models.Order;
@@ -19,6 +20,9 @@ public class AppUserService implements UserDetailsService {
 
     @Autowired
     UserRepo repo;
+
+    @Autowired
+    OrderRepo orderRepo;
 
     private final AppUserRepository repository;
     private final PasswordEncoder encoder;
@@ -57,6 +61,10 @@ public class AppUserService implements UserDetailsService {
             return lookupResult;
         }
 
+        // agent-alias relationship
+        List<Order> appUserOrders = orderRepo.getOrdersByAppUserId(id);
+        foundAppUser.setOrders(appUserOrders);
+
         lookupResult.setPayload(foundAppUser);
         return lookupResult;
     }
@@ -75,6 +83,25 @@ public class AppUserService implements UserDetailsService {
         return deleteResult;
     }
 
+    public Result<AppUser> update(AppUser appUser, String username) {
+        Result<AppUser> updateResult = new Result<>();
 
+        AppUser updatingUser = repo.loadUserByUsername(username);
+//        appUser.setOwner(updatingUser);
+
+        if (appUser.getAppUserId() <= 0) {
+            updateResult.addErrorMessage("User `id` is required.");
+        }
+
+        if (updateResult.isSuccess()) {
+            if (repo.updateAppUser(appUser)) {
+                updateResult.setPayload(appUser);
+            } else {
+                updateResult.addErrorMessage("Order id was not found." );
+            }
+        }
+
+        return updateResult;
+    }
 
 }

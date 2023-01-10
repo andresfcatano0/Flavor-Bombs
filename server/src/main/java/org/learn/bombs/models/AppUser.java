@@ -21,6 +21,16 @@ public class AppUser implements UserDetails {
 
     List<String> roles;
 
+    List<Order> orders;
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
+
     public AppUser(int appUserId, String firstName, String lastName, String username, String password, String email, boolean enabled, List<String> authorities) {
         this.appUserId = appUserId;
         this.firstName = firstName;
