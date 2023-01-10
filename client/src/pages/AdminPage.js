@@ -16,6 +16,26 @@ import { Link } from 'react-router-dom';
 
 
 export default function AdminPage({ restaurants, getRestaurants}) {
+  const [allUser, setAllUser] = useState([]);
+
+  const getAllOrders = () =>{
+    fetch("http://localhost:8080/api/user", {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + adminUser.token,
+      },
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        // console.log(data);
+        setAllUser(data);
+      });
+  }
+
+
+  
 
   const [reviews, setReviews] = useState([]);
   const getAllReviews = () => {
@@ -34,7 +54,8 @@ export default function AdminPage({ restaurants, getRestaurants}) {
 
   useEffect(()=>{
     getAllReviews()
-  })
+    getAllOrders()
+  },[])
 
   const adminUser = useContext(UserContext);
 
@@ -48,7 +69,7 @@ export default function AdminPage({ restaurants, getRestaurants}) {
                 }
           
             }).then(data => {
-                console.log(data);
+                // console.log(data);
                 getRestaurants();
                 if(data.statusCode === 204){
                   console.log("successfully deleted restaurant");
@@ -68,15 +89,53 @@ export default function AdminPage({ restaurants, getRestaurants}) {
                 }
           
             }).then(data => {
-                console.log(data);
+                // console.log(data);
                 
                 if(data.statusCode === 204){
                   console.log("successfully deleted review");
                 }
-                console.log(data.statusCode)
+                
             })
         }
         }
+
+        const [restaurantOrders, setRestaurantOrders] = useState([]);
+        const getSpecificRestaurantForOrders = (restaurantId) => {
+          fetch("http://localhost:8080/api/restaurant/"+restaurantId, {
+            method: 'GET',
+            headers:{
+              "Content-Type": "application/json"
+            }
+          }).then(res => {
+            return res.json()
+          }).then(data => {
+              getRestaurants()
+              console.log(data)
+          })
+        }
+
+        const [orders, setOrders] = useState([]);
+        const getAllUserOrders = () => {
+          fetch("http://localhost:8080/api/order/all", {
+            method: "GET",
+            headers: {
+              Authorization: "Bearer " + adminUser.token,
+            },
+          })
+            .then((res) => {
+              return res.json();
+            })
+            .then((data) => {
+              console.log(data);
+              setOrders(data);
+            });
+        };
+
+        useEffect(() => {
+          getAllUserOrders();
+        }, []);
+
+        
 
  
   return (
@@ -124,15 +183,14 @@ export default function AdminPage({ restaurants, getRestaurants}) {
                     <span>Reviews</span>
                   </ListGroup.Item>
                   <Link to="/admin/dashboard-menu">
-
-                  <ListGroup.Item
-                    action
-                    // href="/admin/dashboard-menu"
-                    className="d-flex align-items-center justify-content-between"
-                  >
-                    <Clipboard2Data />
-                    <span>Dashboard</span>
-                  </ListGroup.Item>
+                    <ListGroup.Item
+                      action
+                      // href="/admin/dashboard-menu"
+                      className="d-flex align-items-center justify-content-between"
+                    >
+                      <Clipboard2Data />
+                      <span>Dashboard</span>
+                    </ListGroup.Item>
                   </Link>
                 </ListGroup>
               </Col>
@@ -190,14 +248,15 @@ export default function AdminPage({ restaurants, getRestaurants}) {
                         </tr>
                       </thead>
                       <tbody>
-                        {restaurants.map((restaurant, index) => {
+                        {allUser.map((userInfo, index) => {
                           return (
-                            <tr key={index}>
+                            <tr key={userInfo.appUserId}>
                               <td>{index + 1}</td>
-                              <td></td>
-                              <td></td>
-                              <td></td>
-                              <td></td>
+                              <td>{userInfo.username}</td>
+                              <td>{userInfo.firstName}</td>
+                              <td>{userInfo.lastName}</td>
+                              <td>{userInfo.email}</td>
+
                               <td className="d-flex justify-content-around">
                                 <Button className="btn btn-danger d-flex align-items-center">
                                   <span className="px-2">Delete</span>
@@ -220,19 +279,26 @@ export default function AdminPage({ restaurants, getRestaurants}) {
                           <th>OrderId</th>
                           <th>Customer First Name</th>
                           <th>Customer Last Name</th>
+                          <th>Restaurant Name</th>
                           <th>Order Items</th>
                           <th>Actions</th>
                         </tr>
                       </thead>
                       <tbody>
-                        {restaurants.map((restaurant, index) => {
+                        {orders.map((order, index) => {
                           return (
-                            <tr key={index}>
+                            <tr key={order.orderId}>
                               <td>{index + 1}</td>
+                              <td>{order.orderId}</td>
                               <td></td>
                               <td></td>
-                              <td></td>
-                              <td></td>
+                              <td>
+                                {
+                                  restaurants[order.restaurantId - 1]
+                                    .restaurantName
+                                }
+                              </td>
+                              <td>{order.orderItems}</td>
                               <td className="d-flex justify-content-around">
                                 <Button className="btn btn-danger d-flex align-items-center">
                                   <span className="px-2">Delete</span>
@@ -260,19 +326,26 @@ export default function AdminPage({ restaurants, getRestaurants}) {
                         </tr>
                       </thead>
                       <tbody>
+                        {console.log(restaurants)}
                         {reviews.map((review, index) => {
                           return (
                             <tr key={review.reviewId}>
                               <td>{index + 1}</td>
                               <td>{review.owner}</td>
                               <td>{review.restaurantId}</td>
+                              <td>
+                                {
+                                  // restaurants[review.restaurantId - 1]
+                                }
+                              </td>
                               <td>{review.reviewText}</td>
                               <td className="d-flex justify-content-around">
-                                <Button 
-                                  onClick={()=> {
-                                    deleteReview(review.reviewId)
+                                <Button
+                                  onClick={() => {
+                                    deleteReview(review.reviewId);
                                   }}
-                                  className="btn btn-danger d-flex align-items-center">
+                                  className="btn btn-danger d-flex align-items-center"
+                                >
                                   <span className="px-2">Delete</span>
                                   <Trash3 />
                                 </Button>
