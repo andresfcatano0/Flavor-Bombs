@@ -18,7 +18,7 @@ const center = {
   lng: -93.258133,
 };
 
-export default function LoadMap(props) {
+export default function LoadMap() {
 
 const [selectedRestaurant, setSelectedRestaurant] = useState(null);
 

@@ -1,5 +1,6 @@
 package org.learn.bombs.models;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class Restaurant {
@@ -13,6 +14,9 @@ public class Restaurant {
     String description;
 
     List<Order> orders;
+
+    BigDecimal latitude;
+    BigDecimal longitude;
 
     public Integer getRestaurantId() {
         return restaurantId;
@@ -60,6 +64,22 @@ public class Restaurant {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public BigDecimal getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(BigDecimal latitude) {
+        this.latitude = latitude;
+    }
+
+    public BigDecimal getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(BigDecimal longitude) {
+        this.longitude = longitude;
     }
 
     @Override
