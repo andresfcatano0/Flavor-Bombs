@@ -50,8 +50,8 @@ export default function AuthNavBar({setAuthUser}) {
               {/* </Link>
               </Nav.Item> */}
               <Nav.Link href="/">Home</Nav.Link>
-              <Nav.Link href="/orders">Orders</Nav.Link>
               <Nav.Link href="/about-us">About Us</Nav.Link>
+              <Nav.Link href="/orders">Orders</Nav.Link>
               <Nav.Link href="/restaurants">Restaurants</Nav.Link>
             </Nav>
             <Nav>
