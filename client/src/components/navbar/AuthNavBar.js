@@ -22,7 +22,7 @@ export default function AuthNavBar({setAuthUser}) {
     history.push("/");
   }
 
-  const {orderCartItems} = useContext(CartContext);
+  const {orderCartItems, itemCount} = useContext(CartContext);
   // console.log(orderCartItems)
 
   return (
@@ -61,7 +61,7 @@ export default function AuthNavBar({setAuthUser}) {
                   {orderCartItems.length}
                 </Badge>) : null} */}
                 {orderCartItems.length > 0 && (
-                  <Badge pill bg="danger" className="align-self-start">{orderCartItems.length}</Badge>
+                  <Badge pill bg="danger" className="align-self-start">{itemCount.length}</Badge>
                 )}
                 {/* <Badge pill bg="danger" className="align-self-start">
                    777777
