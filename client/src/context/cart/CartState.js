@@ -1,6 +1,12 @@
 import React, { useEffect, useReducer, useState } from 'react'
+// import CartContext, {storage} from './CartContext';
 import CartContext from './CartContext';
-import CartReducer from './CartReducer';
+import CartReducer, { handleTotals } from './CartReducer';
+
+const storage = localStorage.getItem("orderCartItems")
+  ? JSON.parse(localStorage.getItem("orderCartItems"))
+  : [];
+
 
 const CartState = ({children}) => {
 
@@ -34,7 +40,7 @@ const CartState = ({children}) => {
    
 
     const initialState = {
-        orderCartItems: [],
+        orderCartItems: storage, ...handleTotals(storage),
         checkoutCartItems: false,
     };
 

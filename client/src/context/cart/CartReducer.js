@@ -8,11 +8,18 @@ import {
   CLEAR,
 } from "./CartTypes.js";
 
+export const Storage = (orderCartItems) => {
+  localStorage.setItem('orderCartItems', JSON.stringify(orderCartItems.length > 0 ? orderCartItems : []));
+}
+
 export const handleTotals = (orderCartItems) => {
+  Storage(orderCartItems);
+  
     let itemCount = orderCartItems.reduce((total, menuItem)=> total + menuItem.quantity, 0
     );
 
     let total = orderCartItems.reduce((total, menuItem)=> total + menuItem.quantity*menuItem.itemPrice,0).toFixed(2);
+    
     return {itemCount, total};
 };
 
