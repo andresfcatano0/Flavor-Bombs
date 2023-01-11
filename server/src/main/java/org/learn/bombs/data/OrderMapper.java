@@ -17,8 +17,8 @@ public class OrderMapper implements RowMapper<Order> {
         toBuild.setRestaurantId( rs.getInt("restaurant_id"));
         toBuild.setItemQuantity(rs.getInt("item_quantity"));
         toBuild.setTotalPrice(rs.getBigDecimal("total_price"));
-        if (rs.getDate("orderDate") != null) {
-            toBuild.setOrderDate(rs.getDate("orderDate").toLocalDate());
+        if (rs.getDate("order_date") != null) {
+            toBuild.setOrderDate(rs.getDate("order_date").toLocalDate());
         }
 
         try{
