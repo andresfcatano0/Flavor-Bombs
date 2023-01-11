@@ -74,72 +74,156 @@ function App() {
       });
   };
 
+  const [menus,setMenus] = useState([])
+  const getAllMenus = async () => {
+    await fetch("http://localhost:8080/api/menu", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        // let specificMenu = data.filter((d) => {
+        //   return d.restaurantId.toString() == params.id.toString();
+        // });
+        // // console.log(data);
+        setMenus(data);
+      })
+      .catch((err) => console.log(err));
+  };
+
    useEffect(() => {
      getRestaurants();
+     getAllMenus();
    }, []);
 
-  
-  
+   let orderFromLocal = localStorage.getItem("savedCart");
+   
 
-const {
-    addItemToCart,
-    increaseQuantity,
+   let savedItems = orderFromLocal ? JSON.parse(orderFromLocal) : [];
 
-    orderCartItems,
-    handleTotals,
-    itemCount,
-  } = useContext(CartContext);
+  const [orderCartItems, setOrderCartItems] = useState(savedItems);
 
+  const saveOrderCartItems = (saveItems) => {
+    localStorage.setItem("savedCart", JSON.stringify(saveItems))
+    setOrderCartItems(saveItems)
+  }
+
+  const addItemToCart = (menuItem) => {
+    const newOrder = [...orderCartItems, {...menuItem, quantity: 1}]
+    
+    // setOrderCartItems(newOrder);
+    saveOrderCartItems(newOrder);
+  }
+
+  const removeItemFromCart = (menuItem) => {
+    let itemIndex = orderCartItems.findIndex((m)=> m.menuId === menuItem.menuId)
+    // setOrderCartItems(
+    //   [...orderCartItems.slice(0, itemIndex), 
+    //     ...orderCartItems.slice(itemIndex + 1)]
+    //     );
+    saveOrderCartItems(
+      [...orderCartItems.slice(0, itemIndex), 
+        ...orderCartItems.slice(itemIndex + 1)]
+        );
+  }
+
+  const increaseQuantity = (menuItem)=>{
+    let copy = [...orderCartItems];
+
+    let itemIndex = copy.findIndex((m)=> m.menuId === menuItem.menuId);
+
+    copy[itemIndex].quantity++;
+
+    // setOrderCartItems(copy)
+    saveOrderCartItems(copy)
+  }
+
+  const decreaseQuantity = (menuItem)=>{
+     let copy = [...orderCartItems];
+
+     let itemIndex = copy.findIndex((m) => m.menuId === menuItem.menuId);
+
+     copy[itemIndex].quantity--;
+
+    //  setOrderCartItems(copy);
+     saveOrderCartItems(copy);
+  }
+
+  const clearCart = () => { 
+    // setOrderCartItems([]);
+    saveOrderCartItems([]);
+  }
 
   return (
     <UserContext.Provider value={authUser}>
-      <BrowserRouter>
-        <NavBar setAuthUser={setAuthUser} />
-        <Switch>
-          <Route exact path="/">
-            <HomePage />
-          </Route>
-          <Route path="/login">
-            <LoginPage setAuthUser={setAuthUser} />
-          </Route>
-          <Route exact path="/restaurants">
-            <RestaurantPage restaurants={restaurants} isLoading={isLoading} />
-          </Route>
-          <Route path="/restaurant/:id">
-            <RestaurantInfoPage
-              getRestaurants={getRestaurants}
-              restaurants={restaurants}
-            />
-          </Route>
-          <Route path="/orders">
-            <OrdersPage setAuthUser={setAuthUser} restaurants={restaurants} />
-          </Route>
-          <Route path="/admin/dashboard-menu">
-            <AdminDashboard
-              restaurants={restaurants}
-              getRestaurants={getRestaurants}
-              setAuthUser={setAuthUser}
-            />
-          </Route>
-          <Route path="/admin/table-view">
-            <AdminPage
-              setAuthUser={setAuthUser}
-              restaurants={restaurants}
-              getRestaurants={getRestaurants}
-            />
-          </Route>
-          <Route path="/about-us">
-            <AboutPage />
-          </Route>
-          <Route path="/user/:username">
-            <UserProfilePage setAuthUser={setAuthUser} />
-          </Route>
+      <CartContext.Provider
+        value={{
+          orderCartItems: orderCartItems,
+          addItemToCart,
+          increaseQuantity,
+          decreaseQuantity,
+          removeItemFromCart,
+          clearCart
+        }}
+      >
+        <BrowserRouter>
+          <NavBar setAuthUser={setAuthUser} />
+          <Switch>
+            <Route exact path="/">
+              <HomePage />
+            </Route>
+            <Route path="/login">
+              <LoginPage setAuthUser={setAuthUser} />
+            </Route>
+            <Route exact path="/restaurants">
+              <RestaurantPage
+                restaurants={restaurants}
+                getRestaurants={getRestaurants}
+                isLoading={isLoading}
+              />
+            </Route>
+            <Route path="/restaurant/:id">
+              <RestaurantInfoPage
+                getRestaurants={getRestaurants}
+                restaurants={restaurants}
+                menus={menus}
+                getAllMenus={getAllMenus}
+              />
+            </Route>
+            <Route path="/orders">
+              <OrdersPage setAuthUser={setAuthUser} restaurants={restaurants} />
+            </Route>
+            <Route path="/admin/dashboard-menu">
+              <AdminDashboard
+                restaurants={restaurants}
+                getRestaurants={getRestaurants}
+                setAuthUser={setAuthUser}
+              />
+            </Route>
+            <Route path="/admin/table-view">
+              <AdminPage
+                setAuthUser={setAuthUser}
+                restaurants={restaurants}
+                getRestaurants={getRestaurants}
+              />
+            </Route>
+            <Route path="/about-us">
+              <AboutPage />
+            </Route>
+            <Route path="/user/:username">
+              <UserProfilePage setAuthUser={setAuthUser} />
+            </Route>
 
-          <Route path="/shopping-cart">
-            <OrdersCartPage setAuthUser={setAuthUser} />
-          </Route>
-        </Switch>
-      </BrowserRouter>
+            <Route path="/shopping-cart">
+              <OrdersCartPage setAuthUser={setAuthUser} />
+            </Route>
+          </Switch>
+        </BrowserRouter>
+      </CartContext.Provider>
     </UserContext.Provider>
   );
 }
