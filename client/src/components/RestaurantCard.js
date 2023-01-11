@@ -30,7 +30,9 @@ export default function RestaurantCard(props) {
                   >
                     <Card.Img
                       variant="top"
-                      src="https://cdn.pixabay.com/photo/2018/07/14/15/27/cafe-3537801_1280.jpg"
+                      // src="https://cdn.pixabay.com/photo/2018/07/14/15/27/cafe-3537801_1280.jpg"
+                      src={restaurant.restaurantImage}
+                      height={"286px"}
                     />
                     <div style={{ textAlign: "end", marginRight: "1rem" }}>
                       <Card.Title className="justify-content-end">
@@ -42,19 +44,21 @@ export default function RestaurantCard(props) {
                       </Card.Subtitle>
                     </div>
                     <Card.Body>
-                      <Card.Text>{restaurant.description}</Card.Text>
+                      <Card.Text >
+                        {restaurant.description.length > 60 ? restaurant.description.substring(0,70)+"..." : restaurant.description }
+                      </Card.Text>
                       <div className="d-grid gap-2 white-text">
                         {/* <Button
                           variant="primary"
                           size="lg"
                           href={`/restaurant/${restaurant.restaurantId}`}
                         > */}
-                          <Link 
-                            to={`/restaurant/${restaurant.restaurantId}`}
-                            className="btn btn-primary"
-                          >
-                            More Info
-                          </Link>
+                        <Link
+                          to={`/restaurant/${restaurant.restaurantId}`}
+                          className="btn btn-primary"
+                        >
+                          More Info
+                        </Link>
                         {/* </Button> */}
                       </div>
                     </Card.Body>
