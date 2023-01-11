@@ -4,13 +4,13 @@ import Table from 'react-bootstrap/Table'
 
 export default function OrdersPage({restaurants}) {
 
-     const userData = useContext(UserContext);
+     const userInfo = useContext(UserContext);
      const [orders, setOrders] = useState([]);
 
      const [restaurantOrders, setRestaurantOrders] = useState([]);
      
 
-    //  console.log(restaurants)
+    console.log(userInfo)
     
     let getSpecificRestaurantName = (orderId) => {
       let found = restaurants.filter(r=>r.restaurantId == orderId);
@@ -21,11 +21,13 @@ export default function OrdersPage({restaurants}) {
         fetch("http://localhost:8080/api/order", {
           method: "GET",
           headers: {
-            Authorization: "Bearer " + userData.token,
+            Authorization: "Bearer " + userInfo.token,
           },
-        }).then((res) => {
-          return res.json()
-        }).then((data) => {
+        })
+          .then((res) => {
+            return res.json();
+          })
+          .then((data) => {
             console.log(data);
             // getSpecificRestaurantName(data.restaurantId)
             // for(let d of data){
@@ -34,7 +36,7 @@ export default function OrdersPage({restaurants}) {
             // }
             // console.log(restaurantOrders)
             setOrders(data);
-        });
+          });
     }
 
     useEffect(()=>{
@@ -62,8 +64,11 @@ export default function OrdersPage({restaurants}) {
         <thead>
           <tr>
             <th>#</th>
+            <th>Date</th>
             <th>Restaurant Name</th>
             <th>Food Item</th>
+            <th>Quantity</th>
+            <th>Total Price</th>
             {/* <th>Time</th> */}
           </tr>
         </thead>
@@ -72,9 +77,12 @@ export default function OrdersPage({restaurants}) {
             return (
               <tr key={order.orderId}>
                 <td>{index + 1}</td>
+                <td>{order.orderDate}</td>
                 {/* <td>{order.restaurantId}</td> */}
                 <td>{restaurants[order.restaurantId - 1].restaurantName}</td>
                 <td>{order.orderItems}</td>
+                <td>{order.itemQuantity}</td>
+                <td>{order.totalPrice}</td>
               </tr>
             );
           })
