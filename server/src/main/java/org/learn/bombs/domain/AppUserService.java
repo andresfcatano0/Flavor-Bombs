@@ -91,11 +91,8 @@ public class AppUserService implements UserDetailsService {
         return deleteResult;
     }
 
-    public Result<AppUser> update(AppUser appUser, String username) {
+    public Result<AppUser> update(AppUser appUser) {
         Result<AppUser> updateResult = new Result<>();
-
-        AppUser updatingUser = repo.loadUserByUsername(username);
-//        appUser.setOwner(updatingUser);
 
         if (appUser.getAppUserId() <= 0) {
             updateResult.addErrorMessage("User `id` is required.");

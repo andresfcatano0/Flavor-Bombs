@@ -19,7 +19,7 @@ public class AppUser implements UserDetails {
     private boolean enabled;
 //    private Collection<GrantedAuthority> authorities;
 
-    List<String> roles;
+    List<String> roles = new ArrayList<>();
 
     List<Order> orders;
 
