@@ -1,7 +1,9 @@
 package org.learn.bombs.domain;
 
 import org.learn.bombs.data.OrderRepo;
+import org.learn.bombs.data.ReviewRepository;
 import org.learn.bombs.models.Order;
+import org.learn.bombs.models.Review;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
@@ -24,6 +26,9 @@ public class RestaurantService {
     @Autowired
     OrderRepo orderRepo;
 
+    @Autowired
+    ReviewRepository reviewRepo;
+
     public Result<List<Restaurant>> getPublicRestaurants() {
         Result<List<Restaurant>> result = new Result<>();
 
@@ -44,6 +49,9 @@ public class RestaurantService {
         List<Order> restaurantOrders = orderRepo.getOrdersByRestaurantId(id);
         foundRestaurant.setOrders(restaurantOrders);
         // Todo: Fill in reviews similarly to orders
+
+        List<Review> restaurantReviews = reviewRepo.getReviewsByRestaurantId(id);
+        foundRestaurant.setReviews(restaurantReviews);
 
         lookupResult.setPayload(foundRestaurant);
         return lookupResult;

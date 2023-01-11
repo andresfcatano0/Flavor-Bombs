@@ -16,4 +16,6 @@ public interface ReviewRepository {
     boolean updateReview(Review review);
 
     List<Review> getReviewsByAppUserId(Integer id);
+
+    List<Review> getReviewsByRestaurantId(Integer id);
 }

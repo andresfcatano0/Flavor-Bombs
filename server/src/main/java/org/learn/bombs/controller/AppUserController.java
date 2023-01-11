@@ -57,9 +57,8 @@ public class AppUserController {
 
     @PutMapping("/{appUserId}")
     ResponseEntity update( @PathVariable int appUserId, @RequestBody AppUser appUser) {
-        AppUser requestingUser = (AppUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        Result<AppUser> updateResult = service.update(appUser, requestingUser.getUsername());
+        Result<AppUser> updateResult = service.update(appUser);
 
         if (appUserId != appUser.getAppUserId()) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

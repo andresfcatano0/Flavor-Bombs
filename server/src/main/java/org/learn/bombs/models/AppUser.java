@@ -18,7 +18,7 @@ public class AppUser implements UserDetails {
     private String email;
     private boolean enabled;
 
-    List<String> roles;
+    List<String> roles = new ArrayList<>();
 
     List<Order> orders;
 

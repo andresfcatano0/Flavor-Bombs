@@ -76,15 +76,13 @@ public class AppUserRepository implements UserRepo{
         final String sql = "update app_user set " +
                 "first_name = ?, " +
                 "last_name = ?, " +
-                "username = ? " +
-                "passhash = ? " +
-                "email = ? " +
+                "username = ?, " +
+                "email = ?, " +
                 "enabled = ? " +
                 "where app_user_id = ?;";
 
         int rowsUpdated = jdbcTemplate.update(sql, appUser.getFirstName(), appUser.getLastName(),
-                appUser.getUsername(), appUser.getPassword(), appUser.getEmail(),
-                appUser.isEnabled(), appUser.getAppUserId());
+                appUser.getUsername(), appUser.getEmail(), appUser.isEnabled(), appUser.getAppUserId());
 
         return rowsUpdated > 0;
     }

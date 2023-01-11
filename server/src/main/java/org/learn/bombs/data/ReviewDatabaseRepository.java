@@ -95,4 +95,13 @@ public class ReviewDatabaseRepository implements ReviewRepository {
         return appUserReviews;
     }
 
+    @Override
+    public List<Review> getReviewsByRestaurantId(Integer id) {
+        String sql = "select * from reviews where restaurant_id = ?";
+
+        List<Review> restaurantReviews = jdbcTemplate.query(sql, new ReviewMapper(), id);
+
+        return restaurantReviews;
+    }
+
 }
