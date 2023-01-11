@@ -16,15 +16,16 @@ export default function AuthNavBar({setAuthUser}) {
   const history = useHistory();
 
   const user = useContext(UserContext);
+  const {orderCartItems, clearCart} = useContext(CartContext);
   
   function handleLogout(){
     localStorage.removeItem("userData");
+    clearCart();
     localStorage.removeItem("savedCart");
     setAuthUser(null);
     history.push("/");
   }
 
-  const {orderCartItems} = useContext(CartContext);
   // console.log(orderCartItems)
 
   let itemCount = orderCartItems.reduce((sum, item) => sum + item.quantity, 0);
