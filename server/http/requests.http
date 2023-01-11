@@ -82,7 +82,7 @@ GET http://localhost:8080/api/restaurant
 
 ###
 
-GET http://localhost:8080/api/restaurant/3
+GET http://localhost:8080/api/restaurant/1
 
 ###
 
@@ -149,12 +149,12 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzd
 ###
 
 GET http://localhost:8080/api/user
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzdWIiOiJqYW5lZG9lIiwicm9sZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfQURNSU4ifV0sImV4cCI6MTY3MzM4MTgxOH0.3Q7hPqoN8IichRFzpzfIfnhEWoYiaaTGkZuFrw6D3hI
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzdWIiOiJqYW5lZG9lIiwicm9sZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfQURNSU4ifV0sImV4cCI6MTY3MzQ1OTMyNH0.QM1AJRjo6PWPzBPFY60rPpXGZRj0-5KT1uX-14lEPrI
 
 ###
 
 GET http://localhost:8080/api/user/1
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzdWIiOiJqYW5lZG9lIiwicm9sZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfQURNSU4ifV0sImV4cCI6MTY3MzQ1ODgzNn0.UXopiUDFASxz4XE5qo5mYqXiqNxyUevN-p99MNK1iG0
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzdWIiOiJqYW5lZG9lIiwicm9sZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfQURNSU4ifV0sImV4cCI6MTY3MzQ2MDY2NX0.36JsGzW2lss7dOIm5lxpPEAbSDxdPy0jyWSRKx2afl8
 
 ###
 
