@@ -15,6 +15,11 @@ public class OrderMapper implements RowMapper<Order> {
         toBuild.setOrderItems(rs.getString("order_items"));
 //        toBuild.setAppUserId( rs.getInt("app_user_id"));
         toBuild.setRestaurantId( rs.getInt("restaurant_id"));
+        toBuild.setItemQuantity(rs.getInt("item_quantity"));
+        toBuild.setTotalPrice(rs.getBigDecimal("total_price"));
+        if (rs.getDate("orderDate") != null) {
+            toBuild.setOrderDate(rs.getDate("orderDate").toLocalDate());
+        }
 
         try{
             rs.findColumn("username");
