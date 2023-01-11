@@ -1,0 +1,14 @@
+GET /api/menu/ HTTP/1.1
+Host: localhost:8080
+
+###
+
+DELETE http://localhost:8080/api/menu/2 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzdWIiOiJqYW5lZG9lIiwicm9sZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfQURNSU4ifV0sImV4cCI6MTY3MzI4MTMzOH0._PS9y0ANHJb-t7IXnGVMBgu7QTtlaVa12v-qugDxMXk
+
+
+
+
+
+
+

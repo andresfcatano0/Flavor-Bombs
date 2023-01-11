@@ -1,0 +1,58 @@
+
+POST /api/security/login HTTP/1.1
+Host: localhost:8080
+Content-Type: application/json
+
+{
+    "username":"johndoe",
+    "password":"top-secret-password"
+}
+
+###
+
+POST /api/security/login HTTP/1.1
+Host: localhost:8080
+Content-Type: application/json
+
+{
+    "username":"janedoe",
+    "password":"bad-password"
+}
+
+###
+
+
+POST /api/security/login HTTP/1.1
+Host: localhost:8080
+Content-Type: application/json
+
+{
+    "username":"shurst",
+    "password":"butterfly"
+}
+
+
+###
+
+POST /api/security/login HTTP/1.1
+Host: localhost:8080
+Content-Type: application/json
+
+{
+    "username":"blucky",
+    "password":"2-the-moon"
+}
+
+###
+
+
+POST /api/security/login HTTP/1.1
+Host: localhost:8080
+Content-Type: application/json
+
+{
+    "username":"afalls",
+    "password":"trinity-2000"
+}
+
+###

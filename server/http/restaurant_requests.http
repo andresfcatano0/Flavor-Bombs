@@ -1,0 +1,13 @@
+
+GET http://localhost:8080/api/restaurant
+
+###
+
+GET http://localhost:8080/api/restaurant/3
+
+###
+
+DELETE http://localhost:8080/api/restaurant/1 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzdWIiOiJqYW5lZG9lIiwicm9sZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfQURNSU4ifV0sImV4cCI6MTY3MzI4MDIwNn0.USn4DAhwQrJS2naeOa45GZ-n7zHNicSlzEfpQB5RH_8
+
+###
