@@ -8,6 +8,7 @@ import Table from 'react-bootstrap/Table'
 import Image from "react-bootstrap/Image";
 import { DashCircle, PlusCircle, Trash2Fill } from 'react-bootstrap-icons'
 import CartContext from '../context/cart/CartContext'
+import { Link } from 'react-router-dom'
 
 export default function OrdersCartPage() {
     // const [quantity, setQuantity] = useState(1);
@@ -27,7 +28,7 @@ export default function OrdersCartPage() {
       clearCart,
       removeItemFromCart,
       increaseQuantity,
-      decreaseQuantity
+      decreaseQuantity,
     } = useContext(CartContext);
 
 
@@ -35,6 +36,16 @@ export default function OrdersCartPage() {
   return (
     <Container className="mt-3">
       <h2 className="text-center mb-4">Order Summary</h2>
+
+      {handleCheckoutOrder && (
+        <p>
+          Thank you for ordering
+          <Link to="/">
+            <button onClick={clearCart}>Continue Ordering</button>
+          </Link>
+        </p>
+      )}
+
       {/* If cart is empty, show no items in cart message, otherwise show items */}
       {orderCartItems.length === 0 ? (
         <h5>Cart is empty</h5>
@@ -53,6 +64,33 @@ export default function OrdersCartPage() {
                 </tr>
               </thead>
               <tbody>
+                {console.log(orderCartItems)}
+                {orderCartItems.map((item) => (
+                  <tr key={item.menuId}>
+                    <td>{item.itemName}</td>
+                    <td>{item.restaurantId}</td>
+                    <td>{item.itemDescription}</td>
+                    <td>{item.itemPrice}</td>
+                    <td>
+                      <button onClick={() => increaseQuantity(item)}>+</button>
+                      <span>Qty: {item.quantity}</span>
+
+                      {item.quantity > 1 && (
+                        <button onClick={() => decreaseQuantity(item)}>
+                          -
+                        </button>
+                      )}
+
+                      {item.quantity === 1 && (
+                        <button onClick={() => removeItemFromCart(item)}>
+                          Trash
+                        </button>
+                      )}
+                    </td>
+                    <td>{item.itemPrice * item.quantity}</td>
+                  </tr>
+                ))}
+
                 {/* Template */}
                 {/* <tr>
                   <td style={{ padding: "5px" }}>
@@ -84,14 +122,14 @@ export default function OrdersCartPage() {
 
                 {/* End of template  */}
 
-                {orderCartItems.map((m) => (
-                  <tr key={m.menuId}>
-                    <td>{/* Place for menu picture */}</td>
-                    <td>{m.itemName}</td>
+                {/* {orderCartItems.map((m) => (
+                  <tr key={m.menuId}> */}
+                <td>{/* Place for menu picture */}</td>
+                {/* <td>{m.itemName}</td>
                     <td>{m.itemDescription}</td>
-                    <td>{m.itemPrice}</td>
+                    <td>{m.itemPrice}</td> */}
 
-                    <td>
+                {/* <td>
                       <PlusCircle
                         onClick={() => {
                           increaseQuantity(m);
@@ -102,10 +140,10 @@ export default function OrdersCartPage() {
                         onClick={() => {
                           decreaseQuantity(m);
                         }}
-                      />
+                      /> */}
 
-                      {/* Remove item if user clicks minus after 1 */}
-                      {m.quantity === 1 && (
+                {/* Remove item if user clicks minus after 1 */}
+                {/* {m.quantity === 1 && (
                         <Trash2Fill
                           onClick={() => {
                             removeItemFromCart(m);
@@ -115,7 +153,7 @@ export default function OrdersCartPage() {
                     </td>
                     <td>{m.itemPrice}</td>
                   </tr>
-                ))}
+                ))} */}
                 {/* <tr>
                   <td style={{ padding: "5px" }}> */}
                 {/* <Image
@@ -144,6 +182,7 @@ export default function OrdersCartPage() {
               </tbody>
             </Table>
           </Col>
+
           <Col>
             <Card style={{ width: "18rem" }}>
               <Card.Body>
@@ -159,6 +198,7 @@ export default function OrdersCartPage() {
           </Col>
         </Row>
       )}
+      {/* )}  */}
     </Container>
   );
 }
