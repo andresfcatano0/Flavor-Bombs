@@ -57,10 +57,13 @@ export default function AuthNavBar({setAuthUser}) {
             <Nav>
               <Nav.Link href={`/shopping-cart`} className="d-flex">
                 <Cart3 className="align-self-center" size={20} />
-                {orderCartItems.length > 0 ? (<Badge pill bg="danger" className="align-self-start">
+                {/* {orderCartItems.length > 0 ? (<Badge pill bg="danger" className="align-self-start">
                   {orderCartItems.length}
-                </Badge>) : null}
-                 {/* <Badge pill bg="danger" className="align-self-start">
+                </Badge>) : null} */}
+                {orderCartItems.length > 0 && (
+                  <Badge pill bg="danger" className="align-self-start">{orderCartItems.length}</Badge>
+                )}
+                {/* <Badge pill bg="danger" className="align-self-start">
                    777777
                  </Badge> */}
               </Nav.Link>
