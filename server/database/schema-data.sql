@@ -37,7 +37,7 @@ create table restaurants (
     open_hours varchar(120) not null,
     descript varchar(350) not null,
     restaurant_image varchar(2040) not null,
-	`filter` varchar(250) not null
+	`filters` varchar(250) not null
 
 );
 
@@ -76,7 +76,7 @@ create table menu (
     item_description varchar(120) not null,
 	restaurant_id int not null,
     menu_image varchar(2048) not null,
-	`filter` varchar(250) not null,
+	`filters` varchar(250) not null,
 
     constraint foreign key (restaurant_id) references restaurants(restaurant_id)
     on delete cascade
@@ -108,7 +108,7 @@ insert into user_roles (app_user_id, app_role_id) values
 ( 5, 1 ),
 ( 6, 2 );
 
-insert into restaurants (restaurant_name, phone_number, address, open_hours, descript, restaurant_image, `filter`) values
+insert into restaurants (restaurant_name, phone_number, address, open_hours, descript, restaurant_image, `filters`) values
 ('Taco House', '612-555-0186', '111 taco street', 'Monday to Saturday - 10am to 11pm', 'Serving the best tacos in town since 1958', "./assets/images/restaurant-overhead.jpg", "taco,tex-mexican,chicken,beef,tofu"),
 ('Canadian Bacon', '612-555-0156', '333 bacon street', 'Tuesday to Saturday - 9am to 9pm', 'Serving the bacon burger in town since 1999', "./assets/images/bar-outside.jpg", "burger,bacon,canadian,turkey,beef,fries"),
 ('Soulfu', '612-555-0150', '555 tasty avenue', 'Monday to Friday - 11am to 8pm', 'Serving the best waffles in town since 2001', "./assets/images/food-seasoning.jpg","soulfu, waffles,warm,chicken,sweet,beef,tofu"),
@@ -163,13 +163,13 @@ insert into reviews (review_text, app_user_id, restaurant_id) values
 ('Try out the huge selection of incredible appetizers.', 1, 10),
 ('This place had a lot of heart.', 3, 10);
 
-insert into orders (order_items, app_user_id, restaurant_id) values
-('Chicken Burrito', 1, 1),
-('Bison Burger', 2, 2),
-('Bison Burger', 2, 2),
-('Shrimp Curry Waffles', 1, 3);
+insert into orders (order_items, app_user_id, restaurant_id,order_date,item_quantity,total_price) values
+('Chicken Burrito', 1, 1,'2022-09-16',2,27),
+('Bison Burger', 2, 2,'2022-01-23',3,45),
+('Bison Burger', 2, 2,'2022-08-10',1,15),
+('Shrimp Curry Waffles', 1, 3,'2022-09-25',5,63.75);
 
-insert into menu (item_name, item_price, item_description, restaurant_id, menu_image,`filter`) values
+insert into menu (item_name, item_price, item_description, restaurant_id, menu_image,`filters`) values
 -- Taco House
 ('Chicken Burrito', '13.50', 'Its a chicken burrito with beans.', 1, './assets/images/burrito-chicken.jpg',"chicken,burrito,lettuce"),
 ('Chicken Taco', '8.50', 'Ground chicken with pico and lettuce between a corn tortilla.', 1, "./assets/images/taco.jpg","taco,chicken,lettuce,corn,tortilla,pico"),
