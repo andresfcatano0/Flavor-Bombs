@@ -37,7 +37,9 @@ create table restaurants (
     open_hours varchar(120) not null,
     descript varchar(350) not null,
     restaurant_image varchar(2040) not null,
-	`filter` varchar(250) not null
+    latitude decimal(8,6) not null, 
+    longitude decimal(9,6) not null
+-- 	`filter` varchar(250) not null
     
 );
 
@@ -76,7 +78,7 @@ create table menu (
     item_description varchar(120) not null,
 	restaurant_id int not null,
     menu_image varchar(2048) not null,
-	`filter` varchar(250) not null, 
+-- 	`filter` varchar(250) not null, 
 
     constraint foreign key (restaurant_id) references restaurants(restaurant_id)
     ON DELETE CASCADE
@@ -108,18 +110,18 @@ insert into user_roles (app_user_id, app_role_id) values
 ( 5, 1 ),
 ( 6, 2 );
 
-insert into restaurants (restaurant_name, phone_number, address, open_hours, descript, restaurant_image) values
-('Taco House', '612-555-0186', '111 taco street', 'Monday to Saturday - 10am to 11pm', 'Serving the best tacos in town since 1958', "./assets/images/restaurant-overhead.jpg"),
-('Canadian Bacon', '612-555-0156', '333 bacon street', 'Tuesday to Saturday - 9am to 9pm', 'Serving the bacon burger in town since 1999', "./assets/images/bar-outside.jpg"),
-('Soulfu', '612-555-0150', '555 tasty avenue', 'Monday to Friday - 11am to 8pm', 'Serving the best waffles in town since 2001', "./assets/images/food-seasoning.jpg"),
-('Party Fowl', '763-555-0133', '89391 Christiansen Road', 'Monday to Sunday - 10am to 8pm', 'Serving the best waffles in town since 2001', "./assets/images/pub-orange.jpg"),
-('9021PHO', '612-555-9157', '685 Swift Valleys', 'Tuesday to Sunday - 11am to 10pm', 'Hipster-friendly fusion with a little extra spice.', "./assets/images/kitchen-working.jpg"),
+insert into restaurants (restaurant_name, phone_number, address, open_hours, descript, restaurant_image, latitude, longitude) values
+('Taco House', '612-555-0186', '111 taco street', 'Monday to Saturday - 10am to 11pm', 'Serving the best tacos in town since 1958', "./assets/images/restaurant-overhead.jpg", 44.986657, -93.258139),
+('Canadian Bacon', '612-555-0156', '333 bacon street', 'Tuesday to Saturday - 9am to 9pm', 'Serving the bacon burger in town since 1999', "./assets/images/bar-outside.jpg", 44.946346, -93.305101),
+('Soulfu', '612-555-0150', '555 tasty avenue', 'Monday to Friday - 11am to 8pm', 'Serving the best waffles in town since 2001', "./assets/images/food-seasoning.jpg", 44.97482, -93.275941),
+('Party Fowl', '763-555-0133', '89391 Christiansen Road', 'Monday to Sunday - 10am to 8pm', 'Serving the best waffles in town since 2001', "./assets/images/pub-orange.jpg", 44.978471, -93.275941),
+('9021PHO', '612-555-9157', '685 Swift Valleys', 'Tuesday to Sunday - 11am to 10pm', 'Hipster-friendly fusion with a little extra spice.', "./assets/images/kitchen-working.jpg", 44.977032, -93.272362),
 ('Tequila Mockingbird', '612-555-2850', '93661 Bayer Square', 'Monday to Sunday - 11am to 11pm', 'We are a family-run operation spanning three generations of hard-working chefs.
-We strive for an experience that blows you out of this world.', "./assets/images/storefront-red.jpg"),
-('Vincent Van Doughnut', '763-555-1123', '4192 Pietro Crossing', 'Monday to Sunday - 6am to 12am', 'Attention-hungry humans! Welcome you to our world-class restaurant.', "./assets/images/bakery-inside.jpg"),
-('Nacho Daddy', '952-555-3619', '411 Kareem Route', 'Monday to Friday - 11am to 8pm', 'You will get the OG taste of food at our restaurant.', "./assets/images/cafe-inside.jpg"),
-('Lord of the Wings', '763-555-8712', '320 Mizey Junction', 'Monday to Saturday - 10am to 11pm', 'We do wings and only wings', "./assets/images/cafe-dim.jpg"),
-('Pastabilities', '952-555-5873', '531 Dickinson Road', 'Monday to Sunday - 11am to 11pm', 'Everything can be solved with a little pasta', "./assets/images/cafe-seats.jpg");
+We strive for an experience that blows you out of this world.', "./assets/images/storefront-red.jpg", 44.969191, -93.247046),
+('Vincent Van Doughnut', '763-555-1123', '4192 Pietro Crossing', 'Monday to Sunday - 6am to 12am', 'Attention-hungry humans! Welcome you to our world-class restaurant.', "./assets/images/bakery-inside.jpg", 44.968174, -93.276598),
+('Nacho Daddy', '952-555-3619', '411 Kareem Route', 'Monday to Friday - 11am to 8pm', 'You will get the OG taste of food at our restaurant.', "./assets/images/cafe-inside.jpg", 44.96548, -93.298057),
+('Lord of the Wings', '763-555-8712', '320 Mizey Junction', 'Monday to Saturday - 10am to 11pm', 'We do wings and only wings', "./assets/images/cafe-dim.jpg", 44.952147, -93.293456),
+('Pastabilities', '952-555-5873', '531 Dickinson Road', 'Monday to Sunday - 11am to 11pm', 'Everything can be solved with a little pasta', "./assets/images/cafe-seats.jpg", 44.968053, -93.290599);
 
 insert into reviews (review_text, app_user_id, restaurant_id) values
 -- Taco House
@@ -163,11 +165,11 @@ insert into reviews (review_text, app_user_id, restaurant_id) values
 ('Try out the huge selection of incredible appetizers.', 1, 10),
 ('This place had a lot of heart.', 3, 10);
 
-insert into orders (order_items, app_user_id, restaurant_id) values
-('Chicken Burrito', 1, 1),
-('Bison Burger', 2, 2),
-('Bison Burger', 2, 2),
-('Shrimp Curry Waffles', 1, 3);
+insert into orders (order_items, app_user_id, restaurant_id, order_date, item_quantity, total_price) values
+('Chicken Burrito', 1, 1, '2022-12-21', 1,'13.50'),
+('Bison Burger', 2, 2, '2022-12-28', 1, 15.00),
+('Bison Burger', 2, 2, '2022-12-29', 1, 15.00),
+('Shrimp Curry Waffles', 1, 3, '2023-10-01', 1, '12.75');
 
 insert into menu (item_name, item_price, item_description, restaurant_id, menu_image) values
 -- Taco House
