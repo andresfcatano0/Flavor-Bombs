@@ -30,7 +30,6 @@ export default function RestaurantCard(props) {
                   >
                     <Card.Img
                       variant="top"
-                      // src="https://cdn.pixabay.com/photo/2018/07/14/15/27/cafe-3537801_1280.jpg"
                       src={restaurant.restaurantImage}
                       height={"286px"}
                     />
