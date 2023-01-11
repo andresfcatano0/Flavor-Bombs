@@ -15,6 +15,8 @@ public class RestaurantMapper implements RowMapper<Restaurant> {
         toBuild.setAddress(rs.getString("address"));
         toBuild.setOpenHours(rs.getString("open_hours"));
         toBuild.setDescription(rs.getString("descript"));
+        toBuild.setRestaurantImage(rs.getString("restaurant_image"));
+        toBuild.setFilterTags(rs.getString("filters"));
 
         return toBuild;
     }

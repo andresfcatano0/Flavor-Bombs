@@ -12,6 +12,10 @@ public class Restaurant {
 
     String description;
 
+    String restaurantImage;
+
+    String filterTags;
+
     List<Order> orders;
 
     public Integer getRestaurantId() {
@@ -62,6 +66,22 @@ public class Restaurant {
         this.description = description;
     }
 
+    public String getRestaurantImage() {
+        return restaurantImage;
+    }
+
+    public void setRestaurantImage(String restaurantImage) {
+        this.restaurantImage = restaurantImage;
+    }
+
+    public String getFilterTags() {
+        return filterTags;
+    }
+
+    public void setFilterTags(String filterTags) {
+        this.filterTags = filterTags;
+    }
+
     @Override
     public String toString() {
         return "Restaurant{" +
@@ -70,8 +90,9 @@ public class Restaurant {
                 ", address='" + address + '\'' +
                 ", openHours='" + openHours + '\'' +
                 ", description='" + description + '\'' +
+                ", restaurantImage='" + restaurantImage + '\'' +
+                ", filterTags='" + filterTags + '\'' +
                 ", orders=" + orders +
                 '}';
     }
-
 }
