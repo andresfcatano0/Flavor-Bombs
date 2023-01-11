@@ -61,7 +61,7 @@ export default function AuthNavBar({setAuthUser}) {
                   {orderCartItems.length}
                 </Badge>) : null} */}
                 {orderCartItems.length > 0 && (
-                  <Badge pill bg="danger" className="align-self-start">{itemCount.length}</Badge>
+                  <Badge pill bg="danger" className="align-self-start">{itemCount}</Badge>
                 )}
                 {/* <Badge pill bg="danger" className="align-self-start">
                    777777
