@@ -6,45 +6,89 @@ import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import Table from 'react-bootstrap/Table'
 import Image from "react-bootstrap/Image";
-import { DashCircle, PlusCircle, Trash2Fill } from 'react-bootstrap-icons'
+import { DashCircle, PlusCircle, PlusCircleFill, Trash, Trash2Fill } from 'react-bootstrap-icons'
 import CartContext from '../context/cart/CartContext'
 import { Link } from 'react-router-dom'
+import UserContext from '../context/AuthContext'
 
 export default function OrdersCartPage() {
-    // const [quantity, setQuantity] = useState(1);
+  const userInfo = useContext(UserContext);
+  // const [quantity, setQuantity] = useState(1);
 
-    // const handleQuantity = (type) => {
-    //     if(type === "decrease"){
-    //         quantity > 1 && setQuantity(quantity - 1);
-    //     }
-    //     else{
-    //         setQuantity(quantity + 1);
-    //     }
-    // }
+  // const handleQuantity = (type) => {
+  //     if(type === "decrease"){
+  //         quantity > 1 && setQuantity(quantity - 1);
+  //     }
+  //     else{
+  //         setQuantity(quantity + 1);
+  //     }
+  // }
 
-    const {
-      orderCartItems,
-      handleCheckoutOrder,
-      clearCart,
-      removeItemFromCart,
-      increaseQuantity,
-      decreaseQuantity,
-    } = useContext(CartContext);
+  const {
+    orderCartItems,
+    clearCart,
+    removeItemFromCart,
+    increaseQuantity,
+    decreaseQuantity
+  } = useContext(CartContext);
 
+  const newlyMadeOrder = {
+    orderItems: "",
+    userId: "",
+    restaurantId: "",
+    orderDate: "",
+    itemQuantity: "",
+    totalPrice: "",
+  };
 
+  const [newOrder, setNewOrder] = useState({newlyMadeOrder})
+
+  const completeOrder = () => {
+    fetch("http://localhost:8080/api/order", {
+      method: "POST",
+      headers:{
+        Authorization: "Bearer " + userInfo.token,
+        "Content-Type": "application/json" 
+      },
+      body: JSON.stringify(newlyMadeOrder)
+    }).then((res)=> {
+      console.log(res)
+    }).then(err=> {
+      console.log(err)
+    })
+    ;
+  }
+
+  const handleCheckoutOrder = () => {
+
+  }
+
+  /*
+    filterTags: "spicy,waffles,shrimp,curry,savory"
+itemDescription: "Spicy shrimp on top of 3 buttermilk waffles."
+itemImage: "images/waffles.jpg"
+itemName: "Shrimp Curry Waffles"
+itemPrice: 12.75
+menuId: 7
+quantity: 1
+restaurantId:3
+    */
+   let total = orderCartItems.reduce(
+     (sum, item) => item.itemPrice * item.quantity, 0
+   );
 
   return (
     <Container className="mt-3">
       <h2 className="text-center mb-4">Order Summary</h2>
 
-      {handleCheckoutOrder && (
+      {/* {handleCheckoutOrder && (
         <p>
           Thank you for ordering
           <Link to="/">
             <button onClick={clearCart}>Continue Ordering</button>
           </Link>
         </p>
-      )}
+      )} */}
 
       {/* If cart is empty, show no items in cart message, otherwise show items */}
       {orderCartItems.length === 0 ? (
@@ -67,27 +111,49 @@ export default function OrdersCartPage() {
                 {console.log(orderCartItems)}
                 {orderCartItems.map((item) => (
                   <tr key={item.menuId}>
-                    <td>{item.itemName}</td>
-                    <td>{item.restaurantId}</td>
-                    <td>{item.itemDescription}</td>
-                    <td>{item.itemPrice}</td>
                     <td>
-                      <button onClick={() => increaseQuantity(item)}>+</button>
-                      <span>Qty: {item.quantity}</span>
+                      <img
+                        height="65"
+                        style={{
+                          objectFit: "cover",
+                          width: "100%",
+                          borderRadius: "2px",
+                        }}
+                        className="d-inline-block align-top"
+                        src={item.itemImage}
+                      />
+                    </td>
+                    <td>{item.itemName}</td>
+                    <td>{item.itemDescription}</td>
+                    <td>${(item.itemPrice).toFixed(2)}</td>
+                    <td>
+                      <Button
+                        className="btn-success"
+                        onClick={() => increaseQuantity(item)}
+                      >
+                        <PlusCircleFill />
+                      </Button>
+                      <span>{item.quantity}</span>
 
                       {item.quantity > 1 && (
-                        <button onClick={() => decreaseQuantity(item)}>
-                          -
-                        </button>
+                        <Button
+                          className="btn-secondary"
+                          onClick={() => decreaseQuantity(item)}
+                        >
+                          <DashCircle />
+                        </Button>
                       )}
 
                       {item.quantity === 1 && (
-                        <button onClick={() => removeItemFromCart(item)}>
-                          Trash
-                        </button>
+                        <Button
+                          className="btn-danger"
+                          onClick={() => removeItemFromCart(item)}
+                        >
+                          <Trash />
+                        </Button>
                       )}
                     </td>
-                    <td>{item.itemPrice * item.quantity}</td>
+                    <td>${(item.itemPrice * item.quantity).toFixed(2)}</td>
                   </tr>
                 ))}
 
@@ -191,8 +257,16 @@ export default function OrdersCartPage() {
                   From Restaurant Name
                 </Card.Subtitle>
                 <Card.Text>Subtotal:</Card.Text>
-                <Card.Text>Total:</Card.Text>
-                {orderCartItems.length > 0 && <Button>Checkout Now</Button>}
+                <Card.Text>Total: ${total.toFixed(2)}</Card.Text>
+                {orderCartItems.length > 0 && (
+                  <>
+                    <Button onClick={handleCheckoutOrder}>Checkout Now</Button>
+
+                    <Button className="btn-danger" onClick={clearCart}>
+                      Clear Cart
+                    </Button>
+                  </>
+                )}
               </Card.Body>
             </Card>
           </Col>
