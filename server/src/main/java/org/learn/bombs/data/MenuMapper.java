@@ -16,6 +16,9 @@ public class MenuMapper implements RowMapper<Menu> {
         menu.setItemDescription(resultSet.getString("item_description"));
         menu.setItemPrice(resultSet.getBigDecimal("item_price"));
         menu.setRestaurantId(resultSet.getInt("restaurant_id"));
+        menu.setItemImage(resultSet.getString("menu_image"));
+        menu.setFilterTags(resultSet.getString("filters"));
+
         return menu;
     }
 }

@@ -17,7 +17,7 @@ public class MenuDatabaseRepository implements MenuRepository{
 
     @Override
     public Menu findById(int menuId) {
-        final String sql = "select menu_id, item_description, item_name, item_price, restaurant_id "
+        final String sql = "select menu_id, item_description, item_name, item_price, restaurant_id, menu_image, filters "
                 + "from menu "
                 + "where menu_id = ?;";
 
@@ -31,7 +31,7 @@ public class MenuDatabaseRepository implements MenuRepository{
     public List<Menu> getMenu() {
         // Find all listings
         List<Menu> publicMenu = jdbcTemplate.query(
-                "select menu_id, item_description, item_name, item_price, restaurant_id "
+                "select menu_id, item_description, item_name, item_price, restaurant_id, menu_image, filters "
                         + "from menu;",
 
                 new MenuMapper()

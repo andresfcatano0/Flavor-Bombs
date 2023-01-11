@@ -10,6 +10,10 @@ public class Menu {
     private BigDecimal itemPrice;
     private int restaurantId;
 
+    private String itemImage;
+
+    private String filterTags;
+
     public int getMenuId() {
         return menuId;
     }
@@ -48,5 +52,21 @@ public class Menu {
 
     public void setRestaurantId(int restaurantId) {
         this.restaurantId = restaurantId;
+    }
+
+    public String getItemImage() {
+        return itemImage;
+    }
+
+    public void setItemImage(String itemImage) {
+        this.itemImage = itemImage;
+    }
+
+    public String getFilterTags() {
+        return filterTags;
+    }
+
+    public void setFilterTags(String filterTags) {
+        this.filterTags = filterTags;
     }
 }
