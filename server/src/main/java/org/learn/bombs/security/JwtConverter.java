@@ -57,4 +57,33 @@ public class JwtConverter {
         return user;
     }
 
+//        if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")) {
+//            return null;
+//        }
+//
+//        try {
+//            // 4. Use JJWT classes to read a token.
+//            Jws<Claims> jws = Jwts.parserBuilder()
+//                    .requireIssuer("FLAVORBOMBS-app")
+//                    .setSigningKey(signingKey)
+//                    .build()
+//                    .parseClaimsJws(authorizationHeader.substring(7));
+//
+//            String username = jws.getBody().getSubject();
+//            String authStr = (String) jws.getBody().get("roles");
+//
+//            List<SimpleGrantedAuthority> roles = Arrays.stream(authStr.split(","))
+//                    .map(r -> new SimpleGrantedAuthority(r))
+//                    .collect(Collectors.toList());
+//
+//            return new User(username, username, roles);
+//
+//        } catch (JwtException e) {
+//            // 5. JWT failures are modeled as exceptions.
+//            System.out.println(e);
+//        }
+//
+//        return null;
+//    }
+
 }

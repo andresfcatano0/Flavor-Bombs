@@ -25,6 +25,7 @@ public class SecurityConfig {
 
         http.authorizeRequests()
 
+
                 .antMatchers( HttpMethod.GET,"/api/restaurant/public").permitAll()
                 .antMatchers( HttpMethod.DELETE, "/api/review/*").authenticated()
                 .antMatchers( HttpMethod.DELETE, "/api/restaurant/*").hasRole("ADMIN")
@@ -32,6 +33,16 @@ public class SecurityConfig {
                 .antMatchers( HttpMethod.POST, "/api/review").authenticated()
                 .antMatchers( HttpMethod.POST,"/api/security/login").permitAll()
                 .antMatchers(HttpMethod.PUT, "/api/review/*").authenticated()
+                .antMatchers( HttpMethod.GET,"/api/user/*").permitAll()
+                .antMatchers( HttpMethod.GET,"/api/user").permitAll()
+                .antMatchers( HttpMethod.GET,"/api/restaurant/*").permitAll()
+                .antMatchers( HttpMethod.GET,"/api/restaurant").permitAll()
+                .antMatchers( HttpMethod.GET,"/api/order").authenticated()
+                .antMatchers( HttpMethod.DELETE, "/api/restaurant/*").hasRole("ADMIN")
+                .antMatchers( HttpMethod.DELETE, "/api/order/*").authenticated()
+                .antMatchers( HttpMethod.POST,"/api/security/login").permitAll()
+                .antMatchers( HttpMethod.POST, "/api/order").authenticated()
+                .antMatchers(HttpMethod.PUT, "/api/order/*").authenticated()
                 .and()
                 .addFilter( new JwtRequestFilter(buildAuthManager(config), converter ))
                 .sessionManagement()

@@ -21,9 +21,11 @@ public class Result<T> {
     }
 
     public List<String> getErrorMessages(){
+
         return new ArrayList<>(errorMessages);
     }
     public boolean isSuccess(){
         return errorMessages.isEmpty();
     }
+
 }
