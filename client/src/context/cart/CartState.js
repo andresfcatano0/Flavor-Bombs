@@ -79,9 +79,7 @@ const CartState = ({children}) => {
 
                     return (
                       <CartContext.Provider
-                        value={{
-                          showCart: state.showCart,
-                          orderCartItems: state.orderCartItems,
+                        value={{orderCartItems: state.orderCartItems,
                           addItemToCart,
                           increaseQuantity,
                           decreaseQuantity,
