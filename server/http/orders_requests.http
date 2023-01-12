@@ -19,7 +19,19 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzd
 POST http://localhost:8080/api/order HTTP/1.1
 # Host: localhost:8080
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzdWIiOiJqYW5lZG9lIiwicm9sZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfQURNSU4ifV0sImV4cCI6MTY3MzM4MDA0M30.HBFAmx0Q-9oG5u-DdFo9mp4RcwPvebOxavFMacmrFgk
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzdWIiOiJqYW5lZG9lIiwicm9sZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfQURNSU4ifV0sImV4cCI6MTY3MzQ4MTQzN30.vBSCv0J-BZNrW6R2n1_1alTn9dAlC2gAdKB2rLZ_Sf8
+
+{
+  "orderItems": "cheese Pizza",
+  "AppUserId": 1,
+  "restaurantId": 1
+}
+###
+
+POST http://localhost:8080/api/checkout HTTP/1.1
+# Host: localhost:8080
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGTEFWT1JCT01CUy1hcHAiLCJzdWIiOiJqYW5lZG9lIiwicm9sZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfQURNSU4ifV0sImV4cCI6MTY3MzQ4MTQzN30.vBSCv0J-BZNrW6R2n1_1alTn9dAlC2gAdKB2rLZ_Sf8
 
 {
   "orderItems": "cheese Pizza",
