@@ -16,6 +16,7 @@ export default function UserProfilePage({setAuthUser}) {
   const [lastName, setLastName] = useState("");
   const [username, setUsername] = useState("");
   const [formEmail, setFormEmail] = useState("");
+  const [password, setPassword] = useState("");
   
   
     const userInfo = useContext(UserContext);
@@ -45,7 +46,7 @@ export default function UserProfilePage({setAuthUser}) {
         let found;
         for(let d of data){
           if (d.username == paramUsername) {
-            // console.log(d)
+            console.log(d)
             setFullUserData(d);
           }
         }
@@ -68,24 +69,26 @@ export default function UserProfilePage({setAuthUser}) {
       setLastName(fullUserData.lastName)
       setUsername(fullUserData.username)
       setFormEmail(fullUserData.email)
+      setPassword(fullUserData.password)
       
     }
 
     const [disableForm, setDisableForm] = useState(true);
 
-    const editProfile = () => {
+    const editProfile = async () => {
       populateUserInfo()
 
       const updateUser = {
         appUserId: fullUserData.appUserId,
         firstName: firstName,
         lastName: lastName,
-        userName: username,
+        username: username,
         email: formEmail,
-        ...userInfo,
+        password: fullUserData.password,
+        enabled: fullUserData.enabled,
       };
 
-      fetch("http://localhost:8080/api/user/" + fullUserData.appUserId, {
+      await fetch("http://localhost:8080/api/user/" + fullUserData.appUserId, {
         method: "PUT",
         headers: {
           Authorization: "Bearer " + userInfo.token,
@@ -130,7 +133,7 @@ export default function UserProfilePage({setAuthUser}) {
           <Button
             className="mt-5"
             onClick={() => {
-              editProfile();
+              populateUserInfo();
             }}
           >
             Edit Profile
@@ -174,6 +177,16 @@ export default function UserProfilePage({setAuthUser}) {
                   disabled
                 />
               </FloatingLabel>
+
+              {/* <FloatingLabel label="Password" className="mb-3">
+                <Form.Control
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  disabled
+                />
+              </FloatingLabel> */}
+
               <Button type="submit" style={{ marginLeft: "45%" }} disabled>
                 Update Profile
               </Button>
@@ -217,6 +230,15 @@ export default function UserProfilePage({setAuthUser}) {
                   onChange={(e) => setFormEmail(e.target.value)}
                 />
               </FloatingLabel>
+
+              {/* <FloatingLabel label="Password" className="mb-3">
+                <Form.Control
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  disabled
+                />
+              </FloatingLabel> */}
 
               <Button type="submit" style={{ marginLeft: "45%" }}>
                 Update Profile
