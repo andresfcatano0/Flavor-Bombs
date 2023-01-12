@@ -18,7 +18,13 @@ export default function NavBar({setAuthUser}){
     return (
       <>
         {!user ? (
-          <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+          <Navbar
+            collapseOnSelect
+            expand="lg"
+            bg="dark"
+            variant="dark"
+            className="fixed-top"
+          >
             <Container>
               <Link to="/">
                 <Navbar.Brand>

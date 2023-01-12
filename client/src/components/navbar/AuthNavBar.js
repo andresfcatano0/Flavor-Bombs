@@ -32,7 +32,13 @@ export default function AuthNavBar({setAuthUser}) {
 
   return (
     <>
-      <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+      <Navbar
+        collapseOnSelect
+        expand="lg"
+        bg="dark"
+        variant="dark"
+        className="sticky-top"
+      >
         <Container>
           <Link to="/">
             <Navbar.Brand>
@@ -91,11 +97,7 @@ export default function AuthNavBar({setAuthUser}) {
                 <PersonCircle size={30} style={{ paddingRight: "5px" }} />{" "}
                 {user.userData.sub}
               </Nav.Link>
-              <NavDropdown
-                className=""
-                title=""
-                id="basic-nav-dropdown"
-              >
+              <NavDropdown className="" title="" id="basic-nav-dropdown">
                 {/* <NavDropdown.Item href="#action/3.1">Account</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">Orders</NavDropdown.Item> */}
                 {/* <NavDropdown.Divider /> */}

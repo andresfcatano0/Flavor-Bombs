@@ -23,7 +23,13 @@ export default function AdminNavBar({ setAuthUser }) {
 
   return (
     <>
-      <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+      <Navbar
+        collapseOnSelect
+        expand="lg"
+        bg="dark"
+        variant="dark"
+        className="sticky-top"
+      >
         <Container>
           <Navbar.Brand href="/admin/dashboard-menu">
             <img
