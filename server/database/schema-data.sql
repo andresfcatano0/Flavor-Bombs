@@ -39,7 +39,7 @@ create table restaurants (
     restaurant_image varchar(2040) not null,
     latitude decimal(8,6) not null,
     longitude decimal(9,6) not null,
- 	`filter` varchar(250) null
+ 	`filters` varchar(250) null
 
 );
 
