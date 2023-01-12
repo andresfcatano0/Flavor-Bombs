@@ -19,6 +19,7 @@ import OrdersCartPage from './pages/OrdersCartPage';
 import CartContext from './context/cart/CartContext';
 import FoodBackgroundPattern from './components/FoodBackgroundPattern';
 import NotFoundPage from './pages/NotFoundPage';
+import LoaderEat from './components/LoaderEat';
 
 function App() {
 
@@ -76,6 +77,7 @@ function App() {
       })
       .catch((err) => console.log(err));
   };
+
 
 
 
@@ -168,7 +170,7 @@ function App() {
               <LoginPage setAuthUser={setAuthUser} />
             </Route>
             <Route path="/food">
-              <FoodBackgroundPattern />
+              <LoaderEat />
             </Route>
             <Route exact path="/restaurants">
               <RestaurantPage
