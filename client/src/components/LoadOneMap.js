@@ -23,7 +23,7 @@ export default function LoadOneMap() {
 
   const getSelectedRestaurant = () => {
     // fetch(`http://localhost:8080/api/restaurant/${params.id}`, {
-      fetch(`http://localhost:8080/api/restaurant/${6}`, {
+      fetch(`http://localhost:8080/api/restaurant/${4}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
