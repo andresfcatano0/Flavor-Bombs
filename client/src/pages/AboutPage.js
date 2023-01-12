@@ -18,11 +18,14 @@ export default function AboutPage() {
             <img
               style={{
                 width: "150px",
+                height: "150px",
+                objectFit:"cover",
                 // border: "2px solid black",
-                borderRadius: "1rem",
+                borderRadius: "50%",
+                objectPosition: "80% 100%"
               }}
               className="p-3"
-              src={require("../assets/avatar_placeholders/andres_placeholder.jpg")}
+              src={require("../assets/andres.png")}
               alt="andres avatar - guy with glasses"
             />
           </Col>
@@ -34,7 +37,7 @@ export default function AboutPage() {
                 borderRadius: "50%",
               }}
               className="p-3"
-              src={require("../assets/avatar_placeholders/christina_placeholder.png")}
+              src={require("../assets/christina.png")}
               alt="christina avatar - woman with curly hair"
             />
           </Col>
