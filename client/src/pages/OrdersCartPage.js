@@ -87,6 +87,7 @@ export default function OrdersCartPage() {
         body: JSON.stringify(checkOutOrder)
 
       }).then((res)=> {
+        clearCart()
           return res.json().then((error)=> {
             console.log(error);
           })
@@ -119,7 +120,7 @@ export default function OrdersCartPage() {
       {/* If cart is empty, show no items in cart message, otherwise show items */}
       {orderCartItems.length === 0 ? (
         <div>
-          <h5 className="text-center">Cart is empty...<span>Grab some food from the Restaurants page</span></h5>
+          <h5 className="text-center">Cart is empty...<span>Head to your orders page or grab some food from the Restaurants page</span></h5>
           <LoaderEat/>
           </div>
       ) : (
@@ -285,8 +286,7 @@ export default function OrdersCartPage() {
                 <Card.Subtitle className="mb-2 text-muted">
                   From Restaurant Name
                 </Card.Subtitle>
-                <Card.Text>Subtotal:</Card.Text>
-                <Card.Text>Total: ${total.toFixed(2)}</Card.Text>
+                <Card.Text className="fw-bolder">Total: ${total.toFixed(2)}</Card.Text>
                 {orderCartItems.length > 0 && (
                   <div >
                     <Button className="me-4" onClick={handleCheckoutOrder}>Checkout Now</Button>
