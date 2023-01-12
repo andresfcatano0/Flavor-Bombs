@@ -38,8 +38,8 @@ create table restaurants (
     descript varchar(350) not null,
     restaurant_image varchar(2040) not null,
     latitude decimal(8,6) not null,
-    longitude decimal(9,6) not null
- 	`filter` varchar(250) not null
+    longitude decimal(9,6) not null,
+ 	`filter` varchar(250) null
 
 );
 
@@ -111,17 +111,17 @@ insert into user_roles (app_user_id, app_role_id) values
 ( 6, 2 );
 
 insert into restaurants (restaurant_name, phone_number, address, open_hours, descript, restaurant_image, latitude, longitude) values
-('Taco House', '612-555-0186', '111 taco street', 'Monday to Saturday - 10am to 11pm', 'Serving the best tacos in town since 1958', "./assets/images/restaurant-overhead.jpg", 44.986657, -93.258139),
-('Canadian Bacon', '612-555-0156', '333 bacon street', 'Tuesday to Saturday - 9am to 9pm', 'Serving the bacon burger in town since 1999', "./assets/images/bar-outside.jpg", 44.946346, -93.305101),
-('Soulfu', '612-555-0150', '555 tasty avenue', 'Monday to Friday - 11am to 8pm', 'Serving the best waffles in town since 2001', "./assets/images/food-seasoning.jpg", 44.97482, -93.275941),
-('Party Fowl', '763-555-0133', '89391 Christiansen Road', 'Monday to Sunday - 10am to 8pm', 'Serving the best waffles in town since 2001', "./assets/images/pub-orange.jpg", 44.978471, -93.275941),
-('9021PHO', '612-555-9157', '685 Swift Valleys', 'Tuesday to Sunday - 11am to 10pm', 'Hipster-friendly fusion with a little extra spice.', "./assets/images/kitchen-working.jpg", 44.977032, -93.272362),
+('Taco House', '612-555-0186', '111 taco street', 'Monday to Saturday - 10am to 11pm', 'Serving the best tacos in town since 1958', "/images/restaurant-overhead.jpg", 44.986657, -93.258139),
+('Canadian Bacon', '612-555-0156', '333 bacon street', 'Tuesday to Saturday - 9am to 9pm', 'Serving the bacon burger in town since 1999', "/images/bar-outside.jpg", 44.946346, -93.305101),
+('Soulfu', '612-555-0150', '555 tasty avenue', 'Monday to Friday - 11am to 8pm', 'Serving the best waffles in town since 2001', "/images/food-seasoning.jpg", 44.97482, -93.275941),
+('Party Fowl', '763-555-0133', '89391 Christiansen Road', 'Monday to Sunday - 10am to 8pm', 'Serving the best waffles in town since 2001', "/images/pub-orange.jpg", 44.978471, -93.275941),
+('9021PHO', '612-555-9157', '685 Swift Valleys', 'Tuesday to Sunday - 11am to 10pm', 'Hipster-friendly fusion with a little extra spice.', "/images/kitchen-working.jpg", 44.977032, -93.272362),
 ('Tequila Mockingbird', '612-555-2850', '93661 Bayer Square', 'Monday to Sunday - 11am to 11pm', 'We are a family-run operation spanning three generations of hard-working chefs.
-We strive for an experience that blows you out of this world.', "./assets/images/storefront-red.jpg", 44.969191, -93.247046),
-('Vincent Van Doughnut', '763-555-1123', '4192 Pietro Crossing', 'Monday to Sunday - 6am to 12am', 'Attention-hungry humans! Welcome you to our world-class restaurant.', "./assets/images/bakery-inside.jpg", 44.968174, -93.276598),
-('Nacho Daddy', '952-555-3619', '411 Kareem Route', 'Monday to Friday - 11am to 8pm', 'You will get the OG taste of food at our restaurant.', "./assets/images/cafe-inside.jpg", 44.96548, -93.298057),
-('Lord of the Wings', '763-555-8712', '320 Mizey Junction', 'Monday to Saturday - 10am to 11pm', 'We do wings and only wings', "./assets/images/cafe-dim.jpg", 44.952147, -93.293456),
-('Pastabilities', '952-555-5873', '531 Dickinson Road', 'Monday to Sunday - 11am to 11pm', 'Everything can be solved with a little pasta', "./assets/images/cafe-seats.jpg", 44.968053, -93.290599);
+We strive for an experience that blows you out of this world.', "/images/storefront-red.jpg", 44.969191, -93.247046),
+('Vincent Van Doughnut', '763-555-1123', '4192 Pietro Crossing', 'Monday to Sunday - 6am to 12am', 'Attention-hungry humans! Welcome you to our world-class restaurant.', "/images/bakery-inside.jpg", 44.968174, -93.276598),
+('Nacho Daddy', '952-555-3619', '411 Kareem Route', 'Monday to Friday - 11am to 8pm', 'You will get the OG taste of food at our restaurant.', "/images/cafe-inside.jpg", 44.96548, -93.298057),
+('Lord of the Wings', '763-555-8712', '320 Mizey Junction', 'Monday to Saturday - 10am to 11pm', 'We do wings and only wings', "/images/cafe-dim.jpg", 44.952147, -93.293456),
+('Pastabilities', '952-555-5873', '531 Dickinson Road', 'Monday to Sunday - 11am to 11pm', 'Everything can be solved with a little pasta', "/images/cafe-seats.jpg", 44.968053, -93.290599);
 
 insert into reviews (review_text, app_user_id, restaurant_id) values
 -- Taco House
@@ -173,42 +173,42 @@ insert into orders (order_items, app_user_id, restaurant_id, order_date, item_qu
 
 insert into menu (item_name, item_price, item_description, restaurant_id, menu_image,`filters`) values
 -- Taco House
-('Chicken Burrito', '13.50', 'Its a chicken burrito with beans.', 1, '/images/burrito-chicken.jpg',"chicken,burrito,lettuce"),
-('Chicken Taco', '8.50', 'Ground chicken with pico and lettuce between a corn tortilla.', 1, "/images/taco.jpg","taco,chicken,lettuce,corn,tortilla,pico"),
-('Mexican Rice', '6.70', 'Rice with beans and red and green peppers.', 1, "/images/mexican-rice.jpg","peppers,beans,mexican,rice"),
+('Chicken Burrito', 13.50, 'Its a chicken burrito with beans.', 1, '/images/burrito-chicken.jpg',"chicken,burrito,lettuce"),
+('Chicken Taco', 8.50, 'Ground chicken with pico and lettuce between a corn tortilla.', 1, "/images/taco.jpg","taco,chicken,lettuce,corn,tortilla,pico"),
+('Mexican Rice', 6.70, 'Rice with beans and red and green peppers.', 1, "/images/mexican-rice.jpg","peppers,beans,mexican,rice"),
 -- Canadian bacon
-('Bison Burger', '15.00', 'Ground bison between two buns.', 2, "/images/bison-burger.jpg","bison,burger,lettuce,cheese"),
-('Bacon Burger', '13.00', 'Beef between two bun.s', 2, "/images/baconburger.jpg","burger,beef,lettuce,cheese"),
-('Poutine', '12.70', 'Frech fries with gravy and cheese curds.', 2, "/images/poutine.jpg","fries,cheese,curds,gravy,poutine"),
+('Bison Burger', 15.00, 'Ground bison between two buns.', 2, "/images/bison-burger.jpg","bison,burger,lettuce,cheese"),
+('Bacon Burger', 13.00, 'Beef between two bun.s', 2, "/images/baconburger.jpg","burger,beef,lettuce,cheese"),
+('Poutine', 12.70, 'Frech fries with gravy and cheese curds.', 2, "/images/poutine.jpg","fries,cheese,curds,gravy,poutine"),
 -- SoulFu
-('Shrimp Curry Waffles', '12.75', 'Spicy shrimp on top of 3 buttermilk waffles.', 3, "/images/waffles.jpg","spicy,waffles,shrimp,curry,savory"),
-('Pork Fried Rice', '8.25', 'Pork fried with white rice, carrots, and peas.', 3, "/images/pork-rice.jpg","carrots,rice,peas,pork,white rice,fried rice"),
-('BBQ Potstickers', '9.75', 'Pan seared dumpling with spicy BBQ sauce.', 3, "/images/potsticker.jpg","bbq,spicy,dumpling,potstickers,"),
+('Shrimp Curry Waffles', 12.75, 'Spicy shrimp on top of 3 buttermilk waffles.', 3, "/images/waffles.jpg","spicy,waffles,shrimp,curry,savory"),
+('Pork Fried Rice', 8.25, 'Pork fried with white rice, carrots, and peas.', 3, "/images/pork-rice.jpg","carrots,rice,peas,pork,white rice,fried rice"),
+('BBQ Potstickers', 9.75, 'Pan seared dumpling with spicy BBQ sauce.', 3, "/images/potsticker.jpg","bbq,spicy,dumpling,potstickers,"),
 -- Party Fowl
-('Chicken Dinner', '19.75', 'Just like how Momma used to make.', 4, "/images/chicken-dinner.jpg","chicken,homemade,warm"),
-('Fried Chicken', '14.00', 'Its a bird fried to golden perfection.', 4, "/images/fried-chicken.jpg","chicken,fried,spicy,savory"),
-('French Fries ', '14.00', 'Fried potato strings.', 4, "/images/fries.jpg","potato,fries,fried potato"),
+('Chicken Dinner', 19.75, 'Just like how Momma used to make.', 4, "/images/chicken-dinner.jpg","chicken,homemade,warm"),
+('Fried Chicken', 14.00, 'Its a bird fried to golden perfection.', 4, "/images/fried-chicken.jpg","chicken,fried,spicy,savory"),
+('French Fries ', 14.00, 'Fried potato strings.', 4, "/images/fries.jpg","potato,fries,fried potato"),
 -- 9021PHO
-('Basil and Duck Kebab', '17.50', 'Skewer-cooked fresh basil and duck served in warm pitta pockets.', 5, "/images/duck-kebab.jpg","pitta,duck,basil,kebab,savory"),
-('Leek and Tuna Pizza', '25.00', 'Deep pan pizza topped with baby leek and tuna.', 5, "/images/leek-pizza.jpg","tuna,leek,pizza,deep pan"),
-('Crab and nectarine wontons', '13.25', 'Crab and nectarine wontons.', 5, "/images/wontons.jpg","crab,wontons,fried"),
+('Basil and Duck Kebab', 17.50, 'Skewer-cooked fresh basil and duck served in warm pitta pockets.', 5, "/images/duck-kebab.jpg","pitta,duck,basil,kebab,savory"),
+('Leek and Tuna Pizza', 25.00, 'Deep pan pizza topped with baby leek and tuna.', 5, "/images/leek-pizza.jpg","tuna,leek,pizza,deep pan"),
+('Crab and nectarine wontons', 13.25, 'Crab and nectarine wontons.', 5, "/images/wontons.jpg","crab,wontons,fried"),
 -- Tequila Mockingbird
-('Turkey Panini', '9.50', 'A hot, pressed panini filled with smoked turkey.', 6, "/images/fries.jpg","tequila,turkey,panini,smoked"),
-('Sweetcorn', '6.50', 'Buttered sweet corn.', 6, "/images/corn.jpg","corn,sweet,buttered"),
-('Cinnamon Bread', '8.75', 'Fluffy bread with added cinnamon.', 6, "/images/cinnamon-bread.jpg","cinnamon,bread,sweet,fluffy"),
+('Turkey Panini', 9.50, 'A hot, pressed panini filled with smoked turkey.', 6, "/images/fries.jpg","tequila,turkey,panini,smoked"),
+('Sweetcorn', 6.50, 'Buttered sweet corn.', 6, "/images/corn.jpg","corn,sweet,buttered"),
+('Cinnamon Bread', 8.75, 'Fluffy bread with added cinnamon.', 6, "/images/cinnamon-bread.jpg","cinnamon,bread,sweet,fluffy"),
 -- Vincent Van Doughnut
-('Bean and pumpkin cake', '15.00', 'White cake made with bean and fresh pumpkin.', 7, "/images/pumpkin-cake.jpg","cake,pumpkin,bean,fresh"),
-('Apple Crumble', '11.50', 'red apple cake topped with butter crumble.', 7, "/images/apple-crumble.jpg","fresh,apple,crumble,cake,butter"),
-('13 Angry Doughnuts', '11.00', 'Thirteen of our weekly special doughnuts.', 7, "/images/doughnuts.jpg","doughnuts,fresh,special,sweet"),
+('Bean and pumpkin cake', 15.00, 'White cake made with bean and fresh pumpkin.', 7, "/images/pumpkin-cake.jpg","cake,pumpkin,bean,fresh"),
+('Apple Crumble', 11.50, 'red apple cake topped with butter crumble.', 7, "/images/apple-crumble.jpg","fresh,apple,crumble,cake,butter"),
+('13 Angry Doughnuts', 11.00, 'Thirteen of our weekly special doughnuts.', 7, "/images/doughnuts.jpg","doughnuts,fresh,special,sweet"),
 -- Nacho Daddy
-('Party Pack', '44.00', 'Good friends are like nachos. You can never have enough of them.', 8, "/images/nacho-party.jpg","party,nachos,large"),
-('Nacho Nacho Man', '18.50', 'A cheesy mountain of epic proportions.', 8, "/images/nacho-man.jpg","cheesy,cheese,nacho,large"),
-('Nacho Bizness', '13.25', 'Cheese and salsa heaven on top of yummy nacho goodness.', 8, "/images/nacho-bizness.jpg","nacho,cheese,slasa,medium"),
+('Party Pack', 44.00, 'Good friends are like nachos. You can never have enough of them.', 8, "/images/nacho-party.jpg","party,nachos,large"),
+('Nacho Nacho Man', 18.50, 'A cheesy mountain of epic proportions.', 8, "/images/nacho-man.jpg","cheesy,cheese,nacho,large"),
+('Nacho Bizness', 13.25, 'Cheese and salsa heaven on top of yummy nacho goodness.', 8, "/images/nacho-bizness.jpg","nacho,cheese,slasa,medium"),
 -- Lord of the Wings
-('A Wing and a Prayer', '10.25', 'Our spiciest wings sauce on top of eight wings.', 9, "/images/wings-prayer.jpg","wings,chicken,spicy,large"),
-('Winged Perfection', '12.75', 'Award winning wings with a tangy dry rub', 9, "/images/wings-perfection.jpg","tangy,chicken,wings"),
-('Queen Wings', '14.50', 'Crispy fried wings fit for a Queen', 9, "/images/wings-queen.jpg","wings,crispy,fresh"),
+('A Wing and a Prayer', 10.25, 'Our spiciest wings sauce on top of eight wings.', 9, "/images/wings-prayer.jpg","wings,chicken,spicy,large"),
+('Winged Perfection', 12.75, 'Award winning wings with a tangy dry rub', 9, "/images/wings-perfection.jpg","tangy,chicken,wings"),
+('Queen Wings', 14.50, 'Crispy fried wings fit for a Queen', 9, "/images/wings-queen.jpg","wings,crispy,fresh"),
 -- Pastabilities
-('Canola oil and pasta salad', '19.00', 'A crisp salad featuring canola oil and dried pasta', 10, "/images/pasta-salad.jpg","pasta,canola,salad,fresh"),
-('Tofu and mushroom soup', '13.00', 'Smoked tofu and oyster mushroom combined into chunky soup', 10, "/images/mushroom-soup.jpg","soup,mushroom,tofu,smoked,oyster mushroom,warm"),
+('Canola oil and pasta salad', 19.00, 'A crisp salad featuring canola oil and dried pasta', 10, "/images/pasta-salad.jpg","pasta,canola,salad,fresh"),
+('Tofu and mushroom soup', 13.00, 'Smoked tofu and oyster mushroom combined into chunky soup', 10, "/images/mushroom-soup.jpg","soup,mushroom,tofu,smoked,oyster mushroom,warm"),
 ('Mozzarella and thyme pizza', 18.00, 'Thin and crispy pizza topped with fresh mozzarella and thyme', 10, "/images/mozzarella.jpg","thyme,mozzarella,fresh,pizza,crispy");
