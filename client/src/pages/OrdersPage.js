@@ -81,8 +81,7 @@ export default function OrdersPage({restaurants}) {
             <th>Food Item</th>
             <th>Quantity</th>
             <th>Total Price</th>
-            <th>Actions</th>
-            {/* <th>Time</th> */}
+            {/* <th>Actions</th> */}
           </tr>
         </thead>
         <tbody>
@@ -98,7 +97,7 @@ export default function OrdersPage({restaurants}) {
                 <td>{order.itemQuantity}</td>
                 <td>{order.totalPrice}</td>
 
-                <td>
+                {/* <td>
                   <Button
                     value={order.orderId}
                     className="btn-danger"
@@ -106,7 +105,7 @@ export default function OrdersPage({restaurants}) {
                   >
                     Delete
                   </Button>
-                </td>
+                </td> */}
               </tr>
             );
           })

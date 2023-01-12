@@ -11,8 +11,8 @@ export default function HomePage() {
         // width={"100vw"}
         style={{width:"100vw", height:"90vh", objectFit:"cover"}}
       />
-      <SearchBar style={{position: "absolute", right: "50%",
-  left: "50%", bottom:"50%"}}/>
+      {/* <SearchBar style={{position: "absolute", right: "50%",
+  left: "50%", bottom:"50%"}}/> */}
     </div>
   );
 }

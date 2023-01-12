@@ -113,6 +113,7 @@ export default function UserProfilePage({setAuthUser}) {
     const handleSubmit = (event) => {
       event.preventDefault();
       editProfile()
+      setDisableForm(true)
     }
 
   return (
@@ -136,7 +137,7 @@ export default function UserProfilePage({setAuthUser}) {
               populateUserInfo();
             }}
           >
-            Edit Profile
+            See More Info
           </Button>
         </Col>
         {disableForm === true ? (
@@ -187,9 +188,9 @@ export default function UserProfilePage({setAuthUser}) {
                 />
               </FloatingLabel> */}
 
-              <Button type="submit" style={{ marginLeft: "45%" }} disabled>
+              {/* <Button type="submit" style={{ marginLeft: "45%" }} disabled>
                 Update Profile
-              </Button>
+              </Button> */}
             </Form>
           </Col>
         ) : (
@@ -240,9 +241,9 @@ export default function UserProfilePage({setAuthUser}) {
                 />
               </FloatingLabel> */}
 
-              <Button type="submit" style={{ marginLeft: "45%" }}>
+              {/* <Button type="submit" style={{ marginLeft: "45%" }}>
                 Update Profile
-              </Button>
+              </Button> */}
             </Form>
           </Col>
         )}
