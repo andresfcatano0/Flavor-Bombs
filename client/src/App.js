@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route,  Switch } from 'react-router-dom';
 import "./App.css";
 import AuthNavBar from './components/navbar/AuthNavBar';
 import AdminNavBar from './components/navbar/AdminNavBar';
@@ -7,7 +7,8 @@ import LoginPage from './pages/LoginPage';
 import HomePage from './pages/HomePage';
 import { useContext, useState, useEffect } from 'react';
 import UserContext from './context/AuthContext';
-import jwtDecode from 'jwt-decode';
+
+import jwtDecode from "jwt-decode";
 import RestaurantPage from './pages/RestaurantPage';
 import RestaurantInfoPage from './pages/RestaurantInfoPage';
 import OrdersPage from './pages/OrdersPage';
@@ -20,24 +21,19 @@ import CartContext from './context/cart/CartContext';
 import FoodBackgroundPattern from './components/FoodBackgroundPattern';
 import NotFoundPage from './pages/NotFoundPage';
 import LoaderEat from './components/LoaderEat';
-import "bootstrap/dist/css/bootstrap.min.css";
-import React, { useState, useEffect } from "react";
-import LoadMap from "./components/LoadMap";
-import LoadOneMap from "./components/LoadOneMap";
+import Map from './components/Map';
 
-
-
+function App() {
   // USER DATA
   let currentUserData = localStorage.getItem("userData");
-  
-  if(currentUserData){
+
+  if (currentUserData) {
     currentUserData = JSON.parse(currentUserData);
   }
-  
+
   const [authUser, setAuthUser] = useState(currentUserData);
 
   const user = useContext(UserContext);
-
 
   // ALL RESTAURANTS
   const [restaurants, setRestaurants] = useState([]);
@@ -65,7 +61,7 @@ import LoadOneMap from "./components/LoadOneMap";
   };
 
   // ALL MENUS
-  const [menus,setMenus] = useState([])
+  const [menus, setMenus] = useState([]);
   const getAllMenus = async () => {
     await fetch("http://localhost:8080/api/menu", {
       method: "GET",
@@ -82,77 +78,71 @@ import LoadOneMap from "./components/LoadOneMap";
       .catch((err) => console.log(err));
   };
 
-
-
-
-
-   useEffect(() => {
-     getRestaurants();
-     getAllMenus();
-   }, []);
-
+  useEffect(() => {
+    getRestaurants();
+    getAllMenus();
+  }, []);
 
   //  LOAD CART if in storage
-   let orderFromLocal = localStorage.getItem("savedCart");
-   
+  let orderFromLocal = localStorage.getItem("savedCart");
 
-   let savedItems = orderFromLocal ? JSON.parse(orderFromLocal) : [];
+  let savedItems = orderFromLocal ? JSON.parse(orderFromLocal) : [];
 
   //  CART DATA + METHODS to manipulate data
   const [orderCartItems, setOrderCartItems] = useState(savedItems);
 
   const saveOrderCartItems = (saveItems) => {
-    localStorage.setItem("savedCart", JSON.stringify(saveItems))
-    setOrderCartItems(saveItems)
-  }
+    localStorage.setItem("savedCart", JSON.stringify(saveItems));
+    setOrderCartItems(saveItems);
+  };
 
   const addItemToCart = (menuItem) => {
-    const newOrder = [...orderCartItems, {...menuItem, quantity: 1}]
-    
+    const newOrder = [...orderCartItems, { ...menuItem, quantity: 1 }];
+
     // setOrderCartItems(newOrder);
     saveOrderCartItems(newOrder);
-  }
+  };
 
   const removeItemFromCart = (menuItem) => {
-    let itemIndex = orderCartItems.findIndex((m)=> m.menuId === menuItem.menuId)
+    let itemIndex = orderCartItems.findIndex(
+      (m) => m.menuId === menuItem.menuId
+    );
     // setOrderCartItems(
-    //   [...orderCartItems.slice(0, itemIndex), 
+    //   [...orderCartItems.slice(0, itemIndex),
     //     ...orderCartItems.slice(itemIndex + 1)]
     //     );
-    saveOrderCartItems(
-      [...orderCartItems.slice(0, itemIndex), 
-        ...orderCartItems.slice(itemIndex + 1)]
-        );
-  }
+    saveOrderCartItems([
+      ...orderCartItems.slice(0, itemIndex),
+      ...orderCartItems.slice(itemIndex + 1),
+    ]);
+  };
 
-  const increaseQuantity = (menuItem)=>{
+  const increaseQuantity = (menuItem) => {
     let copy = [...orderCartItems];
 
-    let itemIndex = copy.findIndex((m)=> m.menuId === menuItem.menuId);
+    let itemIndex = copy.findIndex((m) => m.menuId === menuItem.menuId);
 
     copy[itemIndex].quantity++;
 
     // setOrderCartItems(copy)
-    saveOrderCartItems(copy)
-  }
+    saveOrderCartItems(copy);
+  };
 
-  const decreaseQuantity = (menuItem)=>{
-     let copy = [...orderCartItems];
+  const decreaseQuantity = (menuItem) => {
+    let copy = [...orderCartItems];
 
-     let itemIndex = copy.findIndex((m) => m.menuId === menuItem.menuId);
+    let itemIndex = copy.findIndex((m) => m.menuId === menuItem.menuId);
 
-     copy[itemIndex].quantity--;
+    copy[itemIndex].quantity--;
 
     //  setOrderCartItems(copy);
-     saveOrderCartItems(copy);
-  }
+    saveOrderCartItems(copy);
+  };
 
-  const clearCart = () => { 
+  const clearCart = () => {
     // setOrderCartItems([]);
     saveOrderCartItems([]);
-  }
-
-function App() {
+  };
   return (
     <UserContext.Provider value={authUser}>
       <CartContext.Provider
@@ -165,20 +155,13 @@ function App() {
           clearCart,
         }}
       >
-        <div id="googleMapApp">
-          <h1>
-            Flavor Bombs{" "}
-            <span role="img" aria-label="bombs">
-              🔥
-            </span>
-          </h1>
-          <LoadMap />
-        </div>
+        
         <BrowserRouter>
           <NavBar setAuthUser={setAuthUser} />
           <Switch>
             <Route exact path="/">
               <HomePage />
+              <Map/>
             </Route>
             <Route path="/login">
               <LoginPage setAuthUser={setAuthUser} />
