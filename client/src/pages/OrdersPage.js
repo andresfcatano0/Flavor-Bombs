@@ -1,6 +1,7 @@
 import React, {useContext, useEffect, useState} from 'react'
 import UserContext from '../context/AuthContext';
 import Table from 'react-bootstrap/Table'
+import Button from 'react-bootstrap/Button'
 
 export default function OrdersPage({restaurants}) {
 
@@ -17,7 +18,9 @@ export default function OrdersPage({restaurants}) {
       setRestaurantOrders(found)
     }
 
-    const getAllUserOrders = () => {
+    
+
+    const getUserOrders = () => {
         fetch("http://localhost:8080/api/order", {
           method: "GET",
           headers: {
@@ -28,27 +31,36 @@ export default function OrdersPage({restaurants}) {
             return res.json();
           })
           .then((data) => {
-            console.log(data);
-            // getSpecificRestaurantName(data.restaurantId)
-            // for(let d of data){
-            //   setRestaurantOrders(restaurants.filter(r=>r.restaurantId == d.orderId))
-            //   setOrders(d)
-            // }
-            // console.log(restaurantOrders)
+            // console.log(data);
             setOrders(data);
           });
     }
 
+    const deleteOrder = (orderId) => {
+      if (window.confirm("Are you sure you want to delete this order?")) {
+        fetch("http://localhost:8080/api/order/" + orderId, {
+          method: "DELETE",
+          Authorization: "Bearer " + userInfo.token,
+        }).then((data) => {
+          // console.log(data);
+          getUserOrders();
+          if (data.statusCode === 204) {
+            console.log("successfully deleted restaurant");
+          }
+          // console.log(data.statusCode)
+        });
+      }
+    };
+
     useEffect(()=>{
-        getAllUserOrders()
+        getUserOrders()
         
     },[])
 
-    // console.log(restaurantOrders)
 
   return (
-    <div>
-      <h2>Current or Future Orders</h2>
+    <div className=" mt-3 text-center">
+      {/* <h2>Current or Future Orders</h2>
       <hr />
       <p className="text-muted">
         There are no current or future orders yet... Visit <a href="/restaurants" style={{color:"grey", fontWeight:"700"}}>Restaurants</a> to start
@@ -56,19 +68,20 @@ export default function OrdersPage({restaurants}) {
       </p>
 
       <br />
-      <br />
-      <h2>Past Orders</h2>
+      <br /> */}
+      <h2 className='text-center'>Orders</h2>
       <hr />
       {orders ? (
       <Table striped hover>
         <thead>
           <tr>
-            <th>#</th>
+            <th className='text-center'>#</th>
             <th>Date</th>
             <th>Restaurant Name</th>
             <th>Food Item</th>
             <th>Quantity</th>
             <th>Total Price</th>
+            <th>Actions</th>
             {/* <th>Time</th> */}
           </tr>
         </thead>
@@ -76,13 +89,23 @@ export default function OrdersPage({restaurants}) {
           {orders.map((order, index) => {
             return (
               <tr key={order.orderId}>
-                <td>{index + 1}</td>
+                <td className="text-center">{index + 1}</td>
                 <td>{order.orderDate}</td>
                 {/* <td>{order.restaurantId}</td> */}
                 <td>{restaurants[order.restaurantId - 1].restaurantName}</td>
                 <td>{order.orderItems}</td>
                 <td>{order.itemQuantity}</td>
                 <td>{order.totalPrice}</td>
+
+                <td>
+                  <Button
+                    value={order.orderId}
+                    className="btn-danger"
+                    onClick={() => deleteOrder(order.orderId)}
+                  >
+                    Delete
+                  </Button>
+                </td>
               </tr>
             );
           })
