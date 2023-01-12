@@ -35,11 +35,16 @@ export default function AdminDashboard({ setAuthUser }) {
               <ListGroup.Item as="li" className="">
                 <div className="ms-2 me-auto">
                   <div className="fw-bold text-muted">VIEWINGS</div>
-                  <div className="d-flex align-items-center justify-content-between">
-                    <People />
-                    <span>Users</span>
-                  </div>
-                  <Link to="/admin/table-view" className="text-reset">
+                  <Link to="/admin/table-view#link2" className="text-reset">
+                    <div className="d-flex align-items-center justify-content-between">
+                      <People />
+                      <span>Users</span>
+                    </div>
+                  </Link>
+                  <Link
+                    to="admin/table-view#restaurant-table"
+                    className="text-reset"
+                  >
                     <div className="d-flex align-items-center justify-content-between">
                       <ShopWindow />
                       <span>Restaurants</span>
@@ -82,13 +87,13 @@ export default function AdminDashboard({ setAuthUser }) {
                     up the bulk of the card's content.
                   </Card.Text>
                   <div className="d-flex align-items-center justify-content-between">
-                    <Card.Link
-                      href="#"
+                    <Link
+                      to="/admin/table-view#link2"
                       className="fw-semibold text-decoration-underline"
                       style={{ color: "#999" }}
                     >
                       See all users
-                    </Card.Link>
+                    </Link>
                     <PeopleFill style={{ color: "darkred" }} />
                   </div>
                 </Card.Body>
@@ -106,14 +111,15 @@ export default function AdminDashboard({ setAuthUser }) {
                     up the bulk of the card's content.
                   </Card.Text>
                   <div className="d-flex align-items-center justify-content-between">
-                    <Link to="/admin/table-view"
-                    // <Card.Link
-                    //   href="#"
+                    <Link
+                      to="/admin/table-view"
+                      // <Card.Link
+                      //   href="#"
                       className="fw-semibold text-decoration-underline"
                       style={{ color: "#999" }}
                     >
                       See all restaurants
-                      </Link>
+                    </Link>
                     {/* </Card.Link> */}
                     <Shop style={{ color: "indigo" }} />
                   </div>
