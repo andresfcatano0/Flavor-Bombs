@@ -8,6 +8,7 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 import org.learn.bombs.models.Order;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -90,13 +91,16 @@ public class OrderDatabaseRepo implements OrderRepo{
         if( toAdd.getOwner() != null ){
             int rowsAffected = template.update(  connection -> {
                 PreparedStatement statement = connection.prepareStatement(
-                        "insert into orders (order_items,app_user_id,restaurant_id) values (?,?,?)",
+                        "insert into orders (order_items, app_user_id, restaurant_id, order_date, item_quantity, total_price) values (?,?,?,?,?,?)",
                         Statement.RETURN_GENERATED_KEYS
                 );
 
                 statement.setString(1, toAdd.getOrderItems());
                 statement.setInt( 2, toAdd.getOwner().getAppUserId() );
                 statement.setInt( 3, toAdd.getRestaurantId() );
+                statement.setDate( 4, toAdd.getOrderDate() == null ? null : Date.valueOf((toAdd.getOrderDate())) );
+                statement.setInt( 5, toAdd.getItemQuantity() );
+                statement.setBigDecimal( 6, toAdd.getTotalPrice() );
 
                 return statement;
             }, holder);
@@ -113,11 +117,14 @@ public class OrderDatabaseRepo implements OrderRepo{
         final String sql = "update orders set " +
                 "order_items = ?, " +
                 "app_user_id = ?, " +
-                "restaurant_id = ? " +
+                "restaurant_id  = ?, " +
+                "order_date  = ?, " +
+                "item_quantity  = ?, " +
+                "total_price  = ? " +
                 "where order_id = ?;";
 
         int rowsUpdated = template.update(sql, order.getOrderItems(), order.getOwner().getAppUserId(),
-                order.getRestaurantId(), order.getOrderId());
+                order.getRestaurantId(), order.getOrderId(), order.getOrderDate(), order.getItemQuantity(), order.getTotalPrice());
 
         return rowsUpdated > 0;
     }
