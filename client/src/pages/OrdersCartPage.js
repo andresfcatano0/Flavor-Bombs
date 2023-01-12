@@ -10,6 +10,7 @@ import { DashCircle, PlusCircle, PlusCircleFill, Trash, Trash2Fill } from 'react
 import CartContext from '../context/cart/CartContext'
 import { Link } from 'react-router-dom'
 import UserContext from '../context/AuthContext'
+import LoaderEat from '../components/LoaderEat'
 
 export default function OrdersCartPage() {
   const userInfo = useContext(UserContext);
@@ -24,6 +25,8 @@ export default function OrdersCartPage() {
   //         setQuantity(quantity + 1);
   //     }
   // }
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     orderCartItems,
@@ -74,9 +77,6 @@ export default function OrdersCartPage() {
 
     let checkOutOrder = [...orderCartItems];
     
-
-    
-
       await fetch("http://localhost:8080/api/checkout", {
         method: "POST",
         headers:{
@@ -85,6 +85,7 @@ export default function OrdersCartPage() {
           "Authorization": "Bearer " + userInfo.token
         },
         body: JSON.stringify(checkOutOrder)
+
       }).then((res)=> {
           return res.json().then((error)=> {
             console.log(error);
@@ -94,6 +95,7 @@ export default function OrdersCartPage() {
         // }
         // console.log("successfully passed to back")
       })
+      clearCart();
 
   }
 
@@ -116,10 +118,13 @@ export default function OrdersCartPage() {
 
       {/* If cart is empty, show no items in cart message, otherwise show items */}
       {orderCartItems.length === 0 ? (
-        <h5>Cart is empty</h5>
+        <div>
+          <h5 className="text-center">Cart is empty...<span>Grab some food from the Restaurants page</span></h5>
+          <LoaderEat/>
+          </div>
       ) : (
-        <Row className="">
-          <Col xs={8} className="">
+        <Row className="d-flex justify-content-between">
+          <Col xs={8} className="me-5">
             <Table hover>
               <thead>
                 <tr>
@@ -149,7 +154,7 @@ export default function OrdersCartPage() {
                     </td>
                     <td>{item.itemName}</td>
                     <td>{item.itemDescription}</td>
-                    <td>${(item.itemPrice).toFixed(2)}</td>
+                    <td>${item.itemPrice.toFixed(2)}</td>
                     <td>
                       <Button
                         className="btn-success"
@@ -214,7 +219,7 @@ export default function OrdersCartPage() {
 
                 {/* {orderCartItems.map((m) => (
                   <tr key={m.menuId}> */}
-                
+
                 {/* <td>{m.itemName}</td>
                     <td>{m.itemDescription}</td>
                     <td>{m.itemPrice}</td> */}
@@ -273,7 +278,7 @@ export default function OrdersCartPage() {
             </Table>
           </Col>
 
-          <Col>
+          <Col >
             <Card style={{ width: "18rem" }}>
               <Card.Body>
                 <Card.Title>CART</Card.Title>
@@ -283,13 +288,15 @@ export default function OrdersCartPage() {
                 <Card.Text>Subtotal:</Card.Text>
                 <Card.Text>Total: ${total.toFixed(2)}</Card.Text>
                 {orderCartItems.length > 0 && (
-                  <>
-                    <Button onClick={handleCheckoutOrder}>Checkout Now</Button>
+                  <div >
+                    <Button className="me-4" onClick={handleCheckoutOrder}>Checkout Now</Button>
 
+
+                   
                     <Button className="btn-danger" onClick={clearCart}>
                       Clear Cart
                     </Button>
-                  </>
+                  </div>
                 )}
               </Card.Body>
             </Card>
