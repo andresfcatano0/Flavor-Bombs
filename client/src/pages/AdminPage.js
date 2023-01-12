@@ -11,7 +11,7 @@ import ListGroup from "react-bootstrap/ListGroup";
 import Modal from "react-bootstrap/Modal";
 import { BagCheckFill, Basket3Fill, BasketFill, ChatQuoteFill, Clipboard2Data, MenuDown, PeopleFill, Shop, Trash3 } from 'react-bootstrap-icons';
 import ReviewsTable from '../components/adminTables/ReviewsTable';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import AdminRestaurantTable from './AdminRestaurantTable';
 import AdminUsersTable from './AdminUsersTable';
 
@@ -19,10 +19,11 @@ import AdminUsersTable from './AdminUsersTable';
 
 export default function AdminPage({ restaurants, getRestaurants}) {
   const userInfo = useContext(UserContext);
+  const history = useHistory();
 
   const [allUser, setAllUser] = useState([]);
 
-  const getAllOrders = () =>{
+  const getAllUsers = () =>{
     fetch("http://localhost:8080/api/user", {
       method: "GET",
       headers: {
@@ -33,7 +34,7 @@ export default function AdminPage({ restaurants, getRestaurants}) {
         return res.json();
       })
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         setAllUser(data);
       });
   }
@@ -57,8 +58,8 @@ export default function AdminPage({ restaurants, getRestaurants}) {
   }
 
   useEffect(()=>{
+    getAllUsers()
     getAllReviews()
-    getAllOrders()
   },[])
 
   const adminUser = useContext(UserContext);
@@ -131,17 +132,40 @@ export default function AdminPage({ restaurants, getRestaurants}) {
             })
             .then((data) => {
               // console.log(data);
+              // for (let i = 0; i < allUser.length; i++) {
+              //   for (let j = 0; j < allUser[i].length; j++) {
+              //     if (allUser[i].orders[j].orderId === data[j].orderId) {
+              //       data.owner = allUser[i];
+              //     }
+              //   }
+              // }
               setOrders(data);
             });
         };
 
+        const [specificUser, setSpecificUser] = useState({});
+        const handleSpecificReviewOrder = (userId) => {
+          fetch("http://localhost:8080/api/user/" + userId, {
+             method: "GET",
+            headers: {
+              Authorization: "Bearer " + adminUser.token,
+            },
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              console.log(data);
+              history.push("/admin/table-view#link5");
+              setSpecificUser(data);
+            });
+        }
+
         useEffect(() => {
           getAllUserOrders();
+          // handleSpecificReviewOrder(3);
         }, []);
 
-        
-
  
+      
   return (
     <>
       <Container className="d-flex mt-4">
@@ -186,6 +210,14 @@ export default function AdminPage({ restaurants, getRestaurants}) {
                     <ChatQuoteFill />
                     <span>Reviews</span>
                   </ListGroup.Item>
+                  <ListGroup.Item
+                    action
+                    href="#link5"
+                    className="d-flex align-items-center justify-content-between"
+                  >
+                    <ChatQuoteFill />
+                    <span>Specific User</span>
+                  </ListGroup.Item>
                   <Link to="/admin/dashboard-menu">
                     <ListGroup.Item
                       action
@@ -200,13 +232,19 @@ export default function AdminPage({ restaurants, getRestaurants}) {
               </Col>
               <Col sm={8}>
                 <Tab.Content>
-                   <Tab.Pane eventKey="#restaurant-table">
-                  <AdminRestaurantTable restaurants={restaurants} deleteRestaurant={deleteRestaurant}/>
+                  <Tab.Pane eventKey="#restaurant-table">
+                    <AdminRestaurantTable
+                      restaurants={restaurants}
+                      deleteRestaurant={deleteRestaurant}
+                    />
                   </Tab.Pane>
 
                   <Tab.Pane eventKey="#link2">
                     Users
-                    <AdminUsersTable allUser={allUser}/>
+                    <AdminUsersTable
+                      allUser={allUser}
+                      handleSpecificReviewOrder={handleSpecificReviewOrder}
+                    />
                   </Tab.Pane>
                   <Tab.Pane eventKey="#link3">
                     Orders
@@ -223,30 +261,9 @@ export default function AdminPage({ restaurants, getRestaurants}) {
                         </tr>
                       </thead>
                       <tbody>
-                        {orders.map((order, index) => {
-                          return (
-                            <tr key={order.orderId}>
-                              <td>{index + 1}</td>
-                              <td>{order.orderId}</td>
-                              <td>{}</td>
-                              <td></td>
-                              <td>
-                                {
-                                  restaurants[order.restaurantId - 1]
-                                    .restaurantName
-                                }
-                              </td>
-                              <td>{order.orderItems}</td>
-                              <td className="d-flex justify-content-around">
-                                <Button className="btn btn-danger d-flex align-items-center">
-                                  <span className="px-2">Delete</span>
-                                  <Trash3 />
-                                </Button>
-                              </td>
-                            </tr>
-                          );
-                        })}
-                        <tr></tr>
+                        {/* {console.log(handleSpecificReviewOrder(2))} */}
+
+                        {/* (handleSpecificReviewOrder(userInfo.appUserId).username) */}
                       </tbody>
                     </Table>
                   </Tab.Pane>
@@ -292,6 +309,85 @@ export default function AdminPage({ restaurants, getRestaurants}) {
                           );
                         })}
                         <tr></tr>
+                      </tbody>
+                    </Table>
+                  </Tab.Pane>
+                  <Tab.Pane eventKey="#link5">
+                    Specific User
+                    {/* <ReviewsTable/> */}
+                    <Table striped bordered hover className="text-center">
+                      <thead>
+                        <tr>
+                          <th>User Name</th>
+                          <th>First Name</th>
+                          <th>Last Name</th>
+                          <th>Orders</th>
+                          <th>Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>{specificUser.username}</td>
+                          <td>{specificUser.firstName}</td>
+                          <td>{specificUser.lastName}</td>
+                          <td>
+                            <th>OrderId</th>
+                            <th>Order Items</th>
+                            <th>Qty</th>
+                            <th>Order Date</th>
+                            <td>Total Price</td>
+                            <th>Restaurant Name</th>
+                            {specificUser.orders?.map((o, index) => (
+                              <>
+                                <tbody>
+                                  <tr>
+                                    <td key={o.orderId}>{index + 1}</td>
+                                    <td>{o.orderItems}</td>
+                                    <td>{o.itemQuantity}</td>
+                                    <td>{o.orderDate}</td>
+                                    <td>{o.totalPrice}</td>
+                                    <td>
+                                      {
+                                        restaurants[o.restaurantId]
+                                          .restaurantName
+                                      }
+                                    </td>
+                                    <hr />
+                                  </tr>
+                                </tbody>
+                              </>
+                            ))}
+                          </td>
+                          <td>
+                            <th>#</th>
+                            <th>Review Text</th>
+                            <th>Restaurant Name</th>
+
+                            {specificUser.reviews?.map((r, index) => (
+                              <>
+                                <tbody>
+                                  <tr>
+                                    <td key={r.reviewId}>{index + 1}</td>
+                                    <td>{r.reviewText}</td>
+                                    <td>
+                                      {
+                                        restaurants[r.restaurantId]
+                                          .restaurantName
+                                      }
+                                    </td>
+                                    <hr />
+                                  </tr>
+                                </tbody>
+                              </>
+                            ))}
+                          </td>
+
+                          {/* <td>
+                          { console.log(specificUser.orders[0].orderItems)
+}
+                          </td> */}
+                          <td>{}</td>
+                        </tr>
                       </tbody>
                     </Table>
                   </Tab.Pane>
