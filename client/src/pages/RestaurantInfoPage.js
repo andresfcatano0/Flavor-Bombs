@@ -11,17 +11,16 @@ import ReviewCard from '../components/ReviewCard';
 import MenuCard from '../components/MenuCard';
 import CartContext from '../context/cart/CartContext';
 import { DashCircle, PlusCircle, PlusCircleFill, Trash } from 'react-bootstrap-icons';
+import UserContext from '../context/AuthContext';
 
 export default function RestaurantInfoPage({ restaurants, getRestaurants, menus }) {
-  // const [index, setIndex] = useState(0);
 
-  // const handleSelect = (selectedIndex, e) => {
-  //   setIndex(selectedIndex);
-  // };
+  const userInfo = useContext(UserContext);
 
   const [menu, setMenu] = useState([]);
   const params = useParams();
   const [specificRestaurant, setSpecificRestaurant] = useState({});
+  const [usersThatDoneReviews, setUsersThatDoneReviews] = useState([]);
 
   let found = menus.filter(m => {
     return (m.restaurantId == params.id)
@@ -76,6 +75,16 @@ export default function RestaurantInfoPage({ restaurants, getRestaurants, menus 
   //     .catch((err) => console.log(err));
   // };
 
+  // const getUsers = () => {
+  //   fetch("http://localhost:8080//api/user", {
+  //     method: "GET",
+  //     headers: {
+  //       "Content-Type": "application/json"
+  //     }
+  //   }
+  //   );
+  // }
+
   const [reviews, setReviews] = useState([]);
   const getReviewPerRestaurant = () => {
     fetch("http://localhost:8080/api/review", {
@@ -102,6 +111,32 @@ export default function RestaurantInfoPage({ restaurants, getRestaurants, menus 
       });
   };
 
+  const [fullUserData, setFullUserData] = useState({});
+
+  const getCurrentUserInfo = () => {
+    fetch("http://localhost:8080/api/user/", {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + userInfo.token,
+      },
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        let findOwnerOfReview;
+        for(let d of data){
+          if(d.reviewId === specificRestaurant.reviewId){
+            findOwnerOfReview = d;
+          }
+        }
+        
+      });
+  };
+
+
+   
+
   
 
   useEffect(() => {
@@ -115,7 +150,7 @@ export default function RestaurantInfoPage({ restaurants, getRestaurants, menus 
     <>
       <div className="mt-4 mx-4" key={specificRestaurant.restaurantId}>
         <div className="text-center">
-          <img src={specificRestaurant.restaurantImage} />
+          <img src={specificRestaurant.restaurantImage} style={{height:"300px", width:"350px", objectFit:"cover"}}/>
           
         </div>
         <div>
@@ -149,7 +184,7 @@ export default function RestaurantInfoPage({ restaurants, getRestaurants, menus 
         {menu.map((m) => {
           return <MenuCard key={m.menuId} m={m} />;
         })} */}
-          {console.log(found)}
+          
           
           {found.map((m) => {
             return (
@@ -166,7 +201,8 @@ export default function RestaurantInfoPage({ restaurants, getRestaurants, menus 
                   <Col>
                     <img
                       width={"350px"}
-                      style={{ borderRadius: "1.7rem" }}
+                      height={"200px"}
+                      style={{ borderRadius: "1.7rem", objectFit:"cover" }}
                       className="p-2, my-3"
                       // src="https://cdn.pixabay.com/photo/2014/11/05/15/57/salmon-518032_1280.jpg"
                       src={m.itemImage}
@@ -175,7 +211,7 @@ export default function RestaurantInfoPage({ restaurants, getRestaurants, menus 
                   <Col className="d-flex">
                     <Row>
                       <h5 className="mt-3 ">
-                        {m.itemName} - <span>${m.itemPrice}</span>
+                        {m.itemName} - <span>${(m.itemPrice).toFixed(2)}</span>
                       </h5>
                       <p>{m.itemDescription}</p>
                     </Row>
