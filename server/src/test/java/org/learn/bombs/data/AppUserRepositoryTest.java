@@ -66,14 +66,14 @@ class AppUserRepositoryTest {
     }
 
     @Test
-    void shouldUpdate() {
+    void shouldUpdateUser() {
         AppUser appUser = makeUser();
         appUser.setAppUserId(1);
         assertTrue(repository.updateAppUser(appUser));
     }
 
     @Test
-    void shouldNotUpdate() {
+    void shouldNotUpdateUser() {
         AppUser appUser = makeUser();
         appUser.setAppUserId(99);
         assertFalse(repository.updateAppUser(appUser));
