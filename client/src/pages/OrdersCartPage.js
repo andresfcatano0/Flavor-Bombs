@@ -95,7 +95,7 @@ export default function OrdersCartPage() {
         // }
         // console.log("successfully passed to back")
       })
-      clearCart();
+      // clearCart();
 
   }
 

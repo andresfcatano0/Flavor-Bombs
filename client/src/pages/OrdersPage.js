@@ -11,7 +11,7 @@ export default function OrdersPage({restaurants}) {
      const [restaurantOrders, setRestaurantOrders] = useState([]);
      
 
-    console.log(userInfo)
+    // console.log(userInfo)
     
     let getSpecificRestaurantName = (orderId) => {
       let found = restaurants.filter(r=>r.restaurantId == orderId);
@@ -86,13 +86,14 @@ export default function OrdersPage({restaurants}) {
           </tr>
         </thead>
         <tbody>
+          {console.log(orders)}
           {orders.map((order, index) => {
             return (
               <tr key={order.orderId}>
                 <td className="text-center">{index + 1}</td>
                 <td>{order.orderDate}</td>
                 {/* <td>{order.restaurantId}</td> */}
-                <td>{restaurants[order.restaurantId - 1].restaurantName}</td>
+                <td>{restaurants[order.restaurantId].restaurantName}</td>
                 <td>{order.orderItems}</td>
                 <td>{order.itemQuantity}</td>
                 <td>{order.totalPrice}</td>
