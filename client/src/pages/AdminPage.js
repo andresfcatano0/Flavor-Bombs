@@ -12,10 +12,14 @@ import Modal from "react-bootstrap/Modal";
 import { BagCheckFill, Basket3Fill, BasketFill, ChatQuoteFill, Clipboard2Data, MenuDown, PeopleFill, Shop, Trash3 } from 'react-bootstrap-icons';
 import ReviewsTable from '../components/adminTables/ReviewsTable';
 import { Link } from 'react-router-dom';
+import AdminRestaurantTable from './AdminRestaurantTable';
+import AdminUsersTable from './AdminUsersTable';
 
 
 
 export default function AdminPage({ restaurants, getRestaurants}) {
+  const userInfo = useContext(UserContext);
+
   const [allUser, setAllUser] = useState([]);
 
   const getAllOrders = () =>{
@@ -29,7 +33,7 @@ export default function AdminPage({ restaurants, getRestaurants}) {
         return res.json();
       })
       .then((data) => {
-        // console.log(data);
+        console.log(data);
         setAllUser(data);
       });
   }
@@ -110,7 +114,7 @@ export default function AdminPage({ restaurants, getRestaurants}) {
             return res.json()
           }).then(data => {
               getRestaurants()
-              console.log(data)
+              // console.log(data)
           })
         }
 
@@ -126,7 +130,7 @@ export default function AdminPage({ restaurants, getRestaurants}) {
               return res.json();
             })
             .then((data) => {
-              console.log(data);
+              // console.log(data);
               setOrders(data);
             });
         };
@@ -196,79 +200,13 @@ export default function AdminPage({ restaurants, getRestaurants}) {
               </Col>
               <Col sm={8}>
                 <Tab.Content>
-                  <Tab.Pane eventKey="#restaurant-table">
-                    <Table striped bordered hover className="text-center">
-                      <thead>
-                        <tr>
-                          <th></th>
-                          <th>Restaurant Name</th>
-                          <th>Restaurant Address</th>
-                          <th>Description</th>
-                          <th>Actions</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {restaurants.map((restaurant, index) => {
-                          return (
-                            <tr key={index}>
-                              <td>{index + 1}</td>
-                              <td>{restaurant.restaurantName}</td>
-                              <td>{restaurant.address}</td>
-                              <td>{restaurant.description}</td>
-                              <td className="d-flex justify-content-around">
-                                <Button
-                                  value={restaurant.restaurantId}
-                                  onClick={() => {
-                                    deleteRestaurant(restaurant.restaurantId);
-                                  }}
-                                  className="btn btn-danger d-flex align-items-center"
-                                >
-                                  <span className="px-2">Delete</span>
-                                  <Trash3 />
-                                </Button>
-                              </td>
-                            </tr>
-                          );
-                        })}
-                        <tr></tr>
-                      </tbody>
-                    </Table>
+                   <Tab.Pane eventKey="#restaurant-table">
+                  <AdminRestaurantTable restaurants={restaurants} deleteRestaurant={deleteRestaurant}/>
                   </Tab.Pane>
+
                   <Tab.Pane eventKey="#link2">
                     Users
-                    <Table striped bordered hover className="text-center">
-                      <thead>
-                        <tr>
-                          <th></th>
-                          <th>User Name</th>
-                          <th>First Name</th>
-                          <th>Last Name</th>
-                          <th>Email</th>
-                          <th>Actions</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {allUser.map((userInfo, index) => {
-                          return (
-                            <tr key={userInfo.appUserId}>
-                              <td>{index + 1}</td>
-                              <td>{userInfo.username}</td>
-                              <td>{userInfo.firstName}</td>
-                              <td>{userInfo.lastName}</td>
-                              <td>{userInfo.email}</td>
-
-                              <td className="d-flex justify-content-around">
-                                <Button className="btn btn-danger d-flex align-items-center">
-                                  <span className="px-2">Delete</span>
-                                  <Trash3 />
-                                </Button>
-                              </td>
-                            </tr>
-                          );
-                        })}
-                        <tr></tr>
-                      </tbody>
-                    </Table>
+                    <AdminUsersTable allUser={allUser}/>
                   </Tab.Pane>
                   <Tab.Pane eventKey="#link3">
                     Orders
@@ -290,7 +228,7 @@ export default function AdminPage({ restaurants, getRestaurants}) {
                             <tr key={order.orderId}>
                               <td>{index + 1}</td>
                               <td>{order.orderId}</td>
-                              <td></td>
+                              <td>{}</td>
                               <td></td>
                               <td>
                                 {
@@ -326,7 +264,7 @@ export default function AdminPage({ restaurants, getRestaurants}) {
                         </tr>
                       </thead>
                       <tbody>
-                        {console.log(restaurants)}
+                        {/* {console.log(restaurants)} */}
                         {reviews.map((review, index) => {
                           return (
                             <tr key={review.reviewId}>
