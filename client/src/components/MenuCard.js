@@ -8,25 +8,22 @@ import CartContext from "../context/cart/CartContext";
 import { useContext } from 'react';
 import { PlusCircle } from 'react-bootstrap-icons';
 
-export default function MenuCard({
-  m,
-  
-}) {
+export default function MenuCard({m}) 
+{
   const {
     addItemToCart,
     increaseQuantity,
 
     orderCartItems,
-    handleTotals,
-    itemCount,
+    handleTotals
   } = useContext(CartContext);
 
   const isItemInCart = (m) => {
     return orderCartItems?.find((item) => item.menuId === m.menuId);
   };
 
-  console.log(orderCartItems);
-
+  // console.log(orderCartItems);
+console.log(m)
   return (
     <Container
       className="mb-4 pe-5"
@@ -42,8 +39,19 @@ export default function MenuCard({
             width={"350px"}
             style={{ borderRadius: "1.7rem" }}
             className="p-2, my-3"
-            src="https://cdn.pixabay.com/photo/2014/11/05/15/57/salmon-518032_1280.jpg"
+            // src="https://cdn.pixabay.com/photo/2014/11/05/15/57/salmon-518032_1280.jpg"
+            src={m.itemImage}
           />
+          {/* <img
+            height="65"
+            style={{
+              objectFit: "cover",
+              width: "100%",
+              borderRadius: "2px",
+            }}
+            className="d-inline-block align-top"
+            src={item.itemImage}
+          /> */}
         </Col>
         <Col className="d-flex">
           <Row>
@@ -64,15 +72,22 @@ export default function MenuCard({
 
             {/* <Button className="">Order Now</Button> */}
             {isItemInCart(m) && (
-              <Button
-                onClick={() => {
-                  increaseQuantity(m);
-                }}
-              >
-                <PlusCircle />
-                
-                {m.quantity}
-              </Button>
+              <div>
+                {/* <Button
+                  onClick={() => {
+                    increaseQuantity(m);
+                  }}
+                > */}
+                  <PlusCircle className="btn-secondary"
+                    onClick={() => {
+                      increaseQuantity(m);
+                    }}
+                  />
+                {/* </Button> */}
+                <span style={{ color: "black", fontSize: "100px" }}>
+                  {m.quantity}
+                </span>
+              </div>
             )}
 
             {/* If item is not in cart show order now button then change to other button above */}
