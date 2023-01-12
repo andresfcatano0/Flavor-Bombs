@@ -17,10 +17,12 @@ import AdminDashboard from './pages/AdminDashboard';
 import UserProfilePage from './pages/UserProfilePage';
 import OrdersCartPage from './pages/OrdersCartPage';
 import CartContext from './context/cart/CartContext';
+import FoodBackgroundPattern from './components/FoodBackgroundPattern';
+import NotFoundPage from './pages/NotFoundPage';
 
 function App() {
 
-  
+  // USER DATA
   let currentUserData = localStorage.getItem("userData");
   
   if(currentUserData){
@@ -29,27 +31,10 @@ function App() {
   
   const [authUser, setAuthUser] = useState(currentUserData);
 
-  const [orderInCart, setOrdersInCart] = useState();
-
-  
   const user = useContext(UserContext);
 
 
-  // const login = (token) => {
-  //   //decode token
-  //   const decodedJwt = jwtDecode(token);
-
-  //   //create user obj 
-
-  // }
-
-  // const logout = () => {
-  // }
-
-  // const auth ={
-
-  // }
-
+  // ALL RESTAURANTS
   const [restaurants, setRestaurants] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -74,6 +59,7 @@ function App() {
       });
   };
 
+  // ALL MENUS
   const [menus,setMenus] = useState([])
   const getAllMenus = async () => {
     await fetch("http://localhost:8080/api/menu", {
@@ -86,25 +72,27 @@ function App() {
         return response.json();
       })
       .then((data) => {
-        // let specificMenu = data.filter((d) => {
-        //   return d.restaurantId.toString() == params.id.toString();
-        // });
-        // // console.log(data);
         setMenus(data);
       })
       .catch((err) => console.log(err));
   };
+
+
+
 
    useEffect(() => {
      getRestaurants();
      getAllMenus();
    }, []);
 
+
+  //  LOAD CART if in storage
    let orderFromLocal = localStorage.getItem("savedCart");
    
 
    let savedItems = orderFromLocal ? JSON.parse(orderFromLocal) : [];
 
+  //  CART DATA + METHODS to manipulate data
   const [orderCartItems, setOrderCartItems] = useState(savedItems);
 
   const saveOrderCartItems = (saveItems) => {
@@ -167,7 +155,7 @@ function App() {
           increaseQuantity,
           decreaseQuantity,
           removeItemFromCart,
-          clearCart
+          clearCart,
         }}
       >
         <BrowserRouter>
@@ -178,6 +166,9 @@ function App() {
             </Route>
             <Route path="/login">
               <LoginPage setAuthUser={setAuthUser} />
+            </Route>
+            <Route path="/food">
+              <FoodBackgroundPattern />
             </Route>
             <Route exact path="/restaurants">
               <RestaurantPage
@@ -221,6 +212,12 @@ function App() {
             <Route path="/shopping-cart">
               <OrdersCartPage setAuthUser={setAuthUser} />
             </Route>
+            <Route
+              path="*"
+              render={() => {
+                return <NotFoundPage />;
+              }}
+            />
           </Switch>
         </BrowserRouter>
       </CartContext.Provider>
