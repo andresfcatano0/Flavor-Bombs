@@ -13,6 +13,7 @@ import UserContext from '../context/AuthContext'
 
 export default function OrdersCartPage() {
   const userInfo = useContext(UserContext);
+  
   // const [quantity, setQuantity] = useState(1);
 
   // const handleQuantity = (type) => {
@@ -32,49 +33,72 @@ export default function OrdersCartPage() {
     decreaseQuantity
   } = useContext(CartContext);
 
-  const newlyMadeOrder = {
-    orderItems: "",
-    userId: "",
-    restaurantId: "",
-    orderDate: "",
-    itemQuantity: "",
-    totalPrice: "",
-  };
+  // const newlyMadeOrder = {
+  //   orderItems: "",
+  //   userId: "",
+  //   restaurantId: "",
+  //   orderDate: "",
+  //   itemQuantity: "",
+  //   totalPrice: "",
+  // };
 
-  const [newOrder, setNewOrder] = useState({newlyMadeOrder})
+  // const [newOrder, setNewOrder] = useState({newlyMadeOrder})
 
-  const completeOrder = () => {
-    fetch("http://localhost:8080/api/order", {
-      method: "POST",
-      headers:{
-        Authorization: "Bearer " + userInfo.token,
-        "Content-Type": "application/json" 
-      },
-      body: JSON.stringify(newlyMadeOrder)
-    }).then((res)=> {
-      console.log(res)
-    }).then(err=> {
-      console.log(err)
-    })
-    ;
+  // const completeOrder = () => {
+  //   fetch("http://localhost:8080/api/order", {
+  //     method: "POST",
+  //     headers:{
+  //       Authorization: "Bearer " + userInfo.token,
+  //       "Content-Type": "application/json" 
+  //     },
+  //     body: JSON.stringify(newlyMadeOrder)
+  //   }).then((res)=> {
+  //     console.log(res)
+  //   }).then(err=> {
+  //     console.log(err)
+  //   })
+  //   ;
+  // }
+
+  const handleCheckoutOrder = async () => {
+    const checkoutItem = [
+      {filterTags: "",
+      itemDescription:"", 
+      itemImage:"",
+      itemName:"",
+      itemPrice:  0.00,
+      menuId: 0,
+      quantity: 0,
+      restaurantId: 0}
+    ]
+
+    let checkOutOrder = [...orderCartItems];
+    
+
+    
+
+      await fetch("http://localhost:8080/api/checkout", {
+        method: "POST",
+        headers:{
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+          "Authorization": "Bearer " + userInfo.token
+        },
+        body: JSON.stringify(checkOutOrder)
+      }).then((res)=> {
+          return res.json().then((error)=> {
+            console.log(error);
+          })
+
+        // if(res.statusCode >= 400){
+        // }
+        // console.log("successfully passed to back")
+      })
+
   }
 
-  const handleCheckoutOrder = () => {
-
-  }
-
-  /*
-    filterTags: "spicy,waffles,shrimp,curry,savory"
-itemDescription: "Spicy shrimp on top of 3 buttermilk waffles."
-itemImage: "images/waffles.jpg"
-itemName: "Shrimp Curry Waffles"
-itemPrice: 12.75
-menuId: 7
-quantity: 1
-restaurantId:3
-    */
    let total = orderCartItems.reduce(
-     (sum, item) => item.itemPrice * item.quantity, 0
+     (sum, item) => sum+item.itemPrice * item.quantity, 0
    );
 
   return (
@@ -190,7 +214,7 @@ restaurantId:3
 
                 {/* {orderCartItems.map((m) => (
                   <tr key={m.menuId}> */}
-                <td>{/* Place for menu picture */}</td>
+                
                 {/* <td>{m.itemName}</td>
                     <td>{m.itemDescription}</td>
                     <td>{m.itemPrice}</td> */}
