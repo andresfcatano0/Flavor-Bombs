@@ -1,12 +1,12 @@
-import React from 'react'
-import  { useState, useEffect } from "react";
+import React from "react";
+import { useState, useEffect } from "react";
 import {
   GoogleMap,
   useLoadScript,
   MarkerF,
   InfoWindowF,
 } from "@react-google-maps/api";
-import restInfo from "./data/restInfo.json";
+// import restInfo from "./data/restInfo.json";
 
 const libraries = ["places"];
 const mapContainerStyle = {
@@ -20,7 +20,30 @@ const center = {
 
 export default function LoadMap() {
 
-const [selectedRestaurant, setSelectedRestaurant] = useState(null);
+  const [selectedRestaurant, setSelectedRestaurant] = useState([]);
+  const [clickedRestaurant, setClickedRestaurant] = useState("")
+
+  const getSelectedRestaurant = () => {
+
+    fetch(`http://localhost:8080/api/restaurant`, {
+      
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((selectRestaurant) => {
+        setSelectedRestaurant(selectRestaurant);
+      });
+  };
+  
+
+  useEffect(() => {
+    getSelectedRestaurant();
+  },[]);
 
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
@@ -29,50 +52,53 @@ const [selectedRestaurant, setSelectedRestaurant] = useState(null);
 
   if (loadError) return "Error loading the map";
   if (!isLoaded) return "Loading map...";
-    return (
-        <div>
+  return (
+    <div>
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         zoom={12}
         center={center}
       >
-        {restInfo.restaurants.map((restName) => (
+        {selectedRestaurant.map((restName) => (
           <MarkerF
-            key={restName.restaurant_id}
+            key={restName.latitude}
             icon={{
-              url: restName.icon,
+              url: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/whatsapp/326/hamburger_1f354.png",
               scaledSize: new window.google.maps.Size(40, 40),
             }}
             position={{
-              lat: restName.lat,
-              lng: restName.lng,
+              lat: restName.latitude,
+              lng: restName.longitude,
             }}
             onClick={() => {
-              setSelectedRestaurant(restName);
+              setClickedRestaurant(restName);
+              console.log(clickedRestaurant)
             }}
           />
         ))}
-        {selectedRestaurant ? (
+        {clickedRestaurant ? (
+
           <InfoWindowF
             position={{
-              lat: selectedRestaurant.lat,
-              lng: selectedRestaurant.lng,
+              lat: clickedRestaurant.latitude,
+              lng: clickedRestaurant.longitude,
             }}
             onCloseClick={() => {
-              setSelectedRestaurant(null);
+              setClickedRestaurant();
             }}
           >
             <div>
               <h6>
-              {selectedRestaurant.restaurant_name}
+              {clickedRestaurant.restaurantName}
               </h6>
-              <p>{selectedRestaurant.open_hours}</p>
-              <p>{selectedRestaurant.address}</p>
-              <p>{selectedRestaurant.phone_number}</p>
+              <p>{clickedRestaurant.openHours}</p> 
+              <p>{clickedRestaurant.phoneNumber}</p>
+              <p>{clickedRestaurant.address}</p>
             </div>
           </InfoWindowF>
-        ) : null}
+
+) : null}
       </GoogleMap>
     </div>
-    );
+  );
 }
