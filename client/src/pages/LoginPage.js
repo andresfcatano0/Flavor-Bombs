@@ -13,12 +13,11 @@ export default function LoginPage({setAuthUser}) {
 
     const [loginData, setLoginData] = useState({username:"",password:""});
 
-
     const history = useHistory();
+
 
     const handleLoginInput = (event) => {
         const inputChange = event.target;
-        // console.log(inputChange.id);
         
         const loginInfoCopy = {...loginData};
 
@@ -30,8 +29,6 @@ export default function LoginPage({setAuthUser}) {
     const handleSubmit = (event) =>{
         event.preventDefault();
 
-        // console.log(loginData);
-
         fetch("http://localhost:8080/api/security/login", {
             method: 'POST',
             headers: {
@@ -40,7 +37,7 @@ export default function LoginPage({setAuthUser}) {
             body: JSON.stringify(loginData)
         }).then(response => {
             if(response.status === 200) {
-                console.log("Success");
+                // console.log("Success");
                 return response.json();
             } else if(response.status === 403){
                 console.log("Forbidden");
@@ -51,9 +48,7 @@ export default function LoginPage({setAuthUser}) {
 
         }).then(jwtContainer => {
             const jwt = jwtContainer.jwt;
-            // console.log(jwt);
             const decodeJwt = jwtDecode(jwt);
-            // console.log(decodeJwt);
 
             const fullLoginData = {
                 token: jwt,
@@ -63,11 +58,11 @@ export default function LoginPage({setAuthUser}) {
             localStorage.setItem("userData",JSON.stringify(fullLoginData));
 
             setAuthUser(fullLoginData);
-            // console.log(fullLoginData)
-            fullLoginData.userData.roles[0].authority === "ROLE_ADMIN"
-              ? history.push("/admin/dashboard-menu")
-              : history.push("/");
-            // history.push("/");
+
+            // redirect user to appropriate home page
+            fullLoginData.userData.roles[0].authority === "ROLE_ADMIN" ? 
+            history.push("/admin/dashboard-menu") : history.push("/");
+            
         })
 
 
@@ -76,16 +71,34 @@ export default function LoginPage({setAuthUser}) {
 
 
   return (
-    <Row className="mt-4 align-items-center">
-      <Col>
-        <h1>Welcome to Flavor Bombs</h1>
+    <Row
+      className="mt-4 align-items-center"
+      id="food-background"
+      style={{ height: "83vh" }}
+    >
+      <Col xs={12} lg={6}>
+        <h1
+          className="text-center ms-5"
+          style={{ }}
+        >
+          Welcome <br />
+          to <br/> Flavor Bombs
+        </h1>
       </Col>
-      <Col>
-        <h2 className="text-center">Log In</h2>
-        <Form onSubmit={handleSubmit} className="justify-content-center me-3">
+      <Col
+        className="mx-5 text-center"
+        style={{
+          border: "0.5px solid grey",
+          height: "75vh",
+          backgroundColor: "white",
+        }}
+      >
+        <h2 className="text-center p-3 pb-4 mb-3">Log In</h2>
+        <Form onSubmit={handleSubmit} className="justify-content-center ">
           <FloatingLabel
             label="Username"
-            className="mb-3"
+            className="mb-3 mx-auto"
+            style={{ width: "90%" }}
           >
             <Form.Control
               type="input"
@@ -95,7 +108,11 @@ export default function LoginPage({setAuthUser}) {
               onChange={handleLoginInput}
             />
           </FloatingLabel>
-          <FloatingLabel  label="Password">
+          <FloatingLabel
+            label="Password"
+            style={{ width: "90%" }}
+            className="mt-5 mx-auto"
+          >
             <Form.Control
               type="password"
               id="password"
@@ -104,7 +121,7 @@ export default function LoginPage({setAuthUser}) {
               onChange={handleLoginInput}
             />
           </FloatingLabel>
-          <Button className="mt-3" variant="primary" type="submit">
+          <Button className="mt-5" variant="primary" type="submit">
             Submit
           </Button>
         </Form>
