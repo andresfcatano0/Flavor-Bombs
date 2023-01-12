@@ -23,6 +23,16 @@ public class Restaurant {
     BigDecimal latitude;
     BigDecimal longitude;
 
+    List<Review> reviews;
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
+    }
+
     
     public String getPhoneNumber() {
         return phoneNumber;
@@ -56,13 +66,6 @@ public class Restaurant {
         this.address = address;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
 
     public List<Order> getOrders() {
         return orders;
@@ -104,6 +107,21 @@ public class Restaurant {
         this.longitude = longitude;
     }
 
+    public String getRestaurantImage() {
+        return restaurantImage;
+    }
+
+    public void setRestaurantImage(String restaurantImage) {
+        this.restaurantImage = restaurantImage;
+    }
+
+    public String getFilterTags() {
+        return filterTags;
+    }
+
+    public void setFilterTags(String filterTags) {
+        this.filterTags = filterTags;
+    }
 
     @Override
     public String toString() {
