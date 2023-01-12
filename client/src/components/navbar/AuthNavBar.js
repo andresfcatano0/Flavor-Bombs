@@ -49,40 +49,31 @@ export default function AuthNavBar({setAuthUser}) {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-                <Link  to="/">
-              <Nav.Item className="nav-link">
-                  Home
-              </Nav.Item>
-                </Link>
-                <Link to="/about-us">
-              <Nav.Item className="nav-link">
-                  About Us
-              </Nav.Item>
-                </Link>
-                <Link to="/orders">
-              <Nav.Item className="nav-link">
-                  Orders
-              </Nav.Item>
-                </Link>
-                <Link to="/restaurants">
-              <Nav.Item className="nav-link">
-                  Restaurants
-              </Nav.Item>
-                </Link>
-              
+              <Link to="/">
+                <Nav.Item className="nav-link">Home</Nav.Item>
+              </Link>
+              <Link to="/about-us">
+                <Nav.Item className="nav-link">About Us</Nav.Item>
+              </Link>
+              <Link to="/orders">
+                <Nav.Item className="nav-link">Orders</Nav.Item>
+              </Link>
+              <Link to="/restaurants">
+                <Nav.Item className="nav-link">Restaurants</Nav.Item>
+              </Link>
             </Nav>
             <Nav>
-                <Link exact to="/shopping-cart" className="d-flex">
-              <Nav.Item className="nav-link">
+              <Link to="/shopping-cart" className="d-flex">
+                <Nav.Item className="nav-link">
                   <Cart3 className="align-self-center" size={20} />
-                  
+
                   {orderCartItems.length > 0 && (
                     <Badge pill bg="danger">
                       {itemCount}
                     </Badge>
                   )}
-              </Nav.Item>
-                </Link>
+                </Nav.Item>
+              </Link>
 
               {/* <Nav.Link href={`/shopping-cart`} className="d-flex">
                 
@@ -97,14 +88,19 @@ export default function AuthNavBar({setAuthUser}) {
               </Nav.Link> 
                 */}
               <Nav.Link href={`/user/:${user.userData.sub}`}>
-                <PersonCircle size={30} />
+                <PersonCircle size={30} style={{ paddingRight: "5px" }} />{" "}
+                {user.userData.sub}
               </Nav.Link>
-              <NavDropdown className="" title="" id="basic-nav-dropdown">
-                <NavDropdown.Item href="#action/3.1">Account</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">Orders</NavDropdown.Item>
-                <NavDropdown.Divider />
+              <NavDropdown
+                className=""
+                title=""
+                id="basic-nav-dropdown"
+              >
+                {/* <NavDropdown.Item href="#action/3.1">Account</NavDropdown.Item>
+                <NavDropdown.Item href="#action/3.2">Orders</NavDropdown.Item> */}
+                {/* <NavDropdown.Divider /> */}
                 <NavDropdown.Item onClick={handleLogout}>
-                  Logout {user.userData.sub}
+                  Logout
                 </NavDropdown.Item>
               </NavDropdown>
 
