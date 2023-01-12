@@ -17,7 +17,7 @@ function App() {
           🔥
         </span>
       </h1>
-      <LoadOneMap/>
+      <LoadMap/>
     </div>
   );
 }

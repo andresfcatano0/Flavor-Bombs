@@ -9,6 +9,7 @@ public class Restaurant {
     String restaurantName;
     String address;
 
+    String phoneNumber;
     String openHours;
 
     String description;
@@ -40,6 +41,14 @@ public class Restaurant {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public List<Order> getOrders() {

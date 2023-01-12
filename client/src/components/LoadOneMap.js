@@ -16,12 +16,14 @@ export default function LoadOneMap() {
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     libraries,
   });
-
-  const [selectedRestaurantId, setSelectedRestaurantId] = useState({});
+  const params = useParams();
+  const [selectedRestaurantId, setSelectedRestaurantId] = useState([]);
+  const [clickedRestaurant, setClickedRestaurant] = useState("")
 
 
   const getSelectedRestaurant = () => {
-    fetch(`http://localhost:8080/api/restaurant/2`, {
+    // fetch(`http://localhost:8080/api/restaurant/${params.id}`, {
+      fetch(`http://localhost:8080/api/restaurant/${6}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
@@ -31,8 +33,9 @@ export default function LoadOneMap() {
     .then(res=> {
         return res.json();
     })
-    .then(selectedRestaurant => {
-        setSelectedRestaurantId(selectedRestaurant);
+    .then(selectRestaurant => {
+        setSelectedRestaurantId(selectRestaurant);
+
     })
   }
 
@@ -42,22 +45,21 @@ export default function LoadOneMap() {
     height: "70vh",
   };
   const center = {
-    lat: selectedRestaurantId.latitude,
+    lat: +selectedRestaurantId.latitude,
     // 44.986656 
-    lng: selectedRestaurantId.longitude,
+    lng: +selectedRestaurantId.longitude,
   };
   
-  useState(() => {
+  useEffect(() => {
     getSelectedRestaurant()
-  })
-console.log(selectedRestaurantId)
+  },[])
   if (loadError) return "Error loading the map";
   if (!isLoaded) return "Loading map...";
     return (
         <div>
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
-        zoom={12}
+        zoom={17}
         center={center}
       >
 
@@ -65,33 +67,34 @@ console.log(selectedRestaurantId)
         key={selectedRestaurantId.restaurant_id}
         
         position={{
-          lat: selectedRestaurantId.latitude,
-          lng: selectedRestaurantId.longitude,
+          lat: +selectedRestaurantId.latitude,
+          lng: +selectedRestaurantId.longitude,
         }}
       onClick={() => {
-        setSelectedRestaurantId(selectedRestaurantId);
-        console.log(selectedRestaurantId)
+        setClickedRestaurant(selectedRestaurantId);
+        console.log(clickedRestaurant)
       }}
         />
-         {/* <InfoWindowF
+                {clickedRestaurant ? (
+         <InfoWindowF
             position={{
               lat: selectedRestaurantId.latitude,
               lng: selectedRestaurantId.longitude,
             }}
             onCloseClick={() => {
-              setSelectedRestaurantId();
+              setClickedRestaurant();
             }}
           >
             <div>
               <h6>
-              {selectedRestaurantId.restaurant_name}
+              {clickedRestaurant.restaurantName}
               </h6>
-              <p>{selectedRestaurantId.open_hours}</p>
-              <p>{selectedRestaurantId.address}</p>
-              <p>{selectedRestaurantId.phone_number}</p>
+              <p>{clickedRestaurant.openHours}</p> 
+              <p>{clickedRestaurant.phoneNumber}</p>
+              <p>{clickedRestaurant.address}</p>
             </div>
-          </InfoWindowF> */}
-    
+          </InfoWindowF>
+    ) : null}
       </GoogleMap>
     </div>
     );
