@@ -37,7 +37,7 @@ export default function LoginPage({setAuthUser}) {
             body: JSON.stringify(loginData)
         }).then(response => {
             if(response.status === 200) {
-                // console.log("Success");
+                console.log("Success");
                 return response.json();
             } else if(response.status === 403){
                 console.log("Forbidden");
