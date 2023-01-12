@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import './App.css';
+import "./App.css";
 import AuthNavBar from './components/navbar/AuthNavBar';
 import AdminNavBar from './components/navbar/AdminNavBar';
 import NavBar from './components/navbar/NavBar';
@@ -20,8 +20,12 @@ import CartContext from './context/cart/CartContext';
 import FoodBackgroundPattern from './components/FoodBackgroundPattern';
 import NotFoundPage from './pages/NotFoundPage';
 import LoaderEat from './components/LoaderEat';
+import "bootstrap/dist/css/bootstrap.min.css";
+import React, { useState, useEffect } from "react";
+import LoadMap from "./components/LoadMap";
+import LoadOneMap from "./components/LoadOneMap";
 
-function App() {
+
 
   // USER DATA
   let currentUserData = localStorage.getItem("userData");
@@ -148,6 +152,7 @@ function App() {
     saveOrderCartItems([]);
   }
 
+function App() {
   return (
     <UserContext.Provider value={authUser}>
       <CartContext.Provider
@@ -160,6 +165,15 @@ function App() {
           clearCart,
         }}
       >
+        <div id="googleMapApp">
+          <h1>
+            Flavor Bombs{" "}
+            <span role="img" aria-label="bombs">
+              🔥
+            </span>
+          </h1>
+          <LoadMap />
+        </div>
         <BrowserRouter>
           <NavBar setAuthUser={setAuthUser} />
           <Switch>

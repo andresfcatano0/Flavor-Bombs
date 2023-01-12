@@ -6,12 +6,6 @@ Host: localhost:8080
 
 GET /api/review/ HTTP/1.1
 Host: localhost:8080
-Content-Type: application/json
-
-{
-    "username":"janedoe",
-    "password":"bad-password"
-}
 
 ###
 

@@ -1,5 +1,6 @@
 package org.learn.bombs.models;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class Restaurant {
@@ -8,6 +9,7 @@ public class Restaurant {
     String restaurantName;
     String address;
 
+    String phoneNumber;
     String openHours;
 
     String description;
@@ -17,23 +19,17 @@ public class Restaurant {
     String filterTags;
 
     List<Order> orders;
+    
+    BigDecimal latitude;
+    BigDecimal longitude;
 
-    List<Review> reviews;
-
-    public List<Review> getReviews() {
-        return reviews;
+    
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setReviews(List<Review> reviews) {
-        this.reviews = reviews;
-    }
-
-    public List<Order> getOrders() {
-        return orders;
-    }
-
-    public void setOrders(List<Order> orders) {
-        this.orders = orders;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public Integer getRestaurantId() {
@@ -60,6 +56,22 @@ public class Restaurant {
         this.address = address;
     }
 
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
+
     public String getOpenHours() {
         return openHours;
     }
@@ -76,21 +88,22 @@ public class Restaurant {
         this.description = description;
     }
 
-    public String getRestaurantImage() {
-        return restaurantImage;
+     public BigDecimal getLatitude() {
+        return latitude;
     }
 
-    public void setRestaurantImage(String restaurantImage) {
-        this.restaurantImage = restaurantImage;
+    public void setLatitude(BigDecimal latitude) {
+        this.latitude = latitude;
     }
 
-    public String getFilterTags() {
-        return filterTags;
+    public BigDecimal getLongitude() {
+        return longitude;
     }
 
-    public void setFilterTags(String filterTags) {
-        this.filterTags = filterTags;
+    public void setLongitude(BigDecimal longitude) {
+        this.longitude = longitude;
     }
+
 
     @Override
     public String toString() {
