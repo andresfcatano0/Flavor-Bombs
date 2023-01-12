@@ -92,10 +92,6 @@ begin
     alter table app_user auto_increment = 1;
 
 
-
-
-
-
 insert into app_role (name) values
 ('USER'),
 ('ADMIN');
@@ -131,9 +127,21 @@ insert into reviews (review_text, app_user_id, restaurant_id) values
 ('It was heavenly.', 1, 3),
 ('Highly Recommend.', 2, 3);
 
-
+insert into menu (item_name, item_price, item_description, restaurant_id) values
+-- Taco House
+('Chicken Burrito', '13.50', 'Its a chicken burrito with beans.', 1),
+('Chicken Taco', '8.50', 'Ground chicken with pico and lettuce between a corn tortilla.', 1),
+('Mexican Rice', '6.70', 'Rice with beans and red and green peppers.', 1),
+-- Canadian bacon
+('Bison Burger', '15.00', 'Ground bison between two buns.', 2),
+('Bacon Burger', '13.00', 'Beef between two bun.s', 2),
+('Poutine', '12.70', 'Frech fries with gravy and cheese curds.', 2),
+-- SoulFu
+('Shrimp Curry Waffles', '12.75', 'Spicy shrimp on top of 3 buttermilk waffles.', 3),
+('Pork Fried Rice', '8.25', 'Pork fried with white rice, carrots, and peas.', 3),
+('BBQ Potstickers', '9.75', 'Pan seared dumpling with spicy BBQ sauce.', 3);
 
 
 end //
--- 4. Change the statement terminator back to the original.
+-- Change the statement terminator back to the original.
 delimiter ;
