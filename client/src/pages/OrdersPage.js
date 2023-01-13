@@ -92,10 +92,10 @@ export default function OrdersPage({restaurants}) {
                 <td className="text-center">{index + 1}</td>
                 <td>{order.orderDate}</td>
                 {/* <td>{order.restaurantId}</td> */}
-                <td>{restaurants[order.restaurantId].restaurantName}</td>
+                <td>{restaurants[order.restaurantId-1].restaurantName}</td>
                 <td>{order.orderItems}</td>
                 <td>{order.itemQuantity}</td>
-                <td>{order.totalPrice}</td>
+                <td>${(order.totalPrice).toFixed(2)}</td>
 
                 {/* <td>
                   <Button
@@ -113,7 +113,7 @@ export default function OrdersPage({restaurants}) {
         </tbody>
       </Table>) :
       <p className="text-muted">
-        There are no past orders.
+        There are no orders.
       </p>}
     </div>
   );
