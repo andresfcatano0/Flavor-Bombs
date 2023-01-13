@@ -6,12 +6,14 @@ import {
   MarkerF,
   InfoWindowF,
 } from "@react-google-maps/api";
+import { auto } from "@popperjs/core";
 // import restInfo from "./data/restInfo.json";
 
 const libraries = ["places"];
 const mapContainerStyle = {
-  width: "80vw",
-  height: "70vh",
+  margin: "7rem auto",
+  width: "60vw",
+  height: "60vh",
 };
 const center = {
   lat: 44.986656,
