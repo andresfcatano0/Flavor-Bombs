@@ -40,9 +40,11 @@ export default function OrdersPage({restaurants}) {
       if (window.confirm("Are you sure you want to delete this order?")) {
         fetch("http://localhost:8080/api/order/" + orderId, {
           method: "DELETE",
-          Authorization: "Bearer " + userInfo.token,
+          headers: {
+            Authorization: "Bearer " + userInfo.token,
+          },
         }).then((data) => {
-          // console.log(data);
+          console.log(data);
           getUserOrders();
           if (data.statusCode === 204) {
             console.log("successfully deleted restaurant");
@@ -81,7 +83,7 @@ export default function OrdersPage({restaurants}) {
             <th>Food Item</th>
             <th>Quantity</th>
             <th>Total Price</th>
-            {/* <th>Actions</th> */}
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -97,7 +99,7 @@ export default function OrdersPage({restaurants}) {
                 <td>{order.itemQuantity}</td>
                 <td>${(order.totalPrice).toFixed(2)}</td>
 
-                {/* <td>
+                <td>
                   <Button
                     value={order.orderId}
                     className="btn-danger"
@@ -105,7 +107,7 @@ export default function OrdersPage({restaurants}) {
                   >
                     Delete
                   </Button>
-                </td> */}
+                </td>
               </tr>
             );
           })
