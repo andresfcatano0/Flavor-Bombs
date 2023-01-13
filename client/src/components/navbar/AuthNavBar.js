@@ -81,30 +81,23 @@ export default function AuthNavBar({setAuthUser}) {
                 </Nav.Item>
               </Link>
 
-              {/* <Nav.Link href={`/shopping-cart`} className="d-flex">
-                
-                {orderCartItems.length > 0 && (
-                  <Badge pill bg="danger" className="align-self-start">
-                    {itemCount}
-                  </Badge>
-                )}
-                {/* <Badge pill bg="danger" className="align-self-start">
-                   777777
-                 </Badge> 
-              </Nav.Link> 
-                */}
               <Nav.Link href={`/user/:${user.userData.sub}`}>
-                <PersonCircle size={30} style={{ paddingRight: "5px" }} />{" "}
-                {user.userData.sub}
+                <PersonCircle size={30} style={{ paddingRight: "5px" }} />
               </Nav.Link>
-              <NavDropdown className="" title="" id="basic-nav-dropdown">
-                {/* <NavDropdown.Item href="#action/3.1">Account</NavDropdown.Item>
+              <NavItem>
+                <NavDropdown
+                  className=""
+                  title={user.userData.sub}
+                  id="basic-nav-dropdown"
+                >
+                  {/* <NavDropdown.Item href="#action/3.1">Account</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">Orders</NavDropdown.Item> */}
-                {/* <NavDropdown.Divider /> */}
-                <NavDropdown.Item onClick={handleLogout}>
-                  Logout
-                </NavDropdown.Item>
-              </NavDropdown>
+                  {/* <NavDropdown.Divider /> */}
+                  <NavDropdown.Item onClick={handleLogout}>
+                    Logout
+                  </NavDropdown.Item>
+                </NavDropdown>
+              </NavItem>
 
               {/* <Link to="/signup">
                   <Nav.Link>Sign Up</Nav.Link>
