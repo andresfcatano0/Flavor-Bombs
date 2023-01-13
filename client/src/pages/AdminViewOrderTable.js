@@ -24,7 +24,7 @@ import ReviewsTable from "../components/adminTables/ReviewsTable";
 import { Link } from "react-router-dom";
 import OrdersCartPage from "./OrdersCartPage";
 
-export default function AdminViewOrderTable({allUsers, restaurants, allOrders}) {
+export default function AdminViewOrderTable({allUsers, getAllOrders, deleteOrder, restaurants, allOrders}) {
     const adminUser = useContext(UserContext);
 
     console.log(allOrders)
@@ -59,15 +59,17 @@ export default function AdminViewOrderTable({allUsers, restaurants, allOrders}) 
           <th></th>
           <th>Date</th>
           <th>Order Items</th>
+          <th>Restaurants</th>
           <th>Quantity</th>
           <th>Total Price</th>
+          <th>Actions</th>
         </tr>
       </thead>
         {/* {Array.from({ 
             length: allOrders.length 
         }).map((_, index) => (
             {handleSpecificReviewOrder(index)} )} */}
-        <tbody>
+        <tbody className="text-center">
             {/* {allUsers.map((user)=> {
                 return (
                 <tr key={user.appUserId}>
@@ -85,15 +87,26 @@ export default function AdminViewOrderTable({allUsers, restaurants, allOrders}) 
 
            {allOrders.map((o, index)=> {
             return (
-
-                <tr key={o.orderId}>
-                    <td>{index+1}</td>
-                    <td>{o.orderDate}</td>
-                    <td>{o.orderItems}</td>
-                    <td>{o.itemQuantity}</td>
-                    <td>${(o.totalPrice).toFixed(2)}</td>
-                </tr>
-            )
+              <tr key={o.orderId}>
+                <td>{index + 1}</td>
+                <td>{o.orderDate}</td>
+                <td>{o.orderItems}</td>
+                <td>{restaurants[o.restaurantId].restaurantName}</td>
+                <td>{o.itemQuantity}</td>
+                <td>${o.totalPrice.toFixed(2)}</td>
+                <td>
+                  <Button
+                    value={o.restaurantId}
+                    onClick={() => {
+                      deleteOrder(o.restaurantId);
+                    }}
+                    className="btn btn-danger"
+                  >
+                    Delete
+                  </Button>
+                </td>
+              </tr>
+            );
            })}
         </tbody>
 

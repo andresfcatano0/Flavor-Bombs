@@ -19,8 +19,26 @@ import AdminNavLeftPane from "../../components/navbar/AdminNavLeftPane";
 import AdminViewOrderTable from "../AdminViewOrderTable";
 import UserContext from "../../context/AuthContext";
 
-export default function AdminViewAllOrders({allUsers,allOrders, restaurants,getRestaurants,specificUser,handleSpecificReviewOrder}) {
+export default function AdminViewAllOrders({allUsers, getAllOrders,allOrders, restaurants,getRestaurants,specificUser,handleSpecificReviewOrder}) {
   const adminUser = useContext(UserContext);
+
+  const deleteOrder = (orderId) => {
+    if (window.confirm("Are you sure you want to delete this order?")) {
+      fetch("http://localhost:8080/api/order/" + orderId, {
+        method: "DELETE",
+        headers: {
+          Authorization: "Bearer " + adminUser.token,
+        },
+      }).then((data) => {
+        // console.log(data);
+        getAllOrders();
+        if (data.statusCode === 204) {
+          console.log("successfully deleted order");
+        }
+        // console.log(data.statusCode)
+      });
+    }
+  };
 
 
   return (
@@ -38,8 +56,9 @@ export default function AdminViewAllOrders({allUsers,allOrders, restaurants,getR
               <AdminViewOrderTable 
               allOrders={allOrders}
               allUsers={allUsers} 
+              deleteOrder={deleteOrder}
               restaurants={restaurants}
-              // getAllOrders={getAllOrders}
+              getAllOrders={getAllOrders}
               specificUser={specificUser}
               handleSpecificReviewOrder={handleSpecificReviewOrder}
               />

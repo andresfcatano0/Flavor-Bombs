@@ -265,6 +265,7 @@ function App() {
                 restaurants={restaurants}
                 menus={menus}
                 allUsers={allUsers}
+                getAllOrders={getAllOrders}
                 getRestaurants={getRestaurants}
                 authUser={authUser}
                 setAuthUser={setAuthUser}
