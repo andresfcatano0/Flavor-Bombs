@@ -52,16 +52,16 @@ export default function AdminNavBar({ setAuthUser }) {
             <NavItem>
               <NavDropdown
                 className=""
-                title="Hello, Admin"
+                title="Admin View"
                 id="basic-nav-dropdown"
               >
-                <NavDropdown.Item href="#action/3.1">Settings</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">Users</NavDropdown.Item>
+                {/* <NavDropdown.Item href="#action/3.1">Settings</NavDropdown.Item> */}
+                {/* <NavDropdown.Item href="#action/3.2">Users</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.3">Orders</NavDropdown.Item>
                 <NavDropdown.Item href="/restaurants">
                   Restaurants
                 </NavDropdown.Item>
-                <NavDropdown.Divider />
+                <NavDropdown.Divider /> */}
                 <NavDropdown.Item onClick={handleLogout}>
                   Logout
                 </NavDropdown.Item>
