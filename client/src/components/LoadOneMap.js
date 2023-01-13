@@ -11,33 +11,33 @@ import { useParams } from "react-router-dom";
 
 const libraries = ["places"];
 
-export default function LoadOneMap() {
+export default function LoadOneMap({getSpecificRestaurant, specificRestaurant}) {
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     libraries,
   });
   const params = useParams();
-  const [selectedRestaurantId, setSelectedRestaurantId] = useState([]);
+  // const [selectedRestaurantId, setSelectedRestaurantId] = useState([]);
   const [clickedRestaurant, setClickedRestaurant] = useState("")
 
 
-  const getSelectedRestaurant = () => {
-    // fetch(`http://localhost:8080/api/restaurant/${params.id}`, {
-      fetch(`http://localhost:8080/api/restaurant/${6}`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json'
+  // const getSelectedRestaurant = () => {
+  //   // fetch(`http://localhost:8080/api/restaurant/${params.id}`, {
+  //     fetch(`http://localhost:8080/api/restaurant/${6}`, {
+  //       method: 'GET',
+  //       headers: {
+  //           'Content-Type': 'application/json'
 
-        },
-    })
-    .then(res=> {
-        return res.json();
-    })
-    .then(selectRestaurant => {
-        setSelectedRestaurantId(selectRestaurant);
+  //       },
+  //   })
+  //   .then(res=> {
+  //       return res.json();
+  //   })
+  //   .then(selectRestaurant => {
+  //       setSelectedRestaurantId(selectRestaurant);
 
-    })
-  }
+  //   })
+  // }
 
   const mapContainerStyle = {
 
@@ -45,57 +45,53 @@ export default function LoadOneMap() {
     height: "70vh",
   };
   const center = {
-    lat: +selectedRestaurantId.latitude,
-    // 44.986656 
-    lng: +selectedRestaurantId.longitude,
+    lat: +specificRestaurant.restaurantId.latitude,
+    // 44.986656
+    lng: +specificRestaurant.restaurantId.longitude,
   };
   
   useEffect(() => {
-    getSelectedRestaurant()
+    getSpecificRestaurant();
   },[])
   if (loadError) return "Error loading the map";
   if (!isLoaded) return "Loading map...";
     return (
-        <div>
-      <GoogleMap
-        mapContainerStyle={mapContainerStyle}
-        zoom={17}
-        center={center}
-      >
-
-        <MarkerF 
-        key={selectedRestaurantId.restaurant_id}
-        
-        position={{
-          lat: +selectedRestaurantId.latitude,
-          lng: +selectedRestaurantId.longitude,
-        }}
-      onClick={() => {
-        setClickedRestaurant(selectedRestaurantId);
-        console.log(clickedRestaurant)
-      }}
-        />
-                {clickedRestaurant ? (
-         <InfoWindowF
+      <div>
+        <GoogleMap
+          mapContainerStyle={mapContainerStyle}
+          zoom={17}
+          center={center}
+        >
+          <MarkerF
+            key={specificRestaurant.restaurantId.restaurant_id}
             position={{
-              lat: selectedRestaurantId.latitude,
-              lng: selectedRestaurantId.longitude,
+              lat: +specificRestaurant.restaurantId.latitude,
+              lng: +specificRestaurant.restaurantId.longitude,
             }}
-            onCloseClick={() => {
-              setClickedRestaurant();
+            onClick={() => {
+              setClickedRestaurant(specificRestaurant.restaurantId);
+              console.log(clickedRestaurant);
             }}
-          >
-            <div>
-              <h6>
-              {clickedRestaurant.restaurantName}
-              </h6>
-              <p>{clickedRestaurant.openHours}</p> 
-              <p>{clickedRestaurant.phoneNumber}</p>
-              <p>{clickedRestaurant.address}</p>
-            </div>
-          </InfoWindowF>
-    ) : null}
-      </GoogleMap>
-    </div>
+          />
+          {clickedRestaurant ? (
+            <InfoWindowF
+              position={{
+                lat: specificRestaurant.restaurantId.latitude,
+                lng: specificRestaurant.restaurantId.longitude,
+              }}
+              onCloseClick={() => {
+                setClickedRestaurant();
+              }}
+            >
+              <div>
+                <h6>{clickedRestaurant.restaurantName}</h6>
+                <p>{clickedRestaurant.openHours}</p>
+                <p>{clickedRestaurant.phoneNumber}</p>
+                <p>{clickedRestaurant.address}</p>
+              </div>
+            </InfoWindowF>
+          ) : null}
+        </GoogleMap>
+      </div>
     );
 }
