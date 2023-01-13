@@ -4,11 +4,11 @@ import Image from "react-bootstrap/Image";
 
 export default function HomePage() {
   return (
-    <div style={{overflowX:"hidden", position:"relative", zIndex: "-1",
+    <div style={{overflowX:"hidden", width:"100%", height:"100%", overflow:"hidden", position:"relative", zIndex: "-1",
     display:"block",
     position: "absolute",
     top: "0",
-    left: "0"}}>
+    left: "0"}} >
       <Image 
         
         src="page_images/front_page_image.jpg" 
