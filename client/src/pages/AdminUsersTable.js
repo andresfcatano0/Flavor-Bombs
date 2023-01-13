@@ -1,27 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
-import UserContext from "../context/AuthContext";
+import React, { useContext } from "react";
 
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Tab from "react-bootstrap/Tab";
-import ListGroup from "react-bootstrap/ListGroup";
-import Modal from "react-bootstrap/Modal";
 import {
-  BagCheckFill,
-  Basket3Fill,
-  BasketFill,
-  ChatQuoteFill,
-  Clipboard2Data,
-  MenuDown,
-  PeopleFill,
-  Shop,
   Trash3,
 } from "react-bootstrap-icons";
-import ReviewsTable from "../components/adminTables/ReviewsTable";
-import { Link } from "react-router-dom";
 
 export default function AdminUsersTable({ allUsers, deleteUser, handleSpecificReviewOrder }) {
   return (
@@ -47,14 +30,7 @@ export default function AdminUsersTable({ allUsers, deleteUser, handleSpecificRe
               <td>{userInfo.email}</td>
 
               <td className="d-flex justify-content-around">
-                {/* <Button
-                  value={userInfo.appUserId}
-                  onClick={() => {
-                    handleSpecificReviewOrder(userInfo.appUserId);
-                  }}
-                >
-                  View More Details
-                </Button> */}
+                
                 <Button
                   value={userInfo.appUserId}
                   onClick={()=> {

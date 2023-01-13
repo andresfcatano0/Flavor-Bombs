@@ -7,7 +7,6 @@ import {
   InfoWindowF,
 } from "@react-google-maps/api";
 import { auto } from "@popperjs/core";
-// import restInfo from "./data/restInfo.json";
 
 const libraries = ["places"];
 const mapContainerStyle = {

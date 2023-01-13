@@ -170,29 +170,14 @@ export default function RestaurantInfoPage({ restaurants, getRestaurants, menus 
           <p className="text-muted">{specificRestaurant.openHours}</p>
         </div>
         <hr />
-        {/* <Carousel activeIndex={index} onSelect={handleSelect}>
-              <Carousel.Item>
-                <ReviewCard/>
-              </Carousel.Item>
-              <Carousel.Item>
-                <ReviewCard/>
-              </Carousel.Item>
-              <Carousel.Item>
-                <ReviewCard/>
-              </Carousel.Item>
-            </Carousel> */}
         <Row>
           <ReviewCard reviews={reviews} specificRestaurant={specificRestaurant} />
-          {/* {console.log(reviews)} */}
-          {/* <ReviewCard /> */}
+          
         </Row>
         <hr />
         <div>
           <h4>Menu</h4>
-          {/* </div>
-        {menu.map((m) => {
-          return <MenuCard key={m.menuId} m={m} />;
-        })} */}
+          
 
           {found.map((m) => {
             return (
@@ -212,7 +197,6 @@ export default function RestaurantInfoPage({ restaurants, getRestaurants, menus 
                       height={"200px"}
                       style={{ borderRadius: "1.7rem", objectFit: "cover" }}
                       className="p-2, my-3"
-                      // src="https://cdn.pixabay.com/photo/2014/11/05/15/57/salmon-518032_1280.jpg"
                       src={m.itemImage}
                     />
                   </Col>

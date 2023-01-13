@@ -5,7 +5,6 @@ import "../components/FoodBackground.css"
 import Button from "react-bootstrap/Button";
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import UserContext from '../context/AuthContext';
 import jwtDecode from 'jwt-decode';
 import { useHistory } from 'react-router-dom';
 
