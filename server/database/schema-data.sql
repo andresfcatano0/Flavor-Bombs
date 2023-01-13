@@ -114,14 +114,14 @@ insert into restaurants (restaurant_name, phone_number, address, open_hours, des
 ('Taco House', '612-555-0186', '111 taco street', 'Monday to Saturday - 10am to 11pm', 'Serving the best tacos in town since 1958', "/images/restaurant-overhead.jpg", 44.986657, -93.258139),
 ('Canadian Bacon', '612-555-0156', '333 bacon street', 'Tuesday to Saturday - 9am to 9pm', 'Serving the bacon burger in town since 1999', "/images/bar-outside.jpg", 44.946346, -93.305101),
 ('Soulfu', '612-555-0150', '555 tasty avenue', 'Monday to Friday - 11am to 8pm', 'Serving the best waffles in town since 2001', "/images/food-seasoning.jpg", 44.97482, -93.275941),
-('Party Fowl', '763-555-0133', '89391 Christiansen Road', 'Monday to Sunday - 10am to 8pm', 'Serving the best waffles in town since 2001', "/images/pub-orange.jpg", 44.978471, -93.275941),
+('Party Fowl', '763-555-0133', '89391 Christiansen Road', 'Monday to Sunday - 10am to 8pm', 'Serving the best waffles in town since 2001', "/images/pub-orange.jpeg", 44.978471, -93.275941),
 ('9021PHO', '612-555-9157', '685 Swift Valleys', 'Tuesday to Sunday - 11am to 10pm', 'Hipster-friendly fusion with a little extra spice.', "/images/kitchen-working.jpg", 44.977032, -93.272362),
 ('Tequila Mockingbird', '612-555-2850', '93661 Bayer Square', 'Monday to Sunday - 11am to 11pm', 'We are a family-run operation spanning three generations of hard-working chefs.
 We strive for an experience that blows you out of this world.', "/images/storefront-red.jpg", 44.969191, -93.247046),
 ('Vincent Van Doughnut', '763-555-1123', '4192 Pietro Crossing', 'Monday to Sunday - 6am to 12am', 'Attention-hungry humans! Welcome you to our world-class restaurant.', "/images/bakery-inside.jpg", 44.968174, -93.276598),
-('Nacho Daddy', '952-555-3619', '411 Kareem Route', 'Monday to Friday - 11am to 8pm', 'You will get the OG taste of food at our restaurant.', "/images/cafe-inside.jpg", 44.96548, -93.298057),
+('Nacho Daddy', '952-555-3619', '411 Kareem Route', 'Monday to Friday - 11am to 8pm', 'You will get the OG taste of food at our restaurant.', "/images/cafe-inside.jpeg", 44.96548, -93.298057),
 ('Lord of the Wings', '763-555-8712', '320 Mizey Junction', 'Monday to Saturday - 10am to 11pm', 'We do wings and only wings', "/images/cafe-dim.jpg", 44.952147, -93.293456),
-('Pastabilities', '952-555-5873', '531 Dickinson Road', 'Monday to Sunday - 11am to 11pm', 'Everything can be solved with a little pasta', "/images/cafe-seats.jpg", 44.968053, -93.290599);
+('Pastabilities', '952-555-5873', '531 Dickinson Road', 'Monday to Sunday - 11am to 11pm', 'Everything can be solved with a little pasta', "/images/cafe-seats.jpeg", 44.968053, -93.290599);
 
 insert into reviews (review_text, app_user_id, restaurant_id) values
 -- Taco House
