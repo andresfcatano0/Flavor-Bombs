@@ -9,7 +9,7 @@ export default function ReviewCard({reviews}) {
       return(
 
         <Card style={{ width: "15rem" }} className="ms-3" key={review.reviewId}>
-      <Card.Header>{index}</Card.Header>
+      <Card.Header>Anonymous</Card.Header>
       <Card.Body>
         {/* <Card.Title>Special title treatment</Card.Title> */}
         <Card.Text>
