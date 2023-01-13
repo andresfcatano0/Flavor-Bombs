@@ -77,10 +77,30 @@ function App() {
       })
       .catch((err) => console.log(err));
   };
+  
+
+  // ALL USERS
+  const [allUsers, setAllUsers] = useState([]);
+
+  const getCurrentUserInfo = async () => {
+   await fetch("http://localhost:8080/api/user/", {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + authUser.token,
+      },
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        setAllUsers(data)
+      });
+  };
 
   useEffect(() => {
     getRestaurants();
     getAllMenus();
+    getCurrentUserInfo();
   }, []);
 
   //  LOAD CART if in storage
@@ -155,15 +175,14 @@ function App() {
           clearCart,
         }}
       >
-        
         <BrowserRouter>
           <NavBar setAuthUser={setAuthUser} />
           <Switch>
             <Route exact path="/">
               <HomePage />
-              <Map/>
+              <Map />
             </Route>
-            <Route path="/login">
+            <Route exact path="/login">
               <LoginPage setAuthUser={setAuthUser} />
             </Route>
             <Route path="/food">
@@ -176,7 +195,7 @@ function App() {
                 isLoading={isLoading}
               />
             </Route>
-            <Route path="/restaurant/:id">
+            <Route exact path="/restaurant/:id">
               <RestaurantInfoPage
                 getRestaurants={getRestaurants}
                 restaurants={restaurants}
@@ -184,32 +203,41 @@ function App() {
                 getAllMenus={getAllMenus}
               />
             </Route>
-            <Route path="/orders">
+            <Route exact path="/orders">
               <OrdersPage setAuthUser={setAuthUser} restaurants={restaurants} />
             </Route>
-            <Route path="/admin/dashboard-menu">
+            <Route exact path="/admin/dashboard-menu">
               <AdminDashboard
                 restaurants={restaurants}
+                menus={menus}
+                allUsers={allUsers}
                 getRestaurants={getRestaurants}
+                authUser={authUser}
                 setAuthUser={setAuthUser}
               />
             </Route>
-            <Route path="/admin/table-view">
+            <Route exact path="/admin/table-view">
               <AdminPage
                 setAuthUser={setAuthUser}
                 restaurants={restaurants}
+                menus={menus}
+                allUsers={allUsers}
                 getRestaurants={getRestaurants}
+                
               />
             </Route>
-            <Route path="/about-us">
+            <Route exact path="/about-us">
               <AboutPage />
             </Route>
             <Route path="/user/:username">
               <UserProfilePage setAuthUser={setAuthUser} />
             </Route>
 
-            <Route path="/shopping-cart">
-              <OrdersCartPage setAuthUser={setAuthUser} />
+            <Route exact path="/shopping-cart">
+              <OrdersCartPage
+                setAuthUser={setAuthUser}
+                restaurants={restaurants}
+              />
             </Route>
             <Route
               path="*"
