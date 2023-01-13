@@ -6,13 +6,13 @@ import Button from 'react-bootstrap/Button';
 import Badge from "react-bootstrap/Badge";
 import ListGroup from "react-bootstrap/ListGroup";
 import Card from "react-bootstrap/Card";
-import { Cart2, Clipboard2Data, CreditCardFill, People, PeopleFill, Shop, ShopWindow } from 'react-bootstrap-icons';
+import { Cart2, ChatQuoteFill, Clipboard2Data, CreditCardFill, People, PeopleFill, Shop, ShopWindow } from 'react-bootstrap-icons';
 import UserContext from '../context/AuthContext';
 import { Link } from 'react-router-dom';
 import AdminNavLeftPane from '../components/navbar/AdminNavLeftPane';
 
 
-export default function AdminDashboard({ setAuthUser, restaurants, menus, allUsers }) {
+export default function AdminDashboard({ setAuthUser, allReviews, getAllReviews, restaurants, menus, allUsers }) {
   const user = useContext(UserContext);
 
   const [allOrders, setAllOrders] = useState([]);
@@ -127,6 +127,32 @@ export default function AdminDashboard({ setAuthUser, restaurants, menus, allUse
                       See all orders
                     </Link>
                     <CreditCardFill style={{ color: "#DAA520" }} />
+                  </div>
+                </Card.Body>
+              </Card>
+            </Col>
+            </Row>
+            <Row>
+            <Col>
+              <Card style={{ width: "18rem" }}>
+                <Card.Body>
+                  <Card.Title className=" text-muted">REVIEWS</Card.Title>
+                  <Card.Subtitle className="mb-2 fs-2 fw-semibold">
+                    {allReviews.length}
+                  </Card.Subtitle>
+                  <Card.Text>
+                    Admins can view all reviews made and delete each one
+                  </Card.Text>
+                  
+                  <div className="d-flex align-items-center justify-content-between">
+                    <Link
+                      to="/admin/view-all-reviews"
+                      className="fw-semibold text-decoration-underline"
+                      style={{ color: "#999" }}
+                    >
+                      See all reviews
+                    </Link>
+                    <ChatQuoteFill style={{ color: "#DAA520" }} />
                   </div>
                 </Card.Body>
               </Card>

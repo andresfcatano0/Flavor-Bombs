@@ -8,6 +8,8 @@ import ListGroup from "react-bootstrap/ListGroup";
 import Card from "react-bootstrap/Card";
 import {
   Cart2,
+  ChatQuote,
+  ChatQuoteFill,
   Clipboard2Data,
   CreditCardFill,
   People,
@@ -53,6 +55,12 @@ export default function AdminNavLeftPane() {
               <div className="d-flex align-items-center justify-content-between py-2">
                 <Cart2 />
                 <span>Orders</span>
+              </div>
+            </Link>
+            <Link to="/admin/view-all-reviews" className="text-reset">
+              <div className="d-flex align-items-center justify-content-between py-2">
+                <ChatQuote />
+                <span>Reviews</span>
               </div>
             </Link>
           </div>
