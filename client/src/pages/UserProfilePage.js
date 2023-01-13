@@ -46,7 +46,7 @@ export default function UserProfilePage({setAuthUser}) {
         let found;
         for(let d of data){
           if (d.username == paramUsername) {
-            console.log(d)
+            // console.log(d)
             setFullUserData(d);
           }
         }

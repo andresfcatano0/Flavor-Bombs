@@ -44,7 +44,7 @@ export default function OrdersPage({restaurants}) {
             Authorization: "Bearer " + userInfo.token,
           },
         }).then((data) => {
-          console.log(data);
+          // console.log(data);
           getUserOrders();
           if (data.statusCode === 204) {
             console.log("successfully deleted restaurant");
@@ -87,7 +87,7 @@ export default function OrdersPage({restaurants}) {
           </tr>
         </thead>
         <tbody>
-          {console.log(orders)}
+          {/* {console.log(orders)} */}
           {orders.map((order, index) => {
             return (
               <tr key={order.orderId}>
