@@ -59,7 +59,7 @@ export default function AdminDashboard({ setAuthUser, allReviews, getAllReviews,
               </h2>
             </Col>
           </Row>
-          <Row>
+          <Row className="mb-3">
             <Col>
               <Card style={{ width: "18rem" }}>
                 <Card.Body>
@@ -76,7 +76,7 @@ export default function AdminDashboard({ setAuthUser, allReviews, getAllReviews,
                       className="fw-semibold text-decoration-underline"
                       style={{ color: "#999" }}
                     >
-                      See all user information
+                      See all users
                     </Link>
                     <PeopleFill style={{ color: "darkred" }} />
                   </div>
@@ -132,7 +132,7 @@ export default function AdminDashboard({ setAuthUser, allReviews, getAllReviews,
               </Card>
             </Col>
             </Row>
-            <Row>
+            <Row className="mb-3">
             <Col>
               <Card style={{ width: "18rem" }}>
                 <Card.Body>
@@ -152,7 +152,7 @@ export default function AdminDashboard({ setAuthUser, allReviews, getAllReviews,
                     >
                       See all reviews
                     </Link>
-                    <ChatQuoteFill style={{ color: "#DAA520" }} />
+                    <ChatQuoteFill style={{ color: "darkblue" }} />
                   </div>
                 </Card.Body>
               </Card>

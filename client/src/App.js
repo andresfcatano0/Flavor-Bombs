@@ -23,6 +23,7 @@ import Map from './components/Map';
 import AdminViewAllRestaurants from './pages/adminTables/AdminViewAllRestaurants';
 import AdminViewAllUsers from './pages/adminTables/AdminViewAllUsers';
 import AdminViewAllOrders from './pages/adminTables/AdminViewAllOrders';
+import AdminViewAllReviews from './pages/adminTables/AdminViewAllReviews';
 
 function App() {
   // USER DATA
@@ -78,6 +79,24 @@ function App() {
       })
       .catch((err) => console.log(err));
   };
+
+  //ALL REVIEWS
+  const [allReviews, setAllReviews] = useState([]);
+  const getAllReviews = async () => {
+    await fetch("http://localhost:8080/api/review", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        setAllReviews(data);
+      })
+      .catch((err) => console.log(err));
+  };
   
 
   // ALL USERS
@@ -121,24 +140,11 @@ function App() {
     getAllMenus();
     getAllUsers();
     getAllOrders();
+    getAllReviews();
   }, []);
 
 
 
-  // const [specificUser, setSpecificUser] = useState({});
-  // const handleSpecificReviewOrder = (userId) => {
-  //   fetch("http://localhost:8080/api/user/" + userId, {
-  //     method: "GET",
-  //     headers: {
-  //       Authorization: "Bearer " + user.token,
-  //     },
-  //   })
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       console.log(data);
-  //       setSpecificUser(data);
-  //     });
-  // };
 
   //  LOAD CART if in storage
   let orderFromLocal = localStorage.getItem("savedCart");
@@ -247,6 +253,8 @@ function App() {
                 allUsers={allUsers}
                 getRestaurants={getRestaurants}
                 authUser={authUser}
+                allReviews={allReviews}
+                getAllReviews={getAllReviews}
                 setAuthUser={setAuthUser}
               />
             </Route>
@@ -270,8 +278,20 @@ function App() {
                 authUser={authUser}
                 setAuthUser={setAuthUser}
                 allOrders={allOrders}
-                // specificUser={specificUser}
-                // handleSpecificReviewOrder={handleSpecificReviewOrder}
+              />
+            </Route>
+            <Route exact path="/admin/view-all-reviews">
+              <AdminViewAllReviews
+                restaurants={restaurants}
+                menus={menus}
+                allUsers={allUsers}
+                getAllOrders={getAllOrders}
+                getRestaurants={getRestaurants}
+                authUser={authUser}
+                setAuthUser={setAuthUser}
+                allOrders={allOrders}
+                allReviews={allReviews}
+                getAllReviews={getAllReviews}
               />
             </Route>
             <Route exact path="/admin/view-all-users">
@@ -283,8 +303,6 @@ function App() {
                 getRestaurants={getRestaurants}
                 authUser={authUser}
                 setAuthUser={setAuthUser}
-                // specificUser={specificUser}
-                // handleSpecificReviewOrder={handleSpecificReviewOrder}
               />
             </Route>
             <Route exact path="/admin/table-view">
