@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react'
 import Form from "react-bootstrap/Form";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
-
+import "../components/FoodBackground.css"
 import Button from "react-bootstrap/Button";
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
