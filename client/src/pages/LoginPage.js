@@ -72,9 +72,9 @@ export default function LoginPage({setAuthUser}) {
 
   return (
     <Row
-      className="mt-4 align-items-center"
+      className=" align-items-center mt-5"
       id="food-background"
-      style={{ height: "83vh" }}
+      style={{ height: "88vh", width:"100%" }}
     >
       <Col xs={12} lg={6}>
         <h1

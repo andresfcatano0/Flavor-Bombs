@@ -6,7 +6,7 @@ import { ReactComponent as LogoSvg } from "../assets/avatar_placeholders/stacy_a
 
 export default function AboutPage() {
   return (
-    <div className="text-center">
+    <div className="text-center" id="food-background">
       <div>
         <h1>About Us</h1>
         <hr width="60%" className="mx-auto" />
@@ -19,10 +19,10 @@ export default function AboutPage() {
               style={{
                 width: "150px",
                 height: "150px",
-                objectFit:"cover",
+                objectFit: "cover",
                 // border: "2px solid black",
                 borderRadius: "50%",
-                objectPosition: "80% 100%"
+                objectPosition: "80% 100%",
               }}
               className="p-3"
               src={require("../assets/andres.png")}
@@ -56,7 +56,7 @@ export default function AboutPage() {
           </Col>
         </Row>
         <hr width="95%" className="mx-auto" />
-        <div className="mb-3 mx-auto" style={{ width: "70vw" }}>
+        <div className="mb-3 mx-auto" style={{ width: "70vw", backgroundColor:"white" }}>
           <Row>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Donec
@@ -66,7 +66,7 @@ export default function AboutPage() {
             gravida rutrum quisque non tellus. Malesuada proin libero nunc
             consequat. Leo integer malesuada nunc vel risus commodo viverra.
           </Row>
-          <Row >
+          <Row>
             Libero enim sed faucibus turpis in eu mi. Dolor sed viverra ipsum
             nunc. Tellus molestie nunc non blandit massa enim nec dui nunc.
             Velit euismod in pellentesque massa placerat. Bibendum at varius vel

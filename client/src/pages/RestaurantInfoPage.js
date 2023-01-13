@@ -12,6 +12,7 @@ import MenuCard from '../components/MenuCard';
 import CartContext from '../context/cart/CartContext';
 import { DashCircle, PlusCircle, PlusCircleFill, Trash } from 'react-bootstrap-icons';
 import UserContext from '../context/AuthContext';
+import LoadOneMap from '../components/LoadOneMap';
 
 export default function RestaurantInfoPage({ restaurants, getRestaurants, menus }) {
 
@@ -148,10 +149,18 @@ export default function RestaurantInfoPage({ restaurants, getRestaurants, menus 
   return (
     // <div className="mt-4 flex-column text-center">
     <>
+    <div>
+      {/* <LoadOneMap
+        getSpecificRestaurant={getSpecificRestaurant}
+        specificRestaurant
+      ={specificRestaurant}/> */}
+      </div>
       <div className="mt-4 mx-4" key={specificRestaurant.restaurantId}>
         <div className="text-center">
-          <img src={specificRestaurant.restaurantImage} style={{height:"300px", width:"350px", objectFit:"cover"}}/>
-          
+          <img
+            src={specificRestaurant.restaurantImage}
+            style={{ height: "300px", width: "350px", objectFit: "cover" }}
+          />
         </div>
         <div>
           <h3 className="mt-2 text-end">{specificRestaurant.restaurantName}</h3>
@@ -173,7 +182,7 @@ export default function RestaurantInfoPage({ restaurants, getRestaurants, menus 
               </Carousel.Item>
             </Carousel> */}
         <Row>
-          <ReviewCard reviews={reviews} />
+          <ReviewCard reviews={reviews} specificRestaurant={specificRestaurant} />
           {/* {console.log(reviews)} */}
           {/* <ReviewCard /> */}
         </Row>
@@ -184,8 +193,7 @@ export default function RestaurantInfoPage({ restaurants, getRestaurants, menus 
         {menu.map((m) => {
           return <MenuCard key={m.menuId} m={m} />;
         })} */}
-          
-          
+
           {found.map((m) => {
             return (
               <Container
@@ -202,7 +210,7 @@ export default function RestaurantInfoPage({ restaurants, getRestaurants, menus 
                     <img
                       width={"350px"}
                       height={"200px"}
-                      style={{ borderRadius: "1.7rem", objectFit:"cover" }}
+                      style={{ borderRadius: "1.7rem", objectFit: "cover" }}
                       className="p-2, my-3"
                       // src="https://cdn.pixabay.com/photo/2014/11/05/15/57/salmon-518032_1280.jpg"
                       src={m.itemImage}
@@ -211,7 +219,7 @@ export default function RestaurantInfoPage({ restaurants, getRestaurants, menus 
                   <Col className="d-flex">
                     <Row>
                       <h5 className="mt-3 ">
-                        {m.itemName} - <span>${(m.itemPrice).toFixed(2)}</span>
+                        {m.itemName} - <span>${m.itemPrice.toFixed(2)}</span>
                       </h5>
                       <p>{m.itemDescription}</p>
                     </Row>
@@ -226,8 +234,6 @@ export default function RestaurantInfoPage({ restaurants, getRestaurants, menus 
                         </Button>
                       )} */}
 
-                      
-                      
                       {isItemInCart(m) && (
                         <>
                           <Button
@@ -237,12 +243,8 @@ export default function RestaurantInfoPage({ restaurants, getRestaurants, menus 
                           >
                             <PlusCircleFill />
                           </Button>
-                        
-                      
-                         
                         </>
-                      )
-                      }
+                      )}
 
                       {/* <Button
                         className="btn-success"
@@ -252,7 +254,6 @@ export default function RestaurantInfoPage({ restaurants, getRestaurants, menus 
                       </Button>
                       <span>{item.quantity}</span> */}
 
-                      
                       {/* <Button className="">Order Now</Button> */}
                       {!isItemInCart(m) && (
                         <Button
