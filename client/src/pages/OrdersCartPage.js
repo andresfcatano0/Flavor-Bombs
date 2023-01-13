@@ -67,17 +67,17 @@ export default function OrdersCartPage({restaurants}) {
      (sum, item) => sum+item.itemPrice * item.quantity, 0
    );
 
-   let restaurantNamesArray = orderCartItems.map((o,index) => {
-                    return (
-                       restaurants[o.restaurantId].restaurantName
-                    )
-                  })
-                  let restaurantUniqueNameArray = [
-                    ...new Set(restaurantNamesArray),
-                  ];
-                  if(restaurantUniqueNameArray.length > 0){
-                    restaurantUniqueNameArray = restaurantUniqueNameArray.join(", ")
-                  }
+  //  let restaurantNamesArray = orderCartItems.map((o,index) => {
+  //                   return (
+  //                      restaurants[o.restaurantId].restaurantName
+  //                   )
+  //                 })
+  //                 let restaurantUniqueNameArray = [
+  //                   ...new Set(restaurantNamesArray),
+  //                 ];
+  //                 if(restaurantUniqueNameArray.length > 0){
+  //                   restaurantUniqueNameArray = restaurantUniqueNameArray.join(", ")
+  //                 }
                     
 
   return (
@@ -209,11 +209,11 @@ export default function OrdersCartPage({restaurants}) {
             <Card style={{ width: "18rem" }}>
               <Card.Body>
                 <Card.Title>CART</Card.Title>
-                <Card.Subtitle className="mb-2 text-muted">
+                {/* <Card.Subtitle className="mb-2 text-muted">
                   From
                   {" "}
                   {restaurantUniqueNameArray}
-                </Card.Subtitle>
+                </Card.Subtitle> */}
                 <Card.Text className="fw-bolder">
                   Total: ${total.toFixed(2)}
                 </Card.Text>

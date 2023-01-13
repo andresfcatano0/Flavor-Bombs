@@ -56,7 +56,7 @@ export default function AdminViewOrderTable({allUsers, getAllOrders, deleteOrder
           <th></th>
           <th>Date</th>
           <th>Order Items</th>
-          <th>Restaurants</th>
+          {/* <th>Restaurants</th> */}
           <th>Quantity</th>
           <th>Total Price</th>
           <th>Actions</th>
@@ -88,7 +88,7 @@ export default function AdminViewOrderTable({allUsers, getAllOrders, deleteOrder
                 <td>{index + 1}</td>
                 <td>{o.orderDate}</td>
                 <td>{o.orderItems}</td>
-                <td>{restaurants[o.restaurantId].restaurantName}</td>
+                {/* <td>{restaurants[o.restaurantId].restaurantName}</td> */}
                 <td>{o.itemQuantity}</td>
                 <td>${o.totalPrice.toFixed(2)}</td>
                 <td>
