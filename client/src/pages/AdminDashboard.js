@@ -115,7 +115,7 @@ export default function AdminDashboard({ setAuthUser, restaurants, menus, allUse
                     {allOrders.length}
                   </Card.Subtitle>
                   <Card.Text>
-                    Admins can view all orders made and delete them for users
+                    Admins can view all orders made and delete them for restaurants
                   </Card.Text>
                   
                   <div className="d-flex align-items-center justify-content-between">
