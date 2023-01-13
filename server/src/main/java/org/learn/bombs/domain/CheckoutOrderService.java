@@ -50,7 +50,7 @@ public class CheckoutOrderService {
             BigDecimal price = BigDecimal.ZERO;
 
             for(CheckoutObject item : itemsForRestaurant){
-                commaSeparated = commaSeparated+item.getItemName()+",";
+                commaSeparated = commaSeparated+item.getItemName()+", ";
                 itemCount += item.getQuantity();
                 price = price.add(item.getItemPrice().multiply(new BigDecimal(item.getQuantity())));
             }
