@@ -10,7 +10,7 @@ import { DashCircle, DashCircleFill, PlusCircle, PlusCircleFill, Trash, Trash2Fi
 import CartContext from '../context/cart/CartContext'
 import { Link } from 'react-router-dom'
 import UserContext from '../context/AuthContext'
-import LoaderEat from '../components/LoaderEat'
+import LoaderEat from '../components/loadingComponents/LoaderEat'
 
 export default function OrdersCartPage({restaurants}) {
   const userInfo = useContext(UserContext);
