@@ -15,12 +15,14 @@ import {
   Shop,
   ShopWindow,
 } from "react-bootstrap-icons";
-import UserContext from "../context/AuthContext";
-import { Link } from "react-router-dom";
-import AdminRestaurantTable from "./AdminRestaurantTable";
-import AdminNavLeftPane from "../components/navbar/AdminNavLeftPane";
+import AdminNavLeftPane from "../../components/navbar/AdminNavLeftPane";
+import AdminViewOrderTable from "../AdminViewOrderTable";
+import UserContext from "../../context/AuthContext";
 
-export default function AdminViewAllUsers() {
+export default function AdminViewAllOrders({allOrders, restaurants,getRestaurants,specificUser,handleSpecificReviewOrder}) {
+  const adminUser = useContext(UserContext);
+
+
   return (
     <Container fluid className="mt-3">
       {/* Left Pane - Menu */}
@@ -33,7 +35,14 @@ export default function AdminViewAllUsers() {
         <Col xs={10}>
           <Row>
             <Col>
-              <></>
+              <AdminViewOrderTable 
+              allOrders={allOrders}
+              // orders={orders} 
+              restaurants={restaurants}
+              // getAllOrders={getAllOrders}
+              specificUser={specificUser}
+              handleSpecificReviewOrder={handleSpecificReviewOrder}
+              />
             </Col>
           </Row>
         </Col>

@@ -15,12 +15,12 @@ import {
   Shop,
   ShopWindow,
 } from "react-bootstrap-icons";
-import UserContext from "../context/AuthContext";
+import UserContext from "../../context/AuthContext";
 import { Link } from "react-router-dom";
-import AdminRestaurantTable from "./AdminRestaurantTable";
-import AdminNavLeftPane from "../components/navbar/AdminNavLeftPane";
+import AdminRestaurantTable from "../AdminRestaurantTable";
+import AdminNavLeftPane from "../../components/navbar/AdminNavLeftPane";
 
-export default function AdminViewAllRestaurants({ restaurants, menus, allUsers }) {
+export default function AdminViewAllRestaurants({ restaurants, getRestaurants, menus, allUsers }) {
     const user = useContext(UserContext);
 
     const [allOrders, setAllOrders] = useState([]);
@@ -43,6 +43,24 @@ export default function AdminViewAllRestaurants({ restaurants, menus, allUsers }
       getAllOrders();
     }, []);
 
+    const deleteRestaurant = (restaurantId) => {
+      if (window.confirm("Are you sure you want to delete this restaurant?")) {
+        fetch("http://localhost:8080/api/restaurant/" + restaurantId, {
+          method: "DELETE",
+          headers: {
+            Authorization: "Bearer " + user.token,
+          },
+        }).then((data) => {
+          // console.log(data);
+          getRestaurants();
+          if (data.statusCode === 204) {
+            console.log("successfully deleted restaurant");
+          }
+          // console.log(data.statusCode)
+        });
+      }
+    };
+
   return (
 
     <Container fluid className="mt-3">
@@ -57,6 +75,7 @@ export default function AdminViewAllRestaurants({ restaurants, menus, allUsers }
           <Row>
             <Col>
               <AdminRestaurantTable 
+              deleteRestaurant={deleteRestaurant}
               restaurants={restaurants} 
             //   deleteRestaurant={deleteRestaurant}
               />

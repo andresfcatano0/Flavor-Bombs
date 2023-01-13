@@ -23,7 +23,7 @@ import {
 import ReviewsTable from "../components/adminTables/ReviewsTable";
 import { Link } from "react-router-dom";
 
-export default function AdminUsersTable({ allUser, handleSpecificReviewOrder }) {
+export default function AdminUsersTable({ allUsers, deleteUser, handleSpecificReviewOrder }) {
   return (
     <Table striped bordered hover className="text-center">
       <thead>
@@ -37,7 +37,7 @@ export default function AdminUsersTable({ allUser, handleSpecificReviewOrder }) 
         </tr>
       </thead>
       <tbody>
-        {allUser.map((userInfo, index) => {
+        {allUsers.map((userInfo, index) => {
           return (
             <tr key={userInfo.appUserId}>
               <td>{index + 1}</td>
@@ -47,14 +47,21 @@ export default function AdminUsersTable({ allUser, handleSpecificReviewOrder }) 
               <td>{userInfo.email}</td>
 
               <td className="d-flex justify-content-around">
-                <Button value={userInfo.appUserId}
+                {/* <Button
+                  value={userInfo.appUserId}
                   onClick={() => {
                     handleSpecificReviewOrder(userInfo.appUserId);
                   }}
                 >
                   View More Details
-                </Button>
-                <Button className="btn btn-danger d-flex align-items-center">
+                </Button> */}
+                <Button
+                  value={userInfo.appUserId}
+                  onClick={()=> {
+                    deleteUser(userInfo.appUserId);
+                  }}
+                  className="btn btn-danger d-flex align-items-center"
+                >
                   <span className="px-2">Delete</span>
                   <Trash3 />
                 </Button>
