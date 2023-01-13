@@ -18,14 +18,11 @@ import AdminDashboard from './pages/AdminDashboard';
 import UserProfilePage from './pages/UserProfilePage';
 import OrdersCartPage from './pages/OrdersCartPage';
 import CartContext from './context/cart/CartContext';
-import FoodBackgroundPattern from './components/FoodBackgroundPattern';
 import NotFoundPage from './pages/NotFoundPage';
-import LoaderEat from './components/LoaderEat';
 import Map from './components/Map';
-import AdminViewAll from './pages/AdminViewAllRestaurants';
-import AdminViewAllRestaurants from './pages/AdminViewAllRestaurants';
-import AdminViewAllUsers from './pages/AdminViewAllUsers';
-import AdminViewAllOrders from './pages/AdminViewAllOrders';
+import AdminViewAllRestaurants from './pages/adminTables/AdminViewAllRestaurants';
+import AdminViewAllUsers from './pages/adminTables/AdminViewAllUsers';
+import AdminViewAllOrders from './pages/adminTables/AdminViewAllOrders';
 
 function App() {
   // USER DATA
@@ -86,7 +83,7 @@ function App() {
   // ALL USERS
   const [allUsers, setAllUsers] = useState([]);
 
-  const getCurrentUserInfo = async () => {
+  const getAllUsers = async () => {
    await fetch("http://localhost:8080/api/user/", {
       method: "GET",
       headers: {
@@ -101,11 +98,47 @@ function App() {
       });
   };
 
+  // ALL ORDERS
+  const [allOrders, setAllOrders] = useState([]);
+
+  const getAllOrders = async () => {
+    await fetch("http://localhost:8080/api/order/all", {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + authUser.token,
+      },
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        setAllOrders(data);
+      });
+  };
+
   useEffect(() => {
     getRestaurants();
     getAllMenus();
-    getCurrentUserInfo();
+    getAllUsers();
+    getAllOrders();
   }, []);
+
+
+
+  // const [specificUser, setSpecificUser] = useState({});
+  // const handleSpecificReviewOrder = (userId) => {
+  //   fetch("http://localhost:8080/api/user/" + userId, {
+  //     method: "GET",
+  //     headers: {
+  //       Authorization: "Bearer " + user.token,
+  //     },
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       console.log(data);
+  //       setSpecificUser(data);
+  //     });
+  // };
 
   //  LOAD CART if in storage
   let orderFromLocal = localStorage.getItem("savedCart");
@@ -189,9 +222,6 @@ function App() {
             <Route exact path="/login">
               <LoginPage setAuthUser={setAuthUser} />
             </Route>
-            <Route path="/food">
-              <LoaderEat />
-            </Route>
             <Route exact path="/restaurants">
               <RestaurantPage
                 restaurants={restaurants}
@@ -228,7 +258,8 @@ function App() {
                 getRestaurants={getRestaurants}
                 authUser={authUser}
                 setAuthUser={setAuthUser}
-              /></Route>
+              />
+            </Route>
             <Route exact path="/admin/view-all-orders">
               <AdminViewAllOrders
                 restaurants={restaurants}
@@ -237,6 +268,9 @@ function App() {
                 getRestaurants={getRestaurants}
                 authUser={authUser}
                 setAuthUser={setAuthUser}
+                allOrders={allOrders}
+                // specificUser={specificUser}
+                // handleSpecificReviewOrder={handleSpecificReviewOrder}
               />
             </Route>
             <Route exact path="/admin/view-all-users">
@@ -244,9 +278,12 @@ function App() {
                 restaurants={restaurants}
                 menus={menus}
                 allUsers={allUsers}
+                getAllUsers={getAllUsers}
                 getRestaurants={getRestaurants}
                 authUser={authUser}
                 setAuthUser={setAuthUser}
+                // specificUser={specificUser}
+                // handleSpecificReviewOrder={handleSpecificReviewOrder}
               />
             </Route>
             <Route exact path="/admin/table-view">
@@ -256,7 +293,6 @@ function App() {
                 menus={menus}
                 allUsers={allUsers}
                 getRestaurants={getRestaurants}
-                
               />
             </Route>
             <Route exact path="/about-us">
