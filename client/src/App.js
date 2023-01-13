@@ -22,6 +22,10 @@ import FoodBackgroundPattern from './components/FoodBackgroundPattern';
 import NotFoundPage from './pages/NotFoundPage';
 import LoaderEat from './components/LoaderEat';
 import Map from './components/Map';
+import AdminViewAll from './pages/AdminViewAllRestaurants';
+import AdminViewAllRestaurants from './pages/AdminViewAllRestaurants';
+import AdminViewAllUsers from './pages/AdminViewAllUsers';
+import AdminViewAllOrders from './pages/AdminViewAllOrders';
 
 function App() {
   // USER DATA
@@ -208,6 +212,35 @@ function App() {
             </Route>
             <Route exact path="/admin/dashboard-menu">
               <AdminDashboard
+                restaurants={restaurants}
+                menus={menus}
+                allUsers={allUsers}
+                getRestaurants={getRestaurants}
+                authUser={authUser}
+                setAuthUser={setAuthUser}
+              />
+            </Route>
+            <Route exact path="/admin/view-all-restaurants">
+              <AdminViewAllRestaurants
+                restaurants={restaurants}
+                menus={menus}
+                allUsers={allUsers}
+                getRestaurants={getRestaurants}
+                authUser={authUser}
+                setAuthUser={setAuthUser}
+              /></Route>
+            <Route exact path="/admin/view-all-orders">
+              <AdminViewAllOrders
+                restaurants={restaurants}
+                menus={menus}
+                allUsers={allUsers}
+                getRestaurants={getRestaurants}
+                authUser={authUser}
+                setAuthUser={setAuthUser}
+              />
+            </Route>
+            <Route exact path="/admin/view-all-users">
+              <AdminViewAllUsers
                 restaurants={restaurants}
                 menus={menus}
                 allUsers={allUsers}

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -9,55 +9,40 @@ import Card from "react-bootstrap/Card";
 import { Cart2, Clipboard2Data, CreditCardFill, People, PeopleFill, Shop, ShopWindow } from 'react-bootstrap-icons';
 import UserContext from '../context/AuthContext';
 import { Link } from 'react-router-dom';
+import AdminNavLeftPane from '../components/navbar/AdminNavLeftPane';
 
 
-export default function AdminDashboard({ setAuthUser }) {
+export default function AdminDashboard({ setAuthUser, restaurants, menus, allUsers }) {
   const user = useContext(UserContext);
+
+  const [allOrders, setAllOrders] = useState([]);
+
+  const getAllOrders = async () => {
+    await fetch("http://localhost:8080/api/order/all", {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + user.token,
+      },
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        setAllOrders(data);
+      });
+  };
+
+  useEffect(()=> {
+    getAllOrders()
+  },[])
+
 
   return (
     <Container fluid className="mt-3">
       {/* Left Pane - Menu */}
       <Row>
         <Col>
-          <div>
-            <ListGroup as="ol">
-              <ListGroup.Item as="li" className=" ">
-                <div className="ms-2 me-auto">
-                  <div className="fw-bold text-muted">MAIN</div>
-                  <div className="d-flex align-items-center justify-content-between">
-                    <Clipboard2Data
-                    // style={{marginLeft: "-15px"}}
-                    />
-                    <span className="">Dashboard</span>
-                  </div>
-                </div>
-              </ListGroup.Item>
-              <ListGroup.Item as="li" className="">
-                <div className="ms-2 me-auto">
-                  <div className="fw-bold text-muted">VIEWINGS</div>
-                  <Link to="/admin/table-view#link2" className="text-reset">
-                    <div className="d-flex align-items-center justify-content-between">
-                      <People />
-                      <span>Users</span>
-                    </div>
-                  </Link>
-                  <Link
-                    to="admin/table-view#restaurant-table"
-                    className="text-reset"
-                  >
-                    <div className="d-flex align-items-center justify-content-between">
-                      <ShopWindow />
-                      <span>Restaurants</span>
-                    </div>
-                  </Link>
-                  <div className="d-flex align-items-center justify-content-between">
-                    <Cart2 />
-                    <span>Orders</span>
-                  </div>
-                </div>
-              </ListGroup.Item>
-            </ListGroup>
-          </div>
+          <AdminNavLeftPane />
         </Col>
 
         {/* Right Pane - Content */}
@@ -80,19 +65,18 @@ export default function AdminDashboard({ setAuthUser }) {
                 <Card.Body>
                   <Card.Title className=" text-muted">USERS</Card.Title>
                   <Card.Subtitle className="mb-2 fs-2 fw-semibold">
-                    10
+                    {allUsers.length}
                   </Card.Subtitle>
                   <Card.Text>
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
+                    Admins can view and delete registered users.
                   </Card.Text>
                   <div className="d-flex align-items-center justify-content-between">
                     <Link
-                      to="/admin/table-view#link2"
+                      to="/admin/view-all-users"
                       className="fw-semibold text-decoration-underline"
                       style={{ color: "#999" }}
                     >
-                      See all users
+                      See all user information
                     </Link>
                     <PeopleFill style={{ color: "darkred" }} />
                   </div>
@@ -104,15 +88,12 @@ export default function AdminDashboard({ setAuthUser }) {
                 <Card.Body>
                   <Card.Title className=" text-muted">RESTAURANTS</Card.Title>
                   <Card.Subtitle className="mb-2 fs-2 fw-semibold">
-                    30
+                    {restaurants.length}
                   </Card.Subtitle>
-                  <Card.Text>
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
-                  </Card.Text>
+                  <Card.Text>Admins can view and delete restaurants</Card.Text>
                   <div className="d-flex align-items-center justify-content-between">
                     <Link
-                      to="/admin/table-view"
+                      to="/admin/view-all-restaurants"
                       // <Card.Link
                       //   href="#"
                       className="fw-semibold text-decoration-underline"
@@ -131,20 +112,20 @@ export default function AdminDashboard({ setAuthUser }) {
                 <Card.Body>
                   <Card.Title className=" text-muted">ORDERS</Card.Title>
                   <Card.Subtitle className="mb-2 fs-2 fw-semibold">
-                    25
+                    {allOrders.length}
                   </Card.Subtitle>
                   <Card.Text>
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
+                    Admins can view all orders made and delete them for users
                   </Card.Text>
+                  
                   <div className="d-flex align-items-center justify-content-between">
-                    <Card.Link
-                      href="#"
+                    <Link
+                      to="/admin/view-all-orders"
                       className="fw-semibold text-decoration-underline"
                       style={{ color: "#999" }}
                     >
                       See all orders
-                    </Card.Link>
+                    </Link>
                     <CreditCardFill style={{ color: "#DAA520" }} />
                   </div>
                 </Card.Body>
