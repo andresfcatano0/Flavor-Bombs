@@ -27,8 +27,6 @@ import OrdersCartPage from "./OrdersCartPage";
 export default function AdminViewOrderTable({allUsers, getAllOrders, deleteOrder, restaurants, allOrders}) {
     const adminUser = useContext(UserContext);
 
-    console.log(allOrders)
-
     const [specificUser, setSpecificUser] = useState({});
     const handleSpecificReviewOrder = (userId) => {
       fetch("http://localhost:8080/api/user/" + userId, {
@@ -39,17 +37,16 @@ export default function AdminViewOrderTable({allUsers, getAllOrders, deleteOrder
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
           setSpecificUser(data);
         });
     };
 
 
 
-    useEffect(()=> {
-        console.log(handleSpecificReviewOrder(1))
+    // useEffect(()=> {
+    //     console.log(handleSpecificReviewOrder(1))
 
-    },[])
+    // },[])
 
    
   return (
