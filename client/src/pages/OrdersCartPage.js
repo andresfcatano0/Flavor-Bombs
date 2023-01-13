@@ -6,26 +6,15 @@ import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import Table from 'react-bootstrap/Table'
 import Image from "react-bootstrap/Image";
-import { DashCircle, PlusCircle, PlusCircleFill, Trash, Trash2Fill } from 'react-bootstrap-icons'
+import { DashCircle, DashCircleFill, PlusCircle, PlusCircleFill, Trash, Trash2Fill, Trash3Fill, TrashFill } from 'react-bootstrap-icons'
 import CartContext from '../context/cart/CartContext'
 import { Link } from 'react-router-dom'
 import UserContext from '../context/AuthContext'
 import LoaderEat from '../components/LoaderEat'
 
-export default function OrdersCartPage() {
+export default function OrdersCartPage({restaurants}) {
   const userInfo = useContext(UserContext);
   
-  // const [quantity, setQuantity] = useState(1);
-
-  // const handleQuantity = (type) => {
-  //     if(type === "decrease"){
-  //         quantity > 1 && setQuantity(quantity - 1);
-  //     }
-  //     else{
-  //         setQuantity(quantity + 1);
-  //     }
-  // }
-
   const [isLoading, setIsLoading] = useState(false);
 
   const {
@@ -36,33 +25,7 @@ export default function OrdersCartPage() {
     decreaseQuantity
   } = useContext(CartContext);
 
-  // const newlyMadeOrder = {
-  //   orderItems: "",
-  //   userId: "",
-  //   restaurantId: "",
-  //   orderDate: "",
-  //   itemQuantity: "",
-  //   totalPrice: "",
-  // };
-
-  // const [newOrder, setNewOrder] = useState({newlyMadeOrder})
-
-  // const completeOrder = () => {
-  //   fetch("http://localhost:8080/api/order", {
-  //     method: "POST",
-  //     headers:{
-  //       Authorization: "Bearer " + userInfo.token,
-  //       "Content-Type": "application/json" 
-  //     },
-  //     body: JSON.stringify(newlyMadeOrder)
-  //   }).then((res)=> {
-  //     console.log(res)
-  //   }).then(err=> {
-  //     console.log(err)
-  //   })
-  //   ;
-  // }
-
+  
   const handleCheckoutOrder = async () => {
     const checkoutItem = [
       {filterTags: "",
@@ -104,10 +67,22 @@ export default function OrdersCartPage() {
      (sum, item) => sum+item.itemPrice * item.quantity, 0
    );
 
+   let restaurantNamesArray = orderCartItems.map((o,index) => {
+                    return (
+                       restaurants[o.restaurantId].restaurantName
+                    )
+                  })
+                  let restaurantUniqueNameArray = [
+                    ...new Set(restaurantNamesArray),
+                  ];
+                  if(restaurantUniqueNameArray.length > 0){
+                    restaurantUniqueNameArray = restaurantUniqueNameArray.join(", ")
+                  }
+                    
+
   return (
     <Container className="mt-3">
       <h2 className="text-center mb-4">Order Summary</h2>
-
       {/* {handleCheckoutOrder && (
         <p>
           Thank you for ordering
@@ -120,9 +95,15 @@ export default function OrdersCartPage() {
       {/* If cart is empty, show no items in cart message, otherwise show items */}
       {orderCartItems.length === 0 ? (
         <div>
-          <h5 className="text-center">Cart is empty...<span>Head to your orders page or grab some food from the Restaurants page</span></h5>
-          <LoaderEat/>
-          </div>
+          <h5 className="text-center mt-3">
+            Cart is empty...
+            <span>
+              Head to your orders page or grab some food from the Restaurants
+              page
+            </span>
+          </h5>
+          <LoaderEat />
+        </div>
       ) : (
         <Row className="d-flex justify-content-between">
           <Col xs={8} className="me-5">
@@ -137,10 +118,9 @@ export default function OrdersCartPage() {
                   <th>Total</th>
                 </tr>
               </thead>
-              <tbody>
-                {console.log(orderCartItems)}
+              <tbody className="">
                 {orderCartItems.map((item) => (
-                  <tr key={item.menuId}>
+                  <tr key={item.menuId} className="">
                     <td>
                       <img
                         height="65"
@@ -156,143 +136,93 @@ export default function OrdersCartPage() {
                     <td>{item.itemName}</td>
                     <td>{item.itemDescription}</td>
                     <td>${item.itemPrice.toFixed(2)}</td>
-                    <td>
-                      <Button
-                        className="btn-success"
+                    <td className="">
+                      {/* <Button
+                        className="btn-success py-auto"
+                        size="sm"
+                        style={{ fontSize: "10px" }}
                         onClick={() => increaseQuantity(item)}
-                      >
-                        <PlusCircleFill />
-                      </Button>
-                      <span>{item.quantity}</span>
-
+                      > */}
+                      <PlusCircleFill
+                        style={{
+                          fontSize: "15px",
+                          color: "#198754",
+                          cursor: "pointer"
+                        }}
+                        onClick={() => increaseQuantity(item)}
+                      />{" "}
+                      {/* </Button> */}
+                      <span>{item.quantity}</span>{" "}
                       {item.quantity > 1 && (
-                        <Button
-                          className="btn-secondary"
+                        // <Button
+                        //   className="btn-secondary"
+                        //   size="sm"
+                        //   style={{ fontSize: "10px" }}
+                        //   onClick={() => decreaseQuantity(item)}
+                        // >
+                        <DashCircleFill
+                          style={{
+                            fontSize: "15px",
+                            color: "#6c757d",
+                            cursor: "pointer",
+                            // padding: "3px",
+                            // borderRadius: "5px",
+                            // color: "white",
+                          }}
                           onClick={() => decreaseQuantity(item)}
-                        >
-                          <DashCircle />
-                        </Button>
-                      )}
-
+                        />
+                        // </Button>
+                      )}{" "}
                       {item.quantity === 1 && (
-                        <Button
-                          className="btn-danger"
+                        // <Button
+                        //   className="btn-danger d-flex align-items-center justify-content-center"
+                        //   size="sm"
+                        //   style={{ padding: "3px"}}
+                        //   onClick={() => removeItemFromCart(item)}
+                        // >
+                        <Trash3Fill
+                          // className="btn "
+                          style={{
+                            fontSize: "17px",
+                            // backgroundColor: "#dc3545",
+                            // padding: "3px",
+                            marginBottom:"4px",
+                            borderRadius: "5px",
+                            color: "#dc3545",
+                            cursor: "pointer",
+                          }}
                           onClick={() => removeItemFromCart(item)}
-                        >
-                          <Trash />
-                        </Button>
+                        />
+                        //  </Button>
                       )}
                     </td>
                     <td>${(item.itemPrice * item.quantity).toFixed(2)}</td>
                   </tr>
                 ))}
 
-                {/* Template */}
-                {/* <tr>
-                  <td style={{ padding: "5px" }}>
-                    <Image
-                      src={require("../assets/images/burger-closeup.jpeg")}
-                      // width="50"
-                      height="65"
-                      style={{
-                        objectFit: "cover",
-                        width: "100%",
-                        borderRadius: "2px",
-                      }}
-                      className="d-inline-block align-top"
-                    />
-                  </td>
-                  <td>Menu Item Name</td>
-                  <td>Words</td>
-                  <td>$2.99</td>
-                  <td className="d-flex align-items-center justify-content-between"> */}
-                {/* <DashCircle onClick={()=> {
-                    handleQuantity("decrease")
-                  }}/>
-                  {quantity}
-                  <PlusCircle onClick={()=> {
-                    handleQuantity("increase")}}/> */}
-                {/* </td>
-                  <td className="fw-bolder">$2.99</td>
-                </tr> */}
-
-                {/* End of template  */}
-
-                {/* {orderCartItems.map((m) => (
-                  <tr key={m.menuId}> */}
-
-                {/* <td>{m.itemName}</td>
-                    <td>{m.itemDescription}</td>
-                    <td>{m.itemPrice}</td> */}
-
-                {/* <td>
-                      <PlusCircle
-                        onClick={() => {
-                          increaseQuantity(m);
-                        }}
-                      />
-                      {m.quantity}
-                      <DashCircle
-                        onClick={() => {
-                          decreaseQuantity(m);
-                        }}
-                      /> */}
-
-                {/* Remove item if user clicks minus after 1 */}
-                {/* {m.quantity === 1 && (
-                        <Trash2Fill
-                          onClick={() => {
-                            removeItemFromCart(m);
-                          }}
-                        />
-                      )}
-                    </td>
-                    <td>{m.itemPrice}</td>
-                  </tr>
-                ))} */}
-                {/* <tr>
-                  <td style={{ padding: "5px" }}> */}
-                {/* <Image
-                      src={require("../assets/images/burger-closeup.jpeg")}
-                      // width="50"
-                      height="65"
-                      style={{
-                        objectFit: "cover",
-                        width: "100%",
-                        borderRadius: "2px",
-                      }}
-                      className="d-inline-block align-top"
-                    /> */}
-                {/* </td>
-                  
-                  <td className="d-flex align-items-center justify-content-between"> */}
-                {/* <DashCircle onClick={()=> {
-                    handleQuantity("decrease")
-                  }}/>
-                  {quantity}
-                  <PlusCircle onClick={()=> {
-                    handleQuantity("increase")}}/> */}
-                {/* </td>
-                  <td className="fw-bolder">$2.99</td>
-                </tr> */}
+               
               </tbody>
             </Table>
           </Col>
 
-          <Col >
+          <Col>
             <Card style={{ width: "18rem" }}>
               <Card.Body>
                 <Card.Title>CART</Card.Title>
                 <Card.Subtitle className="mb-2 text-muted">
-                  From Restaurant Name
+                  From
+                  {" "}
+                  {restaurantUniqueNameArray}
                 </Card.Subtitle>
-                <Card.Text className="fw-bolder">Total: ${total.toFixed(2)}</Card.Text>
+                <Card.Text className="fw-bolder">
+                  Total: ${total.toFixed(2)}
+                </Card.Text>
                 {orderCartItems.length > 0 && (
-                  <div >
-                    <Button className="me-4" onClick={handleCheckoutOrder}>Checkout Now</Button>
+                  <div>
+                    <Button className="me-4" onClick={handleCheckoutOrder}>
+                      Checkout Now
+                    </Button>
 
-
-                   
                     <Button className="btn-danger" onClick={clearCart}>
                       Clear Cart
                     </Button>
@@ -303,7 +233,6 @@ export default function OrdersCartPage() {
           </Col>
         </Row>
       )}
-      {/* )}  */}
     </Container>
   );
 }
