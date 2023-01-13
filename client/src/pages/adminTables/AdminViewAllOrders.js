@@ -19,7 +19,7 @@ import AdminNavLeftPane from "../../components/navbar/AdminNavLeftPane";
 import AdminViewOrderTable from "../AdminViewOrderTable";
 import UserContext from "../../context/AuthContext";
 
-export default function AdminViewAllOrders({allOrders, restaurants,getRestaurants,specificUser,handleSpecificReviewOrder}) {
+export default function AdminViewAllOrders({allUsers,allOrders, restaurants,getRestaurants,specificUser,handleSpecificReviewOrder}) {
   const adminUser = useContext(UserContext);
 
 
@@ -37,7 +37,7 @@ export default function AdminViewAllOrders({allOrders, restaurants,getRestaurant
             <Col>
               <AdminViewOrderTable 
               allOrders={allOrders}
-              // orders={orders} 
+              allUsers={allUsers} 
               restaurants={restaurants}
               // getAllOrders={getAllOrders}
               specificUser={specificUser}
