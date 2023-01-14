@@ -148,9 +148,9 @@ export default function RestaurantInfoPage({ restaurants, getRestaurants, menus 
 
   return (
     // <div className="mt-4 flex-column text-center">
-    <>
-    <div>
-      {/* <LoadOneMap
+    <div id="food-background" style={{ height: "100%" }}>
+      <div>
+        {/* <LoadOneMap
         getSpecificRestaurant={getSpecificRestaurant}
         specificRestaurant
       ={specificRestaurant}/> */}
@@ -162,22 +162,33 @@ export default function RestaurantInfoPage({ restaurants, getRestaurants, menus 
             style={{ height: "300px", width: "350px", objectFit: "cover" }}
           />
         </div>
-        <div>
-          <h3 className="mt-2 text-end">{specificRestaurant.restaurantName}</h3>
+        <div style={{ backgroundColor: "white", display: "inline-block" }}>
+          <h3
+            className="mt-2 text-end"
+            style={{ backgroundColor: "white", display: "inline-block" }}
+          >
+            {specificRestaurant.restaurantName}
+          </h3>
         </div>
-        <div className="text-end">
-          <p className="text-muted">{specificRestaurant.address}</p>
-          <p className="text-muted">{specificRestaurant.openHours}</p>
+        <div
+          className="text-end"
+          style={{ backgroundColor: "white", display: "inline-block", float:"right" }}
+        >
+          <p className="text-muted">Address: {specificRestaurant.address}</p> 
+          <p className="text-muted">Hours: {specificRestaurant.openHours}</p>
         </div>
+        <br/>
+        <br/>
         <hr />
         <Row>
-          <ReviewCard reviews={reviews} specificRestaurant={specificRestaurant} />
-          
+          <ReviewCard
+            reviews={reviews}
+            specificRestaurant={specificRestaurant}
+          />
         </Row>
         <hr />
         <div>
           <h4>Menu</h4>
-          
 
           {found.map((m) => {
             return (
@@ -268,6 +279,6 @@ export default function RestaurantInfoPage({ restaurants, getRestaurants, menus 
           })}
         </div>
       </div>
-    </>
+    </div>
   );
 }

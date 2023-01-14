@@ -81,9 +81,20 @@ export default function OrdersCartPage({restaurants}) {
                     
 
   return (
-    <Container className="mt-3">
-      <h2 className="text-center mb-4">Order Summary</h2>
-      {/* {handleCheckoutOrder && (
+    <div
+      id="food-background"
+      width="100%"
+      height="100%"
+      style={{ height: "86vh" }}
+    >
+      <Container className="mt-3">
+        <div className='text-center'>
+        <h2 className="mb-4" style={{ backgroundColor: "white", display:"inline-block" }}>
+          Order Summary
+        </h2>
+
+        </div>
+        {/* {handleCheckoutOrder && (
         <p>
           Thank you for ordering
           <Link to="/">
@@ -92,147 +103,149 @@ export default function OrdersCartPage({restaurants}) {
         </p>
       )} */}
 
-      {/* If cart is empty, show no items in cart message, otherwise show items */}
-      {orderCartItems.length === 0 ? (
-        <div>
-          <h5 className="text-center mt-3">
-            Cart is empty...
-            <span>
-              Head to your orders page or grab some food from the Restaurants
-              page
-            </span>
-          </h5>
-          <LoaderEat />
-        </div>
-      ) : (
-        <Row className="d-flex justify-content-between">
-          <Col xs={8} className="me-5">
-            <Table hover>
-              <thead>
-                <tr>
-                  <th>Food</th>
-                  <th>Name</th>
-                  <th>Description</th>
-                  <th>Price</th>
-                  <th>Quantity</th>
-                  <th>Total</th>
-                </tr>
-              </thead>
-              <tbody className="">
-                {orderCartItems.map((item) => (
-                  <tr key={item.menuId} className="">
-                    <td>
-                      <img
-                        height="65"
-                        style={{
-                          objectFit: "cover",
-                          width: "100%",
-                          borderRadius: "2px",
-                        }}
-                        className="d-inline-block align-top"
-                        src={item.itemImage}
-                      />
-                    </td>
-                    <td>{item.itemName}</td>
-                    <td>{item.itemDescription}</td>
-                    <td>${item.itemPrice.toFixed(2)}</td>
-                    <td className="">
-                      {/* <Button
+        {/* If cart is empty, show no items in cart message, otherwise show items */}
+        {orderCartItems.length === 0 ? (
+          <div>
+            <h5
+              className="text-center mt-3"
+              style={{ backgroundColor: "white" }}
+            >
+              Cart is empty...
+              <span>
+                Head to your orders page or grab some food from the Restaurants
+                page
+              </span>
+            </h5>
+            <LoaderEat />
+          </div>
+        ) : (
+          <Row className="d-flex justify-content-between">
+            <Col xs={8} className="me-5">
+              <Table hover>
+                <thead>
+                  <tr>
+                    <th>Food</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                  </tr>
+                </thead>
+                <tbody className="">
+                  {orderCartItems.map((item) => (
+                    <tr key={item.menuId} className="">
+                      <td>
+                        <img
+                          height="65"
+                          style={{
+                            objectFit: "cover",
+                            width: "100%",
+                            borderRadius: "2px",
+                          }}
+                          className="d-inline-block align-top"
+                          src={item.itemImage}
+                        />
+                      </td>
+                      <td>{item.itemName}</td>
+                      <td>{item.itemDescription}</td>
+                      <td>${item.itemPrice.toFixed(2)}</td>
+                      <td className="">
+                        {/* <Button
                         className="btn-success py-auto"
                         size="sm"
                         style={{ fontSize: "10px" }}
                         onClick={() => increaseQuantity(item)}
                       > */}
-                      <PlusCircleFill
-                        style={{
-                          fontSize: "15px",
-                          color: "#198754",
-                          cursor: "pointer"
-                        }}
-                        onClick={() => increaseQuantity(item)}
-                      />{" "}
-                      {/* </Button> */}
-                      <span>{item.quantity}</span>{" "}
-                      {item.quantity > 1 && (
-                        // <Button
-                        //   className="btn-secondary"
-                        //   size="sm"
-                        //   style={{ fontSize: "10px" }}
-                        //   onClick={() => decreaseQuantity(item)}
-                        // >
-                        <DashCircleFill
+                        <PlusCircleFill
                           style={{
                             fontSize: "15px",
-                            color: "#6c757d",
-                            cursor: "pointer",
-                            // padding: "3px",
-                            // borderRadius: "5px",
-                            // color: "white",
-                          }}
-                          onClick={() => decreaseQuantity(item)}
-                        />
-                        // </Button>
-                      )}{" "}
-                      {item.quantity === 1 && (
-                        // <Button
-                        //   className="btn-danger d-flex align-items-center justify-content-center"
-                        //   size="sm"
-                        //   style={{ padding: "3px"}}
-                        //   onClick={() => removeItemFromCart(item)}
-                        // >
-                        <Trash3Fill
-                          // className="btn "
-                          style={{
-                            fontSize: "17px",
-                            // backgroundColor: "#dc3545",
-                            // padding: "3px",
-                            marginBottom:"4px",
-                            borderRadius: "5px",
-                            color: "#dc3545",
+                            color: "#198754",
                             cursor: "pointer",
                           }}
-                          onClick={() => removeItemFromCart(item)}
-                        />
-                        //  </Button>
-                      )}
-                    </td>
-                    <td>${(item.itemPrice * item.quantity).toFixed(2)}</td>
-                  </tr>
-                ))}
+                          onClick={() => increaseQuantity(item)}
+                        />{" "}
+                        {/* </Button> */}
+                        <span>{item.quantity}</span>{" "}
+                        {item.quantity > 1 && (
+                          // <Button
+                          //   className="btn-secondary"
+                          //   size="sm"
+                          //   style={{ fontSize: "10px" }}
+                          //   onClick={() => decreaseQuantity(item)}
+                          // >
+                          <DashCircleFill
+                            style={{
+                              fontSize: "15px",
+                              color: "#6c757d",
+                              cursor: "pointer",
+                              // padding: "3px",
+                              // borderRadius: "5px",
+                              // color: "white",
+                            }}
+                            onClick={() => decreaseQuantity(item)}
+                          />
+                          // </Button>
+                        )}{" "}
+                        {item.quantity === 1 && (
+                          // <Button
+                          //   className="btn-danger d-flex align-items-center justify-content-center"
+                          //   size="sm"
+                          //   style={{ padding: "3px"}}
+                          //   onClick={() => removeItemFromCart(item)}
+                          // >
+                          <Trash3Fill
+                            // className="btn "
+                            style={{
+                              fontSize: "17px",
+                              // backgroundColor: "#dc3545",
+                              // padding: "3px",
+                              marginBottom: "4px",
+                              borderRadius: "5px",
+                              color: "#dc3545",
+                              cursor: "pointer",
+                            }}
+                            onClick={() => removeItemFromCart(item)}
+                          />
+                          //  </Button>
+                        )}
+                      </td>
+                      <td>${(item.itemPrice * item.quantity).toFixed(2)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </Table>
+            </Col>
 
-               
-              </tbody>
-            </Table>
-          </Col>
-
-          <Col>
-            <Card style={{ width: "18rem" }}>
-              <Card.Body>
-                <Card.Title>CART</Card.Title>
-                {/* <Card.Subtitle className="mb-2 text-muted">
+            <Col>
+              <Card style={{ width: "18rem" }}>
+                <Card.Body>
+                  <Card.Title>CART</Card.Title>
+                  {/* <Card.Subtitle className="mb-2 text-muted">
                   From
                   {" "}
                   {restaurantUniqueNameArray}
                 </Card.Subtitle> */}
-                <Card.Text className="fw-bolder">
-                  Total: ${total.toFixed(2)}
-                </Card.Text>
-                {orderCartItems.length > 0 && (
-                  <div>
-                    <Button className="me-4" onClick={handleCheckoutOrder}>
-                      Checkout Now
-                    </Button>
+                  <Card.Text className="fw-bolder">
+                    Total: ${total.toFixed(2)}
+                  </Card.Text>
+                  {orderCartItems.length > 0 && (
+                    <div>
+                      <Button className="me-4" onClick={handleCheckoutOrder}>
+                        Checkout Now
+                      </Button>
 
-                    <Button className="btn-danger" onClick={clearCart}>
-                      Clear Cart
-                    </Button>
-                  </div>
-                )}
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
-      )}
-    </Container>
+                      <Button className="btn-danger" onClick={clearCart}>
+                        Clear Cart
+                      </Button>
+                    </div>
+                  )}
+                </Card.Body>
+              </Card>
+            </Col>
+          </Row>
+        )}
+      </Container>
+    </div>
   );
 }

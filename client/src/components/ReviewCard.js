@@ -8,7 +8,7 @@ export default function ReviewCard({reviews}) {
     {reviews?.map((review, index)=> {
       return(
 
-        <Card style={{ width: "15rem" }} className="ms-3" key={review.reviewId}>
+        <Card style={{ width: "15rem" }} className="ms-3 mb-3" key={review.reviewId}>
       <Card.Header>Anonymous</Card.Header>
       <Card.Body>
         {/* <Card.Title>Special title treatment</Card.Title> */}

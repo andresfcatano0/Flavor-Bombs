@@ -3,6 +3,7 @@ import UserContext from '../context/AuthContext';
 import Table from 'react-bootstrap/Table'
 import Button from 'react-bootstrap/Button'
 import Modal from "react-bootstrap/Modal";
+import FoodBackgroundPattern from '../components/FoodBackgroundPattern';
 
 export default function OrdersPage({restaurants}) {
 
@@ -70,7 +71,10 @@ export default function OrdersPage({restaurants}) {
 
 
   return (
-    <div className=" mt-3 text-center">
+    <div 
+      className="mt-4 text-center" 
+      id="food-background"
+      style={{height:"86vh"}}>
       {/* <h2>Current or Future Orders</h2>
       <hr />
       <p className="text-muted">
@@ -80,10 +84,10 @@ export default function OrdersPage({restaurants}) {
 
       <br />
       <br /> */}
-      <h2 className="text-center">Orders</h2>
+      <h2 className="text-center" style={{backgroundColor:"white", display:"inline-block"}}>Orders</h2>
       <hr />
       {orders ? (
-        <Table striped hover>
+        <Table style={{backgroundColor:"white"}} hover>
           <thead>
             <tr>
               <th className="text-center">#</th>

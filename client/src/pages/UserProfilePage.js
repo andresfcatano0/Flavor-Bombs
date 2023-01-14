@@ -117,122 +117,70 @@ export default function UserProfilePage({setAuthUser}) {
     }
 
   return (
-    <Container
-      className=""
-      style={{ height: "80vh" }}
-      // id="food-background"
-    >
-      <Row className="mt-5">
-        <Col className="d-flex  flex-column align-items-center">
-          <PersonCircle size={"100px"} className="mb-4" />
-          {/* <Form.Group controlId="formFile" className="mb-3">
+    <div id="food-background" width="100%" height="100%" className='mt-3'>
+      <Container
+        className="mt-3"
+        style={{ height: "87vh" }}
+        // id="food-background"
+      >
+        <Row className="">
+          <Col className="d-flex  flex-column align-items-center">
+            <PersonCircle size={"100px"} className="mb-4" />
+            {/* <Form.Group controlId="formFile" className="mb-3">
             <Form.Label>Default file input example</Form.Label>
             <Form.Control type="file" />
           </Form.Group>
           <Button className="mb-4">Change Profile Picture</Button> */}
 
-          <Button
-            className="mt-5"
-            onClick={() => {
-              populateUserInfo();
-            }}
-          >
-            See More Info
-          </Button>
-        </Col>
-        {disableForm === true ? (
-          <Col>
-            <Form>
-              <FloatingLabel label="First Name" className="mb-3">
-                <Form.Control
-                  type="text"
-                  value={firstName}
-                  onChange={(e) => setFirstName(e.target.value)}
-                  disabled
-                />
-              </FloatingLabel>
-
-              <FloatingLabel label="Last Name" className="mb-3">
-                <Form.Control
-                  type="text"
-                  value={lastName}
-                  onChange={(e) => setLastName(e.target.value)}
-                  disabled
-                />
-              </FloatingLabel>
-
-              <FloatingLabel label="Username" className="mb-3">
-                <Form.Control
-                  type="text"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                  disabled
-                />
-              </FloatingLabel>
-
-              <FloatingLabel label="Email Address" className="mb-3">
-                <Form.Control
-                  type="text"
-                  value={formEmail}
-                  onChange={(e) => setFormEmail(e.target.value)}
-                  disabled
-                />
-              </FloatingLabel>
-
-              {/* <FloatingLabel label="Password" className="mb-3">
-                <Form.Control
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  disabled
-                />
-              </FloatingLabel> */}
-
-              {/* <Button type="submit" style={{ marginLeft: "45%" }} disabled>
-                Update Profile
-              </Button> */}
-            </Form>
-          </Col>
-        ) : (
-          <Col>
-            <Form
-              onSubmit={(e) => {
-                handleSubmit(e);
+            <Button
+              className="mt-5"
+              onClick={() => {
+                populateUserInfo();
               }}
             >
-              <FloatingLabel label="First Name" className="mb-3">
-                <Form.Control
-                  type="text"
-                  value={firstName}
-                  onChange={(e) => setFirstName(e.target.value)}
-                />
-              </FloatingLabel>
+              See More Info
+            </Button>
+          </Col>
+          {disableForm === true ? (
+            <Col>
+              <Form>
+                <FloatingLabel label="First Name" className="mb-3">
+                  <Form.Control
+                    type="text"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                    disabled
+                  />
+                </FloatingLabel>
 
-              <FloatingLabel label="Last Name" className="mb-3">
-                <Form.Control
-                  type="text"
-                  value={lastName}
-                  onChange={(e) => setLastName(e.target.value)}
-                />
-              </FloatingLabel>
+                <FloatingLabel label="Last Name" className="mb-3">
+                  <Form.Control
+                    type="text"
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
+                    disabled
+                  />
+                </FloatingLabel>
 
-              <FloatingLabel label="Username" className="mb-3">
-                <Form.Control
-                  type="text"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                />
-              </FloatingLabel>
+                <FloatingLabel label="Username" className="mb-3">
+                  <Form.Control
+                    type="text"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    disabled
+                  />
+                </FloatingLabel>
 
-              <FloatingLabel label="Email Address" className="mb-3">
-                <Form.Control
-                  type="text"
-                  value={formEmail}
-                  onChange={(e) => setFormEmail(e.target.value)}
-                />
-              </FloatingLabel>
+                <FloatingLabel label="Email Address" className="mb-3">
+                  <Form.Control
+                    type="text"
+                    value={formEmail}
+                    onChange={(e) => setFormEmail(e.target.value)}
+                    disabled
+                  />
+                </FloatingLabel>
 
-              {/* <FloatingLabel label="Password" className="mb-3">
+                {/* <FloatingLabel label="Password" className="mb-3">
                 <Form.Control
                   type="password"
                   value={password}
@@ -241,13 +189,67 @@ export default function UserProfilePage({setAuthUser}) {
                 />
               </FloatingLabel> */}
 
-              {/* <Button type="submit" style={{ marginLeft: "45%" }}>
+                {/* <Button type="submit" style={{ marginLeft: "45%" }} disabled>
                 Update Profile
               </Button> */}
-            </Form>
-          </Col>
-        )}
-      </Row>
-    </Container>
+              </Form>
+            </Col>
+          ) : (
+            <Col>
+              <Form
+                onSubmit={(e) => {
+                  handleSubmit(e);
+                }}
+              >
+                <FloatingLabel label="First Name" className="mb-3">
+                  <Form.Control
+                    type="text"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                  />
+                </FloatingLabel>
+
+                <FloatingLabel label="Last Name" className="mb-3">
+                  <Form.Control
+                    type="text"
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
+                  />
+                </FloatingLabel>
+
+                <FloatingLabel label="Username" className="mb-3">
+                  <Form.Control
+                    type="text"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                  />
+                </FloatingLabel>
+
+                <FloatingLabel label="Email Address" className="mb-3">
+                  <Form.Control
+                    type="text"
+                    value={formEmail}
+                    onChange={(e) => setFormEmail(e.target.value)}
+                  />
+                </FloatingLabel>
+
+                {/* <FloatingLabel label="Password" className="mb-3">
+                <Form.Control
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  disabled
+                />
+              </FloatingLabel> */}
+
+                {/* <Button type="submit" style={{ marginLeft: "45%" }}>
+                Update Profile
+              </Button> */}
+              </Form>
+            </Col>
+          )}
+        </Row>
+      </Container>
+    </div>
   );
 }
