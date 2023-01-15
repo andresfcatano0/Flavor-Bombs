@@ -22,8 +22,12 @@ import UserContext from "../../context/AuthContext";
 export default function AdminViewAllOrders({allUsers, getAllOrders,allOrders, restaurants,getRestaurants,specificUser,handleSpecificReviewOrder}) {
   const adminUser = useContext(UserContext);
 
+   const [show, setShow] = useState(false);
+
+   const handleClose = () => setShow(false);
+   const handleShow = () => setShow(true);
+
   const deleteOrder = (orderId) => {
-    if (window.confirm("Are you sure you want to delete this order?")) {
       fetch("http://localhost:8080/api/order/" + orderId, {
         method: "DELETE",
         headers: {
@@ -32,12 +36,12 @@ export default function AdminViewAllOrders({allUsers, getAllOrders,allOrders, re
       }).then((data) => {
         // console.log(data);
         getAllOrders();
+        handleClose()
         if (data.statusCode === 204) {
           console.log("successfully deleted order");
         }
         // console.log(data.statusCode)
       });
-    }
   };
 
 
@@ -53,14 +57,17 @@ export default function AdminViewAllOrders({allUsers, getAllOrders,allOrders, re
         <Col xs={10}>
           <Row>
             <Col>
-              <AdminViewOrderTable 
-              allOrders={allOrders}
-              allUsers={allUsers} 
-              deleteOrder={deleteOrder}
-              restaurants={restaurants}
-              getAllOrders={getAllOrders}
-              specificUser={specificUser}
-              handleSpecificReviewOrder={handleSpecificReviewOrder}
+              <AdminViewOrderTable
+                allOrders={allOrders}
+                allUsers={allUsers}
+                deleteOrder={deleteOrder}
+                restaurants={restaurants}
+                getAllOrders={getAllOrders}
+                specificUser={specificUser}
+                handleSpecificReviewOrder={handleSpecificReviewOrder}
+                show={show}
+                handleClose={handleClose}
+                handleShow={handleShow}
               />
             </Col>
           </Row>
