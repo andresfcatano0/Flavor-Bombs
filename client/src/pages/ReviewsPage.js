@@ -32,7 +32,6 @@ export default function ReviewsPage({
       })
       .then((data) => {
         let found;
-        setIsLoading(false);
         for (let d of data) {
           if (d.username === currentUser.userData.sub) {
             // console.log(d)
@@ -40,6 +39,7 @@ export default function ReviewsPage({
           }
         }
       });
+      setIsLoading(false);
   };
   console.log(fullUserData);
 
@@ -50,19 +50,41 @@ export default function ReviewsPage({
         Authorization: "Bearer " + currentUser.token,
       },
     })
-      .then((res) => res.json())
+      .then((res) => {
+        return res.json(); 
+      })
       .then((data) => {
-        setIsLoading(false);
-        // console.log(data)
+        console.log(data)
         setDetailedUser(data);
+        // setIsLoading(true)
       });
+      setIsLoading(false);
   };
-  console.log(detailedUser);
 
   useEffect(() => {
     getCurrentUserInfo();
     getDetailedUser();
+    setIsLoading(false)
   }, []);
+
+  const deleteReview = (reviewId) => {
+    if(window.confirm("Are you sure you want to delete this review?")){
+
+      fetch("http://localhost:8080/api/review/" + reviewId, {
+        method: "DELETE",
+        headers: {
+          Authorization: "Bearer " + currentUser.token,
+        },
+      }).then((data) => {
+        // console.log(data);
+      getAllReviews()
+        
+          console.log("successfully deleted order");
+        
+        // console.log(data.statusCode)
+      });
+    }
+  }
 
   return (
     <div>
@@ -87,7 +109,7 @@ export default function ReviewsPage({
             </thead>
             <tbody>
              
-              {detailedUser.reviews.map((review, index) => {
+                 {detailedUser?.reviews.map((review, index) => {
                 return (
                   <tr key={review.reviewId}>
                     <td>{index + 1}</td>
@@ -101,11 +123,11 @@ export default function ReviewsPage({
                       >
                         Edit
                       </Link>
-                      <Button variant="danger">Delete</Button>
+                      <Button variant="danger" onClick={()=>{deleteReview(review.reviewId);}}>Delete</Button>
                     </td>
                   </tr>
                 );
-              })}
+              })}   
             </tbody>
           </Table>
           <p>

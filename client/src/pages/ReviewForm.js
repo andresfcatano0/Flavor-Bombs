@@ -71,7 +71,7 @@ export default function ReviewForm({ restaurants, allReviews }) {
       reviewId: params.id,
       restaurantId: selectedRestaurant,
       reviewText: reviewText,
-      owner: null,
+      owner: currentUser.appUserId,
     };
 
     fetch("http://localhost:8080//api/review/" + params.id, {
