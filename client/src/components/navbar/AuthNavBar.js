@@ -81,7 +81,7 @@ export default function AuthNavBar({setAuthUser}) {
                 </Nav.Item>
               </Link>
 
-              <Nav.Link href={`/user/:${user.userData.sub}`}>
+              <Nav.Link href={`/edit-user/:${user.userData.sub}`}>
                 <PersonCircle size={30} style={{ paddingRight: "5px" }} />
               </Nav.Link>
               <NavItem>
@@ -90,9 +90,14 @@ export default function AuthNavBar({setAuthUser}) {
                   title={user.userData.sub}
                   id="basic-nav-dropdown"
                 >
-                  {/* <NavDropdown.Item href="#action/3.1">Account</NavDropdown.Item>
+                    <NavDropdown.Item>
+                  <Link to="/user/reviews" className="text-reset">
+                      View Reviews
+                  </Link>
+                      </NavDropdown.Item>
+                  {/*
                 <NavDropdown.Item href="#action/3.2">Orders</NavDropdown.Item> */}
-                  {/* <NavDropdown.Divider /> */}
+                  <NavDropdown.Divider />
                   <NavDropdown.Item onClick={handleLogout}>
                     Logout
                   </NavDropdown.Item>

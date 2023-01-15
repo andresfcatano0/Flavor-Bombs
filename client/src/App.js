@@ -24,6 +24,7 @@ import AdminViewAllRestaurants from './pages/adminTables/AdminViewAllRestaurants
 import AdminViewAllUsers from './pages/adminTables/AdminViewAllUsers';
 import AdminViewAllOrders from './pages/adminTables/AdminViewAllOrders';
 import AdminViewAllReviews from './pages/adminTables/AdminViewAllReviews';
+import ReviewsPage from './pages/ReviewsPage';
 
 function App() {
   // USER DATA
@@ -106,7 +107,7 @@ function App() {
    await fetch("http://localhost:8080/api/user/", {
       method: "GET",
       headers: {
-        Authorization: "Bearer " + authUser.token,
+        Authorization: "Bearer " + authUser?.token,
       },
     })
       .then((res) => {
@@ -124,7 +125,7 @@ function App() {
     await fetch("http://localhost:8080/api/order/all", {
       method: "GET",
       headers: {
-        Authorization: "Bearer " + authUser.token,
+        Authorization: "Bearer " + authUser?.token,
       },
     })
       .then((res) => {
@@ -317,8 +318,11 @@ function App() {
             <Route exact path="/about-us">
               <AboutPage />
             </Route>
-            <Route path="/user/:username">
+            <Route exact path="/edit-user/:username">
               <UserProfilePage setAuthUser={setAuthUser} />
+            </Route>
+            <Route exact path="/user/reviews">
+              <ReviewsPage/>
             </Route>
 
             <Route exact path="/shopping-cart">
