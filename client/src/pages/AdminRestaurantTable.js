@@ -76,39 +76,41 @@ export default function AdminRestaurantTable({show, handleClose, handleShow, res
                     handleModal(event);
                   }}
                   className="btn btn-danger d-flex align-items-center"
-                > Delete
+                >
+                  {" "}
+                  Delete
                   {/* <span value={restaurant.restaurantId} className="px-2">
                     Delete
                   </span>
                   <Trash3 /> */}
                 </Button>
-                <Modal show={show} onHide={handleClose}>
-                  <Modal.Header closeButton>
-                    <Modal.Title>Delete Restaurant</Modal.Title>
-                  </Modal.Header>
-                  <Modal.Body>Are you sure you want to delete {restaurantSavedState.restaurantName}?</Modal.Body>
-                  <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                      Close
-                    </Button>
-                    <Button
-                      variant="danger"
-                      onClick={() => {
-                        deleteRestaurant(
-                          restaurantSavedState.restaurantId
-                        );
-                      }}
-                    >
-                      Delete
-                    </Button>
-                  </Modal.Footer>
-                </Modal>
               </td>
             </tr>
           );
         })}
         <tr></tr>
       </tbody>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Delete Restaurant</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          Are you sure you want to delete {restaurantSavedState.restaurantName}?
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button
+            variant="danger"
+            onClick={() => {
+              deleteRestaurant(restaurantSavedState.restaurantId);
+            }}
+          >
+            Delete
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </Table>
   );
 }

@@ -71,35 +71,33 @@ export default function AdminUsersTable({ handleClose, handleShow, show, allUser
                   <Trash3 />
                 </Button>
               </td>
-              <Modal show={show} onHide={handleClose}>
-                <Modal.Header closeButton>
-                  <Modal.Title>Delete User</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                  Are you sure you want to {" "} 
-              {userSavedState.firstName} {" "} {userSavedState.lastName}?
-                </Modal.Body>
-                <Modal.Footer>
-                  <Button variant="secondary" onClick={handleClose}>
-                    Close
-                  </Button>
-                  <Button
-                    variant="danger"
-                    onClick={() => {
-                      deleteUser(
-                        userSavedState.appUserId
-                      );
-                    }}
-                  >
-                    Delete
-                  </Button>
-                </Modal.Footer>
-              </Modal>
             </tr>
           );
         })}
         <tr></tr>
       </tbody>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Delete User</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          Are you sure you want to {userSavedState.firstName}{" "}
+          {userSavedState.lastName}?
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button
+            variant="danger"
+            onClick={() => {
+              deleteUser(userSavedState.appUserId);
+            }}
+          >
+            Delete
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </Table>
   );
 }

@@ -75,60 +75,55 @@ export default function AdminReviewTable({allReviews, getAllReviews}) {
           <th>Actions</th>
         </tr>
       </thead>
-        <tbody className="text-center">
-           
+      <tbody className="text-center">
+        {allReviews.map((r, index) => {
+          return (
+            <tr key={r.reviewId}>
+              <td>{index + 1}</td>
+              <td>{r.reviewText}</td>
 
-           {allReviews.map((r, index)=> {
-            return (
-              <tr key={r.reviewId}>
-                <td>{index + 1}</td>
-                <td>{r.reviewText}</td>
-
-                <td>
-                  {/* <Button
+              <td>
+                {/* <Button
                     value={r.reviewId}
                     onClick={() => {
                       deleteReview(r.reviewId);
                     }}
                     className="btn btn-danger"
                   > */}
-                  <Button
-                    value={r.reviewId}
-                    onClick={(event) => {
-                      handleModal(event);
-                    }}
-                    className="btn btn-danger"
-                  >
-                    Delete
-                  </Button>
-                </td>
-                <Modal show={show} onHide={handleClose}>
-                  <Modal.Header closeButton>
-                    <Modal.Title>Delete Review</Modal.Title>
-                  </Modal.Header>
-                  <Modal.Body>
-                    Are you sure you want to delete this review?
-                  </Modal.Body>
-                  <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                      Close
-                    </Button>
-                    <Button
-                      variant="danger"
-                      onClick={() => {
-                        deleteReview(reviewSavedState.reviewId);
-                      }}
-                    >
-                      Delete
-                    </Button>
-                  </Modal.Footer>
-                </Modal>
-              </tr>
-            );
-           })}
-        </tbody>
+                <Button
+                  value={r.reviewId}
+                  onClick={(event) => {
+                    handleModal(event);
+                  }}
+                  className="btn btn-danger"
+                >
+                  Delete
+                </Button>
+              </td>
+            </tr>
+          );
+        })}
+      </tbody>
 
-
-  </Table>
-  )
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Delete Review</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Are you sure you want to delete this review?</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button
+            variant="danger"
+            onClick={() => {
+              deleteReview(reviewSavedState.reviewId);
+            }}
+          >
+            Delete
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </Table>
+  );
 }
