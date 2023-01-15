@@ -82,7 +82,7 @@ export default function AuthNavBar({setAuthUser}) {
               </Link>
 
               <NavItem className="d-flex align-items-center justify-content-start">
-                <Link to={`/edit-user/:${user.userData.sub}`} style={{color: "grey"}}>
+                <Link to={`/edit-user/profile`} style={{color: "grey"}}>
                   <PersonCircle size={30} style={{ paddingRight: "5px" }} />
                 </Link>
               </NavItem>

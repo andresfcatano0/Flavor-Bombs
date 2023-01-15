@@ -21,12 +21,12 @@ export default function UserProfilePage({ setAuthUser, currentUserFormInfo, getD
 
   const userInfo = useContext(UserContext);
 
-  const params = useParams();
+  // const params = useParams();
 
   const [error, setError] = useState([]);
 
-  let paramUsername = params.username;
-  paramUsername = paramUsername.replace(":", "");
+  // let paramUsername = params.username;
+  // paramUsername = paramUsername.replace(":", "");
 
   const [fullUserData, setFullUserData] = useState({});
 
@@ -43,7 +43,7 @@ export default function UserProfilePage({ setAuthUser, currentUserFormInfo, getD
       .then((data) => {
         let found;
         for (let d of data) {
-          if (d.username == paramUsername) {
+          if (d.username == userInfo.userData.sub) {
             // console.log(d)
             setFullUserData(d);
           }
@@ -78,7 +78,7 @@ export default function UserProfilePage({ setAuthUser, currentUserFormInfo, getD
       firstName: firstName,
       lastName: lastName,
       username: username,
-      password: currentUserFormInfo.password,
+      password: password,
       email: formEmail,
       enabled: fullUserData.enabled,
     };
@@ -105,6 +105,7 @@ export default function UserProfilePage({ setAuthUser, currentUserFormInfo, getD
 
   const cancelEdit = () => {
     setDisableForm(true);
+    clearForm()
   };
 
   const clearForm = () => {
@@ -112,6 +113,7 @@ export default function UserProfilePage({ setAuthUser, currentUserFormInfo, getD
     setFirstName("");
     setLastName("");
     setUsername("");
+    setPassword("");
     setFormEmail("");
   }
 
@@ -255,7 +257,7 @@ export default function UserProfilePage({ setAuthUser, currentUserFormInfo, getD
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    disabled
+                    
                   />
                 </FloatingLabel>
 

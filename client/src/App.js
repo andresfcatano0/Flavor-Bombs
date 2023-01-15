@@ -326,7 +326,7 @@ function App() {
             <Route exact path="/about-us">
               <AboutPage />
             </Route>
-            <Route exact path="/edit-user/:username">
+            <Route exact path="/edit-user/profile">
               <UserProfilePage setAuthUser={setAuthUser} getData={getData} currentUserFormInfo={currentUserFormInfo}/>
             </Route>
             <Route exact path="/user/reviews">
