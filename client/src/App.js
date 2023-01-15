@@ -25,6 +25,7 @@ import AdminViewAllUsers from './pages/adminTables/AdminViewAllUsers';
 import AdminViewAllOrders from './pages/adminTables/AdminViewAllOrders';
 import AdminViewAllReviews from './pages/adminTables/AdminViewAllReviews';
 import ReviewsPage from './pages/ReviewsPage';
+import AddReview from './pages/AddReview';
 
 function App() {
   // USER DATA
@@ -126,29 +127,11 @@ function App() {
       });
   };
 
-  // ALL ORDERS
-  const [allOrders, setAllOrders] = useState([]);
-
-  const getAllOrders = async () => {
-    await fetch("http://localhost:8080/api/order/all", {
-      method: "GET",
-      headers: {
-        Authorization: "Bearer " + authUser?.token,
-      },
-    })
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        setAllOrders(data);
-      });
-  };
 
   useEffect(() => {
     getRestaurants();
     getAllMenus();
     getAllUsers();
-    getAllOrders();
     getAllReviews();
   }, []);
 
@@ -282,11 +265,10 @@ function App() {
                 restaurants={restaurants}
                 menus={menus}
                 allUsers={allUsers}
-                getAllOrders={getAllOrders}
+                
                 getRestaurants={getRestaurants}
                 authUser={authUser}
                 setAuthUser={setAuthUser}
-                allOrders={allOrders}
               />
             </Route>
             <Route exact path="/admin/view-all-reviews">
@@ -294,11 +276,9 @@ function App() {
                 restaurants={restaurants}
                 menus={menus}
                 allUsers={allUsers}
-                getAllOrders={getAllOrders}
                 getRestaurants={getRestaurants}
                 authUser={authUser}
                 setAuthUser={setAuthUser}
-                allOrders={allOrders}
                 allReviews={allReviews}
                 getAllReviews={getAllReviews}
               />
@@ -331,6 +311,10 @@ function App() {
             </Route>
             <Route exact path="/user/reviews">
               <ReviewsPage restaurants={restaurants} allUsers={allUsers} getAllUsers={getAllUsers} allReviews={allReviews} getAllReviews={getAllReviews}
+              />
+            </Route>
+            <Route exact path="/user/add-review">
+              <AddReview restaurants={restaurants} allUsers={allUsers} getAllUsers={getAllUsers}
               />
             </Route>
 

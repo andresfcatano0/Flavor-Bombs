@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react'
 import Table from "react-bootstrap/Table";
+import { Link } from 'react-router-dom';
 import UserContext from '../context/AuthContext'
 
 export default function ReviewsPage({restaurants, allUsers, allReviews, getAllUsers, getAllReviews}) {
@@ -27,7 +28,7 @@ export default function ReviewsPage({restaurants, allUsers, allReviews, getAllUs
             let found;
             setIsLoading(false)
             for (let d of data) {
-                if (d.username == currentUser.userData.sub) {
+                if (d.username === currentUser.userData.sub) {
                     // console.log(d)
                     setFullUserData(d);
                 }
@@ -58,45 +59,54 @@ export default function ReviewsPage({restaurants, allUsers, allReviews, getAllUs
       getCurrentUserInfo();
       getDetailedUser();
     }, []);
-
+    
 
   return (
     <div>
-        {detailedUser.length === 0 ? (<div>
-            <p>There are no reviews..</p>
-        </div>):(
-            
+      {isLoading ? (
+        <div>
+          <p>There are no reviews..</p>
+          <Link to="/user/add-review">
+            <button>Make a review</button>
+          </Link>
+        </div>
+      ) : (
         <>
-        
-        <h3>View Your Reviews</h3>
-      <Table striped bordered hover size="sm">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Restaurant</th>
-            <th>Review</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-              {detailedUser.reviews.map((review, index)=> {
-            return (
-              <tr key={review.reviewId}>
-                <td>{index+1}</td>
-                <td>{review.restaurantId}</td>
-               
-                <td>{review.reviewText}</td>
-                <td className="d-flex align-items-center justify-content-around">
-                  <button className="btn btn-warning">Edit</button>
-                  <button className="btn btn-danger">Delete</button>
-                </td>
+          <h3>View Your Reviews</h3>
+          <Table striped bordered hover size="sm">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Restaurant</th>
+                <th>Review</th>
+                <th>Actions</th>
               </tr>
-            );
-          })}    
-        </tbody>
-      </Table>
-      </>
-        )}
+            </thead>
+            <tbody>
+              {detailedUser.reviews.map((review, index) => {
+                return (
+                  <tr key={review.reviewId}>
+                    <td>{index + 1}</td>
+                    <td>{review.restaurantId}</td>
+
+                    <td>{review.reviewText}</td>
+                    <td className="d-flex align-items-center justify-content-around">
+                      <button className="btn btn-warning">Edit</button>
+                      <button className="btn btn-danger">Delete</button>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </Table>
+          <p>
+            Want to make a review? Click here to{" "}
+            <Link to="/user/add-review">
+              <button className='btn btn-primary'>Make review.</button>
+            </Link>
+          </p>
+        </>
+      )}
     </div>
   );
 }
