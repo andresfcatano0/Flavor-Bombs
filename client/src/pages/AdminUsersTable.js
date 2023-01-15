@@ -1,12 +1,35 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
 import {
   Trash3,
 } from "react-bootstrap-icons";
 
-export default function AdminUsersTable({ allUsers, deleteUser, handleSpecificReviewOrder }) {
+export default function AdminUsersTable({ handleClose, handleShow, show, allUsers, deleteUser, handleSpecificReviewOrder }) {
+  let userModal = {
+    appUserId: 0,
+    firstName: "",
+    lastName: "",
+  };
+
+  let [userSavedState, setUserSavedState] = useState({
+    userModal,
+  });
+
+  const handleModal = (event) => {
+    console.log(event.target.value);
+    let found = allUsers.filter((user) => user.appUserId == event.target.value);
+    //  console.log(found[0].userName)
+    let savedU = {
+      appUserId: event.target.value,
+      firstName: found[0].firstName,
+      lastName: found[0].lastName
+    };
+    setUserSavedState(savedU);
+    handleShow();
+  };
   return (
     <Table striped bordered hover className="text-center">
       <thead>
@@ -30,18 +53,48 @@ export default function AdminUsersTable({ allUsers, deleteUser, handleSpecificRe
               <td>{userInfo.email}</td>
 
               <td className="d-flex justify-content-around">
-                
-                <Button
+                {/* <Button
                   value={userInfo.appUserId}
                   onClick={()=> {
                     deleteUser(userInfo.appUserId);
                   }}
                   className="btn btn-danger d-flex align-items-center"
+                > */}
+                <Button
+                  value={userInfo.appUserId}
+                  onClick={(event) => {
+                    handleModal(event);
+                  }}
+                  className="btn btn-danger d-flex align-items-center"
                 >
-                  <span className="px-2">Delete</span>
+                  Delete
                   <Trash3 />
                 </Button>
               </td>
+              <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                  <Modal.Title>Delete User</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  Are you sure you want to {" "} 
+              {userSavedState.firstName} {" "} {userSavedState.lastName}?
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button variant="secondary" onClick={handleClose}>
+                    Close
+                  </Button>
+                  <Button
+                    variant="danger"
+                    onClick={() => {
+                      deleteUser(
+                        userSavedState.appUserId
+                      );
+                    }}
+                  >
+                    Delete
+                  </Button>
+                </Modal.Footer>
+              </Modal>
             </tr>
           );
         })}

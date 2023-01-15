@@ -25,6 +25,11 @@ export default function AdminViewAllUsers({allUsers, getAllUsers}) {
   const history = useHistory();
      const user = useContext(UserContext);
 
+      const [show, setShow] = useState(false);
+
+      const handleClose = () => setShow(false);
+      const handleShow = () => setShow(true);
+
     //  const [specificUser, setSpecificUser] = useState({});
     //  const handleSpecificReviewOrder = (userId) => {
     //    fetch("http://localhost:8080/api/user/" + userId, {
@@ -42,7 +47,6 @@ export default function AdminViewAllUsers({allUsers, getAllUsers}) {
     //  };
 
     const deleteUser = (userId) => {
-      if (window.confirm("Are you sure you want to delete this user?")) {
         fetch("http://localhost:8080/api/user/" + userId, {
           method: "DELETE",
           headers: {
@@ -51,12 +55,12 @@ export default function AdminViewAllUsers({allUsers, getAllUsers}) {
         }).then((data) => {
           // console.log(data);
           getAllUsers();
+          handleClose();
           if (data.statusCode === 204) {
             console.log("successfully deleted user");
           }
           // console.log(data.statusCode)
         });
-      }
     };
   return (
     <Container fluid className="mt-3">
@@ -73,6 +77,9 @@ export default function AdminViewAllUsers({allUsers, getAllUsers}) {
               <AdminUsersTable
                 allUsers={allUsers}
                 deleteUser={deleteUser}
+                show={show}
+                handleClose={handleClose}
+                handleShow={handleShow}
                 // handleSpecificReviewOrder={handleSpecificReviewOrder}
               />
             </Col>
