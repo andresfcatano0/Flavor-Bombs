@@ -23,6 +23,11 @@ import AdminNavLeftPane from "../../components/navbar/AdminNavLeftPane";
 export default function AdminViewAllRestaurants({ restaurants, getRestaurants, menus, allUsers }) {
     const user = useContext(UserContext);
 
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
     const [allOrders, setAllOrders] = useState([]);
     const getAllOrders = async () => {
       await fetch("http://localhost:8080/api/order/all", {
@@ -44,7 +49,7 @@ export default function AdminViewAllRestaurants({ restaurants, getRestaurants, m
     }, []);
 
     const deleteRestaurant = (restaurantId) => {
-      if (window.confirm("Are you sure you want to delete this restaurant?")) {
+      // if (window.confirm("Are you sure you want to delete this restaurant?")) {
         fetch("http://localhost:8080/api/restaurant/" + restaurantId, {
           method: "DELETE",
           headers: {
@@ -53,12 +58,13 @@ export default function AdminViewAllRestaurants({ restaurants, getRestaurants, m
         }).then((data) => {
           // console.log(data);
           getRestaurants();
+          handleClose();
           if (data.statusCode === 204) {
             console.log("successfully deleted restaurant");
           }
           // console.log(data.statusCode)
         });
-      }
+      // }
     };
 
   return (
@@ -76,7 +82,10 @@ export default function AdminViewAllRestaurants({ restaurants, getRestaurants, m
             <Col>
               <AdminRestaurantTable 
               deleteRestaurant={deleteRestaurant}
-              restaurants={restaurants} 
+              restaurants={restaurants}
+              show={show}
+              handleClose={handleClose}
+              handleShow={handleShow} 
             //   deleteRestaurant={deleteRestaurant}
               />
             </Col>
