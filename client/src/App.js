@@ -25,7 +25,7 @@ import AdminViewAllUsers from './pages/adminTables/AdminViewAllUsers';
 import AdminViewAllOrders from './pages/adminTables/AdminViewAllOrders';
 import AdminViewAllReviews from './pages/adminTables/AdminViewAllReviews';
 import ReviewsPage from './pages/ReviewsPage';
-import AddReview from './pages/AddReview';
+import ReviewForm from './pages/ReviewForm';
 
 function App() {
   // USER DATA
@@ -218,7 +218,10 @@ function App() {
               <Map />
             </Route>
             <Route exact path="/login">
-              <LoginPage setAuthUser={setAuthUser} setCurrentUserFormInfo={setCurrentUserFormInfo}/>
+              <LoginPage
+                setAuthUser={setAuthUser}
+                setCurrentUserFormInfo={setCurrentUserFormInfo}
+              />
             </Route>
             <Route exact path="/restaurants">
               <RestaurantPage
@@ -265,7 +268,6 @@ function App() {
                 restaurants={restaurants}
                 menus={menus}
                 allUsers={allUsers}
-                
                 getRestaurants={getRestaurants}
                 authUser={authUser}
                 setAuthUser={setAuthUser}
@@ -307,14 +309,34 @@ function App() {
               <AboutPage />
             </Route>
             <Route exact path="/edit-user/profile">
-              <UserProfilePage setAuthUser={setAuthUser} getData={getData} currentUserFormInfo={currentUserFormInfo}/>
+              <UserProfilePage
+                setAuthUser={setAuthUser}
+                getData={getData}
+                currentUserFormInfo={currentUserFormInfo}
+              />
             </Route>
             <Route exact path="/user/reviews">
-              <ReviewsPage restaurants={restaurants} allUsers={allUsers} getAllUsers={getAllUsers} allReviews={allReviews} getAllReviews={getAllReviews}
+              <ReviewsPage
+                restaurants={restaurants}
+                allUsers={allUsers}
+                getAllUsers={getAllUsers}
+                allReviews={allReviews}
+                getAllReviews={getAllReviews}
               />
             </Route>
             <Route exact path="/user/add-review">
-              <AddReview restaurants={restaurants} allUsers={allUsers} getAllUsers={getAllUsers}
+              <ReviewForm
+                restaurants={restaurants}
+                allUsers={allUsers}
+                getAllUsers={getAllUsers}
+              />
+            </Route>
+            <Route exact path="/user/edit-review/:id">
+              <ReviewForm
+                restaurants={restaurants}
+                allUsers={allUsers}
+                getAllUsers={getAllUsers}
+                allReviews={allReviews}
               />
             </Route>
 
