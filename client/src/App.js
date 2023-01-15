@@ -38,6 +38,14 @@ function App() {
 
   const user = useContext(UserContext);
 
+  // GATHER USER FORM INFO
+  const [currentUserFormInfo, setCurrentUserFormInfo] = useState({});
+  const getData = (data) => {
+    let copyData = {...data};
+    setCurrentUserFormInfo(copyData);
+    return copyData
+  }
+
   // ALL RESTAURANTS
   const [restaurants, setRestaurants] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -227,7 +235,7 @@ function App() {
               <Map />
             </Route>
             <Route exact path="/login">
-              <LoginPage setAuthUser={setAuthUser} />
+              <LoginPage setAuthUser={setAuthUser} setCurrentUserFormInfo={setCurrentUserFormInfo}/>
             </Route>
             <Route exact path="/restaurants">
               <RestaurantPage
@@ -319,10 +327,11 @@ function App() {
               <AboutPage />
             </Route>
             <Route exact path="/edit-user/:username">
-              <UserProfilePage setAuthUser={setAuthUser} />
+              <UserProfilePage setAuthUser={setAuthUser} getData={getData} currentUserFormInfo={currentUserFormInfo}/>
             </Route>
             <Route exact path="/user/reviews">
-              <ReviewsPage/>
+              <ReviewsPage restaurants={restaurants} allUsers={allUsers} getAllUsers={getAllUsers} allReviews={allReviews} getAllReviews={getAllReviews}
+              />
             </Route>
 
             <Route exact path="/shopping-cart">

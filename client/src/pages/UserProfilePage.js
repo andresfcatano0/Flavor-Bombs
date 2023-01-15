@@ -10,114 +10,121 @@ import FloatingLabel from "react-bootstrap/FloatingLabel";
 import { PersonCircle } from 'react-bootstrap-icons'
 import { useParams } from 'react-router-dom'
 
-export default function UserProfilePage({setAuthUser}) {
-  
+export default function UserProfilePage({ setAuthUser, currentUserFormInfo, getData }) {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [username, setUsername] = useState("");
   const [formEmail, setFormEmail] = useState("");
   const [password, setPassword] = useState("");
-  
-  
-    const userInfo = useContext(UserContext);
 
-    const params = useParams();
+  // console.log(currentUserFormInfo.password);
 
-    const [error, setError] = useState([]);
+  const userInfo = useContext(UserContext);
 
+  const params = useParams();
 
-    let paramUsername = params.username
-    paramUsername = paramUsername.replace(":", "");
-   
+  const [error, setError] = useState([]);
 
-    const [fullUserData,setFullUserData] = useState({}) 
-    
-    
-    const getCurrentUserInfo = () => {
-      fetch("http://localhost:8080/api/user/", {
-        method: "GET",
-        headers: {
-          Authorization: "Bearer " + userInfo.token,
-        },
-      }).then((res) => {
+  let paramUsername = params.username;
+  paramUsername = paramUsername.replace(":", "");
+
+  const [fullUserData, setFullUserData] = useState({});
+
+  const getCurrentUserInfo = () => {
+    fetch("http://localhost:8080/api/user/", {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + userInfo.token,
+      },
+    })
+      .then((res) => {
         return res.json();
       })
-      .then((data)=>{
+      .then((data) => {
         let found;
-        for(let d of data){
+        for (let d of data) {
           if (d.username == paramUsername) {
             // console.log(d)
             setFullUserData(d);
           }
         }
-        
-        
       });
-    }
+  };
 
-    useEffect(()=> {
-      getCurrentUserInfo()
-    },[])
+  useEffect(() => {
+    getCurrentUserInfo();
+  }, []);
 
-    // console.log(found)
+  // console.log(found)
 
-    // console.log(userInfo)
+  // console.log(userInfo)
 
-    const populateUserInfo = () => {
-      setDisableForm(false)
-      setFirstName(fullUserData.firstName)
-      setLastName(fullUserData.lastName)
-      setUsername(fullUserData.username)
-      setFormEmail(fullUserData.email)
-      setPassword(fullUserData.password)
-      
-    }
+  const populateUserInfo = () => {
+    setDisableForm(false);
+    setFirstName(fullUserData.firstName);
+    setLastName(fullUserData.lastName);
+    setUsername(fullUserData.username);
+    setFormEmail(fullUserData.email);
+    setPassword(currentUserFormInfo.password);
+  };
 
-    const [disableForm, setDisableForm] = useState(true);
+  const [disableForm, setDisableForm] = useState(true);
 
-    const editProfile = async () => {
-      populateUserInfo()
+  const editProfile = async () => {
+    populateUserInfo();
 
-      const updateUser = {
-        appUserId: fullUserData.appUserId,
-        firstName: firstName,
-        lastName: lastName,
-        username: username,
-        email: formEmail,
-        password: fullUserData.password,
-        enabled: fullUserData.enabled,
-      };
+    const updateUser = {
+      appUserId: fullUserData.appUserId,
+      firstName: firstName,
+      lastName: lastName,
+      username: username,
+      password: currentUserFormInfo.password,
+      email: formEmail,
+      enabled: fullUserData.enabled,
+    };
 
-      await fetch("http://localhost:8080/api/user/" + fullUserData.appUserId, {
-        method: "PUT",
-        headers: {
-          Authorization: "Bearer " + userInfo.token,
-        },
-        body: JSON.stringify(updateUser),
-      }).then((res) => {
-        if (res.statusCode === 204) {
-          console.log("user updated successfully");
-          setDisableForm(true);
-        } else {
-          res.json().then((error) => {
-            setError(error);
-          });
-        }
-      });
-    }
+    console.log(updateUser)
+    await fetch("http://localhost:8080/api/user/" + fullUserData.appUserId, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + userInfo.token,
+      },
+      body: JSON.stringify(updateUser),
+    }).then((res) => {
+      if (res.statusCode === 204) {
+        console.log("user updated successfully");
+        setDisableForm(true);
+      } else {
+        res.json().then((error) => {
+          setError(error);
+        });
+      }
+    });
+  };
 
-    const cancelEdit = () => {
-      setDisableForm(true);
-    }
+  const cancelEdit = () => {
+    setDisableForm(true);
+  };
 
-    const handleSubmit = (event) => {
-      event.preventDefault();
-      editProfile()
-      setDisableForm(true)
-    }
+  const clearForm = () => {
+    setDisableForm(true);
+    setFirstName("");
+    setLastName("");
+    setUsername("");
+    setFormEmail("");
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    editProfile();
+    setDisableForm(true);
+    clearForm()
+  };
+  
 
   return (
-    <div id="food-background" width="100%" height="100%" className='mt-3'>
+    <div id="food-background" width="100%" height="100%" className="mt-3">
       <Container
         className="mt-3"
         style={{ height: "87vh" }}
@@ -138,8 +145,18 @@ export default function UserProfilePage({setAuthUser}) {
                 populateUserInfo();
               }}
             >
-              See More Info
+              Update Profile Information
             </Button>
+
+            {/* <Button
+              className="mt-5"
+              variant='danger'
+              onClick={() => {
+                cancelEdit();
+              }}
+            >
+              Cancel Update
+            </Button> */}
           </Col>
           {disableForm === true ? (
             <Col>
@@ -233,18 +250,27 @@ export default function UserProfilePage({setAuthUser}) {
                   />
                 </FloatingLabel>
 
-                {/* <FloatingLabel label="Password" className="mb-3">
-                <Form.Control
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  disabled
-                />
-              </FloatingLabel> */}
+                <FloatingLabel label="Password" className="mb-3">
+                  <Form.Control
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    disabled
+                  />
+                </FloatingLabel>
 
-                {/* <Button type="submit" style={{ marginLeft: "45%" }}>
-                Update Profile
-              </Button> */}
+                <div className="mt-5 d-flex justify-content-around">
+                  <Button
+                    className=""
+                    variant="danger"
+                    onClick={() => {
+                      cancelEdit();
+                    }}
+                  >
+                    Cancel Update
+                  </Button>
+                  <Button type="submit">Update Profile</Button>
+                </div>
               </Form>
             </Col>
           )}

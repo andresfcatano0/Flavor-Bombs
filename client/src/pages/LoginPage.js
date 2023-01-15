@@ -8,80 +8,73 @@ import Row from 'react-bootstrap/Row';
 import jwtDecode from 'jwt-decode';
 import { useHistory } from 'react-router-dom';
 
-export default function LoginPage({setAuthUser}) {
+export default function LoginPage({ setAuthUser, getData, setCurrentUserFormInfo }) {
+  const [loginData, setLoginData] = useState({ username: "", password: "" });
 
-    const [loginData, setLoginData] = useState({username:"",password:""});
+  const history = useHistory();
 
-    const history = useHistory();
+  const handleLoginInput = (event) => {
+    const inputChange = event.target;
 
+    const loginInfoCopy = { ...loginData };
 
-    const handleLoginInput = (event) => {
-        const inputChange = event.target;
-        
-        const loginInfoCopy = {...loginData};
+    loginInfoCopy[inputChange.id] = inputChange.value;
 
-        loginInfoCopy[inputChange.id] = inputChange.value;
+    setLoginData(loginInfoCopy);
+  };
 
-        setLoginData(loginInfoCopy);
-    }
+  const handleSubmit = (event) => {
+    event.preventDefault();
 
-    const handleSubmit = (event) =>{
-        event.preventDefault();
+    fetch("http://localhost:8080/api/security/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(loginData),
+    })
+      .then((response) => {
+        if (response.status === 200) {
+          console.log("Success");
+          return response.json();
+        } else if (response.status === 403) {
+          console.log("Forbidden");
+        } else {
+          console.log(response);
+        }
+      })
+      .then((jwtContainer) => {
+        const jwt = jwtContainer.jwt;
+        const decodeJwt = jwtDecode(jwt);
 
-        fetch("http://localhost:8080/api/security/login", {
-            method: 'POST',
-            headers: {
-              "Content-Type":"application/json"  
-        },
-            body: JSON.stringify(loginData)
-        }).then(response => {
-            if(response.status === 200) {
-                console.log("Success");
-                return response.json();
-            } else if(response.status === 403){
-                console.log("Forbidden");
-            } else {
-                console.log(response);
+        const fullLoginData = {
+          token: jwt,
+          userData: decodeJwt,
+        };
 
-            }
+        localStorage.setItem("userData", JSON.stringify(fullLoginData));
 
-        }).then(jwtContainer => {
-            const jwt = jwtContainer.jwt;
-            const decodeJwt = jwtDecode(jwt);
+        setAuthUser(fullLoginData);
 
-            const fullLoginData = {
-                token: jwt,
-                userData: decodeJwt
-            };
+        // redirect user to appropriate home page
+        fullLoginData.userData.roles[0].authority === "ROLE_ADMIN"
+          ? history.push("/admin/dashboard-menu")
+          : history.push("/");
+      });
 
-            localStorage.setItem("userData",JSON.stringify(fullLoginData));
-
-            setAuthUser(fullLoginData);
-
-            // redirect user to appropriate home page
-            fullLoginData.userData.roles[0].authority === "ROLE_ADMIN" ? 
-            history.push("/admin/dashboard-menu") : history.push("/");
-            
-        })
-
-
-    }   
-    
-
+    setCurrentUserFormInfo(loginData);
+  };
 
   return (
     <Row
       className=" align-items-center mt-5"
       id="food-background"
-      style={{ height: "88vh", width:"100%" }}
+      style={{ height: "88vh", width: "100%" }}
     >
       <Col xs={12} lg={6}>
-        <h1
-          className="text-center ms-5"
-          style={{ }}
-        >
+        <h1 className="text-center ms-5" style={{}}>
           Welcome <br />
-          to <br/> Flavor Bombs
+          to <br /> Flavor Bombs
         </h1>
       </Col>
       <Col
