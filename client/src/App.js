@@ -28,6 +28,7 @@ import ReviewsPage from './pages/ReviewsPage';
 import ReviewForm from './pages/ReviewForm';
 
 function App() {
+  const [error, setError] = useState([]);
   // USER DATA
   let currentUserData = localStorage.getItem("userData");
 
@@ -68,7 +69,7 @@ function App() {
       })
       .catch((err) => {
         setIsLoading(false);
-        console.log(err);
+        setError(err)
       });
   };
 
@@ -87,7 +88,7 @@ function App() {
       .then((data) => {
         setMenus(data);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => setError(err));
   };
 
   //ALL REVIEWS
@@ -107,7 +108,7 @@ function App() {
       .then((data) => {
         setAllReviews(data);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => setError(err));
   };
   
 
@@ -128,7 +129,7 @@ function App() {
         
         setIsLoading(false);
         setAllUsers(data)
-      });
+      }).catch(err=>setError(err));
   };
 
 
@@ -216,6 +217,15 @@ function App() {
       >
         <BrowserRouter>
           <NavBar setAuthUser={setAuthUser} />
+          {error.length > 0 ? (
+            <section className="error-msg alert alert-danger mx-3">
+              <ul>
+                {error.map((err) => {
+                  return <li key={err}>{err}</li>;
+                })}
+              </ul>
+            </section>
+          ) : null}
           <Switch>
             <Route exact path="/">
               <HomePage />
@@ -223,6 +233,8 @@ function App() {
             </Route>
             <Route exact path="/login">
               <LoginPage
+                setError={setError}
+                error={error}
                 setAuthUser={setAuthUser}
                 setCurrentUserFormInfo={setCurrentUserFormInfo}
               />
@@ -232,6 +244,7 @@ function App() {
                 restaurants={restaurants}
                 getRestaurants={getRestaurants}
                 isLoading={isLoading}
+                menus={menus}
               />
             </Route>
             <Route exact path="/restaurant/:id">
