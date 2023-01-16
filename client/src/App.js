@@ -100,6 +100,8 @@ function App() {
       },
     })
       .then((response) => {
+        
+        setIsLoading(false);
         return response.json();
       })
       .then((data) => {
@@ -123,6 +125,8 @@ function App() {
         return res.json();
       })
       .then((data) => {
+        
+        setIsLoading(false);
         setAllUsers(data)
       });
   };
