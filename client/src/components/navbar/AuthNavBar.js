@@ -82,7 +82,7 @@ export default function AuthNavBar({setAuthUser}) {
               </Link>
 
               <NavItem className="d-flex align-items-center justify-content-start">
-                <Link to={`/edit-user/profile`} style={{color: "grey"}}>
+                <Link to={`/edit-user/profile`} style={{ color: "grey" }}>
                   <PersonCircle size={30} style={{ paddingRight: "5px" }} />
                 </Link>
               </NavItem>
@@ -92,11 +92,11 @@ export default function AuthNavBar({setAuthUser}) {
                   title={user.userData.sub}
                   id="basic-nav-dropdown"
                 >
-                  <NavDropdown.Item>
-                    <Link to="/user/reviews" className="text-reset">
-                      View Reviews
-                    </Link>
-                  </NavDropdown.Item>
+                  {/* <NavDropdown.Item> */}
+                  <Link to="/user/reviews" className="">
+                    View Reviews
+                  </Link>
+                  {/* </NavDropdown.Item> */}
                   {/*
                 <NavDropdown.Item href="#action/3.2">Orders</NavDropdown.Item> */}
                   <NavDropdown.Divider />
