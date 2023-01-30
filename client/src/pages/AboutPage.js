@@ -7,8 +7,8 @@ import { ReactComponent as LogoSvg } from "../assets/avatar_placeholders/stacy_a
 export default function AboutPage() {
   return (
     <div className="text-center" id="food-background">
-      <div>
-        <h1>About Us</h1>
+      <div className='mt-5'>
+        <h1 className='pt-4'>About Us</h1>
         <hr width="60%" className="mx-auto" />
         <h2 className="mb-5">Learn Our Story</h2>
       </div>
