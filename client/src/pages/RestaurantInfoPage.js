@@ -6,7 +6,7 @@ import Image from 'react-bootstrap/Image';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Carousel from 'react-bootstrap/Carousel';
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import ReviewCard from '../components/ReviewCard';
 import MenuCard from '../components/MenuCard';
 import CartContext from '../context/cart/CartContext';
@@ -17,6 +17,8 @@ import LoadOneMap from '../components/LoadOneMap';
 export default function RestaurantInfoPage({ restaurants, getRestaurants, menus }) {
 
   const userInfo = useContext(UserContext);
+
+  const history = useHistory();
 
   const [menu, setMenu] = useState([]);
   const params = useParams();
@@ -136,7 +138,9 @@ export default function RestaurantInfoPage({ restaurants, getRestaurants, menus 
   };
 
 
-   
+   const redirectionToLogin = () => {
+      history.push("/login");
+   }
 
   
 
@@ -162,23 +166,32 @@ export default function RestaurantInfoPage({ restaurants, getRestaurants, menus 
             style={{ height: "300px", width: "350px", objectFit: "cover" }}
           />
         </div>
-        <div style={{ backgroundColor: "white", display: "inline-block" }}>
-          <h3
-            className="mt-2 text-end"
-            style={{ backgroundColor: "white", display: "inline-block" }}
-          >
-            {specificRestaurant.restaurantName}
-          </h3>
-        </div>
-        <div
-          className="text-end"
-          style={{ backgroundColor: "white", display: "inline-block", float:"right" }}
-        >
-          <p className="text-muted">Address: {specificRestaurant.address}</p> 
-          <p className="text-muted">Hours: {specificRestaurant.openHours}</p>
-        </div>
-        <br/>
-        <br/>
+        {/* <Container> */}
+        <Row className="d-flex justify-content-between mt-2">
+          <Col className='text-start'>
+
+            <h3
+              style={{
+                backgroundColor: "white"
+              }}
+            >
+              {specificRestaurant.restaurantName}
+            </h3>
+            <span>{specificRestaurant.description}</span>
+          </Col>
+          <Col className="d-flex flex-column text-end ">
+           
+            <span className="text-muted mb-auto">
+              Address: {specificRestaurant.address}
+            </span>
+            <span className="text-muted">
+              Hours: {specificRestaurant.openHours}
+            </span>
+          </Col>
+        </Row>
+        {/* </Container> */}
+        <br />
+        <br />
         <hr />
         <Row>
           <ReviewCard
@@ -228,7 +241,6 @@ export default function RestaurantInfoPage({ restaurants, getRestaurants, menus 
                           <PlusCircle /> Add More
                         </Button>
                       )} */}
-
                       {isItemInCart(m) && (
                         <>
                           <Button
@@ -250,7 +262,26 @@ export default function RestaurantInfoPage({ restaurants, getRestaurants, menus 
                       <span>{item.quantity}</span> */}
 
                       {/* <Button className="">Order Now</Button> */}
-                      {!isItemInCart(m) && (
+                      {userInfo ? (
+                        !isItemInCart(m) && (
+                          <Button
+                            onClick={() => {
+                              addItemToCart(m);
+                            }}
+                          >
+                            Order Now
+                          </Button>
+                        )
+                      ) : (
+                        <Button
+                          onClick={() => {
+                            redirectionToLogin();
+                          }}
+                        >
+                          Order Now
+                        </Button>
+                      )}
+                      {/* {!isItemInCart(m) && (
                         <Button
                           onClick={() => {
                             addItemToCart(m);
@@ -258,7 +289,7 @@ export default function RestaurantInfoPage({ restaurants, getRestaurants, menus 
                         >
                           Order Now
                         </Button>
-                      )}
+                      )} */}
 
                       {/* If item is not in cart show order now button then change to other button above */}
                       {/* {!isItemInCart(m) && (
