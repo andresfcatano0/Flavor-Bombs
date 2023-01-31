@@ -67,6 +67,9 @@ export default function AuthNavBar({setAuthUser}) {
               <Link to="/restaurants">
                 <Nav.Item className="nav-link">Restaurants</Nav.Item>
               </Link>
+              <Link to="/user/reviews">
+                <Nav.Item className="nav-link">Reviews</Nav.Item>
+              </Link>
             </Nav>
             <Nav>
               <Link to="/shopping-cart" className="d-flex">
