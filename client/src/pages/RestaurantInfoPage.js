@@ -10,7 +10,7 @@ import { useHistory, useParams } from "react-router-dom";
 import ReviewCard from '../components/ReviewCard';
 import MenuCard from '../components/MenuCard';
 import CartContext from '../context/cart/CartContext';
-import { DashCircle, PlusCircle, PlusCircleFill, Trash } from 'react-bootstrap-icons';
+import { DashCircle, DashCircleDotted, DashCircleFill, PlusCircle, PlusCircleFill, Trash, Trash3Fill } from 'react-bootstrap-icons';
 import UserContext from '../context/AuthContext';
 import LoadOneMap from '../components/LoadOneMap';
 
@@ -41,6 +41,13 @@ export default function RestaurantInfoPage({ restaurants, getRestaurants, menus 
   const isItemInCart = (menuItems) => {
     return orderCartItems.find((item) => item.menuId == menuItems.menuId) !== undefined;
   };
+
+  const itemQuantity = (menuItem) => {
+    let copy = [...orderCartItems];
+
+    let itemIndex = copy.findIndex((m) => m.menuId === menuItem.menuId);
+    return copy[itemIndex].quantity;
+  }
 
   const getSpecificRestaurant = () => {
     fetch(`http://localhost:8080/api/restaurant/${params.id}`, {
@@ -159,7 +166,10 @@ export default function RestaurantInfoPage({ restaurants, getRestaurants, menus 
         specificRestaurant
       ={specificRestaurant}/> */}
       </div>
-      <div className="mt-4 mx-4" key={specificRestaurant.restaurantId}>
+      <div
+        className="mt-4 mx-4 pt-5"
+        key={specificRestaurant.restaurantId}
+      >
         <div className="text-center">
           <img
             src={specificRestaurant.restaurantImage}
@@ -168,11 +178,10 @@ export default function RestaurantInfoPage({ restaurants, getRestaurants, menus 
         </div>
         {/* <Container> */}
         <Row className="d-flex justify-content-between mt-2">
-          <Col className='text-start'>
-
+          <Col className="text-start">
             <h3
               style={{
-                backgroundColor: "white"
+                backgroundColor: "white",
               }}
             >
               {specificRestaurant.restaurantName}
@@ -180,7 +189,6 @@ export default function RestaurantInfoPage({ restaurants, getRestaurants, menus 
             <span>{specificRestaurant.description}</span>
           </Col>
           <Col className="d-flex flex-column text-end ">
-           
             <span className="text-muted mb-auto">
               Address: {specificRestaurant.address}
             </span>
@@ -224,9 +232,16 @@ export default function RestaurantInfoPage({ restaurants, getRestaurants, menus 
                       src={m.itemImage}
                     />
                   </Col>
-                  <Col className="d-flex">
+                  <Col
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "space-between",
+                    }}
+                    className="text-center"
+                  >
                     <Row>
-                      <h5 className="mt-3 ">
+                      <h5 className="mt-3 mb-5">
                         {m.itemName} - <span>${m.itemPrice.toFixed(2)}</span>
                       </h5>
                       <p>{m.itemDescription}</p>
@@ -241,17 +256,60 @@ export default function RestaurantInfoPage({ restaurants, getRestaurants, menus 
                           <PlusCircle /> Add More
                         </Button>
                       )} */}
-                      {isItemInCart(m) && (
-                        <>
-                          <Button
-                            onClick={() => {
-                              increaseQuantity(m);
-                            }}
-                          >
-                            <PlusCircleFill />
-                          </Button>
-                        </>
-                      )}
+                      <div className="d-flex flex-row justify-content-center align-items-center mb-3">
+                        {isItemInCart(m) && (
+                          <>
+                            <Button
+                              className="mx-3"
+                              onClick={() => {
+                                increaseQuantity(m);
+                              }}
+                            >
+                              <PlusCircleFill />
+                            </Button>{" "}
+                            {itemQuantity(m)}
+                            {itemQuantity(m) > 1 && (
+                              <Button
+                                className="mx-3"
+                                style={{
+                                  backgroundColor: "grey",
+                                  borderColor: "grey",
+                                }}
+                              >
+                                <DashCircleFill
+                                  onClick={() => decreaseQuantity(m)}
+                                />
+                              </Button>
+                            )}{" "}
+                            {itemQuantity(m) === 1 && (
+                              <Button
+                                className="mx-3 align-self-baseline"
+                                style={{
+                                  backgroundColor: "#dc3545",
+                                  borderColor: "#dc3545",
+                                }}
+                              >
+                                <Trash3Fill
+                                  style={{
+                                    color: "white",
+                                    cursor: "pointer",
+                                  }}
+                                  onClick={() => removeItemFromCart(m)}
+                                />
+                              </Button>
+                            )}
+                            {/* <Button
+                              className="mx-3"
+                              variant="danger"
+                              onClick={() => {
+                                decreaseQuantity(m);
+                              }}
+                            > */}
+                            {/* <DashCircleFill />
+                            </Button> */}
+                          </>
+                        )}
+                      </div>
 
                       {/* <Button
                         className="btn-success"
@@ -290,18 +348,6 @@ export default function RestaurantInfoPage({ restaurants, getRestaurants, menus 
                           Order Now
                         </Button>
                       )} */}
-
-                      {/* If item is not in cart show order now button then change to other button above */}
-                      {/* {!isItemInCart(m) && (
-                        <Button
-                          onClick={() => {
-                            addItemToCart(m);
-                          }}
-                        >
-                          Order Now
-                        </Button>
-                      )}
-                      {console.log(handleTotals)} */}
                     </Row>
                   </Col>
                 </Row>
