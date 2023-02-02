@@ -21,12 +21,18 @@ public class Result<T> {
     }
 
     public List<String> getErrorMessages(){
+<<<<<<< HEAD
         //return a copy so the outside world can't mutate errors after
         //they've been added
+=======
+>>>>>>> 46d0b244511803571cd63bb8605736042d361ca4
         return new ArrayList<>(errorMessages);
     }
     public boolean isSuccess(){
         return errorMessages.isEmpty();
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 46d0b244511803571cd63bb8605736042d361ca4
 }

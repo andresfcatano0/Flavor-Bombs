@@ -25,21 +25,34 @@ public class SecurityConfig {
 
         http.authorizeRequests()
 
+<<<<<<< HEAD
                 .antMatchers( HttpMethod.GET,"/api/user/*").authenticated()
                 .antMatchers( HttpMethod.GET,"/api/user").hasRole("ADMIN")
+=======
+>>>>>>> 46d0b244511803571cd63bb8605736042d361ca4
                 .antMatchers( HttpMethod.GET,"/api/restaurant/*").permitAll()
                 .antMatchers( HttpMethod.GET,"/api/restaurant").permitAll()
                 .antMatchers( HttpMethod.GET,"/api/order/all").hasRole("ADMIN")
                 .antMatchers( HttpMethod.GET,"/api/order").authenticated()
+<<<<<<< HEAD
                 .antMatchers( HttpMethod.DELETE, "/api/review/*").authenticated()
                 .antMatchers( HttpMethod.DELETE, "/api/restaurant/*").hasRole("ADMIN")
                 .antMatchers( HttpMethod.DELETE, "/api/user/*").hasRole("ADMIN")
+=======
+                .antMatchers( HttpMethod.DELETE, "/api/restaurant/*").hasRole("ADMIN")
+                .antMatchers( HttpMethod.DELETE, "/api/menu/*").hasRole("ADMIN")
+>>>>>>> 46d0b244511803571cd63bb8605736042d361ca4
                 .antMatchers( HttpMethod.DELETE, "/api/order/*").authenticated()
                 .antMatchers( HttpMethod.POST, "/api/review").authenticated()
+                .antMatchers( HttpMethod.POST, "/api/order").authenticated()
                 .antMatchers( HttpMethod.POST,"/api/security/login").permitAll()
+<<<<<<< HEAD
                 .antMatchers( HttpMethod.POST, "/api/order").authenticated()
                 .antMatchers( HttpMethod.PUT, "/api/user/*").authenticated()
                 .antMatchers( HttpMethod.PUT, "/api/order/*").authenticated()
+=======
+                .antMatchers(HttpMethod.PUT, "/api/order/*").authenticated()
+>>>>>>> 46d0b244511803571cd63bb8605736042d361ca4
                 .antMatchers(HttpMethod.PUT, "/api/review/*").authenticated()
                 .and()
                 .addFilter( new JwtRequestFilter(buildAuthManager(config), converter ))
