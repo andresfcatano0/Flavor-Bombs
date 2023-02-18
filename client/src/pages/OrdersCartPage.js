@@ -26,7 +26,7 @@ export default function OrdersCartPage({restaurants}) {
   } = useContext(CartContext);
 
   
-  const handleCheckoutOrder = async () => {
+  const handleCheckoutOrder = () => {
     const checkoutItem = [
       {filterTags: "",
       itemDescription:"", 
@@ -40,7 +40,7 @@ export default function OrdersCartPage({restaurants}) {
 
     let checkOutOrder = [...orderCartItems];
     
-      await fetch("http://localhost:8080/api/checkout", {
+       fetch("http://localhost:8080/api/checkout", {
         method: "POST",
         headers:{
           "Content-Type": "application/json",

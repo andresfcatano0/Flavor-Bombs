@@ -29,8 +29,8 @@ export default function AdminViewAllRestaurants({ restaurants, getRestaurants, m
     const handleShow = () => setShow(true);
 
     const [allOrders, setAllOrders] = useState([]);
-    const getAllOrders = async () => {
-      await fetch("http://localhost:8080/api/order/all", {
+    const getAllOrders = () => {
+      fetch("http://localhost:8080/api/order/all", {
         method: "GET",
         headers: {
           Authorization: "Bearer " + user.token,

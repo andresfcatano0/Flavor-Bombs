@@ -70,7 +70,7 @@ export default function UserProfilePage({ setAuthUser, currentUserFormInfo, getD
 
   const [disableForm, setDisableForm] = useState(true);
 
-  const editProfile = async () => {
+  const editProfile = () => {
     populateUserInfo();
 
     const updateUser = {
@@ -84,7 +84,7 @@ export default function UserProfilePage({ setAuthUser, currentUserFormInfo, getD
     };
 
     console.log(updateUser)
-    await fetch("http://localhost:8080/api/user/" + fullUserData.appUserId, {
+    fetch("http://localhost:8080/api/user/" + fullUserData.appUserId, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
