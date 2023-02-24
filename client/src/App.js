@@ -26,6 +26,8 @@ import AdminViewAllOrders from './pages/adminTables/AdminViewAllOrders';
 import AdminViewAllReviews from './pages/adminTables/AdminViewAllReviews';
 import ReviewsPage from './pages/ReviewsPage';
 import ReviewForm from './pages/ReviewForm';
+import AdminSpecificPerson from './pages/AdminSpecificPerson';
+import ReviewRestaurantPage from './pages/ReviewRestaurantPage';
 
 function App() {
   const [error, setError] = useState([]);
@@ -50,17 +52,15 @@ function App() {
 
   // ALL RESTAURANTS
   const [restaurants, setRestaurants] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
 
-  const getRestaurants = async () => {
-    await fetch("http://localhost:8080/api/restaurant", {
+  const getRestaurants = () => {
+    fetch("http://localhost:8080/api/restaurant", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
     })
       .then((res) => {
-        setIsLoading(false);
         return res.json();
       })
       .then((data) => {
@@ -68,15 +68,14 @@ function App() {
         setRestaurants(data);
       })
       .catch((err) => {
-        setIsLoading(false);
         setError(err)
       });
   };
 
   // ALL MENUS
   const [menus, setMenus] = useState([]);
-  const getAllMenus = async () => {
-    await fetch("http://localhost:8080/api/menu", {
+  const getAllMenus = () => {
+    fetch("http://localhost:8080/api/menu", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -93,16 +92,14 @@ function App() {
 
   //ALL REVIEWS
   const [allReviews, setAllReviews] = useState([]);
-  const getAllReviews = async () => {
-    await fetch("http://localhost:8080/api/review", {
+  const getAllReviews = () => {
+    fetch("http://localhost:8080/api/review", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
     })
       .then((response) => {
-        
-        setIsLoading(false);
         return response.json();
       })
       .then((data) => {
@@ -115,8 +112,8 @@ function App() {
   // ALL USERS
   const [allUsers, setAllUsers] = useState([]);
 
-  const getAllUsers = async () => {
-   await fetch("http://localhost:8080/api/user/", {
+  const getAllUsers = () => {
+   fetch("http://localhost:8080/api/user/", {
       method: "GET",
       headers: {
         Authorization: "Bearer " + authUser?.token,
@@ -126,8 +123,6 @@ function App() {
         return res.json();
       })
       .then((data) => {
-        
-        setIsLoading(false);
         setAllUsers(data)
       }).catch(err=>setError(err));
   };
@@ -243,7 +238,6 @@ function App() {
               <RestaurantPage
                 restaurants={restaurants}
                 getRestaurants={getRestaurants}
-                isLoading={isLoading}
                 menus={menus}
               />
             </Route>
@@ -282,6 +276,16 @@ function App() {
             </Route>
             <Route exact path="/admin/view-all-orders">
               <AdminViewAllOrders
+                restaurants={restaurants}
+                menus={menus}
+                allUsers={allUsers}
+                getRestaurants={getRestaurants}
+                authUser={authUser}
+                setAuthUser={setAuthUser}
+              />
+            </Route>
+            <Route exact path="/admin/specific-user/:id">
+              <AdminSpecificPerson
                 restaurants={restaurants}
                 menus={menus}
                 allUsers={allUsers}
@@ -333,7 +337,7 @@ function App() {
               />
             </Route>
             <Route exact path="/user/reviews">
-              <ReviewsPage
+              <ReviewRestaurantPage
                 restaurants={restaurants}
                 allUsers={allUsers}
                 getAllUsers={getAllUsers}
