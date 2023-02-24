@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import Table from 'react-bootstrap/Table';
+import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 import UserContext from '../context/AuthContext';
 
@@ -40,6 +41,27 @@ export default function ReviewRestaurantPage({
         }).catch(err => console.log(err))
     }
 
+    const deleteReview = (reviewId) => {
+      if (window.confirm("Are you sure you want to delete this review?")) {
+        fetch("http://localhost:8080/api/review/" + reviewId, {
+          method: "DELETE",
+          headers: {
+            Authorization: "Bearer " + currentUser.token,
+          },
+        }).then((data) => {
+          // console.log(data);
+          getAllReviews();
+
+          console.log("successfully deleted order");
+
+          // console.log(data.statusCode)
+        });
+      }
+    };
+
+    
+
+
     useEffect(()=> {
         findCurrentUser()
       },[allUsers])
@@ -73,6 +95,7 @@ export default function ReviewRestaurantPage({
                 <th></th>
                 <th>Restaurant Name</th>
                 <th>Review Text</th>
+                <th>Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -84,6 +107,10 @@ export default function ReviewRestaurantPage({
                       {restaurants[review.restaurantId - 1]?.restaurantName}
                     </td>
                     <td>{review.reviewText}</td>
+                    <td style={{display: "flex", justifyContent:"space-around"}}>
+                      <Button variant='warning'>Edit</Button>
+                      <Button variant="danger" onClick={()=>{deleteReview(review.reviewId);}}>Delete</Button>
+                    </td>
                   </tr>
                 );
               })} 
