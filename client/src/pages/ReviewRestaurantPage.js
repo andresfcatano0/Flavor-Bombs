@@ -50,8 +50,8 @@ export default function ReviewRestaurantPage({
           },
         }).then((data) => {
           // console.log(data);
-          getAllReviews();
-
+          
+            getHydratedUser();
           console.log("successfully deleted order");
 
           // console.log(data.statusCode)
