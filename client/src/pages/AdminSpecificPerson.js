@@ -69,19 +69,6 @@ export default function AdminSpecificPerson({restaurants, getRestaurants}) {
                     <td>{specificUser.firstName}</td>
                     <td>{specificUser.lastName}</td>
                     <td>
-                      {specificUser &&
-                        specificUser.orders.map((order, index) => {
-                          return (
-                            <tr key={order.orderId}>
-                              <td>{index + 1}</td>
-                              <td>{order.orderDate}</td>
-                              <td>{order.restaurantId}</td>
-                              <td>{order.orderItems}</td>
-                              <td>{order.itemQuantity}</td>
-                              <td>${order.totalPrice.toFixed(2)}</td>
-                            </tr>
-                          );
-                        })}
                       {specificUser.orders.length === 0 ? (
                         <p>No orders.</p>
                       ) : (
