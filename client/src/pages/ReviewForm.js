@@ -2,15 +2,16 @@ import React, { useContext, useEffect, useState } from 'react'
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
+import Container from 'react-bootstrap/Container';
 import UserContext from '../context/AuthContext';
 import { useHistory, useParams } from 'react-router-dom';
 
 
-export default function ReviewForm({ restaurants, allReviews }) {
+export default function ReviewForm({ restaurants, getRestaurants, allReviews }) {
   const currentUser = useContext(UserContext);
   const history = useHistory();
 
-  const [selectedRestaurant, setSelectedRestaurant] = useState(0);
+  const [selectedRestaurant, setSelectedRestaurant] = useState(1);
   const [reviewText, setReviewText] = useState("");
   // const [isAnonymous, setIsAnonymous] = useState(false);
 
@@ -48,10 +49,9 @@ export default function ReviewForm({ restaurants, allReviews }) {
   };
 
   const clearForm = () => {
-    return setSelectedRestaurant(0), setReviewText("");
+    return setSelectedRestaurant(1), setReviewText("");
   };
 
-  console.log(params.id);
   const populateForm = () => {
     if (params.id && allReviews.length > 0) {
       let popReview = allReviews.find(
@@ -62,8 +62,13 @@ export default function ReviewForm({ restaurants, allReviews }) {
     }
   };
 
+  
+
   useEffect(() => {
-    populateForm();
+    if(params.id){
+      populateForm();
+    }
+    getRestaurants();
   }, []);
 
   const updateReview = () => {
@@ -92,19 +97,22 @@ export default function ReviewForm({ restaurants, allReviews }) {
     });
   };
 
+  console.log(selectedRestaurant)
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (params.id !== undefined) {
       postReview();
-    } else {
-      updateReview();
-    }
+    // if (params.id !== undefined) {
+    //   postReview();
+    // } else {
+    //   updateReview();
+    // }
     // console.log(reviewForm)
   };
 
   return (
-    <div className="mt-3">
-      <Form onSubmit={handleSubmit}>
+    <div className="mt-4" id="food-background" style={{minHeight: "86vh"}}>
+      <Form onSubmit={handleSubmit} className="mx-5">
         <FloatingLabel
           className="mb-3"
           label="Choose a restaurant"
@@ -161,9 +169,14 @@ export default function ReviewForm({ restaurants, allReviews }) {
           />
         </Form.Group> */}
 
-        <Button variant="primary" type="submit">
-          Submit
-        </Button>
+        <Container className="d-flex justify-content-around">
+          <Button variant="primary" type="submit">
+            Submit
+          </Button>
+          <Button variant="danger" onClick={clearForm}>
+            Clear Form
+          </Button>
+        </Container>
       </Form>
     </div>
   );
