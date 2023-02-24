@@ -67,10 +67,11 @@ export default function ReviewRestaurantPage({
       ) : (
         <>
           <h2 className="text-center mt-4">Reviews Per Restaurant</h2>
-          <Table striped hover bordered style={{ backgroundColor: "white" }}>
+          <Table striped hover bordered className="mx-5" style={{ backgroundColor: "white", width: "90vw" }}>
             <thead>
               <tr>
                 <th></th>
+                <th>Restaurant Name</th>
                 <th>Review Text</th>
               </tr>
             </thead>
@@ -79,6 +80,9 @@ export default function ReviewRestaurantPage({
                 return (
                   <tr key={review.reviewId}>
                     <td>{index + 1}</td>
+                    <td>
+                      {restaurants[review.restaurantId - 1]?.restaurantName}
+                    </td>
                     <td>{review.reviewText}</td>
                   </tr>
                 );
