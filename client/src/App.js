@@ -348,6 +348,7 @@ function App() {
             <Route exact path="/user/add-review">
               <ReviewForm
                 restaurants={restaurants}
+                getRestaurants = {getRestaurants}
                 allUsers={allUsers}
                 getAllUsers={getAllUsers}
               />
