@@ -30,21 +30,7 @@ export default function AdminViewAllUsers({allUsers, getAllUsers}) {
       const handleClose = () => setShow(false);
       const handleShow = () => setShow(true);
 
-    //  const [specificUser, setSpecificUser] = useState({});
-    //  const handleSpecificReviewOrder = (userId) => {
-    //    fetch("http://localhost:8080/api/user/" + userId, {
-    //      method: "GET",
-    //      headers: {
-    //        Authorization: "Bearer " + user.token,
-    //      },
-    //    })
-    //      .then((res) => res.json())
-    //      .then((data) => {
-    //        console.log(data);
-    //        setSpecificUser(data);
-    //       });
-    //       history.push("/admin/view-all-orders");
-    //  };
+     
 
     const deleteUser = (userId) => {
         fetch("http://localhost:8080/api/user/" + userId, {
@@ -80,7 +66,6 @@ export default function AdminViewAllUsers({allUsers, getAllUsers}) {
                 show={show}
                 handleClose={handleClose}
                 handleShow={handleShow}
-                // handleSpecificReviewOrder={handleSpecificReviewOrder}
               />
             </Col>
           </Row>
