@@ -9,6 +9,7 @@ export default function ReviewsPage({
   allUsers,
   allReviews,
   getAllUsers,
+  getData,
   getAllReviews,
 }) {
   // console.log(allReviews)
@@ -20,11 +21,16 @@ export default function ReviewsPage({
   const [fullUserData, setFullUserData] = useState({});
   const [detailedUser, setDetailedUser] = useState({});
 
-  const getCurrentUserInfo = async () => {
+  const [userFromApp, setUserFromApp] = useState({});
+  
+    setUserFromApp(getData(currentUser));
+
+
+  const getCurrentUserInfo = () => {
     fetch("http://localhost:8080/api/user/", {
       method: "GET",
       headers: {
-        Authorization: "Bearer " + currentUser.token,
+        Authorization: "Bearer " + userFromApp.token,
       },
     })
       .then((res) => {
@@ -33,18 +39,19 @@ export default function ReviewsPage({
       .then((data) => {
         let found;
         for (let d of data) {
-          if (d.username === currentUser.userData.sub) {
-            // console.log(d)
+          if (d.username === userFromApp.userData.sub) {
+            // cmonsole.log(d)
             setFullUserData(d);
           }
         }
       });
       setIsLoading(false);
   };
-  console.log(fullUserData);
+  // console.log(fullUserData);
 
-  const getDetailedUser = async () => {
-    await fetch("http://localhost:8080/api/user/" + fullUserData.appUserId, {
+
+  const getDetailedUser = () => {
+    fetch("http://localhost:8080/api/user/" + fullUserData.appUserId, {
       method: "GET",
       headers: {
         Authorization: "Bearer " + currentUser.token,
