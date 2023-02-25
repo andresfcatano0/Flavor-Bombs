@@ -96,8 +96,12 @@ export default function AuthNavBar({setAuthUser}) {
                   id="basic-nav-dropdown"
                 >
                   {/* <NavDropdown.Item> */}
-                  <Link to="/user/reviews" className="">
-                    View Reviews
+                  <Link
+                    to="/user/add-review"
+                    className="dropdown-item"
+                    style={{ font: "inherit" }}
+                  >
+                    Make a Review
                   </Link>
                   {/* </NavDropdown.Item> */}
                   {/*
