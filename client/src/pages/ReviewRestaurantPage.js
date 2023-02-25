@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import UserContext from '../context/AuthContext';
 
 export default function ReviewRestaurantPage({
@@ -59,6 +59,10 @@ export default function ReviewRestaurantPage({
       }
     };
 
+    const history = useHistory();
+    const editReview = (reviewId) => {
+      history.push("/user/edit-review/"+reviewId);
+    };
     
 
 
@@ -108,7 +112,7 @@ export default function ReviewRestaurantPage({
                     </td>
                     <td>{review.reviewText}</td>
                     <td style={{display: "flex", justifyContent:"space-around"}}>
-                      <Button variant='warning'>Edit</Button>
+                      <Button variant='warning' onClick={()=>{editReview(review.reviewId)}}>Edit</Button>
                       <Button variant="danger" onClick={()=>{deleteReview(review.reviewId);}}>Delete</Button>
                     </td>
                   </tr>
