@@ -4,7 +4,7 @@ import Form from "react-bootstrap/Form";
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Container from 'react-bootstrap/Container';
 import UserContext from '../context/AuthContext';
-import { useHistory, useParams } from 'react-router-dom';
+import { Link, useHistory, useParams } from 'react-router-dom';
 
 
 export default function ReviewForm({ restaurants, getRestaurants, allReviews }) {
@@ -98,7 +98,6 @@ export default function ReviewForm({ restaurants, getRestaurants, allReviews }) 
     });
   };
 
-
   const handleSubmit = (event) => {
     event.preventDefault();
     if (params.id === undefined) {
@@ -110,7 +109,7 @@ export default function ReviewForm({ restaurants, getRestaurants, allReviews }) 
   };
 
   return (
-    <div className="mt-4" id="food-background" style={{minHeight: "86vh"}}>
+    <div className="mt-4" id="food-background" style={{ minHeight: "86vh" }}>
       <Form onSubmit={handleSubmit} className="mx-5">
         <FloatingLabel
           className="mb-3"
@@ -172,9 +171,10 @@ export default function ReviewForm({ restaurants, getRestaurants, allReviews }) 
           <Button variant="primary" type="submit">
             Submit
           </Button>
-          <Button variant="danger" onClick={clearForm}>
+          {/* <Button variant="danger" onClick={clearForm}>
             Clear Form
-          </Button>
+          </Button> */}
+          <Link to="/user/reviews" className='btn btn-danger'>Cancel Edit</Link>
         </Container>
       </Form>
     </div>
