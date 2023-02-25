@@ -55,7 +55,7 @@ export default function ReviewForm({ restaurants, getRestaurants, allReviews }) 
   const populateForm = () => {
     if (params.id && allReviews.length > 0) {
       let popReview = allReviews.find(
-        (r) => r.reviewId == params.id
+        (r) => r.reviewId.toString() === params.id.toString()
       );
       setReviewText(popReview.reviewText)
       setSelectedRestaurant(popReview.restaurantId)
@@ -68,7 +68,6 @@ export default function ReviewForm({ restaurants, getRestaurants, allReviews }) 
     if(params.id){
       populateForm();
     }
-    getRestaurants();
   }, []);
 
   const updateReview = () => {
@@ -76,10 +75,11 @@ export default function ReviewForm({ restaurants, getRestaurants, allReviews }) 
       reviewId: params.id,
       restaurantId: selectedRestaurant,
       reviewText: reviewText,
-      owner: currentUser.appUserId,
+      // owner: currentUser.appUserId,
+      owner: null,
     };
 
-    fetch("http://localhost:8080//api/review/" + params.id, {
+    fetch("http://localhost:8080/api/review/" + params.id, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -87,8 +87,9 @@ export default function ReviewForm({ restaurants, getRestaurants, allReviews }) 
       },
       body: JSON.stringify(updateReview),
     }).then((res) => {
-      if (res.status === 204) {
+      if (res.status>= 200 && res.status < 300) {
         console.log("updated....");
+        history.push("/user/reviews");
       } else {
         res.json().then((error) => {
           console.log(error);
@@ -97,16 +98,14 @@ export default function ReviewForm({ restaurants, getRestaurants, allReviews }) 
     });
   };
 
-  console.log(selectedRestaurant)
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    if (params.id === undefined) {
       postReview();
-    // if (params.id !== undefined) {
-    //   postReview();
-    // } else {
-    //   updateReview();
-    // }
+    } else {
+      updateReview();
+    }
     // console.log(reviewForm)
   };
 
