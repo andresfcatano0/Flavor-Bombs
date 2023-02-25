@@ -26,6 +26,14 @@ export default function AuthNavBar({setAuthUser}) {
     history.push("/");
   }
 
+  function handleEditProfile(){
+    history.push("/edit-user/profile");
+  }
+
+  function handleMakeReview(){
+    history.push("/user/add-review");
+  }
+
   // console.log(orderCartItems)
 
   let itemCount = orderCartItems.reduce((sum, item) => sum + item.quantity, 0);
@@ -96,13 +104,22 @@ export default function AuthNavBar({setAuthUser}) {
                   id="basic-nav-dropdown"
                 >
                   {/* <NavDropdown.Item> */}
-                  <Link
+                  <NavDropdown.Item onClick={handleEditProfile}>
+                    Edit Profile
+                  </NavDropdown.Item>
+
+                  {/* <NavDropdown.Item> */}
+                  {/* <Link
                     to="/user/add-review"
                     className="dropdown-item"
                     style={{ font: "inherit" }}
                   >
                     Make a Review
-                  </Link>
+                  </Link> */}
+
+                  <NavDropdown.Item onClick={handleMakeReview}>
+                    Make a Review
+                  </NavDropdown.Item>
                   {/* </NavDropdown.Item> */}
                   {/*
                 <NavDropdown.Item href="#action/3.2">Orders</NavDropdown.Item> */}
