@@ -116,17 +116,28 @@ export default function ReviewRestaurantPage({
     } 
 
   return (
-    <div id="food-background" style={{ height: "88vh" }}>
+    <div id="food-background" style={{ height: "90vh" }}>
       {!isLoading ? (
         <>
-        <span>You have not made any reviews...</span>
-        <br/>
-        <Link className="btn btn-primary" to="/user/add-review">Make a review</Link>
+          <span className='text-center'>You have not made any reviews...</span>
+          <br />
+          <Link className="btn btn-primary" to="/user/add-review">
+            Make a review
+          </Link>
         </>
       ) : (
         <>
+          <Link to="/user/add-review" className="btn btn-primary float-end my-3 me-2">
+            Make a review
+          </Link>
           <h2 className="text-center mt-4">Reviews Per Restaurant</h2>
-          <Table striped hover bordered className="mx-5" style={{ backgroundColor: "white", width: "90vw" }}>
+          <Table
+            striped
+            hover
+            bordered
+            className="mx-5"
+            style={{ backgroundColor: "white", width: "90vw" }}
+          >
             <thead>
               <tr>
                 <th></th>
@@ -136,7 +147,7 @@ export default function ReviewRestaurantPage({
               </tr>
             </thead>
             <tbody>
-               {fullUserData.map((review, index) => {
+              {fullUserData.map((review, index) => {
                 return (
                   <tr key={review.reviewId}>
                     <td>{index + 1}</td>
@@ -175,36 +186,37 @@ export default function ReviewRestaurantPage({
                       >
                         Delete
                       </Button>
-                        <Modal show={show} onHide={handleClose}>
-                          <Modal.Header closeButton>
-                            <Modal.Title>Delete Review</Modal.Title>
-                          </Modal.Header>
-                          <Modal.Body>
-                            Are you sure you want to delete your review{" "}
-                            <span style={{fontStyle:"italic"}}>{reviewSavedState.reviewText}</span> from{" "}
-                            {reviewSavedState.restaurantName}?
-                          </Modal.Body>
-                          <Modal.Footer>
-                            <Button variant="secondary" onClick={handleClose}>
-                              Close
-                            </Button>
-                            <Button
-                              variant="danger"
-                              onClick={() => {
-                                deleteReview(reviewSavedState.reviewId);
-                              }}
-                            >
-                              Delete
-                            </Button>
-                          </Modal.Footer>
-                        </Modal>
+                      <Modal show={show} onHide={handleClose}>
+                        <Modal.Header closeButton>
+                          <Modal.Title>Delete Review</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                          Are you sure you want to delete your review{" "}
+                          <span style={{ fontStyle: "italic" }}>
+                            {reviewSavedState.reviewText}
+                          </span>{" "}
+                          from {reviewSavedState.restaurantName}?
+                        </Modal.Body>
+                        <Modal.Footer>
+                          <Button variant="secondary" onClick={handleClose}>
+                            Close
+                          </Button>
+                          <Button
+                            variant="danger"
+                            onClick={() => {
+                              deleteReview(reviewSavedState.reviewId);
+                            }}
+                          >
+                            Delete
+                          </Button>
+                        </Modal.Footer>
+                      </Modal>
                     </td>
                   </tr>
                 );
-              })} 
+              })}
             </tbody>
           </Table>
-          <Link to="/user/add-review" className='btn btn-primary'>Make a review</Link>
         </>
       )}
     </div>
