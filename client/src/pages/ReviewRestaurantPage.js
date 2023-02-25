@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
+import Modal from "react-bootstrap/Modal";
 import { Link, useHistory } from 'react-router-dom';
 import UserContext from '../context/AuthContext';
 
@@ -23,7 +24,7 @@ export default function ReviewRestaurantPage({
 
     const findCurrentUser = () => {
         
-        let fullUser = allUsers.filter((u)=> u.username === currentUser.userData.sub)
+        let fullUser = allUsers?.filter((u)=> u.username === currentUser.userData.sub)
        setMoreUserData(fullUser[0])
     }
 
@@ -64,6 +65,38 @@ export default function ReviewRestaurantPage({
       history.push("/user/edit-review/"+reviewId);
     };
     
+
+
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
+    let reviewModal = {
+      reviewId: 0,
+      reviewText: "",
+      restaurantId: 0
+    };
+
+    let [reviewSavedState, setReviewSavedState] = useState({
+      reviewModal,
+    });
+
+    const handleModal = (event) => {
+      console.log(event.target.value);
+      let found = allReviews.filter((r) => r.reviewId == event.target.value);
+      //  console.log(found[0].reviewName)
+      let savedR = {
+        reviewId: event.target.value,
+        reviewText: found[0].reviewText,
+        restaurantId: found[0].restaurantId,
+        restaurantName: restaurants[(found[0].restaurantId)-1].restaurantName,
+      };
+      setReviewSavedState(savedR);
+      handleShow();
+    };
+
+
 
 
     useEffect(()=> {
@@ -111,9 +144,60 @@ export default function ReviewRestaurantPage({
                       {restaurants[review.restaurantId - 1]?.restaurantName}
                     </td>
                     <td>{review.reviewText}</td>
-                    <td style={{display: "flex", justifyContent:"space-around"}}>
-                      <Button variant='warning' onClick={()=>{editReview(review.reviewId)}}>Edit</Button>
-                      <Button variant="danger" onClick={()=>{deleteReview(review.reviewId);}}>Delete</Button>
+                    <td
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-around",
+                      }}
+                    >
+                      <Button
+                        variant="warning"
+                        onClick={() => {
+                          editReview(review.reviewId);
+                        }}
+                      >
+                        Edit
+                      </Button>
+                      {/* <Button
+                        variant="danger"
+                        onClick={() => {
+                          deleteReview(review.reviewId);
+                        }}
+                      >
+                        Delete
+                      </Button> */}
+                      <Button
+                        value={review.reviewId}
+                        onClick={(event) => {
+                          handleModal(event);
+                        }}
+                        className="btn btn-danger"
+                      >
+                        Delete
+                      </Button>
+                        <Modal show={show} onHide={handleClose}>
+                          <Modal.Header closeButton>
+                            <Modal.Title>Delete Review</Modal.Title>
+                          </Modal.Header>
+                          <Modal.Body>
+                            Are you sure you want to delete your review{" "}
+                            <span style={{fontStyle:"italic"}}>{reviewSavedState.reviewText}</span> from{" "}
+                            {reviewSavedState.restaurantName}?
+                          </Modal.Body>
+                          <Modal.Footer>
+                            <Button variant="secondary" onClick={handleClose}>
+                              Close
+                            </Button>
+                            <Button
+                              variant="danger"
+                              onClick={() => {
+                                deleteReview(reviewSavedState.reviewId);
+                              }}
+                            >
+                              Delete
+                            </Button>
+                          </Modal.Footer>
+                        </Modal>
                     </td>
                   </tr>
                 );
