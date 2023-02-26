@@ -1,0 +1,14 @@
+.filter-container{
+    transition: all 0.25s ease-in-out;
+
+}
+
+.filter-container span{
+    text-align: center;
+}
+
+.filter-container:hover{
+    cursor: pointer;
+    font-weight: 600;
+    transform: scale(1.1);
+}
