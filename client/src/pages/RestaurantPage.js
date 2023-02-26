@@ -9,6 +9,7 @@ import { Search } from "react-bootstrap-icons";
 
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
+import Loader from '../components/loadingComponents/Loader';
 
 
 
@@ -23,8 +24,9 @@ export default function RestaurantPage({restaurants,getRestaurants,isLoading,men
 
   const handleSearching = (event) => {
     console.log(event.target.value);
+
     //reset the search to result in all restaurant showing when there is no filter words
-    if(event.target.value == ""){
+    if(event.target.value === ""){
       setShowRestaurants(restaurants)
     }
 
@@ -35,11 +37,7 @@ export default function RestaurantPage({restaurants,getRestaurants,isLoading,men
     event.preventDefault();
     
     let results = showRestaurants.filter(found => {
-        // if(found.filterTags.includes(filterTerm)){
-        //   return found;
-        // }
-        return found.filterTags.includes(filterTerm)
-        
+        return found.filterTags.includes(filterTerm);
       }
     )
 
@@ -48,14 +46,20 @@ export default function RestaurantPage({restaurants,getRestaurants,isLoading,men
      
   };
 
-  // useEffect(()=> {
-  //   getRestaurants();
-  // },[showRestaurants])
+  useEffect(()=> {
+    getRestaurants();
+  },[showRestaurants])
 
   console.log(showRestaurants)
 
-  if(!showRestaurants.length){
-    return <span>Loading...</span>
+  if(!restaurants.length){
+    return (
+      <div
+        className="position-absolute top-50 start-50 translate-middle"
+      >
+        <Loader />
+      </div>
+    );
   }
 
 
@@ -88,7 +92,6 @@ export default function RestaurantPage({restaurants,getRestaurants,isLoading,men
         // restaurants={restaurants}
         restaurants={showRestaurants}
         isLoading={isLoading}
-        // searchTerm={searchTerm}
         menus={menus}
       />
     </div>
