@@ -113,18 +113,21 @@ function App() {
   const [allUsers, setAllUsers] = useState([]);
 
   const getAllUsers = () => {
-   fetch("http://localhost:8080/api/user/", {
-      method: "GET",
-      headers: {
-        Authorization: "Bearer " + authUser?.token,
-      },
-    })
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        setAllUsers(data)
-      }).catch(err=>setError(err));
+    authUser && (
+
+      fetch("http://localhost:8080/api/user/", {
+         method: "GET",
+         headers: {
+           Authorization: "Bearer " + authUser?.token,
+         },
+       })
+         .then((res) => {
+           return res.json();
+         })
+         .then((data) => {
+           setAllUsers(data)
+         }).catch(err=>setError(err))
+    )
   };
 
 
@@ -239,6 +242,7 @@ function App() {
                 restaurants={restaurants}
                 getRestaurants={getRestaurants}
                 menus={menus}
+                getAllMenus={getAllMenus}
               />
             </Route>
             <Route exact path="/restaurant/:id">
