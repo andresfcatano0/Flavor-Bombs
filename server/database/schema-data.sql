@@ -39,7 +39,7 @@ create table restaurants (
     restaurant_image varchar(2040) not null,
     latitude decimal(8,6) not null,
     longitude decimal(9,6) not null,
- 	`filters` varchar(250) null
+ 	`filters` varchar(250)
 
 );
 
@@ -110,18 +110,18 @@ insert into user_roles (app_user_id, app_role_id) values
 ( 5, 1 ),
 ( 6, 2 );
 
-insert into restaurants (restaurant_name, phone_number, address, open_hours, descript, restaurant_image, latitude, longitude) values
-('Taco House', '612-555-0186', '111 taco street', 'Monday to Saturday - 10am to 11pm', 'Serving the best tacos in town since 1958', "/images/restaurant-overhead.jpg", 44.986657, -93.258139),
-('Canadian Bacon', '612-555-0156', '333 bacon street', 'Tuesday to Saturday - 9am to 9pm', 'Serving the bacon burger in town since 1999', "/images/bar-outside.jpg", 44.946346, -93.305101),
-('Soulfu', '612-555-0150', '555 tasty avenue', 'Monday to Friday - 11am to 8pm', 'Serving the best waffles in town since 2001', "/images/food-seasoning.jpg", 44.97482, -93.275941),
-('Party Fowl', '763-555-0133', '89391 Christiansen Road', 'Monday to Sunday - 10am to 8pm', 'Serving the best waffles in town since 2001', "/images/pub-orange.jpeg", 44.978471, -93.275941),
-('9021PHO', '612-555-9157', '685 Swift Valleys', 'Tuesday to Sunday - 11am to 10pm', 'Hipster-friendly fusion with a little extra spice.', "/images/kitchen-working.jpg", 44.977032, -93.272362),
+insert into restaurants (restaurant_name, phone_number, address, open_hours, descript, restaurant_image, latitude, longitude, `filters`) values
+('Taco House', '612-555-0186', '111 taco street', 'Monday to Saturday - 10am to 11pm', 'Serving the best tacos in town since 1958', "/images/restaurant-overhead.jpg", 44.986657, -93.258139,"chicken,burrito,lettuce,taco,corn,tortilla,pico,peppers,beans,mexican,rice" ),
+('Canadian Bacon', '612-555-0156', '333 bacon street', 'Tuesday to Saturday - 9am to 9pm', 'Serving the bacon burger in town since 1999', "/images/bar-outside.jpg", 44.946346, -93.305101,"bison,burger,lettuce,cheese,beef,fries,curds,gravy,poutine"),
+('Soulfu', '612-555-0150', '555 tasty avenue', 'Monday to Friday - 11am to 8pm', 'Serving the best waffles in town since 2001', "/images/food-seasoning.jpg", 44.97482, -93.275941,"bbq,spicy,dumpling,potstickers,carrots,rice,peas,pork,fried,waffles,shrimp,curry,savory"),
+('Party Fowl', '763-555-0133', '89391 Christiansen Road', 'Monday to Sunday - 10am to 8pm', 'Serving the best waffles in town since 2001', "/images/pub-orange.jpeg", 44.978471, -93.275941,"potato,fries,fried,chicken,spicy,savory,homemade,warm"),
+('9021PHO', '612-555-9157', '685 Swift Valleys', 'Tuesday to Sunday - 11am to 10pm', 'Hipster-friendly fusion with a little extra spice.', "/images/kitchen-working.jpg", 44.977032, -93.272362,"crab,wontons,fried,tuna,leek,pizza,deep pan,pitta,duck,basil,kebab,savory"),
 ('Tequila Mockingbird', '612-555-2850', '93661 Bayer Square', 'Monday to Sunday - 11am to 11pm', 'We are a family-run operation spanning three generations of hard-working chefs.
-We strive for an experience that blows you out of this world.', "/images/storefront-red.jpg", 44.969191, -93.247046),
-('Vincent Van Doughnut', '763-555-1123', '4192 Pietro Crossing', 'Monday to Sunday - 6am to 12am', 'Attention-hungry humans! Welcome you to our world-class restaurant.', "/images/bakery-inside.jpg", 44.968174, -93.276598),
-('Nacho Daddy', '952-555-3619', '411 Kareem Route', 'Monday to Friday - 11am to 8pm', 'You will get the OG taste of food at our restaurant.', "/images/cafe-inside.jpeg", 44.96548, -93.298057),
-('Lord of the Wings', '763-555-8712', '320 Mizey Junction', 'Monday to Saturday - 10am to 11pm', 'We do wings and only wings', "/images/cafe-dim.jpg", 44.952147, -93.293456),
-('Pastabilities', '952-555-5873', '531 Dickinson Road', 'Monday to Sunday - 11am to 11pm', 'Everything can be solved with a little pasta', "/images/cafe-seats.jpeg", 44.968053, -93.290599);
+We strive for an experience that blows you out of this world.', "/images/storefront-red.jpg", 44.969191, -93.247046,"cinnamon,bread,sweet,fluffy,corn,buttered,tequila,turkey,panini,smoked"),
+('Vincent Van Doughnut', '763-555-1123', '4192 Pietro Crossing', 'Monday to Sunday - 6am to 12am', 'Attention-hungry humans! Welcome you to our world-class restaurant.', "/images/bakery-inside.jpg", 44.968174, -93.276598,"doughnuts,fresh,special,sweet,fresh,apple,crumble,cake,butter,pumpkin,bean"),
+('Nacho Daddy', '952-555-3619', '411 Kareem Route', 'Monday to Friday - 11am to 8pm', 'You will get the OG taste of food at our restaurant.', "/images/cafe-inside.jpeg", 44.96548, -93.298057,"nacho,cheese,salsa,medium,cheesy,largeparty,nachos,large"),
+('Lord of the Wings', '763-555-8712', '320 Mizey Junction', 'Monday to Saturday - 10am to 11pm', 'We do wings and only wings', "/images/cafe-dim.jpg", 44.952147, -93.293456,"wings,crispy,fresh,tangy,chicken,spicy,large"),
+('Pastabilities', '952-555-5873', '531 Dickinson Road', 'Monday to Sunday - 11am to 11pm', 'Everything can be solved with a little pasta', "/images/cafe-seats.jpeg", 44.968053, -93.290599,"thyme,mozzarella,fresh,pizza,crispy,soup,mushroom,tofu,smoked,oyster mushroom,warm,pasta,canola,salad");
 
 insert into reviews (review_text, app_user_id, restaurant_id) values
 -- Taco House
@@ -183,7 +183,7 @@ insert into menu (item_name, item_price, item_description, restaurant_id, menu_i
 -- SoulFu
 ('Shrimp Curry Waffles', 12.75, 'Spicy shrimp on top of 3 buttermilk waffles.', 3, "/images/waffles.jpg","spicy,waffles,shrimp,curry,savory"),
 ('Pork Fried Rice', 8.25, 'Pork fried with white rice, carrots, and peas.', 3, "/images/pork-rice.jpg","carrots,rice,peas,pork,white rice,fried rice"),
-('BBQ Potstickers', 9.75, 'Pan seared dumpling with spicy BBQ sauce.', 3, "/images/potsticker.jpg","bbq,spicy,dumpling,potstickers,"),
+('BBQ Potstickers', 9.75, 'Pan seared dumpling with spicy BBQ sauce.', 3, "/images/potsticker.jpg","bbq,spicy,dumpling,potstickers"),
 -- Party Fowl
 ('Chicken Dinner', 19.75, 'Just like how Momma used to make.', 4, "/images/chicken-dinner.jpg","chicken,homemade,warm"),
 ('Fried Chicken', 14.00, 'Its a bird fried to golden perfection.', 4, "/images/fried-chicken.jpg","chicken,fried,spicy,savory"),
@@ -203,7 +203,7 @@ insert into menu (item_name, item_price, item_description, restaurant_id, menu_i
 -- Nacho Daddy
 ('Party Pack', 44.00, 'Good friends are like nachos. You can never have enough of them.', 8, "/images/nacho-party.jpg","party,nachos,large"),
 ('Nacho Nacho Man', 18.50, 'A cheesy mountain of epic proportions.', 8, "/images/nacho-man.jpg","cheesy,cheese,nacho,large"),
-('Nacho Bizness', 13.25, 'Cheese and salsa heaven on top of yummy nacho goodness.', 8, "/images/nacho-bizness.jpg","nacho,cheese,slasa,medium"),
+('Nacho Bizness', 13.25, 'Cheese and salsa heaven on top of yummy nacho goodness.', 8, "/images/nacho-bizness.jpg","nacho,cheese,salsa,medium"),
 -- Lord of the Wings
 ('A Wing and a Prayer', 10.25, 'Our spiciest wings sauce on top of eight wings.', 9, "/images/wings-prayer.jpg","wings,chicken,spicy,large"),
 ('Winged Perfection', 12.75, 'Award winning wings with a tangy dry rub', 9, "/images/wings-perfection.jpg","tangy,chicken,wings"),
