@@ -62,27 +62,35 @@ export default function RestaurantPage({restaurants,getRestaurants,isLoading,men
   return (
     <div id="food-background" className="mt-5">
       <h1 className="text-center mb-4">Restaurants</h1>
-      {/* <SearchBar setSearchTerm={setSearchTerm}/> */}
-      
-      <form onSubmit={(e)=>{handleSubmit(e)}}>
-        <input type="search" onChange={(e)=>handleSearching(e)}/>
-        <button type="submit">Search</button>
-      </form>
+     
+      <Form onSubmit={handleSubmit}>
+        <InputGroup
+          size="sm"
+          className="my-5 mx-auto"
+          style={{ width: "80vw" }}
+        >
+          <Form.Control
+            placeholder="Search for restaurant and food"
+            aria-label="search input"
+            aria-describedby="search input"
+            value={filterTerm}
+            onChange={(event) => {
+              handleSearching(event);
+            }}
+          />
+          <InputGroup.Text id="search-input">
+            <Search style={{ cursor: "pointer" }} />
+          </InputGroup.Text>
+        </InputGroup>
+      </Form>
 
       <RestaurantCard
-        restaurants={restaurants}
+        // restaurants={restaurants}
+        restaurants={showRestaurants}
         isLoading={isLoading}
         // searchTerm={searchTerm}
         menus={menus}
       />
-
-      
-      <ul>
-      {showRestaurants.map((found)=> {
-        return <li>{found.restaurantName}</li>
-      })}
-
-      </ul>
     </div>
   );
 }
