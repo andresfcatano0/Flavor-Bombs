@@ -12,16 +12,19 @@ export default function RestaurantCard(props) {
 
   return (
     <>
-      <Container>
+      <Container className=''>
         <Row>
           {props.isLoading ? (
             Array.from({ length: 3 }).map((_, idx) => (
-            <Col key={idx}>
-              <SkeletonLoader />
-            </Col>))
-            ) : (
-
-            // props.restaurants.map((restaurant) => {
+              <Col key={idx}>
+                <SkeletonLoader />
+              </Col>
+            ))
+          ) : !props.restaurants.length ? (
+            <div style={{ height: "58vh" }}>
+              <p>No restaurants with your search</p>
+            </div>
+          ) : (
             props.restaurants.map((restaurant) => {
               return (
                 <Col key={restaurant.restaurantId}>
@@ -45,8 +48,10 @@ export default function RestaurantCard(props) {
                       </Card.Subtitle>
                     </div>
                     <Card.Body>
-                      <Card.Text >
-                        {restaurant.description.length > 60 ? restaurant.description.substring(0,70)+"..." : restaurant.description }
+                      <Card.Text>
+                        {restaurant.description.length > 60
+                          ? restaurant.description.substring(0, 70) + "..."
+                          : restaurant.description}
                       </Card.Text>
                       <div className="d-grid gap-2 white-text">
                         {/* <Button
