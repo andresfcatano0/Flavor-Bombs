@@ -2,10 +2,6 @@ import React, { useEffect, useState } from 'react';
 import "./RestaurantPage.css";
 import RestaurantCard from '../components/RestaurantCard';
 
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import SearchBar from '../components/SearchBar';
 import { Search } from "react-bootstrap-icons";
 
 import Form from "react-bootstrap/Form";
@@ -15,21 +11,21 @@ import Loader from '../components/loadingComponents/Loader';
 import filterMaterial from '../components/data/filterTags';
 
 
-
-
-
-export default function RestaurantPage({restaurants,getRestaurants,isLoading,menus, getAllMenus}) {
+export default function RestaurantPage({restaurants,getRestaurants,isLoading,menus}) {
 
   const [showRestaurants, setShowRestaurants] = useState([]);
 
   const [filterTerm, setFilterTerm] = useState("");
 
+  //handle change from typing in search bar
   const handleSearching = (event) => {
     console.log(event.target.value);
 
     setFilterTerm(event.target.value.toLowerCase());
   };
 
+
+  //submits filter term when press enter in search bar
   const handleSubmit = (event) => {
     event.preventDefault();
     
@@ -38,21 +34,9 @@ export default function RestaurantPage({restaurants,getRestaurants,isLoading,men
       }
     )
 
-    console.log(results)
-    setShowRestaurants(results)
-    
-     
+    // console.log(results)
+    setShowRestaurants(results);    
   };
-
-  // useEffect(()=> {
-  //   setShowRestaurants([...restaurants])
-  //   filterTerm === ""
-  //     ? setShowRestaurants([...restaurants])
-  //     : setShowRestaurants([...restaurants]);
-  //   return () => {
-  //     // getRestaurants();
-  //   }
-  // },[restaurants])
 
   useEffect(()=>{
     //reset the search to result in all restaurant showing when there is no filter words
@@ -63,17 +47,19 @@ export default function RestaurantPage({restaurants,getRestaurants,isLoading,men
 
   // console.log(showRestaurants)
 
+  //handles filling in filter term from clicking filter icon
   const handleSelectFilter = (event) => {
-      console.log(event.target.id)
+      // console.log(event.target.id)
       setFilterTerm(event.target.id.toLowerCase());
       let results = restaurants.filter((found) => {
         return found.filterTags.includes(event.target.id.toLowerCase());
       });
 
-      console.log(results);
+      // console.log(results);
       setShowRestaurants(results);
   }
 
+  //fetching async - in meantime show loader component until restaurant fully load
   if(!restaurants.length){
     return (
       <div className="position-absolute top-50 start-50 translate-middle"
@@ -81,7 +67,6 @@ export default function RestaurantPage({restaurants,getRestaurants,isLoading,men
       </div>
     );
   }
-
 
   return (
     <div id="food-background" className="mt-3">
@@ -131,71 +116,6 @@ export default function RestaurantPage({restaurants,getRestaurants,isLoading,men
             )
           })
         }
-        {/* 
-        <div className="d-flex flex-column p-2 filter-container" onClick={(e)=> {handleSelectFilter(e)}}>
-          <img
-            src="filter_tags/fried-chicken.png"
-            style={{ width: "60px", height: "60px", objectFit: "cover" }}
-          />
-          <span className="bg-light">Chicken</span>
-
-        </div>
-        <div id="sweet" className="d-flex flex-column p-2 filter-container">
-          <img
-            src="filter_tags/cake-slice.png"
-            style={{ width: "60px", height: "60px", objectFit: "cover" }}
-          />
-
-          <span className="bg-light">Sweet</span>
-        </div>
-        <div id="spicy" className="d-flex flex-column p-2 filter-container">
-          <img
-            src="filter_tags/chili.png"
-            style={{ width: "60px", height: "60px", objectFit: "cover" }}
-          />
-
-          <span className="bg-light">Spicy</span>
-        </div>
-        <div className="d-flex flex-column p-2 filter-container">
-          <img
-            src="filter_tags/pizza.png"
-            style={{ width: "60px", height: "60px", objectFit: "cover" }}
-          />
-
-          <span className="bg-light">Pizza</span>
-        </div>
-        <div className="d-flex flex-column p-2 filter-container">
-          <img
-            src="filter_tags/taco.png"
-            style={{ width: "60px", height: "60px", objectFit: "cover" }}
-          />
-
-          <span className="bg-light">Taco</span>
-        </div>
-        <div className="d-flex flex-column p-2 filter-container">
-          <img
-            src="filter_tags/spaguetti.png"
-            style={{ width: "60px", height: "60px", objectFit: "cover" }}
-          />
-
-          <span className="bg-light">Pasta</span>
-        </div>
-        <div className="d-flex flex-column p-2 filter-container">
-          <img
-            src="filter_tags/fried-potatoes.png"
-            style={{ width: "60px", height: "60px", objectFit: "cover" }}
-          />
-
-          <span className="bg-light">Fries</span>
-        </div>
-        <div className="d-flex flex-column p-2 filter-container">
-          <img
-            src="filter_tags/vegan.png"
-            style={{ width: "60px", height: "60px", objectFit: "cover" }}
-          />
-
-          <span className="bg-light">Vegan</span>
-        </div> */}
       </Stack>
 
       <RestaurantCard
