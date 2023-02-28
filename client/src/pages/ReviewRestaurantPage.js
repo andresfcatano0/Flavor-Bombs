@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from "react-bootstrap/Modal";
 import { Link, useHistory } from 'react-router-dom';
 import UserContext from '../context/AuthContext';
+import Loader from '../components/loadingComponents/Loader';
 
 export default function ReviewRestaurantPage({
   restaurants,
@@ -112,14 +113,18 @@ export default function ReviewRestaurantPage({
     // {console.log(allUsers)}
 
     if (!allUsers.length) {
-      return <div>Loading...</div>;
+      return (
+        <div className="position-absolute top-50 start-50 translate-middle">
+          <Loader />
+        </div>
+      );
     } 
 
   return (
     <div id="food-background" style={{ height: "90vh" }}>
       {!isLoading ? (
         <>
-          <span className='text-center'>You have not made any reviews...</span>
+          <span className='text-center'>You did not made any reviews...</span>
           <br />
           <Link className="btn btn-primary" to="/user/add-review">
             Make a review
