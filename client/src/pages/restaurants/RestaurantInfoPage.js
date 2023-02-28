@@ -156,23 +156,30 @@ export default function RestaurantInfoPage({ restaurants, getRestaurants, menus 
   return (
     // <div className="mt-4 flex-column text-center">
     <div id="food-background" style={{ height: "100%" }}>
-      <div>
-        {/* <LoadOneMap
-        getSpecificRestaurant={getSpecificRestaurant}
-        specificRestaurant
-      ={specificRestaurant}/> */}
-      </div>
-      <div
-        className="mt-4 mx-4 pt-5"
-        key={specificRestaurant.restaurantId}
-      >
-        <div className="text-center">
-          <img
-            src={specificRestaurant.restaurantImage}
-            style={{ height: "300px", width: "350px", objectFit: "cover" }}
-          />
-        </div>
-        {/* <Container> */}
+      <div className="mt-4 mx-4 pt-5" key={specificRestaurant.restaurantId}>
+          <Container>
+            <Row className="d-flex">
+              <Col>
+                <img
+                  src={specificRestaurant.restaurantImage}
+                  style={{
+                    height: "300px",
+                    width: "350px",
+                    objectFit: "cover",
+                  }}
+                />
+              </Col>
+              <Col className=''>
+                <LoadOneMap
+                  getSpecificRestaurant={getSpecificRestaurant}
+                  specificRestaurant={specificRestaurant}
+                />
+              </Col>
+            </Row>
+          </Container>
+       
+
+
         <Row className="d-flex justify-content-between mt-2">
           <Col className="text-start">
             <h3
@@ -193,7 +200,7 @@ export default function RestaurantInfoPage({ restaurants, getRestaurants, menus 
             </span>
           </Col>
         </Row>
-        {/* </Container> */}
+        
         <br />
         <br />
         <hr />
