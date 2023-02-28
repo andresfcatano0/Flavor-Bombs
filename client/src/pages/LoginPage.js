@@ -8,7 +8,7 @@ import Row from 'react-bootstrap/Row';
 import jwtDecode from 'jwt-decode';
 import { useHistory } from 'react-router-dom';
 
-export default function LoginPage({ setAuthUser, getData, setCurrentUserFormInfo }) {
+export default function LoginPage({ error,setError, setAuthUser, getData, setCurrentUserFormInfo }) {
   const [loginData, setLoginData] = useState({ username: "", password: "" });
 
   const history = useHistory();
@@ -38,9 +38,10 @@ export default function LoginPage({ setAuthUser, getData, setCurrentUserFormInfo
           console.log("Success");
           return response.json();
         } else if (response.status === 403) {
+          // setError("Denied access. You do not have permission")
           console.log("Forbidden");
         } else {
-          console.log(response);
+          setError(response);
         }
       })
       .then((jwtContainer) => {
