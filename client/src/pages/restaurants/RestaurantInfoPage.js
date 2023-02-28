@@ -1,18 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Card from 'react-bootstrap/Card';
-import Image from 'react-bootstrap/Image';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
-import Carousel from 'react-bootstrap/Carousel';
 import { useHistory, useParams } from "react-router-dom";
-import ReviewCard from '../components/ReviewCard';
-import MenuCard from '../components/MenuCard';
-import CartContext from '../context/cart/CartContext';
+import ReviewCard from '../../components/ReviewCard';
+import CartContext from '../../context/cart/CartContext';
 import { DashCircle, DashCircleDotted, DashCircleFill, PlusCircle, PlusCircleFill, Trash, Trash3Fill } from 'react-bootstrap-icons';
-import UserContext from '../context/AuthContext';
-import LoadOneMap from '../components/LoadOneMap';
+import UserContext from '../../context/AuthContext';
+import LoadOneMap from '../../components/LoadOneMap';
 
 export default function RestaurantInfoPage({ restaurants, getRestaurants, menus }) {
 

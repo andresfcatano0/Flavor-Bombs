@@ -2,24 +2,11 @@ import React, { useContext, useEffect, useState } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Button from "react-bootstrap/Button";
-import Badge from "react-bootstrap/Badge";
-import ListGroup from "react-bootstrap/ListGroup";
-import Card from "react-bootstrap/Card";
-import {
-  Cart2,
-  Clipboard2Data,
-  CreditCardFill,
-  People,
-  PeopleFill,
-  Shop,
-  ShopWindow,
-} from "react-bootstrap-icons";
-import UserContext from "../../context/AuthContext";
+
+import UserContext from "../../../context/AuthContext";
 import { Link, useHistory } from "react-router-dom";
-import AdminRestaurantTable from "../AdminRestaurantTable";
-import AdminNavLeftPane from "../../components/navbar/AdminNavLeftPane";
-import AdminUsersTable from "../AdminUsersTable";
+import AdminNavLeftPane from "../../../components/navbar/AdminNavLeftPane";
+import AdminUsersTable from "../../admin/AdminUsersTable";
 
 export default function AdminViewAllUsers({allUsers, getAllUsers}) {
   const history = useHistory();

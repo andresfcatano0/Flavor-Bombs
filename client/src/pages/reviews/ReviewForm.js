@@ -3,7 +3,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Container from 'react-bootstrap/Container';
-import UserContext from '../context/AuthContext';
+import UserContext from '../../context/AuthContext';
 import { Link, useHistory, useParams } from 'react-router-dom';
 
 

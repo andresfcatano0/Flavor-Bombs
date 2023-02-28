@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import UserContext from "../context/AuthContext";
+import UserContext from "../../context/AuthContext";
 
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";

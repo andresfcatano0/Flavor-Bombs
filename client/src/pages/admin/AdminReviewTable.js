@@ -1,24 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+
 import Button from "react-bootstrap/Button";
-import Badge from "react-bootstrap/Badge";
-import ListGroup from "react-bootstrap/ListGroup";
-import Card from "react-bootstrap/Card";
 import Table from "react-bootstrap/Table";
 import Modal from "react-bootstrap/Modal";
-import {
-  Cart2,
-  Clipboard2Data,
-  CreditCardFill,
-  People,
-  PeopleFill,
-  Shop,
-  ShopWindow,
-} from "react-bootstrap-icons";
-import { Link } from "react-router-dom";
-import UserContext from "../context/AuthContext";
+
+import UserContext from "../../context/AuthContext";
 
 export default function AdminReviewTable({allReviews, getAllReviews}) {
     const adminUser = useContext(UserContext);

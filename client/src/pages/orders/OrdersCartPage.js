@@ -7,10 +7,10 @@ import Button from 'react-bootstrap/Button'
 import Table from 'react-bootstrap/Table'
 import Image from "react-bootstrap/Image";
 import { DashCircle, DashCircleFill, PlusCircle, PlusCircleFill, Trash, Trash2Fill, Trash3Fill, TrashFill } from 'react-bootstrap-icons'
-import CartContext from '../context/cart/CartContext'
+import CartContext from '../../context/cart/CartContext'
 import { Link } from 'react-router-dom'
-import UserContext from '../context/AuthContext'
-import LoaderEat from '../components/loadingComponents/LoaderEat'
+import UserContext from '../../context/AuthContext'
+import LoaderEat from '../../components/loadingComponents/LoaderEat'
 
 export default function OrdersCartPage({restaurants}) {
   const userInfo = useContext(UserContext);

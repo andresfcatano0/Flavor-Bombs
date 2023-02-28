@@ -3,10 +3,9 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Table from "react-bootstrap/Table";
-import Button from "react-bootstrap/Button";
-import AdminNavLeftPane from '../components/navbar/AdminNavLeftPane';
+import AdminNavLeftPane from '../../components/navbar/AdminNavLeftPane';
 import { useParams } from 'react-router-dom';
-import UserContext from '../context/AuthContext';
+import UserContext from '../../context/AuthContext';
 
 export default function AdminSpecificPerson({restaurants, getRestaurants}) {
     const adminUser = useContext(UserContext)

@@ -7,9 +7,9 @@ import Badge from "react-bootstrap/Badge";
 import ListGroup from "react-bootstrap/ListGroup";
 import Card from "react-bootstrap/Card";
 import { Cart2, ChatQuoteFill, Clipboard2Data, CreditCardFill, People, PeopleFill, Shop, ShopWindow } from 'react-bootstrap-icons';
-import UserContext from '../context/AuthContext';
+import UserContext from '../../context/AuthContext';
 import { Link } from 'react-router-dom';
-import AdminNavLeftPane from '../components/navbar/AdminNavLeftPane';
+import AdminNavLeftPane from '../../components/navbar/AdminNavLeftPane';
 
 
 export default function AdminDashboard({ setAuthUser, allReviews, getAllReviews, restaurants, menus, allUsers }) {

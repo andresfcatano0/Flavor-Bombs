@@ -1,9 +1,9 @@
 import React, {useContext, useEffect, useState} from 'react'
-import UserContext from '../context/AuthContext';
+import UserContext from '../../context/AuthContext';
 import Table from 'react-bootstrap/Table'
 import Button from 'react-bootstrap/Button'
 import Modal from "react-bootstrap/Modal";
-import FoodBackgroundPattern from '../components/FoodBackgroundPattern';
+import FoodBackgroundPattern from '../../components/FoodBackgroundPattern';
 
 export default function OrdersPage({restaurants}) {
 

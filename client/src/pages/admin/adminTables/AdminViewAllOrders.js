@@ -2,9 +2,9 @@ import React, { useContext, useEffect, useState } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import AdminNavLeftPane from "../../components/navbar/AdminNavLeftPane";
+import AdminNavLeftPane from "../../../components/navbar/AdminNavLeftPane";
 import AdminViewOrderTable from "../AdminViewOrderTable";
-import UserContext from "../../context/AuthContext";
+import UserContext from "../../../context/AuthContext";
 
 export default function AdminViewAllOrders({allUsers, restaurants,getRestaurants,specificUser,handleSpecificReviewOrder}) {
   const adminUser = useContext(UserContext);

@@ -1,33 +1,29 @@
 import { BrowserRouter, Route,  Switch } from 'react-router-dom';
 import "./App.css";
-import AuthNavBar from './components/navbar/AuthNavBar';
-import AdminNavBar from './components/navbar/AdminNavBar';
 import NavBar from './components/navbar/NavBar';
 import LoginPage from './pages/LoginPage';
 import HomePage from './pages/HomePage';
 import { useContext, useState, useEffect } from 'react';
 import UserContext from './context/AuthContext';
 
-import jwtDecode from "jwt-decode";
-import RestaurantPage from './pages/RestaurantPage';
-import RestaurantInfoPage from './pages/RestaurantInfoPage';
-import OrdersPage from './pages/OrdersPage';
+import RestaurantPage from './pages/restaurants/RestaurantPage';
+import RestaurantInfoPage from './pages/restaurants/RestaurantInfoPage';
+import OrdersPage from './pages/orders/OrdersPage';
 import AboutPage from './pages/AboutPage';
-import AdminPage from './pages/AdminPage';
-import AdminDashboard from './pages/AdminDashboard';
+import AdminPage from './pages/admin/AdminPage';
+import AdminDashboard from './pages/admin/AdminDashboard';
 import UserProfilePage from './pages/UserProfilePage';
-import OrdersCartPage from './pages/OrdersCartPage';
+import OrdersCartPage from './pages/orders/OrdersCartPage';
 import CartContext from './context/cart/CartContext';
 import NotFoundPage from './pages/NotFoundPage';
 import Map from './components/Map';
-import AdminViewAllRestaurants from './pages/adminTables/AdminViewAllRestaurants';
-import AdminViewAllUsers from './pages/adminTables/AdminViewAllUsers';
-import AdminViewAllOrders from './pages/adminTables/AdminViewAllOrders';
-import AdminViewAllReviews from './pages/adminTables/AdminViewAllReviews';
-import ReviewsPage from './pages/ReviewsPage';
-import ReviewForm from './pages/ReviewForm';
-import AdminSpecificPerson from './pages/AdminSpecificPerson';
-import ReviewRestaurantPage from './pages/ReviewRestaurantPage';
+import AdminViewAllRestaurants from './pages/admin/adminTables/AdminViewAllRestaurants';
+import AdminViewAllUsers from './pages/admin/adminTables/AdminViewAllUsers';
+import AdminViewAllOrders from './pages/admin/adminTables/AdminViewAllOrders';
+import AdminViewAllReviews from './pages/admin/adminTables/AdminViewAllReviews';
+import ReviewForm from './pages/reviews/ReviewForm';
+import AdminSpecificPerson from './pages/admin/AdminSpecificPerson';
+import ReviewRestaurantPage from './pages/reviews/ReviewRestaurantPage';
 
 function App() {
   const [error, setError] = useState([]);

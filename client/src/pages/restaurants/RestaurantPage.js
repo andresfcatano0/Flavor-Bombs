@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import "./RestaurantPage.css";
-import RestaurantCard from '../components/RestaurantCard';
+import RestaurantCard from '../../components/RestaurantCard';
 
 import { Search } from "react-bootstrap-icons";
 
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import Stack from "react-bootstrap/Stack";
-import Loader from '../components/loadingComponents/Loader';
-import filterMaterial from '../components/data/filterTags';
+import Loader from '../../components/loadingComponents/Loader';
+import filterMaterial from '../../components/data/filterTags';
 
 
 export default function RestaurantPage({restaurants,getRestaurants,isLoading,menus}) {

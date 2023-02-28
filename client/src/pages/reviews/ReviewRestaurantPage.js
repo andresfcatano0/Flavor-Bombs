@@ -3,8 +3,8 @@ import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import Modal from "react-bootstrap/Modal";
 import { Link, useHistory } from 'react-router-dom';
-import UserContext from '../context/AuthContext';
-import Loader from '../components/loadingComponents/Loader';
+import UserContext from '../../context/AuthContext';
+import Loader from '../../components/loadingComponents/Loader';
 
 export default function ReviewRestaurantPage({
   restaurants,
