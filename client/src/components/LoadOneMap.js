@@ -9,18 +9,18 @@ import {
 import { useParams } from "react-router-dom";
 
 
-const libraries = ["places"];
+// const libraries = ["places"];
 
 export default function LoadOneMap({getSpecificRestaurant, specificRestaurant}) {
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
-    libraries,
+    // libraries,
   });
   const params = useParams();
   // const [selectedRestaurantId, setSelectedRestaurantId] = useState([]);
   const [clickedRestaurant, setClickedRestaurant] = useState("")
 
-
+// console.log(specificRestaurant)
   // const getSelectedRestaurant = () => {
   //   // fetch(`http://localhost:8080/api/restaurant/${params.id}`, {
   //     fetch(`http://localhost:8080/api/restaurant/${6}`, {
@@ -40,19 +40,22 @@ export default function LoadOneMap({getSpecificRestaurant, specificRestaurant}) 
   // }
 
   const mapContainerStyle = {
-
-    width: "80vw",
-    height: "70vh",
+    height: "300px", width: "350px"
+    // width: "50vw",
+    // height: "70vh",
   };
   const center = {
-    lat: +specificRestaurant.restaurantId.latitude,
+    lat: +specificRestaurant.latitude,
     // 44.986656
-    lng: +specificRestaurant.restaurantId.longitude,
+    lng: +specificRestaurant.longitude,
   };
   
   useEffect(() => {
     getSpecificRestaurant();
   },[])
+
+  console.log(specificRestaurant)
+
   if (loadError) return "Error loading the map";
   if (!isLoaded) return "Loading map...";
     return (
@@ -63,21 +66,21 @@ export default function LoadOneMap({getSpecificRestaurant, specificRestaurant}) 
           center={center}
         >
           <MarkerF
-            key={specificRestaurant.restaurantId.restaurant_id}
+            key={specificRestaurant.restaurantId}
             position={{
-              lat: +specificRestaurant.restaurantId.latitude,
-              lng: +specificRestaurant.restaurantId.longitude,
+              lat: +specificRestaurant.latitude,
+              lng: +specificRestaurant.longitude,
             }}
             onClick={() => {
-              setClickedRestaurant(specificRestaurant.restaurantId);
+              setClickedRestaurant(specificRestaurant);
               console.log(clickedRestaurant);
             }}
           />
           {clickedRestaurant ? (
             <InfoWindowF
               position={{
-                lat: specificRestaurant.restaurantId.latitude,
-                lng: specificRestaurant.restaurantId.longitude,
+                lat: specificRestaurant.latitude,
+                lng: specificRestaurant.longitude,
               }}
               onCloseClick={() => {
                 setClickedRestaurant();
