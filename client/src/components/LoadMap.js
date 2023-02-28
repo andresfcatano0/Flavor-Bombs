@@ -65,7 +65,8 @@ export default function LoadMap() {
           <MarkerF
             key={restName.latitude}
             icon={{
-              url: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/whatsapp/326/hamburger_1f354.png",
+              // url: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/whatsapp/326/hamburger_1f354.png",
+              url: "https://cdn-icons-png.flaticon.com/128/9745/9745057.png",
               scaledSize: new window.google.maps.Size(40, 40),
             }}
             position={{
@@ -74,12 +75,11 @@ export default function LoadMap() {
             }}
             onClick={() => {
               setClickedRestaurant(restName);
-              console.log(clickedRestaurant)
+              console.log(clickedRestaurant);
             }}
           />
         ))}
         {clickedRestaurant ? (
-
           <InfoWindowF
             position={{
               lat: clickedRestaurant.latitude,
@@ -90,16 +90,13 @@ export default function LoadMap() {
             }}
           >
             <div>
-              <h6>
-              {clickedRestaurant.restaurantName}
-              </h6>
-              <p>{clickedRestaurant.openHours}</p> 
+              <h6>{clickedRestaurant.restaurantName}</h6>
+              <p>{clickedRestaurant.openHours}</p>
               <p>{clickedRestaurant.phoneNumber}</p>
               <p>{clickedRestaurant.address}</p>
             </div>
           </InfoWindowF>
-
-) : null}
+        ) : null}
       </GoogleMap>
     </div>
   );
