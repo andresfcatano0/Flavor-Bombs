@@ -67,6 +67,10 @@ export default function LoadOneMap({getSpecificRestaurant, specificRestaurant}) 
         >
           <MarkerF
             key={specificRestaurant.restaurantId}
+            icon={{
+              url: "https://cdn-icons-png.flaticon.com/128/9745/9745057.png",
+              scaledSize: new window.google.maps.Size(40, 40),
+            }}
             position={{
               lat: +specificRestaurant.latitude,
               lng: +specificRestaurant.longitude,
