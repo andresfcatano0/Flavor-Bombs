@@ -6,7 +6,7 @@ import Container from 'react-bootstrap/Container';
 import { useHistory, useParams } from "react-router-dom";
 import ReviewCard from '../../components/ReviewCard';
 import CartContext from '../../context/cart/CartContext';
-import { DashCircle, DashCircleDotted, DashCircleFill, PlusCircle, PlusCircleFill, Trash, Trash3Fill } from 'react-bootstrap-icons';
+import { DashCircleFill, PlusCircleFill, Trash3Fill } from 'react-bootstrap-icons';
 import UserContext from '../../context/AuthContext';
 import LoadOneMap from '../../components/LoadOneMap';
 
@@ -33,7 +33,6 @@ export default function RestaurantInfoPage({ restaurants, getRestaurants, menus 
     orderCartItems
   } = useContext(CartContext);
 
-  // return orderCartItems?.find((item) => item.menuId === menuItems.menuId);
   const isItemInCart = (menuItems) => {
     return orderCartItems.find((item) => item.menuId == menuItems.menuId) !== undefined;
   };
@@ -61,35 +60,6 @@ export default function RestaurantInfoPage({ restaurants, getRestaurants, menus 
       });
   };
 
-  // const getMenuByRestaurant = async () => {
-  //   await fetch("http://localhost:8080/api/menu", {
-  //     method: "GET",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //   })
-  //     .then((response) => {
-  //       return response.json();
-  //     })
-  //     .then((data) => {
-  //       let specificMenu = data.filter((d) => {
-  //         return d.restaurantId.toString() == params.id.toString();
-  //       });
-  //       // console.log(data);
-  //       setMenu(specificMenu);
-  //     })
-  //     .catch((err) => console.log(err));
-  // };
-
-  // const getUsers = () => {
-  //   fetch("http://localhost:8080//api/user", {
-  //     method: "GET",
-  //     headers: {
-  //       "Content-Type": "application/json"
-  //     }
-  //   }
-  //   );
-  // }
 
   const [reviews, setReviews] = useState([]);
   const getReviewPerRestaurant = () => {
@@ -103,12 +73,7 @@ export default function RestaurantInfoPage({ restaurants, getRestaurants, menus 
         return res.json();
       })
       .then((data) => {
-        // console.log(data)
-        // for(let i = 0; i<data.length;i++){
-        //   if (data[i].restaurantId === params.id) {
-        //     setReviews(data[i]);
-        //   }
-        // }
+        
         let specificReviews = data.filter((d) => {
           return d.restaurantId.toString() === params.id.toString();
         });
