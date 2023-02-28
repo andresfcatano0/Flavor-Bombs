@@ -250,15 +250,7 @@ export default function RestaurantInfoPage({ restaurants, getRestaurants, menus 
                       <p>{m.itemDescription}</p>
                     </Row>
                     <Row className="align-items-end mb-3">
-                      {/* {isItemInCart(m) && (
-                        <Button
-                          onClick={() => {
-                            increaseQuantity(m);
-                          }}
-                        >
-                          <PlusCircle /> Add More
-                        </Button>
-                      )} */}
+                      {/* + icon should only show up if there is an qty number */}
                       <div className="d-flex flex-row justify-content-center align-items-center mb-3">
                         {isItemInCart(m) && (
                           <>
@@ -279,11 +271,13 @@ export default function RestaurantInfoPage({ restaurants, getRestaurants, menus 
                                   borderColor: "grey",
                                 }}
                               >
+                                {/* - icon should only show up if there is an qty number, larger than 1 */}
                                 <DashCircleFill
                                   onClick={() => decreaseQuantity(m)}
                                 />
                               </Button>
                             )}{" "}
+                            {/* trash bin should only show if qty is 1 */}
                             {itemQuantity(m) === 1 && (
                               <Button
                                 className="mx-3 align-self-baseline"
@@ -301,28 +295,11 @@ export default function RestaurantInfoPage({ restaurants, getRestaurants, menus 
                                 />
                               </Button>
                             )}
-                            {/* <Button
-                              className="mx-3"
-                              variant="danger"
-                              onClick={() => {
-                                decreaseQuantity(m);
-                              }}
-                            > */}
-                            {/* <DashCircleFill />
-                            </Button> */}
                           </>
                         )}
                       </div>
 
-                      {/* <Button
-                        className="btn-success"
-                        onClick={() => increaseQuantity(item)}
-                      >
-                        <PlusCircleFill />
-                      </Button>
-                      <span>{item.quantity}</span> */}
-
-                      {/* <Button className="">Order Now</Button> */}
+                      {/* If user did not login in, redirect user to add items in cart */}
                       {userInfo ? (
                         !isItemInCart(m) && (
                           <Button
@@ -342,15 +319,6 @@ export default function RestaurantInfoPage({ restaurants, getRestaurants, menus 
                           Order Now
                         </Button>
                       )}
-                      {/* {!isItemInCart(m) && (
-                        <Button
-                          onClick={() => {
-                            addItemToCart(m);
-                          }}
-                        >
-                          Order Now
-                        </Button>
-                      )} */}
                     </Row>
                   </Col>
                 </Row>
