@@ -25,7 +25,7 @@ export default function ReviewRestaurantPage({
 
     const findCurrentUser = () => {
         
-        let fullUser = allUsers?.filter((u)=> u.username === currentUser.userData.sub)
+        let fullUser = allUsers.filter((u)=> u.username === currentUser.userData.sub)
        setMoreUserData(fullUser[0])
     }
 
