@@ -132,7 +132,7 @@ function App() {
     getAllMenus();
     getAllUsers();
     getAllReviews();
-  }, []);
+  }, [authUser]);
 
 
 
@@ -331,9 +331,11 @@ function App() {
             </Route>
             <Route exact path="/edit-user/profile">
               <UserProfilePage
+                authUser={authUser}
                 setAuthUser={setAuthUser}
                 getData={getData}
                 currentUserFormInfo={currentUserFormInfo}
+                setCurrentUserFormInfo={setCurrentUserFormInfo}
               />
             </Route>
             <Route exact path="/user/reviews">
