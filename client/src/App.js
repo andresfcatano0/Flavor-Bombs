@@ -230,7 +230,7 @@ function App() {
                 setError={setError}
                 error={error}
                 setAuthUser={setAuthUser}
-                setCurrentUserFormInfo={setCurrentUserFormInfo}
+                // setCurrentUserFormInfo={setCurrentUserFormInfo}
               />
             </Route>
             <Route exact path="/restaurants">
@@ -334,8 +334,8 @@ function App() {
                 authUser={authUser}
                 setAuthUser={setAuthUser}
                 getData={getData}
-                currentUserFormInfo={currentUserFormInfo}
-                setCurrentUserFormInfo={setCurrentUserFormInfo}
+                // currentUserFormInfo={currentUserFormInfo}
+                // setCurrentUserFormInfo={setCurrentUserFormInfo}
               />
             </Route>
             <Route exact path="/user/reviews">

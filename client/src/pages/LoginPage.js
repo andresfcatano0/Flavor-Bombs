@@ -8,7 +8,7 @@ import Row from 'react-bootstrap/Row';
 import jwtDecode from 'jwt-decode';
 import { useHistory } from 'react-router-dom';
 
-export default function LoginPage({ error,setError, setAuthUser, getData, setCurrentUserFormInfo }) {
+export default function LoginPage({ error,setError, setAuthUser, getData, }) {
   const [loginData, setLoginData] = useState({ username: "", password: "" });
 
   const history = useHistory();
@@ -63,7 +63,7 @@ export default function LoginPage({ error,setError, setAuthUser, getData, setCur
           : history.push("/");
       });
 
-    setCurrentUserFormInfo(loginData);
+    // setCurrentUserFormInfo(loginData);
   };
 
   return (
