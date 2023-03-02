@@ -13,9 +13,7 @@ import { useParams } from "react-router-dom";
 
 export default function UserProfilePage({
   setAuthUser,
-  // currentUserFormInfo,
   getData,
-  // setCurrentUserFormInfo,
 }) {
   const initialUserState = {
     appUserId: "",
@@ -28,11 +26,12 @@ export default function UserProfilePage({
   };
 
   const userInfo = useContext(UserContext);
-  console.log(userInfo);
+  
   const [error, setError] = useState([]);
 
   const [fullUserData, setFullUserData] = useState(initialUserState);
 
+  //get more hydrated user info
   const getCurrentUserInfo = () => {
     fetch("http://localhost:8080/api/user/", {
       method: "GET",
@@ -48,6 +47,7 @@ export default function UserProfilePage({
         for (let d of data) {
           if (d.username == userInfo.userData.sub) {
             // console.log(d)
+            //delete password for hydrated user for user to input their password
             delete d.password;
             setFullUserData(d);
           }
@@ -71,11 +71,11 @@ export default function UserProfilePage({
       },
       body: JSON.stringify(fullUserData),
     }).then((res) => {
-      console.log(res);
       if (res.status === 201) {
         console.log("user updated successfully");
-        // setDisableForm(true);
-          console.log(fullUserData)
+       
+
+        //cause user to "login" with credentials to get new token (since user may have change their username)
         return fetch("http://localhost:8080/api/security/login", {
           method: "POST",
           headers: {
@@ -111,13 +111,9 @@ export default function UserProfilePage({
             localStorage.setItem("userData", JSON.stringify(fullLoginData));
 
             setAuthUser(fullLoginData);
-            // getCurrentUserInfo();
           });
 
-        // setCurrentUserFormInfo({
-        //   username: fullUserData.username,
-        //   password: fullUserData.password,
-        // });
+    
       } else {
         return res.json().then((error) => {
           setError(error);
@@ -128,19 +124,14 @@ export default function UserProfilePage({
 
   const cancelEdit = () => {
     setDisableForm(true);
-    clearForm();
-  };
-
-  const clearForm = () => {
-    setDisableForm(true);
     setFullUserData(initialUserState);
   };
 
+ 
   const handleSubmit = (event) => {
     event.preventDefault();
     editProfile();
     setDisableForm(true);
-    // clearForm();
   };
 
   const handleChange = (event) => {
@@ -165,22 +156,11 @@ export default function UserProfilePage({
             <Button
               className="mt-5"
               onClick={() => {
-                // populateUserInfo();
                 setDisableForm(false);
               }}
             >
               Update Profile Information
             </Button>
-
-            {/* <Button
-              className="mt-5"
-              variant='danger'
-              onClick={() => {
-                cancelEdit();
-              }}
-            >
-              Cancel Update
-            </Button> */}
           </Col>
           {disableForm === true ? (
             <Col>
@@ -240,19 +220,6 @@ export default function UserProfilePage({
                     disabled
                   />
                 </FloatingLabel>
-
-                {/* <FloatingLabel label="Password" className="mb-3">
-                <Form.Control
-                  type="password"
-                  value={fullUserData.passwordInput}
-                  onChange={handleChange}
-                  disabled
-                />
-              </FloatingLabel> */}
-
-                {/* <Button type="submit" style={{ marginLeft: "45%" }} disabled>
-                Update Profile
-              </Button> */}
               </Form>
             </Col>
           ) : (
@@ -315,12 +282,17 @@ export default function UserProfilePage({
                   />
                 </FloatingLabel>
 
-                <p style={{backgroundColor: "white"}}>To confirm your changes, please enter your password.</p>
+                <div className = "p-3" style={{ backgroundColor: "white", border:"1px solid black", borderRadius:"10px"}}>
+
+                <p style={{ color: "#df3445" }} className="text-center">
+                  To confirm your changes, please enter your password.
+                </p>
                 <FloatingLabel
                   htmlFor="passwordInput"
                   label="Password"
                   className="mb-3"
                 >
+                  {/* passwordInput is temp placed in appUser object, since delete passhash field due to must still send all user info (username + password) to backend*/}
                   <Form.Control
                     type="password"
                     id="passwordInput"
@@ -329,6 +301,7 @@ export default function UserProfilePage({
                     required={true}
                   />
                 </FloatingLabel>
+                </div>
 
                 <div className="mt-5 d-flex justify-content-around">
                   <Button
